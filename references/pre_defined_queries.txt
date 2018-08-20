@@ -1,0 +1,36 @@
+/*pre defined data for gender table*/
+INSERT INTO `tbl_gender` (`gender_name`, `gender_prefix`) VALUES ('Male', 'MR.'), (NULL, 'Female', 'Ms.');
+
+/*pre defined data for user_type table*/
+INSERT INTO  tbl_user_type (user_type_name,user_type_description,user_type_created_datetime,user_type_modified_datetime) VALUES ('Admin','For Administrator user',NOW(),NOW());
+
+INSERT INTO  tbl_user_type (user_type_name,user_type_description,user_type_created_datetime,user_type_modified_datetime) VALUES ('Parent','For Parent user',NOW(),NOW());
+
+INSERT INTO  tbl_user_type (user_type_name,user_type_description,user_type_created_datetime,user_type_modified_datetime) VALUES ('Staff','For Staff user',NOW(),NOW());
+
+INSERT INTO `tbl_language` (`language_name`) VALUES ('english'), ('chinese');
+
+INSERT INTO `tbl_setting` (`setting_id`, `setting_name`, `setting_value`) VALUES ('project_type', 'school'), ('project_name', 'School Toup Management System');
+
+INSERT INTO `tbl_meal_status` (`meal_status_name`, `meal_status_created_datetime`, `meal_status_modified_datetime`) VALUES ('Finish', '2016-10-30 00:00:00', '2016-10-30 00:00:00');
+INSERT INTO `tbl_meal_status` (`meal_status_name`, `meal_status_created_datetime`, `meal_status_modified_datetime`) VALUES ('Not Finish', '2016-10-30 00:00:00', '2016-10-30 00:00:00');
+
+ALTER TABLE `tbl_participant` ADD `allow_preorder` BIGINT NOT NULL DEFAULT '1' COMMENT '1- preorder , 0=self order' AFTER `organizer_id`;
+ALTER TABLE `tbl_topup` ADD `pos_slip_id` VARCHAR(255) NULL DEFAULT NULL COMMENT 'POS receive slip id' AFTER `payment_status`;
+
+CREATE TABLE IF NOT EXISTS `tbl_student_predefine` (
+  `predefine_participant_id` int(11) NOT NULL,
+  `predefine_participant_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `predefine_participant_enroll_no` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `predefine_org_id` int(11) NOT NULL,
+  `finger_print_number` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+ALTER TABLE `tbl_student_predefine`
+  ADD PRIMARY KEY (`predefine_participant_id`);
+
+ALTER TABLE `tbl_topup` DROP FOREIGN KEY `tbl_topup_ibfk_1`;
+ALTER TABLE `tbl_payment_detail` ADD `transaction_id` INT NOT NULL AFTER `payment_detail_id`;
+ALTER TABLE `tbl_payment_detail` ADD INDEX(`transaction_id`);
+ALTER TABLE `tbl_payment_detail` ADD FOREIGN KEY (`transaction_id`) REFERENCES `topup_card_management`.`tbl_transaction`(`trans_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+/////////////4-12-16/////////////
+ALTER TABLE `tbl_user` CHANGE `is_active` `is_active` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '1= active user , 0 = inactive user';

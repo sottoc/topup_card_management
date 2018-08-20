@@ -1,0 +1,39 @@
+.menu {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 100%;
+	background-color:grey;
+}
+
+.menu li {
+	display: inline;
+}
+
+.menu li a {
+	float: left;	
+	color: #F6F09C;
+	padding: 3px 10px; /*padding of tabs*/
+	font: bold 15px Arial, Tahoma, Verdana;
+	text-decoration: none;	
+}
+
+.menu li a:hover {
+	color: #F6EE8B;
+}
+
+.menu a.noline {
+	
+}
+.footer {
+	background-color:grey;
+	padding: 5px;
+	color:#FBF6B4;
+	font:bold 11px Tahoma, Verdana;
+	text-align: center;
+	height: 20px;
+}
+.footer a 
+{color:#FBF6B4;
+	font:bold 11px Tahoma, Verdana;}
+.footer a:hover {text-decoration: underline; color:#CAD7EC;}

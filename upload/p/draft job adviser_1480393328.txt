@@ -1,0 +1,9 @@
+[gs_logo title="yes" posts="15" order="ASC" logo_cat="food" mode="vertical" speed="1000" inf_loop="0" ticker="1" logo_color="gray_to_def"]
+
+[gs_testimonial order="ASC"]
+
+//not work
+[gs_testimonial theme="gs_style7" img="gs_circle_shadow"]
+
+[gs_testimonial transition="fade"]
+

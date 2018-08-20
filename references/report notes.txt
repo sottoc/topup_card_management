@@ -1,0 +1,75 @@
+card report
+tbl_card
+tbl_participant
+tbl_organizer
+tbl_organization
+
+card number | card description | card status | card issued date| card expired date | student name | student ID(student_enroll_no) | parent name | school name
+
+///////////////////////////////
+topup report
+tbl_transaction
+tbl_topup
+tbl_participant
+
+student ID(student_enroll_number) | student name | card number | topup amount | payment type | POS pay slip number | transaction date
+
+$_SESSION ['login_user_type_id'] == 1 not include where condition
+$_SESSION ['login_user_type_id'] ==2 , include where condition  ( where participant_id in (select * from participant_id where organizer_id= $_SESSION ['login_user_id'])
+
+/////////////////////////////
+pre order report
+
+tbl_pre_orders
+tbl_participant
+tbl_card
+tbl_items
+tbl_category_type
+tbl_meal_status
+
+Select participant_id from tbl_participant where organizer_id = 
+
+Select p.participant_enroll_no,p.participant_name,porders.preorder_date,i.item_name,porders.qty,i.item_price as item_unit_price,ctype.category_type_name,mstatus.meal_status_name,c.card_number
+from tbl_pre_orders  porders 
+left join tbl_participant p on porders.participant_id=p.participant_id
+left join tbl_card  c on p.participant_id=c.participant_id
+left join tbl_items i on porders.item_id=i.item_id
+left join tbl_category_type ctype on porders.category_type_id=ctype.category_type_id
+left join tbl_meal_status mstatus on porders.meal_status_id=mstatus.meal_status_id
+group by porders.preorder_date ,  p.participant_id ,ctype.category_type_id ,i.item_id
+where p.participant_id in ()
+
+
+Student ID (student_enroll_number) | student name | card number | preorder date | item name | unit price of item | qty | item total cost|category type name| meal status name
+
+group by preorder_date and participant_id and category_type_id
+
+$_SESSION ['login_user_type_id'] == 1 not include where condition
+$_SESSION ['login_user_type_id'] ==2 , include where condition  ( where participant_id in (select * from participant_id where organizer_id= $_SESSION ['login_user_id'])
+
+/////////////////////////////
+redemption report
+
+tbl_transaction
+tbl redemption
+tbl_participant
+student ID(student_enroll_number) | student name | card number | redemption amount | order type  | transaction date
+
+$_SESSION ['login_user_type_id'] == 1 not include where condition
+$_SESSION ['login_user_type_id'] ==2 , include where condition  ( where participant_id in (select * from participant_id where organizer_id= $_SESSION ['login_user_id'])
+
+//////////////////////////////////
+transaction balance report
+
+tbl_transaction 
+tbl_participant
+
+student ID(student_enroll_number) | student name | transaction amt | transaction type| transaction_datetime
+
+=> group by student
+
+
+$_SESSION ['login_user_type_id'] == 1 not include where condition
+$_SESSION ['login_user_type_id'] ==2 , include where condition  ( where participant_id in (select * from participant_id where organizer_id= $_SESSION ['login_user_id'])
+
+

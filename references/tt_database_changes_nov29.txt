@@ -1,0 +1,1 @@
+ALTER TABLE `tbl_topup` ADD `login_user_id` INT NOT NULL COMMENT 'staff who do topup' AFTER `pos_slip_id`;

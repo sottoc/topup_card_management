@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* Css Document */
+
+@font-face { 
+	font-family: Myanmar3; 
+	src: url("../font/myanmar3.eot?#iefix") format("embedded-opentype"),
+		url("../font/myanmar3.woff") format("woff"),
+	    url("../font/myanmar3.ttf") format("truetype"),
+		url("") format("svg");
+	font-style: normal; 
+	font-weight: normal; 
+}
+
+table, .list-wrapper, .ufd.plain input, textarea, .frm textarea, .frm select, .frm input, .frmadd textarea  , .ms-parent, .ms-parent button{
+	font-family: "Masterpiece Uni Sans", Myanmar3;
+}

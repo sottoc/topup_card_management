@@ -1,0 +1,15 @@
+Annual Basic = Monthly salary x 12 months
+Annual Base Salary = Annual Basic + Annual Wage Supplement (AWS is guaranteed fixed bonus which some organization may provide. It's optional depending on the company's policy). If there is no AWS, Annual Basic = Annual Base.
+Annual Wage Supplement (AWS) is a common business practice in companies in Singapore, as well as other Asian countries. It is also known as the 13th month payment. It represents a single annual payment to employees that is supplementary to the total amount of annual wages earned.
+The Annual Wage Supplement (AWS) is treated similarly to a bonus payment that depends on an employee’s basic pay. 
+Annual Total Cash = Sum of Annual Base + all variable cash (variable bonus, sales commission, incentives, LTI, etc. Any payout that is linked with performance and not guaranteed).
+Annual Total Earnings = Sum of Annual Total Cash + all fixed cash allowances (housing allowance, meal allowance, transport allowance, etc).
+Annual Total Remuneration = Sum of Annual Total Earnings + all benefits in-kind (insurance cover, provision of car, housing, club membership, etc).
+Annual Total Employment Cost = Sum of Total Remuneration + contribution to the Central Provident Fund (CPF).
+===================================================
+http://www.expatarrivals.com/singapore/work-permits-for-singapore
+http://philpad.com/how-to-get-s-pass-or-employment-pass-work-permit-and-visa-requirements-in-singapore/
+http://www.mom.gov.sg/passes-and-permits/employment-pass/key-facts
+http://www.filmo.com/whyepass.htm
+Employment Pass
+The Employment Pass allows foreign professionals, managers and executives to work in Singapore. Candidates need to earn at least $3,300 a month and have acceptable qualifications.

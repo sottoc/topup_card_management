@@ -1,0 +1,223 @@
+INSERT INTO `topup_card_management`.`tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'home', '0', 'Home');
+/////////////
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'loading_msg_datatable', '1', 'Loading data from server');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'user_type', '1', 'User Type');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'user', '1', 'User');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'organization', '1', 'School');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'food_allergy', '1', 'Food Allergy');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'card_status', '1', 'Card Status');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'category_type', '1', 'Category Type');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'meal_status', '1', 'Meal Status');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'items', '1', 'Items');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'participant', '1', 'Student');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'pre_order', '1', 'PreOrder');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff', '1', 'Staff');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'action', '1', 'Action');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'search_btn', '1', 'Search');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'show_all_btn', '1', 'Show All');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'save_btn', '1', 'Save');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'cancel_btn', '1', 'Cancel');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'edit_btn', '1', 'Edit');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'reset_pw_title', '1', 'Reset Password');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'new_pw', '1', 'New Password');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'save_pw_btn', '1', 'Save Password');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'save_pw_msg', '1', 'Saved Password Successfully');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'change_pw_msg', '1', 'Changed Password Successfully');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'save_fail_msg', '1', 'Failed Saving!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'update_fail_msg', '1', 'Failed Updating!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'delete_fail_msg', '1', 'Failed Deleting!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_new_pw', '1', 'Please enter new password.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'user_profile', '1', 'User Profile');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'topup', '1', 'Top-Up');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'redumption', '1', 'Redemption');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'reports', '1', 'Reports');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'card_report_title', '1', 'Card Report');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'pre_order_report_title', '1', 'Pre-Order Report');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'topup_report_title', '1', 'Top-Up Report');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'redemption_report_title', '1', 'Redemption Report');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'trans_balance_report_title', '1', 'Transaction Balance Report');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'trans_balance_report_title', '1', 'Transaction Balance Report');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'forgot_pw', '1', 'Forgot Password');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'change_pw', '1', 'Change Password');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'logout', '1', 'Logout');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'login', '1', 'Login');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'register', '1', 'Register');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'gender', '1', 'Gender');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_valid_email_adddress', '1', 'Please enter valid email.');
+
+//////////
+2- user type
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'user_type_name', '2', 'User Type Name');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'user_type_list', '2', 'User Type List');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'user_type_desc', '2', 'User Type Description');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_user_type_title', '2', 'Add New User Type');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'edt_new_user_type_title', '2', 'Edit User Type');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_user_type_btn', '2', 'Add New User Type');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_del_user_type_msg', '2', 'Are you sure you want to delete this user type name - ');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'success_save_user_type_msg', '2', 'Saved user type successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'duplicate_save_user_type_msg', '2', 'Duplicate user type name!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_user_type_name', '2', 'Please enter user type name');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'update_user_type_msg', '2', 'Updated user type successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'del_user_type_msg', '2', 'Deleted user type successfully!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'stillinuse_user_type_msg', '2', 'This user type is still in use!.');
+
+//////////
+3- user
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'user_list', '3', 'User List');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'name', '3', 'Name');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'email', '3', 'Email');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'user_type', '3', 'User Type');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'address', '3', 'Address');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'phone', '3', 'Phone');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'user_status', '3', 'User Status');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_change_user_status_1', '3', 'Are you sure you want to');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_change_user_status_2', '3', ' this user type name- ');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'active_success_msg', '3', 'User is changed successfully to active status!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'inactive_success_msg', '3', 'User is changed successfully to in-active status!');
+
+////////////////
+4- organization
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'org_list', '4', 'School List');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'org_name', '4', 'School Name');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'org_address', '4', 'School Address');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'org_desc', '4', 'School Description');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_org_btn', '4', 'Add New School');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_org_title', '4', 'Add New School');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'edt_org_title', '4', 'Edit School');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_del_org_msg', '4', 'Are you sure you want to delete this organization name- ');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'success_org_msg', '4', 'Saved school successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'duplicate_org_msg', '4', 'Duplicate school name!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_org_name', '4', 'Please enter school name.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_org_address', '4', 'Please enter school address.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'update_org_msg', '4', 'Updated school successfully!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'del_org_msg', '4', 'Deleted school successfully!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'stillinuse_org_msg', '4', 'This school is still in use!.');
+
+///////////////
+5- food_allergy
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'food_allergy_list', '5', 'Food Allergy List');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'food_allergy_name', '5', 'Food Allergy Name');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_food_allergy_btn', '5', 'Add New Food Allergy');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_food_allergy_title', '5', 'Add New Food Allergy');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'edt_food_allergy_title', '5', 'Edit Food Allergy');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_del_food_allergy_msg', '5', 'Are you sure you want to delete this food allergy name-');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_food_allergy_name', '5', 'please enter food allergy name.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'save_food_allergy_msg', '5', 'Saved food allergy successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'duplicate_food_allergy_msg', '5', 'Duplicate food allergy name!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'update_food_allergy_msg', '5', 'Updated food allergy successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'del_food_allergy_msg', '5', 'Deleted food allergy successfully!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'stillinuse_food_allergy_msg', '5', 'This food allergy is still in use!.');
+
+/////////////////
+6-card status
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'card_status_list', '6', 'Card Status List');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'card_status_name', '6', 'Card Status Name');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_card_status_btn', '6', 'Add New Card Status');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_card_status_title', '6', 'Add New Card Status');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'edt_card_status_title', '6', 'Edit Card Status');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_del_card_status_msg', '6', 'Are you sure you want to delete this card status name-');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_card_status_name', '6', 'please enter card status name.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'save_card_status_msg', '6', 'Saved card status successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'duplicate_card_status_msg', '6', 'Duplicate card status name!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'update_card_status_msg', '6', 'Updated card status successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'del_card_status_msg', '6', 'Deleted card status successfully!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'stillinuse_card_status_msg', '6', 'This card status is still in use!.');
+
+/////////////
+7- category type
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'category_type_list', '7', 'Category Type List');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'category_type_name', '7', 'Category Type Name');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_category_type_btn', '7', 'Add New Category Type');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_category_type_title', '7', 'Add New Category Type');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'edt_category_type_title', '7', 'Edit Category Type');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_del_category_type_msg', '7', 'Are you sure you want to delete this category type name-');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_category_type_name', '7', 'please enter category type name.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'save_category_type_msg', '7', 'Saved category type successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'duplicate_category_type_msg', '7', 'Duplicate category type name!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'update_category_type_msg', '7', 'Updated category type successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'del_category_type_msg', '7', 'Deleted category type successfully!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'stillinuse_category_type_msg', '7', 'This category type is still in use!.');
+
+////////////
+8- meal_status
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'meal_status_list', '8', 'Meal Status List');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'meal_status_name', '8', 'Meal Status Name');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_meal_status_btn', '8', 'Add New Meal Status');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_meal_status_title', '8', 'Add New Meal Status');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'edt_meal_status_title', '8', 'Edit Meal Status');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_del_meal_status_msg', '8', 'Are you sure you want to delete this meal status name-');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_meal_status_name', '8', 'please enter meal status name.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'save_meal_status_msg', '8', 'Saved meal status successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'duplicate_meal_status_msg', '8', 'Duplicate meal status name!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'update_meal_status_msg', '8', 'Updated meal status successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'del_meal_status_msg', '8', 'Deleted meal status successfully!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'stillinuse_meal_status_msg', '8', 'This meal status is still in use!.');
+
+////////////
+9- items
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'items_list', '9', 'Items List');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'item_name', '9', 'Item Name');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'item_description', '9', 'Item Description');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'item_price', '9', 'Item Price');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_item_btn', '9', 'Add New Item');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_item_title', '9', 'Add New Item');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'edt_item_title', '9', 'Edit Item');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_del_item_msg', '9', 'Are you sure you want to delete this item name-');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_item_name', '9', 'please enter item name.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_item_desc', '9', 'please enter item description.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_item_price', '9', 'please enter item price.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'save_item_msg', '9', 'Saved item successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'duplicate_item_msg', '9', 'Duplicate item name!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'update_item_msg', '9', 'Updated item successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'del_item_msg', '9', 'Deleted item successfully!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'stillinuse_item_msg', '9', 'This item is still in use!.');
+/////
+122 - staff
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff_list', '122', 'Staff List');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff_email', '122', 'Staff Email');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff_password', '122', 'Staff Password');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff_user_type', '122', 'Staff User Type');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff_name', '122', 'Staff Name');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff_address', '122', 'Staff Address');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff_phone', '122', 'Staff Phone');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff_gender', '122', 'Staff Gender');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff_status', '122', 'Staff Status');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_staff_btn', '122', 'Add New Staff');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'add_new_staff_title', '122', 'Add New Staff');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'edt_staff_title', '122', 'Edit Staff');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_staff_email', '122', 'please enter staff email.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_staff_name', '122', 'please enter staff name.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_staff_password', '122', 'please enter staff password.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'save_staff_msg', '122', 'Saved staff successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'duplicate_staff_msg', '122', 'Duplicate staff name!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'update_staff_msg', '122', 'Updated staff successfully!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'del_staff_msg', '122', 'Deleted staff successfully!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'stillinuse_staff_msg', '122', 'This staff is still in use!.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_change_staff_status_1', '122', 'Are you sure you want to');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_change_staff_status_2', '122', ' this staff email - ');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff_active_success_msg', '122', 'Staff is changed successfully to active status!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'staff_inactive_success_msg', '122', 'Staff is changed successfully to in-active status!');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'confirm_change_staff_status_resetpw', '122', 'Are you sure to reset password for this email -');
+////////////////
+169 - login
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'login_email', '169', 'Login Email');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'login_pw', '169', 'Password');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'login_btn', '169', 'Login');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_login_email', '169', 'Please enter login email.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_login_pw', '169', 'Please enter login password.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'login_success_msg', '169', 'Login Successfully.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'login_fail_msg', '169', 'User name or password is incorrect.Login Fail.');
+////////////////
+170 - register
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'register_email', '170', 'Register Email');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'register_name', '170', 'Register Name');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'register_pw', '170', 'Register Password');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'register_btn', '170', 'Register');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_register_email', '170', 'Please enter register email.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_register_name', '170', 'Please enter register name.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'check_req_field_register_pw', '170', 'Please enter register password.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'description', '170', 'Description');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'reg_success_msg', '170', 'Registered Successfully');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'reg_fail_msg', '170', 'Registered Fail.');
+INSERT INTO `tbl_localization` (`localization_name`, `parent_id`, `default_text`) VALUES ( 'duplicate_reg_msg', '170', 'Duplicate register email.Please try with another email.');
+
