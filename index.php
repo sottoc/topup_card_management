@@ -25,7 +25,16 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	find_current_card_amount();
-	
+	localStorage.setItem("current_page", '<a href="index.php">Home</a>');
+	//---- set background for active menu -----
+	if(localStorage.getItem("current_page") != undefined){
+		for(var i=0; i < $("#nav ul li").length; i++){
+			if($($("#nav ul li")[i]).html() == localStorage.getItem("current_page")){
+				$($("#nav ul li")[i]).css("background", '#05815f');
+			}
+		}
+	}
+	//---- End -----
 });
 function find_current_card_amount()
 {
@@ -53,9 +62,43 @@ function find_current_card_amount()
 				<tr>
 					<td>
 						<?php
-							if($_SESSION ['login_user_type_id']==1)
-								echo "<div style='font-size:19px;'>Welcome to Food Card Portal Admin Control Page</br></br><img src='images/admin_Home_img_1.jpg' alt='Admin_Home_img_1'></div>";
-							else if($_SESSION ['login_user_type_id']==2)
+							if($_SESSION ['login_user_type_id']==1) {
+							?>
+								<div style='font-size:19px;'>
+									<h2> &nbsp;&nbsp;&nbsp;&nbsp; Record at <span style="color:#e63d02"> 22 August 2018 </span> </h2>
+									<table width="100%" style="text-align:center;">
+										<tr> 
+											<td style="padding:20px;">
+												<div class="home-block">
+													<div> Total Transaction Today </div>
+													<div class="price"> $ 1028.20 </div>
+													<div> 
+														<a class="edit-button"> View Record </a>
+													</div>
+												</div>
+											</td>
+
+											<td style="padding:20px;">
+												<div class="home-block">
+													<div> Total Topup Today </div>
+													<div class="price"> $ 628.20 </div>
+													<div> 
+														<a class="edit-button"> View Record </a>
+													</div>
+												</div>
+											</td>
+
+											<td style="padding:20px;">
+												<div class="home-block">
+													<div> Total Account Register </div>
+													<div class="price"> 45 </div>
+												</div>
+											</td>
+										</tr>
+									</table>
+								</div>
+							<?php
+							}else if($_SESSION ['login_user_type_id']==2)
 							{
 								$login_user_type_id = $_SESSION ['login_user_type_id'];
 								$login_user_id = $_SESSION ['login_user_id'];
@@ -73,7 +116,7 @@ function find_current_card_amount()
 									echo "</select></div>";
 									
 									echo "<div class='frm' style='border:1px solid lightgray;padding-left: 10px;'>";
-									echo "<label>Card Value</label><br/>";
+									echo "<label>Family Value</label><br/>";
 									echo "<label id='current_card_amount' name='current_card_amount' style='font-size: 35px;font-weight: bold;'></label>";
 									echo "</div>";
 									
@@ -120,3 +163,17 @@ function find_current_card_amount()
 	include('library/closedb.php');
 	include("footer.php");
 ?>
+
+<style>
+	.home-block{
+		background:#eee;
+		padding:40px;
+		height:120px;
+	}
+	.price{
+		font-size:36px;
+		font-weight:600;
+		margin-top:10px;
+		margin-bottom:10px;
+	}
+</style>

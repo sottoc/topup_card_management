@@ -124,11 +124,96 @@ class reportdal{
 		$cri_str = $cri_arr[0];
 		$param = $cri_arr[1];
 		
-		$query = "SELECT SQL_CALC_FOUND_ROWS *
-				FROM `tbl_transaction` t
-				left join tbl_topup top on t.topup_id=top.topup_id
-				left join tbl_redemption r on t.redempation_id=r.redemption_id
-				left join tbl_participant p on p.participant_id=t.participant_id";
+		// $query = "SELECT SQL_CALC_FOUND_ROWS *
+		// 		FROM `tbl_transaction` t
+		// 		left join tbl_topup top on t.topup_id=top.topup_id
+		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
+		// 		left join tbl_participant p on p.participant_id=t.participant_id";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_purchase_records` t left join tbl_card1 top on t.card_id=top.Card_ID";
+		$query .= $cri_str;
+		
+		if(empty($param) && $id_str!='')
+			$query .= " AND t.participant_id in ($id_str)";
+		$query .=$sorting;
+		if($rpage!=-1)
+			$query.= " LIMIT $offset,$rpage";
+		
+		$result = execute_query($query,$param) or die ("get_redemption_report query fail.");	
+		return new readonlyresultset($result);
+	}
+	function get_user_report($offset, $rpage ,$sorting,$cri_arr)
+	{
+		$id_str='';
+		if($_SESSION ['login_user_type_id']==2)
+		{
+			$login_user_id = $_SESSION ['login_user_id'];
+			$login_user_type_id = $_SESSION ['login_user_type_id'];
+			$qry = "SELECT * FROM tbl_participant p
+			left join tbl_organizer o on p.organizer_id=o.organizer_id
+			left join tbl_user u on p.organizer_id=u.user_id 
+			where o.user_id=:login_user_id";
+			$res = execute_query($qry,array(':login_user_id'=>$login_user_id)) or die ("query fail.");
+			$res2 = new readonlyresultset($res);
+			while($row = $res2->getNext())
+			{
+				if($id_str=='')
+					$id_str="'".$row['participant_id']."'";
+				else
+					$id_str=$id_str.",'".$row['participant_id']."'";
+			}
+		}
+		
+		$cri_str = $cri_arr[0];
+		$param = $cri_arr[1];
+		
+		// $query = "SELECT SQL_CALC_FOUND_ROWS *
+		// 		FROM `tbl_transaction` t
+		// 		left join tbl_topup top on t.topup_id=top.topup_id
+		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
+		// 		left join tbl_participant p on p.participant_id=t.participant_id";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_purchase_records` t left join tbl_card1 top on t.card_id=top.Card_ID left join tbl_user u on t.card_id=u.card_id";
+		$query .= $cri_str;
+		
+		if(empty($param) && $id_str!='')
+			$query .= " AND t.participant_id in ($id_str)";
+		$query .=$sorting;
+		if($rpage!=-1)
+			$query.= " LIMIT $offset,$rpage";
+		
+		$result = execute_query($query,$param) or die ("get_redemption_report query fail.");	
+		return new readonlyresultset($result);
+	}
+	function get_refund_report($offset, $rpage ,$sorting,$cri_arr)
+	{
+		$id_str='';
+		if($_SESSION ['login_user_type_id']==2)
+		{
+			$login_user_id = $_SESSION ['login_user_id'];
+			$login_user_type_id = $_SESSION ['login_user_type_id'];
+			$qry = "SELECT * FROM tbl_participant p
+			left join tbl_organizer o on p.organizer_id=o.organizer_id
+			left join tbl_user u on p.organizer_id=u.user_id 
+			where o.user_id=:login_user_id";
+			$res = execute_query($qry,array(':login_user_id'=>$login_user_id)) or die ("query fail.");
+			$res2 = new readonlyresultset($res);
+			while($row = $res2->getNext())
+			{
+				if($id_str=='')
+					$id_str="'".$row['participant_id']."'";
+				else
+					$id_str=$id_str.",'".$row['participant_id']."'";
+			}
+		}
+		
+		$cri_str = $cri_arr[0];
+		$param = $cri_arr[1];
+		
+		// $query = "SELECT SQL_CALC_FOUND_ROWS *
+		// 		FROM `tbl_transaction` t
+		// 		left join tbl_topup top on t.topup_id=top.topup_id
+		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
+		// 		left join tbl_participant p on p.participant_id=t.participant_id";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_purchase_records` t left join tbl_card1 top on t.card_id=top.Card_ID left join tbl_user u on t.card_id=u.card_id";
 		$query .= $cri_str;
 		
 		if(empty($param) && $id_str!='')
@@ -159,56 +244,73 @@ class reportdal{
 			
 		return new readonlyresultset($result);	
 	}
-	function get_topup_report($offset, $rpage ,$sorting,$cri_arr)
+	function get_card_report_new($offset, $rpage ,$sorting,$cri_arr)
 	{
 		$cri_str = $cri_arr[0];
 		$param = $cri_arr[1];
-		$login_user_id = $_SESSION ['login_user_id'];
-		
-		if ($_SESSION ['login_user_type_id']==2)
-		{
-			$query = "SELECT SQL_CALC_FOUND_ROWS p.participant_enroll_no,p.participant_name,
-				c.card_number,t.topup_amt,t.payment_type,t.pos_slip_id,u.user_name,
-				tt.transaction_datetime FROM tbl_transaction tt
-				LEFT JOIN tbl_participant p 
-				on tt.participant_id = p.participant_id
-				LEFT JOIN tbl_topup t on t.topup_id = tt.topup_id
-				Left JOIN tbl_card c on c.card_id = tt.card_id
-				Left JOIN tbl_organizer o on p.organizer_id = o.organizer_id
-				Left JOIN tbl_user u on u.user_id = t.login_user_id";
+		$query = "SELECT `User_code`, `Family_code`, `Card_ID`, `Last_name`, `First_name`, `Level`, `Card_value`, `Card_status`, `Username`, `Password` FROM `tbl_card1`";		
+		$query .= $cri_str;
+		$query .=$sorting;
+		if($rpage!=-1)
+			$query.= " LIMIT $offset,$rpage";
+		$result = execute_query($query,$param) or die ("get_card_report query fail.");
 			
-			$cri_str.= " AND tt.trans_type = 'topup' AND o.user_id = :login_user_id ";
-			//echo $cri_str;exit();
-			$query .= $cri_str;		
-			$query .=$sorting;			
-			$param[':login_user_id']= $login_user_id;
-			if($rpage!=-1)
-				$query.= " LIMIT $offset,$rpage";
-			//echo $query;exit();
-			$result = execute_query($query,$param) or die ("get_topup_report query fail.");
-		}
-		else
-		{
-			$query = "SELECT SQL_CALC_FOUND_ROWS p.participant_enroll_no,p.participant_name,
-				c.card_number,t.topup_amt,t.payment_type,t.pos_slip_id,u.user_name,
-				tt.transaction_datetime FROM tbl_transaction tt
-				LEFT JOIN tbl_participant p 
-				on tt.participant_id = p.participant_id
-				LEFT JOIN tbl_topup t on t.topup_id = tt.topup_id
-				Left JOIN tbl_card c on c.card_id = tt.card_id
-				Left JOIN tbl_organizer o on p.organizer_id = o.organizer_id
-				Left JOIN tbl_user u on u.user_id = t.login_user_id";		
-			
-			$cri_str.= " AND tt.trans_type = 'topup'";
-			$query .= $cri_str;
-			$query .=$sorting;
-			if($rpage!=-1)
-				$query.= " LIMIT $offset,$rpage";
-			//echo $query;exit();
-			$result = execute_query($query,$param) or die ("get_topup_report query fail.");
-		}
-						
 		return new readonlyresultset($result);	
+	}
+	function get_prepaid_card($offset, $rpage ,$sorting,$cri_arr)
+	{
+		$cri_str = $cri_arr[0];
+		$param = $cri_arr[1];
+		$query = "SELECT `id`, `User_code`, `Family_code`, `Card_ID`, `Last_name`, `First_name`, `Level`, `Card_value`, `Card_status`, `Username`, `Password` FROM `tbl_card1`";		
+		$query .= $cri_str;
+		$query .=$sorting;
+		if($rpage!=-1)
+			$query.= " LIMIT $offset,$rpage";
+		$result = execute_query($query,$param) or die ("get_card_report query fail.");
+			
+		return new readonlyresultset($result);	
+	}
+	function get_topup_report($offset, $rpage ,$sorting,$cri_arr)
+	{
+		$id_str='';
+		if($_SESSION ['login_user_type_id']==2)
+		{
+			$login_user_id = $_SESSION ['login_user_id'];
+			$login_user_type_id = $_SESSION ['login_user_type_id'];
+			$qry = "SELECT * FROM tbl_participant p
+			left join tbl_organizer o on p.organizer_id=o.organizer_id
+			left join tbl_user u on p.organizer_id=u.user_id 
+			where o.user_id=:login_user_id";
+			$res = execute_query($qry,array(':login_user_id'=>$login_user_id)) or die ("query fail.");
+			$res2 = new readonlyresultset($res);
+			while($row = $res2->getNext())
+			{
+				if($id_str=='')
+					$id_str="'".$row['participant_id']."'";
+				else
+					$id_str=$id_str.",'".$row['participant_id']."'";
+			}
+		}
+		
+		$cri_str = $cri_arr[0];
+		$param = $cri_arr[1];
+		
+		// $query = "SELECT SQL_CALC_FOUND_ROWS *
+		// 		FROM `tbl_transaction` t
+		// 		left join tbl_topup top on t.topup_id=top.topup_id
+		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
+		// 		left join tbl_participant p on p.participant_id=t.participant_id";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_purchase_records` t left join tbl_card1 top on t.card_id=top.Card_ID";
+		$query .= $cri_str;
+		
+		if(empty($param) && $id_str!='')
+			$query .= " AND t.participant_id in ($id_str)";
+		$query .=$sorting;
+		if($rpage!=-1)
+			$query.= " LIMIT $offset,$rpage";
+		
+		$result = execute_query($query,$param) or die ("get_redemption_report query fail.");	
+		return new readonlyresultset($result);
 	}
 	function get_order_schedule_report($offset, $rpage ,$sorting,$cri_arr)
 	{

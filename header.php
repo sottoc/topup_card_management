@@ -65,11 +65,19 @@
 		<script type="text/javascript" language="javascript" src="javascript/jquery.multiple.select.js"></script>	
 		<script type="text/javascript" src="javascript/jquery.ui.ufd.js"></script> 	
 		<script type="text/javascript" src="javascript/jquery.validate.min.js"></script>
+
+		<!-- jQuery Modal -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 		
 		<script type="text/javascript">
 		$(document).ready(function() {
 			var example = $('#example').superfish({
 				//add options here if required
+			});
+			
+			$("#nav ul li").click(function(){
+				localStorage.setItem("current_page", $(this).html());
 			});
 		});
 		</script>
@@ -107,9 +115,9 @@
 		<div id="nav" <?php echo $nav_class; ?> >
 			<ul  class="sf-menu" id="example">			
 				<li><a href="index.php" ><?php echo $localized_home_data['home']; ?></a></li>
-				
 				<?php if($_SESSION ['login_user_type_id']==1){ ?><!--admin user type-->
-					<li><a href="#" >Data Entry Form</a>
+					<li><a href="prepaid_card.php" >Prepaid Card</a></li>
+					<!-- <li><a href="#" >Data Entry Form</a>
 						<ul style='display: none;' class='dropdown'>
 							<li><a href="user_list.php" ><?php echo $localized_home_data['user']; ?></a></li>
 							<li><a href="user_type_list.php" ><?php echo $localized_home_data['user_type']; ?></a></li>
@@ -120,8 +128,11 @@
 							<li><a href="meal_status_list.php" ><?php echo $localized_home_data['meal_status']; ?></a></li>
 							<li><a href="items_list.php" >Food Items</a></li>
 						</ul>
-					</li>
-					<li><a href="staff_list.php" ><?php echo $localized_home_data['staff']; ?></a></li>
+					</li> -->
+					<li><a href="user.php" ><?php echo "Users"; ?></a></li>
+					<li><a href="refund.php" ><?php echo "Refund"; ?></a></li>
+
+					<!-- <li><a href="staff_list.php" ><?php echo $localized_home_data['staff']; ?></a></li> -->
 				<?php } ?>
 				
 				<?php if($_SESSION ['login_user_type_id']==2){ ?><!--admin user type or parent user type-->
@@ -129,7 +140,7 @@
 				<?php } ?>
 				
 				<?php if($_SESSION ['login_user_type_id']==1){ ?><!--admin user type or organizer user type-->
-					<li><a href="predefine_participant_list.php">Student(Predefine)</a></li>
+					<!-- <li><a href="predefine_participant_list.php">Student(Predefine)</a></li> -->
 				<?php } ?>
 				
 				<?php if($_SESSION ['login_user_type_id']==2){ ?><!--for parentuser type-->
@@ -138,13 +149,13 @@
 				<?php } ?>
 				
 				<?php if($_SESSION ['login_user_type_id']==1 || $_SESSION ['login_user_type_id']==3){ ?>
-					<li><a href="#" >Schedule</a>
+					<!-- <li><a href="#" >Schedule</a>
 					<ul style='display: none;' class='dropdown'>
 						<li><a href="order_delivery_schedule.php">Delivery Schedule</a></li>
 						<li><a href="order_schedule_summary.php">Order Schedule Summary</a></li>
 						<li><a href="order_schedule_detail.php">Order Schedule Detail</a></li>
 					</ul>
-					</li>
+					</li> -->
 				<?php } ?>
 				
 				<?php if($_SESSION ['login_user_type_id']==3){ ?><!--for staff user type-->
@@ -155,15 +166,18 @@
 				<li><a href="#" ><?php echo $localized_home_data['reports']; ?></a>
 					<ul style='display: none;' class='dropdown'>
 						<?php if($_SESSION ['login_user_type_id']==1){ ?><!--admin user type-->
-							<li><a href="card_report.php" ><?php echo $localized_home_data['card_report_title']; ?></a></li>
+							<!-- <li><a href="card_report.php" ><?php echo $localized_home_data['card_report_title']; ?></a></li>
+							<li><a href="card_report_new.php" >New Card Report</a></li> -->
 						<?php } ?>
 						
-						<li><a href="pre_order_report.php" ><?php echo $localized_home_data['pre_order_report_title']; ?></a></li>
+						<!-- <li><a href="pre_order_report.php" ><?php echo $localized_home_data['pre_order_report_title']; ?></a></li> -->
 						
 						<?php if($_SESSION ['login_user_type_id']==1 || $_SESSION ['login_user_type_id']==2){ ?><!--admin user type or parent/organizer user type-->
-							<li><a href="topup_report.php" ><?php echo $localized_home_data['topup_report_title']; ?></a></li>
-							<li><a href="redemption_report.php" ><?php echo $localized_home_data['redemption_report_title']; ?></a></li>
-							<li><a href="transaction_report.php" ><?php echo $localized_home_data['trans_balance_report_title']; ?></a></li>
+							<li><a href="transaction_report.php" ><?php echo "Transaction Report"; ?></a></li>
+							<li><a href="topup_report.php" ><?php echo "Topup Report"; ?></a></li>
+							<li><a href="users_report.php" ><?php echo "Users Report"; ?></a></li>
+							<li><a href="refund_report.php" ><?php echo "Refund Report"; ?></a></li>
+							<!-- <li><a href="redemption_report.php" ><?php echo $localized_home_data['redemption_report_title']; ?></a></li> -->
 						<?php } ?>
 					</ul>
 				</li>

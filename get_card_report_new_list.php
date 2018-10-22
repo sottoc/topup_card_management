@@ -21,21 +21,16 @@
 	{
 		$DisplayLength = $_GET['iDisplayLength'];
 	}
-	$cri_str = ' WHERE created_time';
+	$cri_str = ' WHERE 1=1 ';
 	$param = array();
 	if ( isset($_GET['sSearch']))
 	{	
 		$criobj = json_decode($_GET['sSearch']);
+		if(isset($criobj->search_txt_studentid) &&  $criobj->search_txt_studentid!='' ){
+			$cri_str .= " AND p.participant_enroll_no LIKE CONCAT('%',:search_txt_studentid,'%') ";
+			$param[':search_txt_studentid'] = clean($criobj->search_txt_studentid);
+		}
 		
-		if(isset($criobj->sel_student_id) &&  $criobj->sel_student_id!='-1' ){
-			//$cri_str .= " AND t.participant_id=:sel_student_id";
-			$param[':sel_student_id'] = clean($criobj->sel_student_id);
-		}
-		if(isset($criobj->sel_date_from) && isset($criobj->sel_date_to)){
-			$from = $criobj->sel_date_from;
-			$to = $criobj->sel_date_to;
-			$cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
-		}
 	}
 	$cri_arr = array($cri_str,$param);
 	if ( isset( $_GET['iSortCol_0'] ) )
@@ -51,28 +46,34 @@
 		$_SESSION['SESS_SORTINGCOLS']=$SortingCols;
 	}
 	
-	$rResult= $reportbol->get_transaction_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+	$rResult= $reportbol->get_card_report_new($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
 	$iTotal = $rResult->getFoundRows();
 	$response = array('sEcho'=>$sEcho,'iTotalRecords'=>$iTotal,'iTotalDisplayRecords'=>$iTotal,'aaData'=>array());
-	
 	while( $aRow = $rResult->getNext() )
 	{
-		$trans_amt='';
+		$user_code = $aRow['User_code'];
+		$family_code = $aRow['Family_code'];
+		$card_id = $aRow['Card_ID'];
+		$last_name = $aRow['Last_name'];
+		$first_name = $aRow['First_name'];
+		$level = $aRow['Level'];
+		$card_value = $aRow['Card_value'];
+		$card_status = $aRow['Card_status'];
+		$username = $aRow['Username'];
+		$password = $aRow['Password'];
+				
 		$tmpentry = array();
-		$date_time = explode(" ", $aRow['created_time']);
-		$tmpentry[] = htmlspecialchars($date_time[0]);
-		$tmpentry[] = htmlspecialchars($date_time[1]);
-		// if($aRow['trans_type']=='redemption')
-		// 	$trans_amt = "<font color='red'>".$aRow['redemption_amt']."</font>";
-		// else
-		// 	$trans_amt = "<font color='blue'>".$aRow['topup_amt']."</font>";
-		$tmpentry[] = htmlspecialchars($aRow['User_code']);
-		$tmpentry[] = htmlspecialchars($aRow['card_id']);
-		$tmpentry[] = htmlspecialchars($aRow['First_name']);
-		$tmpentry[] = htmlspecialchars($aRow['Last_name']);
-		$tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
-		//$tmpentry[] = htmlspecialchars($cri_str);
-		$tmpentry[] = htmlspecialchars($aRow['pos_id']);
+		$tmpentry[] = htmlspecialchars($user_code);
+		$tmpentry[] = htmlspecialchars($family_code);
+		$tmpentry[] = htmlspecialchars($card_id);
+		$tmpentry[] = htmlspecialchars($last_name);
+		$tmpentry[] = htmlspecialchars($first_name);
+		$tmpentry[] = htmlspecialchars($level);
+		$tmpentry[] = htmlspecialchars($card_value);
+		$tmpentry[] = htmlspecialchars($card_status);
+		$tmpentry[] = htmlspecialchars($username);
+		$tmpentry[] = htmlspecialchars($password);
+
 		$response['aaData'][] = $tmpentry;
 	}
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
@@ -86,13 +87,25 @@
 	function fnColumnToField( $i )
 	{
 		if ( $i == 0 )
-			return "created_time";
+			return "User_code";
 		else if ( $i == 1 )
-			return "created_time";
+			return "Family_code";
+		else if ( $i == 2 )
+			return "Card_ID";
 		else if ( $i == 3 )
-			return "created_time";
+			return "Last_name";
 		else if ( $i == 4 )
-			return "created_time";
+			return "First_name";
+		else if ( $i == 5 )
+			return "Level";
+		else if ( $i == 6 )
+			return "Card_value";
+		else if ( $i == 7 )
+			return "Card_status";
+		else if ( $i == 8 )
+			return "Username";
+		else if ( $i == 9 )
+			return "Password";
 		else 
 			return true;			
 	}

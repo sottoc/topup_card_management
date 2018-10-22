@@ -3,7 +3,15 @@
 	$dbuser = 'root';
 	$dbpass = 'lycee';//'lycee';
 	$dbname = 'topup_card_management'; 
-	$rootpath = 'http://localhost/topup_card_management';	 
+	//$rootpath = 'http://localhost/topup_card_management';
+	function url(){
+		return sprintf(
+		  "%s://%s%s",
+		  isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
+		  $_SERVER['SERVER_NAME'], ''
+		);
+	}
+	$rootpath = url().'/topup_card_management';
 	$classdirectory = array ('bol', 'commoninfo', 'dal' );	
 
 	//$g_upload_path = "D:/topup_project_images/";

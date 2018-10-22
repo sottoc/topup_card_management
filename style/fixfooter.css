@@ -22,7 +22,7 @@ html, body {
 
 #footer {
 	position: relative;
-	margin-top: -55px; /* negative value of footer height */
+	margin-top: 0px; /* negative value of footer height */
 	height: 55px;
 	clear: both;
 }

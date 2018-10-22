@@ -24,10 +24,34 @@ class reportbol{
 		$result=$reportdal->get_transaction_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
 		return $result;
 	}
+	function get_user_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr)
+	{
+		$reportdal=new reportdal();
+		$result=$reportdal->get_user_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+		return $result;
+	}
+	function get_refund_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr)
+	{
+		$reportdal=new reportdal();
+		$result=$reportdal->get_refund_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+		return $result;
+	}
 	function get_card_report($offset, $rpage ,$sorting,$cri_arr)
 	{
 			$reportdal=new reportdal();
 			$result=$reportdal->get_card_report($offset, $rpage ,$sorting,$cri_arr);
+			return $result;
+	}
+	function get_card_report_new($offset, $rpage ,$sorting,$cri_arr)
+	{
+			$reportdal=new reportdal();
+			$result=$reportdal->get_card_report_new($offset, $rpage ,$sorting,$cri_arr);
+			return $result;
+	}
+	function get_prepaid_card($offset, $rpage ,$sorting,$cri_arr)
+	{
+			$reportdal=new reportdal();
+			$result=$reportdal->get_prepaid_card($offset, $rpage ,$sorting,$cri_arr);
 			return $result;
 	}
 	function get_topup_report($offset, $rpage ,$sorting,$cri_arr)

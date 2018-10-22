@@ -140,6 +140,21 @@ class userdal{
 				
 			return new readonlyresultset($result);
 		}
+		function get_user($offset, $rpage ,$sorting,$cri_arr)
+		{
+			$cri_str = $cri_arr[0];
+			$param = $cri_arr[1];
+			$query = "SELECT SQL_CALC_FOUND_ROWS * FROM tbl_user u
+					lEFT JOIN tbl_user_type u_t on u.user_type_id=u_t.user_type_id
+					LEFT JOIN tbl_gender g on u.user_gender_id=g.gender_id LEFT JOIN tbl_card1 c on u.Card_ID=c.Card_ID";
+			$query .= $cri_str;
+			$query .=$sorting;
+			if($rpage!=-1)
+				$query.= " LIMIT $offset,$rpage";	
+			$result = execute_query($query,$param) or die ("get_user_list query fail.");
+				
+			return new readonlyresultset($result);
+		}
 		function update_user_isactive($user_id,$is_active,$old_values)
 		{
 			#eventlog for user status update
@@ -200,20 +215,28 @@ class userdal{
 			$user_email= $userinfo->get_user_email();
 			$user_password= $userinfo->get_user_password();
 			$md5_user_password = md5($user_password);
+			$user_first_name = $userinfo->get_user_first_name();
+			$user_last_name = $userinfo->get_user_last_name();
+			$user_card_id = $userinfo->get_user_card_id();
 			$user_address= $userinfo->get_user_address();
 			$user_phone= $userinfo->get_user_phone();
 			$user_gender_id= $userinfo->get_user_gender_id();
 			$user_created_datetime= $userinfo->get_user_created_datetime();
 			$user_modified_datetime= $userinfo->get_user_modified_datetime();
-			$query ="INSERT INTO  tbl_user (user_name,user_email,user_password,user_address,user_phone,user_gender_id,user_type_id,user_created_datetime,user_modified_datetime) VALUES (:user_name,:user_email,:user_password,:user_address,:user_phone,:user_gender_id,:user_type_id,:user_created_datetime,:user_modified_datetime) ";
+			$user_status = $userinfo->get_is_active();
+			$query ="INSERT INTO  tbl_user (user_name,user_email,user_password,user_first_name,user_last_name,Card_ID,user_address,user_phone,user_gender_id,user_type_id,is_active,user_created_datetime,user_modified_datetime) VALUES (:user_name,:user_email,:user_password,:user_first_name,:user_last_name,:user_card_id,:user_address,:user_phone,:user_gender_id,:user_type_id,:is_active,:user_created_datetime,:user_modified_datetime) ";
 			$param = array(
 			':user_name'=>$user_name,
 			':user_email'=>$user_email,
 			':user_password'=>$md5_user_password,
+			':user_first_name'=>$user_first_name,
+			':user_last_name'=>$user_last_name,
+			':user_card_id'=>$user_card_id,
 			':user_address'=>$user_address,
 			':user_phone'=>$user_phone,
 			':user_gender_id'=>$user_gender_id,
 			':user_type_id'=>$user_type_id,
+			':is_active'=>$user_status,
 			':user_created_datetime'=>$user_created_datetime,
 			':user_modified_datetime'=>$user_modified_datetime
 			);

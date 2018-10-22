@@ -65,6 +65,12 @@ class userbol{
 			$result=$userdal->get_user_list($offset, $rpage ,$sorting,$cri_arr);
 			return $result;
 		}
+		function get_user($offset, $rpage ,$sorting,$cri_arr)
+		{
+			$userdal=new userdal();
+			$result=$userdal->get_user($offset, $rpage ,$sorting,$cri_arr);
+			return $result;
+		}
 		function update_user_isactive($user_id,$is_active,$old_values)
 		{
 			$userdal=new userdal();

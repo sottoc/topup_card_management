@@ -30,10 +30,9 @@ h1 {
 	font-weight: normal;
 }
 h2 {
-	margin: 50px 0 35px 0;
+	margin: 30px 0 25px 0;
 	font-size: 22px;
 	color: black;
-	text-align: center;
 }
 h3 {
 	margin: 0 0 8px 43px;
@@ -49,7 +48,7 @@ input,select,textarea, button  {
 	border: 1px solid #c0c6cb;
 }
 span {
-	color: #ff9933;
+	/* color: #ff9933; */
 	font-weight: 600;
 }
 p {
@@ -160,7 +159,7 @@ p {
 
 /*-----------Content Data----------*/
 .content_data {
-	margin: 0 1.5%;
+	margin: 0 8%;
 	margin-bottom: 20px;
 }
 
@@ -223,13 +222,14 @@ p {
 	padding: 0;
 	width: 100%;
 	/*background: url('../images/navbg.gif');*/
+	font-family: "Roboto", 'Segoe UI', Tahoma, sans-serif;
 }
 #nav ul {
 	margin: 0 auto;
 	padding: 0;
 	/*width: 1003px;*/
 	width: 1200px;
-	height: 40px;
+	height: 60px;
 	list-style: none;
 }
 #nav ul li {
@@ -238,18 +238,25 @@ p {
 }
 #nav a {
 	float: left;
-	padding: 14px 0 0 0;
-	width: 140px;
-	height: 26px;
+	padding: 22px 20px;
+	/* width: 140px; */
+	/* height: 26px; */
 	text-align: center;
 	text-decoration: none;
 	color: #ffffff;
 	outline: none;
 	text-transform: uppercase;
+	font-size:19px;
 }
 #nav a:hover {
-	color: #cddef0;
-	background: url('../images/nav_hover.gif') bottom center no-repeat;
+	color: white;
+	/* background: url('../images/nav_hover.gif') bottom center no-repeat; */
+	background: #05815f;
+}
+#nav a:visited {
+	color: white;
+	/* background: url('../images/nav_hover.gif') bottom center no-repeat; */
+	background: #05815f;
 }
 #nav a.current {
 	color: #fff;
@@ -263,7 +270,7 @@ p {
 
 /*----------- Form Label -----------*/
 .frm {
-	margin: 8px 150px;
+	margin: 8px 120px;
 }
 .frm_label{
 	margin-bottom: 5px;
@@ -273,6 +280,7 @@ p {
 	font-weight: bold;
 }
 .frm_labelcat{
+	margin-top:10px;
 	margin-bottom: 5px;
 	width: 160px;
 	float: left;  
@@ -281,7 +289,7 @@ p {
 }
 
 .frm select , .frm input {
-	width: 200px;
+	/* width: 200px; */
 	height: 20px;
 }
 .frm select { height: 22px; vertical-align:top;}
@@ -401,7 +409,7 @@ input[ type="radio" ],input[type="checkbox"]{ width: 15px; height: 15px; margin:
 /*---------------SMT Test-----------------------*/
 .smtPotential {		
 	color: #7FC814;
-	//font-weight: bold;	
+	font-weight: bold;	
 }
 
 
@@ -420,7 +428,7 @@ label.error
 	/*margin-right: 450px;
 	float: left;*/
 	display: block;	
-	margin-left: 140px;
+	/* margin-left: 140px; */
 }
 .errors,#message
 {
@@ -492,7 +500,7 @@ label.error
 	}
 	#nav ul ul.dropdown {
 		position: absolute;
-		top: 158px;
+		top: 175px;
 		display: none;
 		min-width: 200px;
 		height: auto;
@@ -605,5 +613,98 @@ input.text { padding: .25em .4em; margin: 0 }
 textarea.textarea { margin-bottom:12px; width:500px; padding: .4em; height:120px; }
 
 
+/*------------------------------  style for table---------------------------------------*/
+.dataTables_wrapper table{
+	border:1px solid #cbccce !important;
+}
 
+.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate{
+	display:none;
+}
 
+.dataTables_wrapper th{
+	background:#2d2d2d;
+	color:white;
+	font-weight: normal !important;
+}
+
+.dataTables_wrapper th.ui-state-default{
+	border:none !important;
+}
+
+.dataTables_wrapper th span:first-of-type{
+	display:none;
+}
+
+.dataTables_wrapper th, .dataTables_wrapper td{
+	font-size: 17px;
+	font-family: "Roboto", 'Segoe UI', Tahoma, sans-serif;
+}
+
+.dataTables_wrapper table th{
+	text-align:left !important;
+	padding-left:20px !important;
+	padding-top:7px !important;
+	padding-bottom:7px !important;
+}
+
+.dataTables_wrapper table td{
+	text-align:left !important;
+	padding-left:20px !important;
+	padding-top:10px !important;
+	padding-bottom:10px !important;
+}
+
+.control-button{
+	padding: 10px 25px !important;
+	background: #7c36a8 !important;
+	font-size: 16px !important;
+	color:white !important;
+	cursor: pointer !important;
+}
+.control-button:hover, active{
+	background: #612a84 !important;
+	color:white !important;
+}
+
+.label-span{
+	color:#2d2d2d !important;
+	font-size:17px;
+	font-weight:normal;
+}
+
+.input-text-custom{
+	height:20px;
+	padding:10px;
+	font-size:15px;
+	width:100%;
+	border-color: #797070;
+}
+
+.select-custom{
+	width: 200px !important;
+	height: 40px !important;
+	padding: 10px !important;
+	font-size: 16px !important;
+	border-color: #797070;
+}
+
+.edit-button{
+	color:#7c36a8 !important;
+	cursor: pointer;
+}
+.edit-button:hover{
+	font-weight:600 !important;
+	color:#7c36a8 !important;
+}
+.alignCenter div{
+	text-align: center !important;
+}
+
+.modal a.close-modal{
+	display:none !important;
+}
+
+.modal{
+	border-radius:0px !important;
+}

@@ -21,15 +21,20 @@
 	{
 		$DisplayLength = $_GET['iDisplayLength'];
 	}
-	$cri_str = ' WHERE 1=1 ';
+	$cri_str = ' WHERE created_time';
 	$param = array();
 	if ( isset($_GET['sSearch']))
 	{	
 		$criobj = json_decode($_GET['sSearch']);
 		
 		if(isset($criobj->sel_student_id) &&  $criobj->sel_student_id!='-1' ){
-			$cri_str .= " AND p.participant_id=:sel_student_id";
+			//$cri_str .= " AND t.participant_id=:sel_student_id";
 			$param[':sel_student_id'] = clean($criobj->sel_student_id);
+		}
+		if(isset($criobj->sel_date_from) && isset($criobj->sel_date_to)){
+			$from = $criobj->sel_date_from;
+			$to = $criobj->sel_date_to;
+			$cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
 		}
 	}
 	$cri_arr = array($cri_str,$param);
@@ -46,25 +51,27 @@
 		$_SESSION['SESS_SORTINGCOLS']=$SortingCols;
 	}
 	
-	$rResult= $reportbol->get_topup_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+	$rResult= $reportbol->get_transaction_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
 	$iTotal = $rResult->getFoundRows();
 	$response = array('sEcho'=>$sEcho,'iTotalRecords'=>$iTotal,'iTotalDisplayRecords'=>$iTotal,'aaData'=>array());
 	
 	while( $aRow = $rResult->getNext() )
-	{	
+	{
+		$trans_amt='';
 		$tmpentry = array();
-		$tmpentry[] = htmlspecialchars($aRow['participant_enroll_no']);
-		$tmpentry[] = htmlspecialchars($aRow['participant_name']);
-		if($aRow['card_number']=='' && $aRow['card_number']==Null)
-			$card_number = "No Card";
-		else
-			$card_number = $aRow['card_number'];
-		$tmpentry[] = htmlspecialchars($card_number);
-		$tmpentry[] = htmlspecialchars($aRow['topup_amt']);
-		$tmpentry[] = htmlspecialchars($aRow['payment_type']);
-		$tmpentry[] = htmlspecialchars($aRow['pos_slip_id']);
-		$tmpentry[] = htmlspecialchars($aRow['transaction_datetime']);
-		$tmpentry[] = htmlspecialchars($aRow['user_name']);
+		$date_time = explode(" ", $aRow['created_time']);
+		$tmpentry[] = htmlspecialchars($date_time[0]);
+		$tmpentry[] = htmlspecialchars($date_time[1]);
+		// if($aRow['trans_type']=='redemption')
+		// 	$trans_amt = "<font color='red'>".$aRow['redemption_amt']."</font>";
+		// else
+		// 	$trans_amt = "<font color='blue'>".$aRow['topup_amt']."</font>";
+		$tmpentry[] = htmlspecialchars($aRow['User_code']);
+		$tmpentry[] = htmlspecialchars($aRow['card_id']);
+		$tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
+		//$tmpentry[] = htmlspecialchars($cri_str);
+		$tmpentry[] = htmlspecialchars($aRow['pos_id']);
+		$tmpentry[] = htmlspecialchars("Keith");
 		$response['aaData'][] = $tmpentry;
 	}
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
@@ -78,21 +85,13 @@
 	function fnColumnToField( $i )
 	{
 		if ( $i == 0 )
-			return "participant_enroll_no";
+			return "created_time";
 		else if ( $i == 1 )
-			return "participant_name";
-		else if ( $i == 2 )
-			return "card_number";
+			return "created_time";
 		else if ( $i == 3 )
-			return "topup_amt";
+			return "created_time";
 		else if ( $i == 4 )
-			return "payment_type";
-		else if ( $i == 5 )
-			return "pos_slip_id";
-		else if ( $i == 6 )
-			return "transaction_datetime";
-		else if ( $i == 7)
-			return "user_name";
+			return "created_time";
 		else 
 			return true;			
 	}

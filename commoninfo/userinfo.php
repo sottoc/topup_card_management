@@ -4,6 +4,9 @@
 		private $user_id;
 		private $user_email;
 		private $user_password;
+		private $user_first_name;
+		private $user_last_name;
+		private $user_card_id;
 		private $user_type_id;
 		private $user_name;
 		private $user_address;
@@ -38,6 +41,27 @@
 		public function get_user_password()
 		{
 			return $this->user_password;
+		}
+
+		public function set_user_first_name($value){
+			$this->user_first_name=$value;
+		}
+		public function get_user_first_name(){
+			return $this->user_first_name;
+		}
+
+		public function set_user_last_name($value){
+			$this->user_last_name=$value;
+		}
+		public function get_user_last_name(){
+			return $this->user_last_name;
+		}
+
+		public function set_user_card_id($value){
+			$this->user_card_id=$value;
+		}
+		public function get_user_card_id(){
+			return $this->user_card_id;
 		}
 		
 		public function set_user_type_id($value)

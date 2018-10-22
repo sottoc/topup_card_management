@@ -89,7 +89,7 @@
 			
 			"bAutoWidth": false,
 			"bEscapeRegex": false,
-			"sAjaxSource": "get_transaction_report.php",
+			"sAjaxSource": "get_refund_report.php",
 			
 			"aoColumns": [						
 							{"bSortable": false,"sWidth":"auto"},											
@@ -97,8 +97,7 @@
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},
-							{"bSortable": false,"sWidth":"auto"},											
-							{"bSortable": false,"sWidth":"auto"},											
+							{"bSortable": false,"sWidth":"auto"},
 							{"bSortable": false,"sWidth":"auto"}
 						]
 		});	
@@ -169,7 +168,7 @@
 <div class="content_data">
 	<form id='frm_card' name='frm_card' method='POST'>
 	
-		<h2>Transaction Report</h2>
+		<h2>Refund Report</h2>
 		<table style="width:100%">
             <tr>
                 <td style="width:70%">
@@ -230,14 +229,13 @@
 		<table cellpadding="0"  border="0" class="display" id="transaction_report_dtList" name="transaction_report_dtList">
 			<thead>
 				<tr>
-					<th>Date</th>
-					<th>Time</th>
-					<th>User ID</th>					
-					<th>Card ID</th>					
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Amount Spend</th>
-					<th>POS</th>
+					<th>Register Date & Time</th>
+					<th>Family ID</th>					
+					<th>Login Email</th>					
+					<th>Sur Name</th>
+					<th>Card</th>
+					<th>Refund Amount</th>
+					<th>Operator</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -264,12 +262,12 @@
 <script>
 	function export_table2excel(){
 		$("#transaction_report_dtList").table2excel({
-			filename: "transaction_report.xls"
+			filename: "refund_report.xls"
 		});
 	}
 	
 	function export_table2csv(){
-		exportTableToCSV('transaction_report.csv')
+		exportTableToCSV('refund_report.csv')
 	}
 
 	function export_table(){

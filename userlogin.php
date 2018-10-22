@@ -114,6 +114,9 @@ jQuery(document).ready(function()
 		jQuery('#txtemail').focus();						
 		AddValidation();
 		
+		$("#btnlogin_a").click(function(){
+			$("#btnlogin").trigger('click');
+		});
 });
 </script>
 
@@ -121,10 +124,10 @@ jQuery(document).ready(function()
 	.login_box {
 		margin: 0 auto;
 		margin-top: 50px;
-		width: 550px;
+		width: 50%;
 		/* padding: 30px; */
-		background: #f5f5f5;
-		border: 1px dotted #ccc;
+		/* background: #f5f5f5;
+		border: 1px dotted #ccc; */
 	}
 	.frm_label {
 		width: 180px;
@@ -135,8 +138,36 @@ jQuery(document).ready(function()
 <p>&nbsp;</p>
 	<div class="login_box">	
 		<form method="post" id="frmuserlogin" name="frmuserlogin">
+
+			<div align="center">
+				<h2 style="font-size:30px;"> Welcome to Compass Food Card Website </h2>
+				<div style="font-size:16px"> Our mission is to bring more quality services to you and your children. </div>
+				<div style="margin-top:30px;">
+					<span class="label-span" style="font-weight:600"> Username : </span> 
+					<input type="text" class="input-text-custom" name="txtemail" id="txtemail"  value="<?php echo $refill_login_email;?>" style="width:50%"> 
+				</div>
+				<div style="margin-top:40px;">
+					<span class="label-span" style="font-weight:600"> Password : </span> 
+					<input type="password" name="txtpassword" id="txtpassword" class="input-text-custom" style="width:50%"> 
+				</div>
+				<br>
+				<br>
+				<div>	
+					<a class="control-button" style="padding:20px 28%;" id="btnlogin_a"> LOGIN </a>
+				</div>
+				<div style="margin-top:50px;font-size:16px;">	
+					<div> Don't have an account? <a class="edit-button" href="register.php"> Register here. </a> </div>
+				</div>
+				<div style="margin-top:30px;font-size:16px;">	
+					<div> If you encounter any issues. Please contact our administration. </div>
+					<br>
+					<div> +64 8828-1173 </div>
+				</div>
+			</div>
+
 			
-			<h2><?php echo $localized_data['login']; ?></h2>
+			
+			<!-- <h2><?php echo $localized_data['login']; ?></h2>
 			
 			<div class="frm">
 				<div class="frm_label"><?php echo $localized_data['login_email']; ?><span>*</span> :</div>
@@ -145,8 +176,8 @@ jQuery(document).ready(function()
 			<div class="frm">
 				<div class="frm_label"><?php echo $localized_data['login_pw']; ?><span>(case sensitive)*</span> :</div>
 				<input type="password" name="txtpassword" id="txtpassword" />
-			</div>
-			<div class="frm">
+			</div> -->
+			<div class="frm" style="display:none">
 				<input type="submit" name="btnlogin" id="btnlogin" value="Login" class="btn" /> &nbsp;
 				<input type="reset" name="btnlogin" id="btnlogin" value="Cancel" class="btn" />
 			</div>
@@ -164,8 +195,6 @@ jQuery(document).ready(function()
 					session_write_close ();
 				}
 			?>
-			<p><span>*</span><a href="register.php">Register Here</a></p>
-			<br />
 		</form>
 	</div>
 <?php

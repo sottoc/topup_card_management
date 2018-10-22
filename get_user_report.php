@@ -51,7 +51,7 @@
 		$_SESSION['SESS_SORTINGCOLS']=$SortingCols;
 	}
 	
-	$rResult= $reportbol->get_transaction_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+	$rResult= $reportbol->get_user_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
 	$iTotal = $rResult->getFoundRows();
 	$response = array('sEcho'=>$sEcho,'iTotalRecords'=>$iTotal,'iTotalDisplayRecords'=>$iTotal,'aaData'=>array());
 	
@@ -59,20 +59,17 @@
 	{
 		$trans_amt='';
 		$tmpentry = array();
-		$date_time = explode(" ", $aRow['created_time']);
-		$tmpentry[] = htmlspecialchars($date_time[0]);
-		$tmpentry[] = htmlspecialchars($date_time[1]);
+		$tmpentry[] = htmlspecialchars($aRow['created_time']);
 		// if($aRow['trans_type']=='redemption')
 		// 	$trans_amt = "<font color='red'>".$aRow['redemption_amt']."</font>";
 		// else
 		// 	$trans_amt = "<font color='blue'>".$aRow['topup_amt']."</font>";
-		$tmpentry[] = htmlspecialchars($aRow['User_code']);
-		$tmpentry[] = htmlspecialchars($aRow['card_id']);
-		$tmpentry[] = htmlspecialchars($aRow['First_name']);
-		$tmpentry[] = htmlspecialchars($aRow['Last_name']);
+		$tmpentry[] = htmlspecialchars($aRow['Family_code']);
+		$tmpentry[] = htmlspecialchars($aRow['user_email']);
+        $tmpentry[] = htmlspecialchars($aRow['First_name']);
+        $tmpentry[] = htmlspecialchars("1");
 		$tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
 		//$tmpentry[] = htmlspecialchars($cri_str);
-		$tmpentry[] = htmlspecialchars($aRow['pos_id']);
 		$response['aaData'][] = $tmpentry;
 	}
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
