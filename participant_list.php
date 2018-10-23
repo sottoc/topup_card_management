@@ -82,6 +82,16 @@
 	
 	jQuery(document).ready(function()
 	{
+		//---- set background for active menu -----
+        if(localStorage.getItem("current_page") != undefined){
+            for(var i=0; i < $("#nav ul li").length; i++){
+                if($($("#nav ul li")[i]).html() == localStorage.getItem("current_page")){
+                    $($("#nav ul li")[i]).css("background", '#b12226');
+                }
+            }
+        }
+        //---- End -----
+
 		loadpagestate();
 		if(jQuery.cookie('participantList[iDisplayStart]')==null)
 		jQuery.cookie('participantList[iDisplayStart]', 0);
@@ -109,6 +119,10 @@
 			"iDisplayStart": istart,
 			"aaSorting": aasorting,
 			"bProcessing": true,
+			"bSortable": true,
+			"asSorting": [ 'asc', 'desc' ],
+			"lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ]	,		
+			"sDom": 'Rfrtlip',
 			"bServerSide": true,
 			"bLengthChange": true,
 			"bJQueryUI":true,
@@ -128,20 +142,37 @@
 				jQuery.cookie('participantList[iDisplayLength]', oSettings._iDisplayLength);
 				jQuery.cookie('participantList[iDisplayStart]', oSettings._iDisplayStart);	
 				jQuery.cookie('participantList[aaSorting]', aaSorting);
+
+				var tds = $(".dataTables_wrapper td");
+                for(var i=0;i<tds.length;i++){
+                    if(i%5==4){
+                        if($(tds[i]).html().indexOf("div") == -1){
+                            $(tds[i]).html("<div class='edit-button'> View Detail </div>");
+                        }
+                    }
+                }
 			},
 			"bAutoWidth": false,
 			"bEscapeRegex": false,
-			"sAjaxSource": "get_participants.php",
+			"sAjaxSource": "get_children_list.php",
 			"aoColumns": [
 						{ "bSortable": true,"sWidth":"auto"},
 						{ "bSortable": true,"sWidth":"auto"},
 						{ "bSortable": false,"sWidth":"auto"},
 						{ "bSortable": true,"sWidth":"auto"},
-						{ "bSortable": true,"sWidth":"auto"},
-						{ "bSortable": false,"sWidth":"auto"}]			
+						{ "bSortable": true,"sWidth":"auto"}]			
 		});	
 		jQuery('.dataTables_filter').hide();
 		show_item_msg();		
+
+		$("#sel_date_from").datepicker({
+			onSelect: function(date){
+				console.log(date);
+				var d = new Date(date);
+				$("#sel_date_from").val(d.toISOString().substring(0, 10));
+			}
+		});
+
 	});
 function show_item_msg()
 {
@@ -165,7 +196,10 @@ function show_item_msg()
 <form id='saleheaderform' name='saleheaderform' method='POST'>
 	<div class="content_data">
 		<h2>Child List</h2>
-		<input type="hidden" id="hid_del_id" name="hid_del_id" value=""/>
+		<div style="font-size:15px;margin-bottom:10px;"> Filter </div>
+		<input type="text" value="Choose date" name="sel_date_from" id="sel_date_from" class='input-text-custom' style="width:200px;"/>
+
+		<!-- <input type="hidden" id="hid_del_id" name="hid_del_id" value=""/>
 		
 		<div class="frm">
 			<div class="frm_label">Participants Name : </div>			
@@ -175,7 +209,7 @@ function show_item_msg()
 			<div class="frm_label">&nbsp;</div>
 			<input type="submit" id="search" name="search" onclick=" return savepagestate()" value="Search" class="btn" /> &nbsp;
 			<input type="submit" id="showall" name="showall" value="Show All" onclick="clearpagestate();" class="btn" />
-		</div>
+		</div> -->
 		<!-- School Name Filter-->
 
 		<div class="cleaner"></div>
@@ -183,11 +217,10 @@ function show_item_msg()
 		<table cellpadding="0" cellspacing="0" border="1" class="display" name="participant_dtList" id="participant_dtList">
 			<thead>
 				<tr>
-					<th>Student Name</th>
-					<th>Student ID</th>
-					<th>Allergy Foods</th>
-					<th>Gender</th>
-					<th>Allow Preorder</th>
+					<th>User Code</th>
+					<th>Card Number</th>
+					<th>Family Code</th>
+					<th>First Name</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -198,9 +231,9 @@ function show_item_msg()
 			</tbody>
 		</table>
 		
-		<?php
+		<!-- <?php
 			echo '<div class="addbtn"><a href="add_new_participant.php" class="link">Add New Student</a></div>';
-		?>
+		?> -->
 	</div>
 </form>
 

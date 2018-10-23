@@ -18,24 +18,27 @@
 	
 ?>
 
-<style type="text/css">
-
-</style>
-
 <script type="text/javascript">
 $(document).ready(function(){
 	find_current_card_amount();
+	var user_id = "<?php echo $_SESSION ['login_user_type_id']; ?>";
 	localStorage.setItem("current_page", '<a href="index.php">Home</a>');
 	//---- set background for active menu -----
 	if(localStorage.getItem("current_page") != undefined){
 		for(var i=0; i < $("#nav ul li").length; i++){
 			if($($("#nav ul li")[i]).html() == localStorage.getItem("current_page")){
-				$($("#nav ul li")[i]).css("background", '#05815f');
+				if(user_id == "1"){
+					$($("#nav ul li")[i]).css("background", '#05815f');
+				}
+				if(user_id == "2"){
+					$($("#nav ul li")[i]).css("background", '#b12226');
+				}
 			}
 		}
 	}
 	//---- End -----
 });
+
 function find_current_card_amount()
 {
 	var sel_student_id = $("#sel_student_id").val();
@@ -107,35 +110,40 @@ function find_current_card_amount()
 								$rCount = $rResult->rowCount();
 								if($rCount > 0)
 								{
-									echo "<div class='frm'>			
-										<select id='sel_student_id' name='sel_student_id' onChange='find_current_card_amount();'>";
-									while($row=$rResult->getNext())
-									{
-										echo "<option value='".$row['participant_id']."'>".$row['participant_enroll_no']."</option>";
-									}
-									echo "</select></div>";
+									echo "<h2> Account Value </h2>";
+									echo "<table><tr> <td> <div class='parent-account-value'> $128.20 </div></td>  <td> <input type='button' name='topup_now' class='control-button' value='Top-up Now'/> </td></tr></table>";
+									include("spending_history_sub.php");
+									include("topup_history_sub.php");
+
+									// echo "<div class='frm'>			
+									// 	<select id='sel_student_id' name='sel_student_id' onChange='find_current_card_amount();'>";
+									// while($row=$rResult->getNext())
+									// {
+									// 	echo "<option value='".$row['participant_id']."'>".$row['participant_enroll_no']."</option>";
+									// }
+									// echo "</select></div>";
 									
-									echo "<div class='frm' style='border:1px solid lightgray;padding-left: 10px;'>";
-									echo "<label>Family Value</label><br/>";
-									echo "<label id='current_card_amount' name='current_card_amount' style='font-size: 35px;font-weight: bold;'></label>";
-									echo "</div>";
+									// echo "<div class='frm' style='border:1px solid lightgray;padding-left: 10px;'>";
+									// echo "<label>Family Value</label><br/>";
+									// echo "<label id='current_card_amount' name='current_card_amount' style='font-size: 35px;font-weight: bold;'></label>";
+									// echo "</div>";
 									
-									echo "<div class='frm' style='background:black;padding-left: 10px;'><a href='under_construction.php'><label style='color:white;font-size: 22px;'>TOP UP NOW</label><br/><label style='color:yellow;font-size: 13px;'>Accept Visa & Master Card</label></a>";
-									echo "</div>";
+									// echo "<div class='frm' style='background:black;padding-left: 10px;'><a href='under_construction.php'><label style='color:white;font-size: 22px;'>TOP UP NOW</label><br/><label style='color:yellow;font-size: 13px;'>Accept Visa & Master Card</label></a>";
+									// echo "</div>";
 									
-									echo "<div class='frm' style='border:1px solid lightgray;padding-left: 10px;'>";
-									echo "<label><a href='pre_order_report.php' style='color:blue;'>Pre Order Now for your kids</a></label>";
-									echo "</div>";
+									// echo "<div class='frm' style='border:1px solid lightgray;padding-left: 10px;'>";
+									// echo "<label><a href='pre_order_report.php' style='color:blue;'>Pre Order Now for your kids</a></label>";
+									// echo "</div>";
 																	
-									//Table for Purchase History Report
-									echo '<div class="cleaner"></div>';
-									echo "<div id='purchase' style='padding-left: 150px;'></div>";
-									//End of Table for Purchase History Report
+									// //Table for Purchase History Report
+									// echo '<div class="cleaner"></div>';
+									// echo "<div id='purchase' style='padding-left: 150px;'></div>";
+									// //End of Table for Purchase History Report
 									
-									//Table for TopUp Report
-									echo '<div class="cleaner"></div>';
-									echo "<div id='topup' style='padding-left: 150px;'></div>";
-									//End of Table for TopUp Report
+									// //Table for TopUp Report
+									// echo '<div class="cleaner"></div>';
+									// echo "<div id='topup' style='padding-left: 150px;'></div>";
+									// //End of Table for TopUp Report
 								}
 								else
 								{
@@ -143,11 +151,11 @@ function find_current_card_amount()
 									echo "<h5>You do not have account yet.</h5><label style='font-size: 13px;'>You can <a href='participant_list.php' style='color: blue;'><u>Register</u></a>.</label>";
 									echo "</div>";
 								}
-								echo "<div class='frm' style='border:1px solid lightgray;padding-left: 10px;padding-top: 10px;padding-bottom: 10px;'>";
-								echo "<h5>Contact Us</h5><label style='font-size: 13px;'>For any difficulties or question you might have regarding our services,please drop us a email or contact us with the number below:</label>
-								<br/><br/><h5>Email</h5><label style='font-size: 13px;'>helpdesk@compasspoint.sg</label>
-								<br/><br/><h5>Compass Point Canteen</h5><label style='font-size: 13px;'>+6554546789</label>";
-								echo "</div>";
+								// echo "<div class='frm' style='border:1px solid lightgray;padding-left: 10px;padding-top: 10px;padding-bottom: 10px;'>";
+								// echo "<h5>Contact Us</h5><label style='font-size: 13px;'>For any difficulties or question you might have regarding our services,please drop us a email or contact us with the number below:</label>
+								// <br/><br/><h5>Email</h5><label style='font-size: 13px;'>helpdesk@compasspoint.sg</label>
+								// <br/><br/><h5>Compass Point Canteen</h5><label style='font-size: 13px;'>+6554546789</label>";
+								// echo "</div>";
 							}
 							else if($_SESSION ['login_user_type_id']==3)
 								echo "<div style='font-size:19px;'>Welcome to Food Card Portal Staff Control Page </br></br><img src='images/staff_Home_img_1.jpg' alt='Admin_Home_img_1'></div>";
@@ -175,5 +183,12 @@ function find_current_card_amount()
 		font-weight:600;
 		margin-top:10px;
 		margin-bottom:10px;
+	}
+	.parent-account-value{
+		background: #eee;
+		text-align: center;
+		padding: 4px 60px;
+		font-size: 23px;
+		font-weight: 600;
 	}
 </style>

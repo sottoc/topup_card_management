@@ -24,6 +24,18 @@ class reportbol{
 		$result=$reportdal->get_transaction_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
 		return $result;
 	}
+	function get_spending_history($DisplayStart,$DisplayLength,$SortingCols,$cri_arr)
+	{
+		$reportdal=new reportdal();
+		$result=$reportdal->get_spending_history($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+		return $result;
+	}
+	function get_topup_history($DisplayStart,$DisplayLength,$SortingCols,$cri_arr)
+	{
+		$reportdal=new reportdal();
+		$result=$reportdal->get_topup_history($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+		return $result;
+	}
 	function get_user_report($DisplayStart,$DisplayLength,$SortingCols,$cri_arr)
 	{
 		$reportdal=new reportdal();

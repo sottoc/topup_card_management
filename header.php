@@ -108,7 +108,7 @@
 			if($_SESSION ['login_user_type_id']==1)
 				$nav_class="style='background-color: #2c2c2c ');'";
 			else if($_SESSION ['login_user_type_id']==2)//parent
-				$nav_class="style='background: #128667;'";
+				$nav_class="style='background: #011880;'";
 			else if($_SESSION ['login_user_type_id']==3)
 				$nav_class="style='background: #005586;'";
 		?>
@@ -144,7 +144,7 @@
 				<?php } ?>
 				
 				<?php if($_SESSION ['login_user_type_id']==2){ ?><!--for parentuser type-->
-					<li><a href="pre_order.php" ><?php echo $localized_home_data['pre_order']; ?></a></li>
+					<!-- <li><a href="pre_order.php" ><?php echo $localized_home_data['pre_order']; ?></a></li> -->
 					<li><a href="topup_paypal.php" >Topup(Paypal)</a></li>
 				<?php } ?>
 				
@@ -172,11 +172,17 @@
 						
 						<!-- <li><a href="pre_order_report.php" ><?php echo $localized_home_data['pre_order_report_title']; ?></a></li> -->
 						
-						<?php if($_SESSION ['login_user_type_id']==1 || $_SESSION ['login_user_type_id']==2){ ?><!--admin user type or parent/organizer user type-->
+						<?php if($_SESSION ['login_user_type_id']==1){ ?><!--admin user type or parent/organizer user type-->
 							<li><a href="transaction_report.php" ><?php echo "Transaction Report"; ?></a></li>
 							<li><a href="topup_report.php" ><?php echo "Topup Report"; ?></a></li>
 							<li><a href="users_report.php" ><?php echo "Users Report"; ?></a></li>
 							<li><a href="refund_report.php" ><?php echo "Refund Report"; ?></a></li>
+							<!-- <li><a href="redemption_report.php" ><?php echo $localized_home_data['redemption_report_title']; ?></a></li> -->
+						<?php } ?>
+
+						<?php if($_SESSION ['login_user_type_id']==2){ ?><!--admin user type or parent/organizer user type-->
+							<li><a href="spending_history.php" ><?php echo "Spending History"; ?></a></li>
+							<li><a href="topup_history.php" ><?php echo "Topup History"; ?></a></li>
 							<!-- <li><a href="redemption_report.php" ><?php echo $localized_home_data['redemption_report_title']; ?></a></li> -->
 						<?php } ?>
 					</ul>
@@ -191,3 +197,33 @@
 	<div id="main"> <!-- Inside this main div we are floating the content to the left and the sidebar to the right  -->
 
 		<div id="content"> 
+
+<?php if($_SESSION ['login_user_type_id']==1){ ?>
+	<style>
+		#nav a:hover {
+			color: white;
+			/* background: url('../images/nav_hover.gif') bottom center no-repeat; */
+			background: #05815f;
+		}
+		#nav a:visited {
+			color: white;
+			/* background: url('../images/nav_hover.gif') bottom center no-repeat; */
+			background: #05815f;
+		}
+	</style>
+<?php } ?>
+
+<?php if($_SESSION ['login_user_type_id']==2){ ?>
+	<style>
+		#nav a:hover {
+			color: white;
+			/* background: url('../images/nav_hover.gif') bottom center no-repeat; */
+			background: #b12226;
+		}
+		#nav a:visited {
+			color: white;
+			/* background: url('../images/nav_hover.gif') bottom center no-repeat; */
+			background: #b12226;
+		}
+	</style>
+<?php } ?>
