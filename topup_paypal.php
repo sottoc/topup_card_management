@@ -18,14 +18,15 @@
 	jQuery(document).ready(function()
 		{
 			//---- set background for active menu -----
-			if(localStorage.getItem("current_page") != undefined){
-				for(var i=0; i < $("#nav ul li").length; i++){
-					if($($("#nav ul li")[i]).html() == localStorage.getItem("current_page")){
-						$($("#nav ul li")[i]).css("background", '#b12226');
-					}
-				}
-			}
+			// if(localStorage.getItem("current_page") != undefined){
+			// 	for(var i=0; i < $("#nav ul li").length; i++){
+			// 		if($($("#nav ul li")[i]).html() == localStorage.getItem("current_page")){
+			// 			$($("#nav ul li")[i]).css("background", '#b12226');
+			// 		}
+			// 	}
+			// }
 			//---- End -----
+			$($("#nav ul li")[2]).css("background", '#b12226');
 		}
 	);
 </script>
@@ -33,7 +34,7 @@
 <div class="content_data">
 	<div class="product">            
 	  
-		<h2>TopUp Paypal</h2>
+		<h2>Top-Up</h2>
 		
 		<div style="font-size:16px"> Please select the amount you wish to topup </div>
 		<br/>
@@ -41,17 +42,22 @@
 			<tr>
 				<td>
 					<div class="topup-amount-div">
-						<strong> S$50 </strong>
+						<strong> $30 </strong>
 					</div>
 				</td>
 				<td>
 					<div class="topup-amount-div">
-						<strong> S$100 </strong>
+						<strong> $50 </strong>
 					</div>
 				</td>
 				<td>
 					<div class="topup-amount-div">
-						<strong> S$200 </strong>
+						<strong> $100 </strong>
+					</div>
+				</td>
+				<td>
+					<div class="topup-amount-div">
+						<strong> $150 </strong>
 					</div>
 				</td>
 			</tr>
@@ -96,7 +102,7 @@
 		<input type="hidden" name="cancel_return" value="http://localhost/topup_card_management/cancel.php">
 		<input type="hidden" name="return" value="http://localhost/topup_card_management/success.php">
 		<div>
-			<input type="submit" name="btnsubmit" value="Pay by Paypal" class="btn control-button" style="height:100% !important;">
+			<input type="submit" name="btnsubmit" value="Top-up Now" class="btn control-button" style="height:100% !important;">
 		</div>
 		
 		<!--input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"-->
@@ -108,7 +114,7 @@
 
 <style>
 	.topup-amount-div{
-		width: 210px;
+		width: 180px;
 		background: #e9e9e9;
 		border-radius: 13px;
 		padding: 52px 30px;

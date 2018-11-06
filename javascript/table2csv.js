@@ -26,19 +26,21 @@ function downloadCSV(csv, filename) {
 function exportTableToCSV(filename) {
     var csv = [];
     var rows = document.querySelectorAll("table.display tr");
-    
     for (var i = 0; i < rows.length; i++) {
         var row = [], cols = rows[i].querySelectorAll("td, th");
-        
         for (var j = 0; j < cols.length; j++) {
-            var t = cols[j].innerText;
+            var t ;
+            if(i==0){
+                t = cols[j].children[0].innerText;
+            } else{
+                t = cols[j].innerText;
+            }
             if(i != 0 && j == 0) {
-                t = ':' + cols[j].innerText;
+                t = ':' + t;
             }
             row.push(t);
         }
-        
-        csv.push(row.join(","));        
+        csv.push(row.join(","));
     }
     // Download CSV file
     downloadCSV(csv.join("\n"), filename);

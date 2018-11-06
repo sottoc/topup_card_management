@@ -145,7 +145,7 @@
 				
 				<?php if($_SESSION ['login_user_type_id']==2){ ?><!--for parentuser type-->
 					<!-- <li><a href="pre_order.php" ><?php echo $localized_home_data['pre_order']; ?></a></li> -->
-					<li><a href="topup_paypal.php" >Topup(Paypal)</a></li>
+					<li><a href="topup_paypal.php" >Topup</a></li>
 				<?php } ?>
 				
 				<?php if($_SESSION ['login_user_type_id']==1 || $_SESSION ['login_user_type_id']==3){ ?>

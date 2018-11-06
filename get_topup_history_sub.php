@@ -36,7 +36,11 @@
 			$to = $criobj->sel_date_to;
 			$cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
 		}
-	}
+    }
+    $date = new DateTime('7 days ago');
+	$from = $date->format('Y-m-d');
+    $to = date("Y-m-d");
+    $cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
 	$cri_arr = array($cri_str,$param);
 	if ( isset( $_GET['iSortCol_0'] ) )
 	{
@@ -51,7 +55,7 @@
 		$_SESSION['SESS_SORTINGCOLS']=$SortingCols;
 	}
 	
-	$rResult= $reportbol->get_spending_history($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+	$rResult= $reportbol->get_topup_history($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
 	$iTotal = $rResult->getFoundRows();
 	$response = array('sEcho'=>$sEcho,'iTotalRecords'=>$iTotal,'iTotalDisplayRecords'=>$iTotal,'aaData'=>array());
 	
@@ -63,12 +67,8 @@
 		$tmpentry[] = htmlspecialchars($date_time[0]);
 		$tmpentry[] = htmlspecialchars($date_time[1]);
         
-        $tmpentry[] = htmlspecialchars($aRow['First_name']);
-        $tmpentry[] = htmlspecialchars($aRow['card_id']);
-        $tmpentry[] = htmlspecialchars($aRow['pos_id']);
-		$tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
-		//$tmpentry[] = htmlspecialchars($cri_str);
-		$tmpentry[] = htmlspecialchars($aRow['item_name'].','.$aRow['Last_name']);
+        $tmpentry[] = htmlspecialchars("Paypal");
+        $tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
 
 		$response['aaData'][] = $tmpentry;
 	}

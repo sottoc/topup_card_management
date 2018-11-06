@@ -110,9 +110,10 @@ function find_current_card_amount()
 								$rCount = $rResult->rowCount();
 								if($rCount > 0)
 								{
-									echo "<h2> Account Value </h2>";
-									echo "<table><tr> <td> <div class='parent-account-value'> $128.20 </div></td>  <td> <input type='button' name='topup_now' class='control-button' value='Top-up Now'/> </td></tr></table>";
+									echo "<h2> Current Account Value: $ <spam> 128.20 </span> </h2>";
+									echo "<table><tr> <td> <a href='topup_paypal.php' name='topup_now' class='control-button'> Top-up Now </a> </td></tr></table>";
 									include("spending_history_sub.php");
+									echo "<br> <table><tr> <td> <a href='spending_history.php' name='topup_now' class='control-button'> View Spending Report </a> </td></tr></table>";
 									include("topup_history_sub.php");
 
 									// echo "<div class='frm'>			

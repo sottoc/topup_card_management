@@ -143,14 +143,6 @@
 				jQuery.cookie('participantList[iDisplayStart]', oSettings._iDisplayStart);	
 				jQuery.cookie('participantList[aaSorting]', aaSorting);
 
-				var tds = $(".dataTables_wrapper td");
-                for(var i=0;i<tds.length;i++){
-                    if(i%5==4){
-                        if($(tds[i]).html().indexOf("div") == -1){
-                            $(tds[i]).html("<div class='edit-button'> View Detail </div>");
-                        }
-                    }
-                }
 			},
 			"bAutoWidth": false,
 			"bEscapeRegex": false,
@@ -196,9 +188,7 @@ function show_item_msg()
 <form id='saleheaderform' name='saleheaderform' method='POST'>
 	<div class="content_data">
 		<h2>Child List</h2>
-		<div style="font-size:15px;margin-bottom:10px;"> Filter </div>
-		<input type="text" value="Choose date" name="sel_date_from" id="sel_date_from" class='input-text-custom' style="width:200px;"/>
-
+		
 		<!-- <input type="hidden" id="hid_del_id" name="hid_del_id" value=""/>
 		
 		<div class="frm">
@@ -221,7 +211,7 @@ function show_item_msg()
 					<th>Card Number</th>
 					<th>Family Code</th>
 					<th>First Name</th>
-					<th>Action</th>
+					<th>Last Name</th>
 				</tr>
 			</thead>
 			<tbody>

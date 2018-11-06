@@ -45,23 +45,23 @@
 		jQuery('#transaction_report_dtList').attr('width',sWidth);
 		
 		loadpagestate();
-		if(jQuery.cookie('transactionReport[iDisplayStart]')==null)
-			jQuery.cookie('transactionReport[iDisplayStart]', 0);
+		if(jQuery.cookie('spendingHistory[iDisplayStart]')==null)
+			jQuery.cookie('spendingHistory[iDisplayStart]', 0);
 
-		if(jQuery.cookie('transactionReport[iDisplayLength]')==null)
-			jQuery.cookie('transactionReport[iDisplayLength]', 10);
+		if(jQuery.cookie('spendingHistory[iDisplayLength]')==null)
+			jQuery.cookie('spendingHistory[iDisplayLength]', 10);
 		
-		if(jQuery.cookie('transactionReport[aaSorting]')==null)
+		if(jQuery.cookie('spendingHistory[aaSorting]')==null)
 		{
-			jQuery.cookie('transactionReport[aaSorting]', "[[0,'asc']]");
+			jQuery.cookie('spendingHistory[aaSorting]', "[[0,'asc']]");
 			aasorting = [[0,'asc']];
 		}
 		else
 		{
-			aasorting = eval('(' + jQuery.cookie('transactionReport[aaSorting]') + ')'); //convert json string to json object
+			aasorting = eval('(' + jQuery.cookie('spendingHistory[aaSorting]') + ')'); //convert json string to json object
 		}		
-		ilength = parseInt(jQuery.cookie('transactionReport[iDisplayLength]'));
-		istart = parseInt(jQuery.cookie('transactionReport[iDisplayStart]'));		
+		ilength = parseInt(jQuery.cookie('spendingHistory[iDisplayLength]'));
+		istart = parseInt(jQuery.cookie('spendingHistory[iDisplayStart]'));		
 		sFilter=getFilter();	
 		
 		oTable=jQuery('#spending_history_dtList').dataTable({
@@ -81,16 +81,28 @@
 			"fnDrawCallback": function() {	
 				var oSettings = oTable.fnSettings();
 				var aaSorting = JSON.stringify(oSettings.aaSorting); //convert json object to json string because cookie only allow to save string
-				jQuery.cookie('transactionReport[iDisplayLength]', oSettings._iDisplayLength);
-				jQuery.cookie('transactionReport[iDisplayStart]', oSettings._iDisplayStart);
-				jQuery.cookie('transactionReport[aaSorting]', aaSorting);
+				jQuery.cookie('spendingHistory[iDisplayLength]', oSettings._iDisplayLength);
+				jQuery.cookie('spendingHistory[iDisplayStart]', oSettings._iDisplayStart);
+				jQuery.cookie('spendingHistory[aaSorting]', aaSorting);
 				
 				var tds = $(".dataTables_wrapper td");
+                var j = 0;
                 for(var i=0;i<tds.length;i++){
                     if(i%7==6){
                         if($(tds[i]).html().indexOf("div") == -1){
-                            $(tds[i]).html("<a class='edit-button' href='#spending_history_detail_modal' rel='modal:open'> View Detail </a>");
-                        }
+							var date = $(tds[j*7+0]).html();
+							var time = $(tds[j*7+1]).html();
+							var first_name = $(tds[j*7+2]).html();
+							var card_id = $(tds[j*7+3]).html();
+							var pos_id = $(tds[j*7+4]).html();
+							var item_price = $(tds[j*7+5]).html();
+							var str = $(tds[j*7+6]).html();
+							var item_name = str.split(",")[0];
+							var last_name = str.split(",")[1];
+							var full_name = first_name + ' ' + last_name;
+                            $(tds[i]).html("<a class='edit-button view-modal' href='#spending_history_detail_modal' rel='modal:open' data-date-time='" + date+' '+time + "' data-card-id='" + card_id + "' data-pos-id='" + pos_id + "' data-item-price='" + item_price + "' data-item-name='" + item_name +"' data-full-name='" + full_name + "'> View Detail </a>");
+						}
+						j++;
                     }
                 }
 			},	
@@ -133,12 +145,12 @@
 	});
 	function loadpagestate()
 	{
-		updatecontrol('#sel_student_id', jQuery.cookie('transactionReport[sel_student_id]'));
-		updatecontrol('#sel_date_from', jQuery.cookie('transactionReport[sel_date_from]'));
-		updatecontrol('#sel_date_to', jQuery.cookie('transactionReport[sel_date_to]'));
-		$( "#sel_student_id" ).val( jQuery.cookie('transactionReport[sel_student_id]') );
-		//$( "#sel_date_from" ).val( jQuery.cookie('transactionReport[sel_date_from]') );
-		//$( "#sel_date_to" ).val( jQuery.cookie('transactionReport[sel_date_to]') );
+		updatecontrol('#sel_student_id', jQuery.cookie('spendingHistory[sel_student_id]'));
+		updatecontrol('#sel_date_from', jQuery.cookie('spendingHistory[sel_date_from]'));
+		updatecontrol('#sel_date_to', jQuery.cookie('spendingHistory[sel_date_to]'));
+		$( "#sel_student_id" ).val( jQuery.cookie('spendingHistory[sel_student_id]') );
+		//$( "#sel_date_from" ).val( jQuery.cookie('spendingHistory[sel_date_from]') );
+		//$( "#sel_date_to" ).val( jQuery.cookie('spendingHistory[sel_date_to]') );
 	}
 	function updatecontrol(parctl, parvalue)
 	{
@@ -148,25 +160,25 @@
 	function getFilter()
 	{
 		var jsonfilter = {};
-		jsonfilter.sel_student_id = jQuery.cookie('transactionReport[sel_student_id]');
-		jsonfilter.sel_date_from = jQuery.cookie('transactionReport[sel_date_from]');
-		jsonfilter.sel_date_to = jQuery.cookie('transactionReport[sel_date_to]');
+		jsonfilter.sel_student_id = jQuery.cookie('spendingHistory[sel_student_id]');
+		jsonfilter.sel_date_from = jQuery.cookie('spendingHistory[sel_date_from]');
+		jsonfilter.sel_date_to = jQuery.cookie('spendingHistory[sel_date_to]');
 		var cri_str = JSON.stringify(jsonfilter);
 		return cri_str;
 	}
-	function savepagestate()
+	function spending_btnsearch()
 	{
-		jQuery.cookie('transactionReport[sel_student_id]', jQuery('#sel_student_id').val());
-		jQuery.cookie('transactionReport[sel_date_from]', jQuery('#sel_date_from').val());
-		jQuery.cookie('transactionReport[sel_date_to]', jQuery('#sel_date_to').val());
+		jQuery.cookie('spendingHistory[sel_student_id]', jQuery('#sel_student_id').val());
+		jQuery.cookie('spendingHistory[sel_date_from]', jQuery('#sel_date_from').val());
+		jQuery.cookie('spendingHistory[sel_date_to]', jQuery('#sel_date_to').val());
 		return true;
 	}
 	function clearpagestate()
 	{
-		jQuery.cookie('transactionReport[sel_student_id]', '-1');
-		jQuery.cookie('transactionReport[sel_date_from]', 'Choose date');
-		jQuery.cookie('transactionReport[sel_date_to]', 'Choose date');		
-		jQuery.cookie('transactionReport[iDisplayStart]', null);
+		jQuery.cookie('spendingHistory[sel_student_id]', '-1');
+		jQuery.cookie('spendingHistory[sel_date_from]', 'Choose date');
+		jQuery.cookie('spendingHistory[sel_date_to]', 'Choose date');		
+		jQuery.cookie('spendingHistory[iDisplayStart]', null);
 		return true;
 	}
 	
@@ -198,7 +210,7 @@
 								</td>
 
 								<td style="padding-top:20px;">
-									<input type="submit" id="btnsearch" name="btnsearch" class="control-button" onclick=" return savepagestate() " value='Go'/>
+									<input type="submit" id="spending_btnsearch" name="spending_btnsearch" class="control-button" onclick=" return spending_btnsearch() " value='Go'/>
 								</td>
 							</tr>
 						</table>
@@ -230,7 +242,7 @@
 			</div>
 			<div class="frm">
 				<div class="frm_label">&nbsp;</div>
-				<input type="submit" id="btnsearch" name="btnsearch" value="<?php echo $localized_home_data['search_btn']; ?>" onclick=" return savepagestate() " class="btn" /> &nbsp;
+				<input type="submit" id="spending_btnsearch" name="spending_btnsearch" value="<?php echo $localized_home_data['search_btn']; ?>" onclick=" return spending_btnsearch() " class="btn" /> &nbsp;
 				<input type="submit" id="btnshowall" name="btnshowall" value="<?php echo $localized_home_data['show_all_btn']; ?>" onclick="clearpagestate()" class="btn" />		
 			</div>
 		</div> -->
@@ -260,44 +272,34 @@
 	</form>
 </div>
 
-<div id="file_type_modal" class="modal">
-	<div align="center">
-		<select class='select-custom' id='sel_file_type' style='height:38px !important; transform: translateY(2px);'>
-			<option value='excel'> Excel </option>
-			<option value='csv' selected> CSV </option>
-		</select>
-		<input type='button' class='control-button' value='Export' onclick='export_table()'/>
-	</div>
-</div>
-
 <div id="spending_history_detail_modal" class="modal" style="padding:50px 50px;padding-top:10px;">
     <table>
 		<tr> 
 			<td> 
 				<div class="title"> Date & Time  </div>
-				<div class="detail"> 2018 08 20 15:18:51 </div>
+				<div class="detail" id='modal_date_time'> 2018 08 20 15:18:51 </div>
 			</td>
 			<td>
 				<div class="title"> Spending By  </div>
-				<div class="detail"> Maecenas Tempu </div>
+				<div class="detail" id='modal_full_name'> Maecenas Tempu </div>
 			</td>
 		</tr>
 
 		<tr> 
 			<td> 
 				<div class="title"> Card ID  </div>
-				<div class="detail"> CC69923 </div>
+				<div class="detail" id='modal_card_id'> CC69923 </div>
 			</td>
 			<td>
 				<div class="title"> POS ID  </div>
-				<div class="detail"> HSC0 </div>
+				<div class="detail" id='modal_pos_id'> HSC0 </div>
 			</td>
 		</tr>
 
 		<tr> 
 			<td> 
 				<div class="title"> Amount Spend  </div>
-				<div class="detail"> S$7.80 </div>
+				<div class="detail" id='modal_item_price'> S$7.80 </div>
 			</td>
 			<td>
 				<div class="title"> Receipt Number  </div>
@@ -308,8 +310,7 @@
 		<tr>
 			<td colspan='2'>
 				<div class="title"> Order Item  </div>
-				<div class="detail"> 1x Lunch Western Meal S$6.00  </div>
-				<div class="detail"> 1x Combo Meal S$1.80 </div>
+				<div class="detail"> <span id='modal_item_name'> </span> <span id='modal_item_price_1'> </span> </div>
 			</td>
 		</tr>
 
@@ -327,7 +328,27 @@
 	#spending_history_detail_modal .detail{
 		font-size:15px;
 	}
+	#spending_history_detail_modal span{
+		font-weight:500 !important;
+	}
 </style>
+
+<script>
+	$(document).ready(function(){
+		setTimeout(() => {
+			$('.edit-button.view-modal').click(function(e) {
+				$("#modal_date_time").html($(e.target).attr('data-date-time'));
+				$("#modal_full_name").html($(e.target).attr('data-full-name'));
+				$("#modal_card_id").html($(e.target).attr('data-card-id'));
+				$("#modal_pos_id").html($(e.target).attr('data-pos-id'));
+				$("#modal_item_price").html($(e.target).attr('data-item-price'));
+				$("#modal_item_name").html($(e.target).attr('data-item-name'));
+				$("#modal_item_price_1").html($(e.target).attr('data-item-price'));
+			});
+		}, 1000);
+		
+	});
+</script>
 
 <?php
 	include("footer.php");

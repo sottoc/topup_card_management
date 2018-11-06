@@ -45,23 +45,23 @@
 		jQuery('#transaction_report_dtList').attr('width',sWidth);
 		
 		loadpagestate();
-		if(jQuery.cookie('transactionReport[iDisplayStart]')==null)
-			jQuery.cookie('transactionReport[iDisplayStart]', 0);
+		if(jQuery.cookie('refundReport[iDisplayStart]')==null)
+			jQuery.cookie('refundReport[iDisplayStart]', 0);
 
-		if(jQuery.cookie('transactionReport[iDisplayLength]')==null)
-			jQuery.cookie('transactionReport[iDisplayLength]', 10);
+		if(jQuery.cookie('refundReport[iDisplayLength]')==null)
+			jQuery.cookie('refundReport[iDisplayLength]', 10);
 		
-		if(jQuery.cookie('transactionReport[aaSorting]')==null)
+		if(jQuery.cookie('refundReport[aaSorting]')==null)
 		{
-			jQuery.cookie('transactionReport[aaSorting]', "[[0,'asc']]");
+			jQuery.cookie('refundReport[aaSorting]', "[[0,'asc']]");
 			aasorting = [[0,'asc']];
 		}
 		else
 		{
-			aasorting = eval('(' + jQuery.cookie('transactionReport[aaSorting]') + ')'); //convert json string to json object
+			aasorting = eval('(' + jQuery.cookie('refundReport[aaSorting]') + ')'); //convert json string to json object
 		}		
-		ilength = parseInt(jQuery.cookie('transactionReport[iDisplayLength]'));
-		istart = parseInt(jQuery.cookie('transactionReport[iDisplayStart]'));		
+		ilength = parseInt(jQuery.cookie('refundReport[iDisplayLength]'));
+		istart = parseInt(jQuery.cookie('refundReport[iDisplayStart]'));		
 		sFilter=getFilter();	
 		
 		oTable=jQuery('#transaction_report_dtList').dataTable({
@@ -81,9 +81,9 @@
 			"fnDrawCallback": function() {	
 				var oSettings = oTable.fnSettings();
 				var aaSorting = JSON.stringify(oSettings.aaSorting); //convert json object to json string because cookie only allow to save string
-				jQuery.cookie('transactionReport[iDisplayLength]', oSettings._iDisplayLength);
-				jQuery.cookie('transactionReport[iDisplayStart]', oSettings._iDisplayStart);
-				jQuery.cookie('transactionReport[aaSorting]', aaSorting);
+				jQuery.cookie('refundReport[iDisplayLength]', oSettings._iDisplayLength);
+				jQuery.cookie('refundReport[iDisplayStart]', oSettings._iDisplayStart);
+				jQuery.cookie('refundReport[aaSorting]', aaSorting);
 				
 			},	
 			
@@ -122,12 +122,12 @@
 	});
 	function loadpagestate()
 	{
-		updatecontrol('#sel_student_id', jQuery.cookie('transactionReport[sel_student_id]'));
-		updatecontrol('#sel_date_from', jQuery.cookie('transactionReport[sel_date_from]'));
-		updatecontrol('#sel_date_to', jQuery.cookie('transactionReport[sel_date_to]'));
-		$( "#sel_student_id" ).val( jQuery.cookie('transactionReport[sel_student_id]') );
-		//$( "#sel_date_from" ).val( jQuery.cookie('transactionReport[sel_date_from]') );
-		//$( "#sel_date_to" ).val( jQuery.cookie('transactionReport[sel_date_to]') );
+		updatecontrol('#sel_student_id', jQuery.cookie('refundReport[sel_student_id]'));
+		updatecontrol('#sel_date_from', jQuery.cookie('refundReport[sel_date_from]'));
+		updatecontrol('#sel_date_to', jQuery.cookie('refundReport[sel_date_to]'));
+		$( "#sel_student_id" ).val( jQuery.cookie('refundReport[sel_student_id]') );
+		//$( "#sel_date_from" ).val( jQuery.cookie('refundReport[sel_date_from]') );
+		//$( "#sel_date_to" ).val( jQuery.cookie('refundReport[sel_date_to]') );
 	}
 	function updatecontrol(parctl, parvalue)
 	{
@@ -137,25 +137,25 @@
 	function getFilter()
 	{
 		var jsonfilter = {};
-		jsonfilter.sel_student_id = jQuery.cookie('transactionReport[sel_student_id]');
-		jsonfilter.sel_date_from = jQuery.cookie('transactionReport[sel_date_from]');
-		jsonfilter.sel_date_to = jQuery.cookie('transactionReport[sel_date_to]');
+		jsonfilter.sel_student_id = jQuery.cookie('refundReport[sel_student_id]');
+		jsonfilter.sel_date_from = jQuery.cookie('refundReport[sel_date_from]');
+		jsonfilter.sel_date_to = jQuery.cookie('refundReport[sel_date_to]');
 		var cri_str = JSON.stringify(jsonfilter);
 		return cri_str;
 	}
 	function savepagestate()
 	{
-		jQuery.cookie('transactionReport[sel_student_id]', jQuery('#sel_student_id').val());
-		jQuery.cookie('transactionReport[sel_date_from]', jQuery('#sel_date_from').val());
-		jQuery.cookie('transactionReport[sel_date_to]', jQuery('#sel_date_to').val());
+		jQuery.cookie('refundReport[sel_student_id]', jQuery('#sel_student_id').val());
+		jQuery.cookie('refundReport[sel_date_from]', jQuery('#sel_date_from').val());
+		jQuery.cookie('refundReport[sel_date_to]', jQuery('#sel_date_to').val());
 		return true;
 	}
 	function clearpagestate()
 	{
-		jQuery.cookie('transactionReport[sel_student_id]', '-1');
-		jQuery.cookie('transactionReport[sel_date_from]', 'Choose date');
-		jQuery.cookie('transactionReport[sel_date_to]', 'Choose date');		
-		jQuery.cookie('transactionReport[iDisplayStart]', null);
+		jQuery.cookie('refundReport[sel_student_id]', '-1');
+		jQuery.cookie('refundReport[sel_date_from]', 'Choose date');
+		jQuery.cookie('refundReport[sel_date_to]', 'Choose date');		
+		jQuery.cookie('refundReport[iDisplayStart]', null);
 		return true;
 	}
 </script>
@@ -267,7 +267,8 @@
 	}
 	
 	function export_table2csv(){
-		exportTableToCSV('refund_report.csv')
+		console.log("export_table2csv fun");
+		exportTableToCSV('refund_report.csv');
 	}
 
 	function export_table(){

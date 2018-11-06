@@ -36,7 +36,11 @@
 			$to = $criobj->sel_date_to;
 			$cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
 		}
-	}
+    }
+    $date = new DateTime('7 days ago');
+	$from = $date->format('Y-m-d');
+    $to = date("Y-m-d");
+    $cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
 	$cri_arr = array($cri_str,$param);
 	if ( isset( $_GET['iSortCol_0'] ) )
 	{

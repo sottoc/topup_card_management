@@ -66,7 +66,7 @@
         $tmpentry[] = htmlspecialchars($aRow['Family_code']);
         $tmpentry[] = htmlspecialchars($aRow['First_name']);
         
-		$tmpentry[] = htmlspecialchars("View Detail");
+		$tmpentry[] = htmlspecialchars($aRow['Last_name']);
 
 		$response['aaData'][] = $tmpentry;
 	}

@@ -140,29 +140,19 @@ jQuery(document).ready(function()
 		<form method="post" id="frmuserlogin" name="frmuserlogin">
 
 			<div align="center">
-				<h2 style="font-size:30px;"> Welcome to Compass Food Card Website </h2>
-				<div style="font-size:16px"> Our mission is to bring more quality services to you and your children. </div>
-				<div style="margin-top:30px;">
-					<span class="label-span"> Login Email: </span> 
-					<input type="text" class="input-text-custom" name="txtemail" id="txtemail"  value="<?php echo $refill_login_email;?>" style="width:50%"> 
-				</div>
-				<div style="margin-top:40px;">
-					<span class="label-span"> Password : </span> 
-					<input type="password" name="txtpassword" id="txtpassword" class="input-text-custom" style="width:50%"> 
-				</div>
+				<h2 style="font-size:30px;"> Please check your email </h2>
+				<div style="font-size:16px"> A reset password link is already sent to your email. Please reset your password and try login again. </div>
 				<br>
 				<br>
+                <br>
 				<div>	
-					<a class="control-button" style="padding:18px 29% !important;" id="btnlogin_a"> LOGIN </a>
+					<a href="userlogin.php" class="control-button" style="padding:16px 29% !important;" id="submit_email_btn"> BACK TO HOME </a>
 				</div>
-				<div style="margin-top:50px;font-size:16px;">	
-					<div style="display:none;"> Don't have an account? <a class="edit-button" href="register.php"> Register here. </a> </div>
-					<div> <a class="edit-button" href="user_password_submit.php"> Forgot Password </a> </div>
-				</div>
+				
 				<div style="margin-top:30px;font-size:16px;">	
 					<div> If you encounter any issues, Kindly send us an email. </div>
 					<br>
-					<a style="color:blue; text-decoration:underline; cursor:pointer;"> Email: Chartwell-Lycee-Support@gmail.com </a>
+					<a style="color:blue; text-decoration:underline; cursor:pointer;"> Email: Support@gmail.com </a>
 				</div>
 			</div>
 

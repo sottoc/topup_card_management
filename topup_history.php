@@ -45,23 +45,23 @@
 		jQuery('#transaction_report_dtList').attr('width',sWidth);
 		
 		loadpagestate();
-		if(jQuery.cookie('transactionReport[iDisplayStart]')==null)
-			jQuery.cookie('transactionReport[iDisplayStart]', 0);
+		if(jQuery.cookie('topupHistory[iDisplayStart]')==null)
+			jQuery.cookie('topupHistory[iDisplayStart]', 0);
 
-		if(jQuery.cookie('transactionReport[iDisplayLength]')==null)
-			jQuery.cookie('transactionReport[iDisplayLength]', 10);
+		if(jQuery.cookie('topupHistory[iDisplayLength]')==null)
+			jQuery.cookie('topupHistory[iDisplayLength]', 10);
 		
-		if(jQuery.cookie('transactionReport[aaSorting]')==null)
+		if(jQuery.cookie('topupHistory[aaSorting]')==null)
 		{
-			jQuery.cookie('transactionReport[aaSorting]', "[[0,'asc']]");
+			jQuery.cookie('topupHistory[aaSorting]', "[[0,'asc']]");
 			aasorting = [[0,'asc']];
 		}
 		else
 		{
-			aasorting = eval('(' + jQuery.cookie('transactionReport[aaSorting]') + ')'); //convert json string to json object
+			aasorting = eval('(' + jQuery.cookie('topupHistory[aaSorting]') + ')'); //convert json string to json object
 		}		
-		ilength = parseInt(jQuery.cookie('transactionReport[iDisplayLength]'));
-		istart = parseInt(jQuery.cookie('transactionReport[iDisplayStart]'));		
+		ilength = parseInt(jQuery.cookie('topupHistory[iDisplayLength]'));
+		istart = parseInt(jQuery.cookie('topupHistory[iDisplayStart]'));		
 		sFilter=getFilter();	
 		
 		oTable=jQuery('#transaction_report_dtList').dataTable({
@@ -81,9 +81,9 @@
 			"fnDrawCallback": function() {	
 				var oSettings = oTable.fnSettings();
 				var aaSorting = JSON.stringify(oSettings.aaSorting); //convert json object to json string because cookie only allow to save string
-				jQuery.cookie('transactionReport[iDisplayLength]', oSettings._iDisplayLength);
-				jQuery.cookie('transactionReport[iDisplayStart]', oSettings._iDisplayStart);
-				jQuery.cookie('transactionReport[aaSorting]', aaSorting);
+				jQuery.cookie('topupHistory[iDisplayLength]', oSettings._iDisplayLength);
+				jQuery.cookie('topupHistory[iDisplayStart]', oSettings._iDisplayStart);
+				jQuery.cookie('topupHistory[aaSorting]', aaSorting);
 				
 			},	
 			
@@ -122,12 +122,12 @@
 	});
 	function loadpagestate()
 	{
-		updatecontrol('#sel_student_id', jQuery.cookie('transactionReport[sel_student_id]'));
-		updatecontrol('#sel_date_from', jQuery.cookie('transactionReport[sel_date_from]'));
-		updatecontrol('#sel_date_to', jQuery.cookie('transactionReport[sel_date_to]'));
-		$( "#sel_student_id" ).val( jQuery.cookie('transactionReport[sel_student_id]') );
-		//$( "#sel_date_from" ).val( jQuery.cookie('transactionReport[sel_date_from]') );
-		//$( "#sel_date_to" ).val( jQuery.cookie('transactionReport[sel_date_to]') );
+		updatecontrol('#sel_student_id', jQuery.cookie('topupHistory[sel_student_id]'));
+		updatecontrol('#sel_date_from', jQuery.cookie('topupHistory[sel_date_from]'));
+		updatecontrol('#sel_date_to', jQuery.cookie('topupHistory[sel_date_to]'));
+		$( "#sel_student_id" ).val( jQuery.cookie('topupHistory[sel_student_id]') );
+		//$( "#sel_date_from" ).val( jQuery.cookie('topupHistory[sel_date_from]') );
+		//$( "#sel_date_to" ).val( jQuery.cookie('topupHistory[sel_date_to]') );
 	}
 	function updatecontrol(parctl, parvalue)
 	{
@@ -137,25 +137,25 @@
 	function getFilter()
 	{
 		var jsonfilter = {};
-		jsonfilter.sel_student_id = jQuery.cookie('transactionReport[sel_student_id]');
-		jsonfilter.sel_date_from = jQuery.cookie('transactionReport[sel_date_from]');
-		jsonfilter.sel_date_to = jQuery.cookie('transactionReport[sel_date_to]');
+		jsonfilter.sel_student_id = jQuery.cookie('topupHistory[sel_student_id]');
+		jsonfilter.sel_date_from = jQuery.cookie('topupHistory[sel_date_from]');
+		jsonfilter.sel_date_to = jQuery.cookie('topupHistory[sel_date_to]');
 		var cri_str = JSON.stringify(jsonfilter);
 		return cri_str;
 	}
-	function savepagestate()
+	function topup_savepagestate()
 	{
-		jQuery.cookie('transactionReport[sel_student_id]', jQuery('#sel_student_id').val());
-		jQuery.cookie('transactionReport[sel_date_from]', jQuery('#sel_date_from').val());
-		jQuery.cookie('transactionReport[sel_date_to]', jQuery('#sel_date_to').val());
+		jQuery.cookie('topupHistory[sel_student_id]', jQuery('#sel_student_id').val());
+		jQuery.cookie('topupHistory[sel_date_from]', jQuery('#sel_date_from').val());
+		jQuery.cookie('topupHistory[sel_date_to]', jQuery('#sel_date_to').val());
 		return true;
 	}
 	function clearpagestate()
 	{
-		jQuery.cookie('transactionReport[sel_student_id]', '-1');
-		jQuery.cookie('transactionReport[sel_date_from]', 'Choose date');
-		jQuery.cookie('transactionReport[sel_date_to]', 'Choose date');		
-		jQuery.cookie('transactionReport[iDisplayStart]', null);
+		jQuery.cookie('topupHistory[sel_student_id]', '-1');
+		jQuery.cookie('topupHistory[sel_date_from]', 'Choose date');
+		jQuery.cookie('topupHistory[sel_date_to]', 'Choose date');		
+		jQuery.cookie('topupHistory[iDisplayStart]', null);
 		return true;
 	}
 	
@@ -187,7 +187,7 @@
 								</td>
 
 								<td style="padding-top:20px;">
-									<input type="submit" id="btnsearch" name="btnsearch" class="control-button" onclick=" return savepagestate() " value='Go'/>
+									<input type="submit" id="topup_btnsearch" name="topup_btnsearch" class="control-button" onclick=" return topup_savepagestate() " value='Go'/>
 								</td>
 							</tr>
 						</table>
@@ -219,7 +219,7 @@
 			</div>
 			<div class="frm">
 				<div class="frm_label">&nbsp;</div>
-				<input type="submit" id="btnsearch" name="btnsearch" value="<?php echo $localized_home_data['search_btn']; ?>" onclick=" return savepagestate() " class="btn" /> &nbsp;
+				<input type="submit" id="topup_btnsearch" name="topup_btnsearch" value="<?php echo $localized_home_data['search_btn']; ?>" onclick=" return topup_savepagestate() " class="btn" /> &nbsp;
 				<input type="submit" id="btnshowall" name="btnshowall" value="<?php echo $localized_home_data['show_all_btn']; ?>" onclick="clearpagestate()" class="btn" />		
 			</div>
 		</div> -->
