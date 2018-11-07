@@ -63,7 +63,7 @@
 		$tmpentry[] = htmlspecialchars($date_time[0]);
 		$tmpentry[] = htmlspecialchars($date_time[1]);
         
-        $tmpentry[] = htmlspecialchars("Paypal");
+        $tmpentry[] = htmlspecialchars("Cash");
         $tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
 
 		$response['aaData'][] = $tmpentry;

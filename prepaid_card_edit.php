@@ -47,30 +47,53 @@
                 $last_name = $row['Last_name'];
                 $card_value = $row['Card_value'];
                 $image_name = $row['Image'];
+                $status = $row['Card_status'];
             }
         }
     }
 ?>
 
 <div class="prepaid_card_edit_div" style="width:80%; margin:0 auto;">
-    <h1> <strong style="color:#2d2d2d"> Prepaid Card . Edit </strong> </h1>
+    <h1> <strong style="color:#2d2d2d"> Card Detail . Edit </strong> </h1>
 
     <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
-        <table width="100%">
+        <table width="85%">
             <tr>
-                <td width="35%">
+                <td width="30%">
+                    <div> 
+                        <span class="label-span"> Card Status </span>
+                        <select class="select-custom" name="status">
+                            <?php if($status == 'Active') { ?>
+                                <option value="1" selected> Active </option>
+                                <option value="0"> DeActive </option>
+                            <?php } else { ?>
+                                <option value="1"> Active </option>
+                                <option value="0" selected> DeActive </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <div> <span class="label-span"> User Code </span> </div>
                     <div> 
                         <input type="text" name='user_code' value='<?php echo $user_code;?>' class="input-text-custom"> </input>
                     </div>
                 </td>
-                <td width="35%">
+                <td width="25%">
                     <div> <span class="label-span"> Card Number </span> </div>
                     <div> 
                         <input type="text" name='card_id' value='<?php echo $card_id;?>' class="input-text-custom"> </input>
                     </div>
                 </td>
-                <td width="30%" rowspan="3">
+                <td width="25%">
+                    <div> <span class="label-span"> Level </span> </div>
+                    <div> 
+                        <input type="text" name='level' value="<?php echo $level;?>" class="input-text-custom"> </input>
+                    </div>
+                </td>
+                <td width="30%" rowspan="2">
                     <div class = "label-span" style="text-align:center;margin-bottom:10px;"> Profile Image </div>
                     
                         <div id="image_preview">
@@ -88,19 +111,11 @@
             </tr>
             <tr>
                 <td>
-                    <div> <span class="label-span"> Level </span> </div>
-                    <div> 
-                        <input type="text" name='level' value="<?php echo $level;?>" class="input-text-custom"> </input>
-                    </div>
-                </td>
-                <td>
                     <div> <span class="label-span"> Family Code </span> </div>
                     <div> 
                         <input type="text" name='family_code' class="input-text-custom" value='<?php echo $family_code;?>'> </input>
                     </div>
                 </td>
-            </tr>
-            <tr>
                 <td>
                     <div> <span class="label-span"> First Name </span> </div>
                     <div> 
@@ -116,7 +131,7 @@
             </tr>
         </table>
         <div style="margin-top:30px; text-align:center;">
-            <a class="control-button" href="<?php echo $rootpath;?>/prepaid_card.php"> Back </a> 
+            <a class="control-button" href="<?php echo $rootpath;?>/card_detail.php"> Back </a> 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a class="control-button" id="save_btn"> Save </a>
         </div>

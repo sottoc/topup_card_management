@@ -68,12 +68,12 @@ function find_current_card_amount()
 							if($_SESSION ['login_user_type_id']==1) {
 							?>
 								<div style='font-size:19px;'>
-									<h2> &nbsp;&nbsp;&nbsp;&nbsp; Record at <span style="color:#e63d02"> 22 August 2018 </span> </h2>
+									<h2> &nbsp;&nbsp;&nbsp;&nbsp; Dashborad </h2>
 									<table width="100%" style="text-align:center;">
 										<tr> 
 											<td style="padding:20px;">
 												<div class="home-block">
-													<div> Total Transaction Today </div>
+													<div> Total Sales today(Prepaid Card Only) </div>
 													<div class="price"> $ 1028.20 </div>
 													<div> 
 														<a class="edit-button"> View Record </a>
@@ -83,18 +83,21 @@ function find_current_card_amount()
 
 											<td style="padding:20px;">
 												<div class="home-block">
-													<div> Total Topup Today </div>
+													<div> Total Top-up amount today </div>
 													<div class="price"> $ 628.20 </div>
 													<div> 
-														<a class="edit-button"> View Record </a>
+														<a class="edit-button" href="topup_report.php"> View Record </a>
 													</div>
 												</div>
 											</td>
 
 											<td style="padding:20px;">
 												<div class="home-block">
-													<div> Total Account Register </div>
+													<div> Total Online Users </div>
 													<div class="price"> 45 </div>
+													<div> 
+														<a class="edit-button" href="user.php"> View Record </a>
+													</div>
 												</div>
 											</td>
 										</tr>

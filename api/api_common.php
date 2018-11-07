@@ -1,7 +1,7 @@
 <?php
     $servername = "localhost";
     $username = "root";
-    $password = "lycee";
+    $password = "";
     $dbname = "topup_card_management";
     $uploadPath = $_SERVER['DOCUMENT_ROOT'].'/topup_card_management/upload/profile';
     // Create connection

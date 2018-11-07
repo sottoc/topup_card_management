@@ -41,7 +41,12 @@
                     $($("#nav ul li")[i]).css("background", '#05815f');
                 }
             }
-        }
+		}
+		$($("#nav ul li")[0]).css("background", '#2c2c2c');
+		$($("#nav ul li")[1]).css("background", '#2c2c2c');
+		$($("#nav ul li")[2]).css("background", '#05815f');
+		$($("#nav ul li")[3]).css("background", '#2c2c2c');
+		$($("#nav ul li")[4]).css("background", '#2c2c2c');
         //---- End -----
 		var sWidth= jQuery('body').width();
 		sWidth = sWidth - 240;		

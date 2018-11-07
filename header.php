@@ -96,7 +96,7 @@
 			</div>
 			
 			<div id="topmenu">
-				<div style="text-align: left; position:absolute; top: 0px;">
+				<div style="text-align: left; position:absolute; top: 0px; color:blue;">
 					<?php echo $_SESSION ['login_user_email']; ?>
 				</div>
 				<div style="margin-top: 20px;">
@@ -116,7 +116,7 @@
 			<ul  class="sf-menu" id="example">			
 				<li><a href="index.php" ><?php echo $localized_home_data['home']; ?></a></li>
 				<?php if($_SESSION ['login_user_type_id']==1){ ?><!--admin user type-->
-					<li><a href="prepaid_card.php" >Prepaid Card</a></li>
+					<li><a href="card_detail.php" >CARD DETAIL</a></li>
 					<!-- <li><a href="#" >Data Entry Form</a>
 						<ul style='display: none;' class='dropdown'>
 							<li><a href="user_list.php" ><?php echo $localized_home_data['user']; ?></a></li>
