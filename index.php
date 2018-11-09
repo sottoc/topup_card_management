@@ -76,7 +76,7 @@ function find_current_card_amount()
 													<div> Total Sales today(Prepaid Card Only) </div>
 													<div class="price"> $ 1028.20 </div>
 													<div> 
-														<a class="edit-button"> View Record </a>
+														<a class="edit-button" href="transaction_report.php"> View Record </a>
 													</div>
 												</div>
 											</td>
