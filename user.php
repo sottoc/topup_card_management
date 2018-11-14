@@ -98,14 +98,18 @@
                     if(i%7==6){
                         if($(tds[i]).html().indexOf("div") == -1){
 							var id = $(tds[i]).html();
-                            $(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button' id='" + id + "' style='float:left;'> Edit </div> <div class='edit-button' style='float:right;'> Chg Password </div> </div>");
+                            $(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button' id='" + id + "' style='float:left;'> Edit </div> <div class='edit-button' id='pw_" + id + "' style='float:right;'> Chg Password </div> </div>");
                         }
                     }
                 }
 				
 				$(".edit-button").click(function(){
 					var id = $(this).attr('id');
-					window.location.replace("<?php echo $rootpath;?>/user_edit.php?id="+id);
+					if(id.indexOf('pw_') == -1){
+						window.location.replace("<?php echo $rootpath;?>/user_edit.php?id="+id);
+					} else{
+						alert(id);
+					}
 				});
 			},	
 			
