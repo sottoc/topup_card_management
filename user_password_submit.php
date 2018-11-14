@@ -144,19 +144,19 @@ jQuery(document).ready(function()
 				<div style="font-size:16px"> Please enter your email address, we will send you a reset password link via email </div>
 				<div style="margin-top:30px;">
 					<span class="label-span"> Email: </span> 
-					<input type="text" class="input-text-custom" name="send_email" style="width:50%"> 
+					<input type="text" class="input-text-custom" name="send_email" id="send_email_address" style="width:50%"> 
 				</div>
 				<br>
 				<br>
                 <br>
 				<div>	
-					<a href="user_password_check.php" class="control-button" style="padding:16px 29% !important;" id="submit_email_btn"> SUBMIT </a>
+					<a href="javascript:send_mail()" class="control-button" style="padding:16px 29% !important;" id="submit_email_btn"> SUBMIT </a>
 				</div>
 				
 				<div style="margin-top:30px;font-size:16px;">	
 					<div> If you encounter any issues, Kindly send us an email. </div>
 					<br>
-					<a style="color:blue; text-decoration:underline; cursor:pointer;"> Email: Support@gmail.com </a>
+					<a style="color:blue; text-decoration:underline; cursor:pointer;"> Email: Chartwell-Lycee-Support@gmail.com </a>
 				</div>
 			</div>
 
@@ -196,3 +196,18 @@ jQuery(document).ready(function()
 	require ("library/closedb.php");
 	require ("footer.php");
 ?>
+
+<script>
+	function send_mail(){
+		var email = $("#send_email_address").val();
+		if(email == ""){
+			$("#send_email_address").focus();
+			return;
+		}
+
+		$.post("library/send_mail.php", {email: email}, function(result){
+			window.location.replace("<?php echo $rootpath;?>/user_password_check.php");
+		});
+		
+	}
+</script>
