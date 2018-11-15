@@ -85,7 +85,7 @@
 							var card_id = $(tds[j*8+1]).html();
 							var first_name = $(tds[j*8+3]).html();
 							var last_name = $(tds[j*8+2]).html();
-                            $(tds[i]).html("<div> <div class='edit-button edit-card' id='edit_btn_" + id + "' style='float:left;'> Edit </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-user-code='"+ user_code +"' data-card-id='" + card_id + "' data-first-name='"+ first_name +"' data-last-name='"+ last_name +"' style='float:right;'> View Log </a> </div>");
+                            $(tds[i]).html("<div style='padding:0 10%'> <div class='edit-button edit-card' id='edit_btn_" + id + "' style='float:left;'> Edit </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-user-code='"+ user_code +"' data-card-id='" + card_id + "' data-first-name='"+ first_name +"' data-last-name='"+ last_name +"' style='float:right;'> View Log </a> </div>");
 						}
 						j++;
                     }

@@ -71,6 +71,10 @@
 		$family_code = $aRow['Family_code'];
 		$amount = $aRow['Card_value'];
 		$user_id = $aRow['user_id'];
+		$card_id = $aRow['Card_ID'];
+		$first_name = $aRow['First_name'];
+		$last_name = $aRow['Last_name'];
+		$user_id_card_id = $user_id.'-'.$card_id;
 		if($is_active==1)
 		{
 			$user_status = 'Active';
@@ -88,12 +92,13 @@
 		
 		$tmpentry = array();
 		$tmpentry[] = htmlspecialchars($user_email);
-        $tmpentry[] = htmlspecialchars($user_type_name);
+		$tmpentry[] = htmlspecialchars($user_type_name);
+		$tmpentry[] = htmlspecialchars($first_name);
+		$tmpentry[] = htmlspecialchars($last_name);
         $tmpentry[] = htmlspecialchars($family_code);
-        $tmpentry[] = htmlspecialchars(1);
         $tmpentry[] = htmlspecialchars($amount);
 		$tmpentry[] = $user_status;
-		$tmpentry[] = $user_id;
+		$tmpentry[] = $user_id_card_id;
 		$response['aaData'][] = $tmpentry;
 	}
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
