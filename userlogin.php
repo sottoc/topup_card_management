@@ -39,9 +39,11 @@
 		
 		if(count($errmsg_arr) == 0)
 		{
-		
 			$loginemail = $_POST['txtemail'];
 			$loginpassword = $_POST['txtpassword'];
+			echo print_r($loginemail);
+			echo print_r($loginpassword);
+			//exit;
 			$userbol = new userbol();
 			$result = $userbol->check_user_login($loginemail,$loginpassword);
 
@@ -104,13 +106,14 @@ function AddValidation()
 			},
 			'messages': {
 				'txtemail':{'required':"<br />*<?php echo $localized_data['check_req_field_login_email']; ?>",'email':"<br /><?php echo $localized_home_data['check_valid_email_adddress']; ?>"},
-				'txtpassword':{'required':"<br />*<?php echo $localized_data['check_req_field_login_email']; ?>"}
+				'txtpassword':{'required':"<br />*<?php echo $localized_data['check_req_field_login_pw']; ?>"}
 			}
 		});
 	}
 	
 jQuery(document).ready(function()
 {   
+		console.log("start");
 		jQuery('#txtemail').focus();						
 		AddValidation();
 		
@@ -148,7 +151,7 @@ jQuery(document).ready(function()
 				</div>
 				<div style="margin-top:40px;">
 					<span class="label-span"> Password : </span> 
-					<input type="password" name="txtpassword" id="txtpassword" class="input-text-custom" style="width:50%"> 
+					<input type="password" name="txtpassword" id="txtpassword" class="input-text-custom" value="" style="width:50%"> 
 				</div>
 				<br>
 				<br>
@@ -180,7 +183,7 @@ jQuery(document).ready(function()
 			</div> -->
 			<div class="frm" style="display:none">
 				<input type="submit" name="btnlogin" id="btnlogin" value="Login" class="btn" /> &nbsp;
-				<input type="reset" name="btnlogin" id="btnlogin" value="Cancel" class="btn" />
+				<!-- <input type="reset" name="btnlogin" id="btnlogin" value="Cancel" class="btn" /> -->
 			</div>
 			
 			<?php

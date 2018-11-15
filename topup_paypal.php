@@ -9,7 +9,7 @@
 	require_once('userauth.php');	
 	require_once('header.php');
 	
-	$paypal_url='https://www.sandbox.paypal.com/cgi-bin/webscr'; // Test Paypal API URL
+	$paypal_url='https://www.paypal.com/cgi-bin/webscr'; // Test Paypal API URL
 	//$paypal_id='ydn.smile-facilitator-1@gmail.com'; // Business email ID
 	$paypal_id='ydn.smile@gmail.com'; // Business email ID
 ?>
@@ -41,22 +41,22 @@
 		<table>
 			<tr>
 				<td>
-					<div class="topup-amount-div">
+					<div class="topup-amount-div" data="30">
 						<strong> $30 </strong>
 					</div>
 				</td>
 				<td>
-					<div class="topup-amount-div">
+					<div class="topup-amount-div" data="50">
 						<strong> $50 </strong>
 					</div>
 				</td>
 				<td>
-					<div class="topup-amount-div">
+					<div class="topup-amount-div" data="100">
 						<strong> $100 </strong>
 					</div>
 				</td>
 				<td>
-					<div class="topup-amount-div">
+					<div class="topup-amount-div" data="150"> 
 						<strong> $150 </strong>
 					</div>
 				</td>
@@ -75,11 +75,11 @@
 		<div class="frm">
 			<div class="frm_label">Student Id :</div>
 			<input type="text" name="item_number">
-		</div>
-		<div class="frm">
+		</div> -->
+		<div class="frm" style="display:none;">
 			<div class="frm_label">Amount : </div>
 			<input type="text" name="amount">
-		</div> -->
+		</div>
 		
 		<!--div class="frm">
 			<div class="frm_label">Invoice : </div>
@@ -97,7 +97,7 @@
 		<input type="hidden" name="rm" value="2">
 		<input type="hidden" name="handling" value="0">
 		<!--input type="hidden" name="cpp_header_image" value="http://localhost/topup_card_management_dec5/images/topup_logotext.gif"-->
-		<input type="hidden" name="currency_code" value="SGD">
+		<input type="hidden" name="currency_code" value="USD">
 		<!--input type="hidden" name="handling" value="0"-->
 		<input type="hidden" name="cancel_return" value="http://localhost/topup_card_management/cancel.php">
 		<input type="hidden" name="return" value="http://localhost/topup_card_management/success.php">
@@ -132,9 +132,18 @@
 </style>
 
 <script>
-	$(".topup-amount-div").click(function(){
-		$(".topup-amount-div").css("background", "#e9e9e9");
-		$(this).css("background", "#f0c370");
+
+	$(document).ready(function(){
+		$(".topup-amount-div").click(function(){
+			$(".topup-amount-div").css("background", "#e9e9e9");
+			$(this).css("background", "#f0c370");
+			var amount = $(this).attr('data');
+			$("input[name='amount']").val(amount);
+		});
+
+		$($(".topup-amount-div")[0]).trigger('click');
 	});
+
+	
 
 </script>
