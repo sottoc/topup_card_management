@@ -632,14 +632,12 @@ textarea.textarea { margin-bottom:12px; width:500px; padding: .4em; height:120px
 }
 
 .dataTables_wrapper table th{
-	text-align:left !important;
 	padding-left:20px !important;
 	padding-top:7px !important;
 	padding-bottom:7px !important;
 }
 
 .dataTables_wrapper table td{
-	text-align:left !important;
 	padding-left:20px !important;
 	padding-top:10px !important;
 	padding-bottom:10px !important;
@@ -697,4 +695,11 @@ textarea.textarea { margin-bottom:12px; width:500px; padding: .4em; height:120px
 
 .modal{
 	border-radius:0px !important;
+}
+
+.DataTables_sort_wrapper{
+	text-align:center;
+}
+.display.dataTable td{
+	text-align: center !important;
 }

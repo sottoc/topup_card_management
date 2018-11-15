@@ -75,13 +75,19 @@
 				jQuery.cookie('cardList[iDisplayStart]', oSettings._iDisplayStart);
 				jQuery.cookie('cardList[aaSorting]', aaSorting);
 
-                var tds = $(".dataTables_wrapper td");
+				var tds = $(".dataTables_wrapper td");
+				var j=0;
                 for(var i=0;i<tds.length;i++){
                     if(i%8==7){
                         if($(tds[i]).html().indexOf("div") == -1){
-                            var id = $(tds[i]).html();
-                            $(tds[i]).html("<div class='edit-button' id='edit_btn_" + id + "'> Edit </div>");
-                        }
+							var id = $(tds[i]).html();
+							var user_code = $(tds[j*8+0]).html();
+							var card_id = $(tds[j*8+1]).html();
+							var first_name = $(tds[j*8+3]).html();
+							var last_name = $(tds[j*8+2]).html();
+                            $(tds[i]).html("<div> <div class='edit-button edit-card' id='edit_btn_" + id + "' style='float:left;'> Edit </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-user-code='"+ user_code +"' data-card-id='" + card_id + "' data-first-name='"+ first_name +"' data-last-name='"+ last_name +"' style='float:right;'> View Log </a> </div>");
+						}
+						j++;
                     }
 					if(i%8==6){
 						if($(tds[i]).html() == 'Active'){
@@ -91,12 +97,12 @@
                         //     var id = $(tds[i]).html();
                         //     $(tds[i]).html("<div class='edit-button' id='edit_btn_" + id + "'> Edit </div>");
                         // }
-                    }
+					}
                 }
 
                 //-------- when click Edit button -----
                 setTimeout(() => {
-                    $(".edit-button").click(function(){
+                    $(".edit-button.edit-card").click(function(){
                         console.log($(this).attr('id'));
                         var x = $(this).attr('id');
                         var id = x.split('_')[2];
@@ -241,9 +247,7 @@
 						<input type="submit" id="btnsearch" name="btnsearch" value="Search" onclick=" return savepagestate() " class="btn" style="display:none"/>
                     <div>
                 </td>
-                <td style="width:30%;text-align:right;">
-                    <a href='<?php echo $rootpath;?>/add_new_card.php' class="control-button"> Create New Card </a>
-                </td>
+                
             </tr>
         </table>
 		<!--showing msgs-->
@@ -302,12 +306,73 @@
 	</form>
 </div>
 
-<?php
-	include("footer.php");
-?>
+<div id="view_log_modal" class="modal" style="padding:50px 50px;padding-top:30px;max-width:800px !important;">
+	<span style='font-size:18px;'> Transaction Detail - <span id='log_first_name'> Michalle </span> <span id='log_last_name'> KONG </span> (UserCode:<span id='log_user_code'>A001923</span>) </span>
+    <br>
+	<div style="max-height:400px;overflow-y:scroll;">
+		<table style='margin-top:20px;'>
+			<tr> 
+				<td> 
+					<span class='date-time'> 2018-08-23 11:06:01 - </span> Spend <strong class='spend-amount'>$4.2</strong> at POS ID(LDS01) by Card Number(F001234).
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<br>
+	<div style="width:30%; padding-left:35%;">
+		<a href='<?php echo $rootpath;?>/add_new_card.php' class="control-button"> Create New Card </a>
+	</div>
+</div>
+
+<script>
+	$(document).ready(function(){
+
+		setTimeout(() => {
+			$('.edit-button.view-log').click(function(e) {
+				$("#log_first_name").html($(e.target).attr('data-first-name'));
+				$("#log_last_name").html($(e.target).attr('data-last-name'));
+				$("#log_user_code").html($(e.target).attr('data-user-code'));
+				var card_id = $(e.target).attr('data-card-id');
+				console.log(card_id);
+				$.post("api/get_purchase_log.php", {card_id: card_id}, function(result){
+					var info = JSON.parse(result);
+					var data = info.response.data;
+					var table = $("#view_log_modal table");
+					var str = '';
+					for(var i=0;i<data.length;i++){
+						str+="<tr><td><span class='date-time'> " + data[i][3] + " - </span> Spend <strong class='spend-amount'>$" + data[i][2] + "</strong> at POS ID(" + data[i][0] + ") by Card Number(" + card_id + ").</td></tr>";
+					}
+					table.html(str);
+				});
+			});
+		}, 500);
+		
+	});
+</script>
 
 <style>
     .control-section{
         width:100%;
-    }
+	}
+	#view_log_modal span{
+		font-weight: 500 !important;
+	}
+	#view_log_modal table td {
+		border: 1px solid black;
+		padding:10px;
+		font-size:17px;
+	}
+	#view_log_modal table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+	.spend-amount{
+		color:red;
+	}
 </style>
+
+<?php
+	include("footer.php");
+?>
+

@@ -100,7 +100,13 @@
 							var id = $(tds[i]).html();
                             $(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button' id='" + id + "' style='float:left;'> Edit </div> <div class='edit-button' id='pw_" + id + "' style='float:right;'> Chg Password </div> </div>");
                         }
-                    }
+					}
+					if(i%7==4){
+						var v=$(tds[i]).html();
+						if(v!=""){
+							$(tds[i]).html('$'+v);
+						}
+					}
                 }
 				
 				$(".edit-button").click(function(){
@@ -273,7 +279,7 @@
                     <th><?php echo $localized_data['user_type']; ?></th>				
                     <th> Family Code </th>				
 					<th> Card </th>					
-					<th> Amount </th>					
+					<th> Card Value </th>					
 					<th><?php echo $localized_data['user_status']; ?></th>					
 					<th><?php echo $localized_home_data['action']; ?></th>					
 				</tr>

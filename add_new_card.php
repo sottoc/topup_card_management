@@ -123,7 +123,7 @@
             </tr>
         </table>
         <div style="margin-top:30px; text-align:center;">
-            <a class="control-button" href="<?php echo $rootpath;?>/prepaid_card.php"> Back </a> 
+            <a class="control-button" href="<?php echo $rootpath;?>/card_detail.php"> Back </a> 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <a class="control-button" id="save_btn"> Save </a>
         </div>
