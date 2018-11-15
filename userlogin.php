@@ -41,8 +41,8 @@
 		{
 			$loginemail = $_POST['txtemail'];
 			$loginpassword = $_POST['txtpassword'];
-			echo print_r($loginemail);
-			echo print_r($loginpassword);
+			//echo print_r($loginemail);
+			//echo print_r($loginpassword);
 			//exit;
 			$userbol = new userbol();
 			$result = $userbol->check_user_login($loginemail,$loginpassword);
