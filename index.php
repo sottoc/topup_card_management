@@ -118,6 +118,7 @@ function find_current_card_amount()
 									include("spending_history_sub.php");
 									echo "<br> <table><tr> <td> <a href='spending_history.php' name='topup_now' class='control-button'> View Spending Report </a> </td></tr></table>";
 									include("topup_history_sub.php");
+									echo "<br> <table><tr> <td> <a href='topup_history.php' name='topup_now' class='control-button'> View Topup Report </a> </td></tr></table>";
 
 									// echo "<div class='frm'>			
 									// 	<select id='sel_student_id' name='sel_student_id' onChange='find_current_card_amount();'>";

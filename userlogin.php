@@ -143,8 +143,8 @@ jQuery(document).ready(function()
 		<form method="post" id="frmuserlogin" name="frmuserlogin">
 
 			<div align="center">
-				<h2 style="font-size:30px;"> Welcome to Compass Food Card Website </h2>
-				<div style="font-size:16px"> Our mission is to bring more quality services to you and your children. </div>
+				<h2 style="font-size:30px;"> Welcome to Compass Point Card Website </h2>
+				<div style="font-size:16px"> Our mission is to bring more concern to you and your children. </div>
 				<div style="margin-top:30px;">
 					<span class="label-span"> Login Email: </span> 
 					<input type="text" class="input-text-custom" name="txtemail" id="txtemail"  value="<?php echo $refill_login_email;?>" style="width:50%"> 
@@ -165,7 +165,7 @@ jQuery(document).ready(function()
 				<div style="margin-top:30px;font-size:16px;">	
 					<div> If you encounter any issues, Kindly send us an email. </div>
 					<br>
-					<a style="color:blue; text-decoration:underline; cursor:pointer;"> Email: Chartwell-Lycee-Support@gmail.com </a>
+					<a style=""> Email: Support@gmail.com </a>
 				</div>
 			</div>
 

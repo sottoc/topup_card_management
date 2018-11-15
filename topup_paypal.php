@@ -55,11 +55,6 @@
 						<strong> $100 </strong>
 					</div>
 				</td>
-				<td>
-					<div class="topup-amount-div" data="150"> 
-						<strong> $150 </strong>
-					</div>
-				</td>
 			</tr>
 		</table>
 		<br/>
@@ -115,7 +110,7 @@
 <style>
 	.topup-amount-div{
 		width: 180px;
-		background: #e9e9e9;
+		background: rgb(191, 189, 189);
 		border-radius: 13px;
 		padding: 52px 30px;
 		text-align:center;
@@ -126,7 +121,7 @@
 		background-color: #f0c370;
 	}
 	.topup-amount-div strong{
-		font-size: 20px;
+		font-size: 30px;
 		font-weight:600;
 	}
 </style>
@@ -135,7 +130,7 @@
 
 	$(document).ready(function(){
 		$(".topup-amount-div").click(function(){
-			$(".topup-amount-div").css("background", "#e9e9e9");
+			$(".topup-amount-div").css("background", "rgb(191, 189, 189)");
 			$(this).css("background", "#f0c370");
 			var amount = $(this).attr('data');
 			$("input[name='amount']").val(amount);
