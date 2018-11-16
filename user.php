@@ -25,8 +25,8 @@
 	}
 	
 	$user_type_id = '0';
-	if(isset($_POST['search_sel_usertype'])) //for drop down option selected
-		$user_type_id=$_POST['search_sel_usertype'];
+	if(isset($_POST['search_filter_by'])) //for drop down option selected
+		$user_type_id=$_POST['search_filter_by'];
 		
 	require_once('header.php');
 	
@@ -145,8 +145,8 @@
 	function loadpagestate()
 	{
 		updatecontrol('#search_txt_username', jQuery.cookie('userlist[search_txt_username]'));
-		updatecontrol('#search_txt_useremail', jQuery.cookie('userlist[search_txt_useremail]'));
-		updatecontrol('#search_sel_usertype', jQuery.cookie('userlist[search_sel_usertype]'));
+		updatecontrol('#search_txt', jQuery.cookie('userlist[search_txt]'));
+		updatecontrol('#search_filter_by', jQuery.cookie('userlist[search_filter_by]'));
 	}
 	function updatecontrol(parctl, parvalue)
 	{
@@ -157,24 +157,23 @@
 	{
 		var jsonfilter = {};
 		jsonfilter.search_txt_username = jQuery.cookie('userlist[search_txt_username]');
-		jsonfilter.search_txt_useremail = jQuery.cookie('userlist[search_txt_useremail]');
-		jsonfilter.search_sel_usertype = jQuery.cookie('userlist[search_sel_usertype]');
+		jsonfilter.search_txt = jQuery.cookie('userlist[search_txt]');
+		jsonfilter.search_filter_by = jQuery.cookie('userlist[search_filter_by]');
 		var cri_str = JSON.stringify(jsonfilter);
 		return cri_str;
-		
 	}
 	function savepagestate()
 	{
 		jQuery.cookie('userlist[search_txt_username]', jQuery('#search_txt_username').val());
-		jQuery.cookie('userlist[search_txt_useremail]', jQuery('#search_txt_useremail').val());
-		jQuery.cookie('userlist[search_sel_usertype]', jQuery('#search_sel_usertype').val());
+		jQuery.cookie('userlist[search_txt]', jQuery('#search_txt').val());
+		jQuery.cookie('userlist[search_filter_by]', jQuery('#search_filter_by').val());
 		return true;
 	}
 	function clearpagestate()
 	{
 		jQuery.cookie('userlist[search_txt_username]', null);		
-		jQuery.cookie('userlist[search_txt_useremail]', null);		
-		jQuery.cookie('userlist[search_sel_usertype]', null);		
+		jQuery.cookie('userlist[search_txt]', null);		
+		jQuery.cookie('userlist[search_filter_by]', null);		
 		jQuery.cookie('userlist[iDisplayStart]', null);
 		return true;
 	}
@@ -220,13 +219,49 @@
 		?>
 	}
 	function changeSearchKey(e){
-		if($(e).val() == '-1'){
-			console.log("email");
-			$('#search_txt_useremail').removeAttr('disabled');
-			$('#search_txt_useremail').focus();
-		} else{
-			$('#search_txt_useremail').val('');
-			$('#search_txt_useremail').attr('disabled','disabled');
+		console.log($(e).val());
+		switch($(e).val()){
+			case '-1':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "");
+				return;
+			case '0':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter email");
+				$('#search_txt').focus();
+				return;
+			case '1':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter account type");
+				$('#search_txt').focus();
+				return;
+			case '2':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Last Name");
+				$('#search_txt').focus();
+				return;
+			case '3':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter First Name");
+				$('#search_txt').focus();
+				return;
+			case '4':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Family Code");
+				$('#search_txt').focus();
+				return;
+			case '5':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Card Value");
+				$('#search_txt').focus();
+                return;
+            case '6':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Active or DeActive");
+				$('#search_txt').focus();
+				return;
+			default:
+				return;
 		}
 	}
 
@@ -240,32 +275,27 @@
 
 <div class="content_data">
 	<form id='frm_usr' name='frm_usr' method='POST'>
-        <h2>Users</h2>
+        <h2>Users Detail</h2>
         <table class="control-section">
             <tr> <span style="color:black; font-size:15px; font-weight:500;"> Search By </span> </tr>
             <tr>
                 <td style="width:70%">
                     <div class="left-section">
-                        <select id="search_sel_usertype" name="search_sel_usertype" class="select-custom" onChange="changeSearchKey(this)">
+                        <select id="search_filter_by" name="search_filter_by" class="select-custom" onChange="changeSearchKey(this)">
                             <option value="-1">Please choose</option>
-                            <?php
-                                $userbol = new userbol();
-                                $sel_usertype_result = $userbol->get_all_usertype();
-                                while($sel_row=$sel_usertype_result->getNext())
-                                {
-                                    echo '<option value="'.$sel_row['user_type_id'].'"';
-                                    if($user_type_id==$sel_row['user_type_id'])
-                                    echo 'selected';
-                                    echo ">".$sel_row['user_type_name']."</option>";
-								}
-                            ?>
-							<option value='-1'> Email </option>
+							<option value='0'> Email </option>
+                            <option value='1'> Account Type </option>
+                            <option value='2'> Last Name </option>
+							<option value='3'> First Name </option>
+							<option value='4'> Family Code </option>
+							<option value='5'> Card Value </option>
+                            <option value='6'> Status </option>
                         </select>
                         &nbsp;&nbsp;&nbsp;
-						<input type="text" class="input-text-custom" id="search_txt_useremail" name="search_txt_useremail" style="width:25%;" disabled placeholder="Email Address"> </input>
+						<input type="text" class="input-text-custom" id="search_txt" name="search_txt" style="width:25%;" placeholder=""> </input>
                         <!-- <input type="submit" id="btnsearch" name="btnsearch" value="Search" onclick=" return savepagestate() " class="btn" /> -->
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="control-button" id="btnsearch_a"> <?php echo $localized_home_data['search_btn']; ?> </a>
+                        <a class="control-button" id="btnsearch_a"> Go </a>
                         <input type="submit" id="btnsearch" name="btnsearch" value="<?php echo $localized_home_data['search_btn']; ?>" onclick=" return savepagestate() " class="btn" style="display:none"/> &nbsp;
                     <div>
                 </td>
@@ -278,7 +308,7 @@
 			<thead>
 				<tr>							
 					<th><?php echo $localized_data['email']; ?></th>
-                    <th><?php echo $localized_data['user_type']; ?></th>
+                    <th> Account Type </th>
 					<th> First Name </th>
 					<th> Last Name </th>				
                     <th> Family Code </th>					

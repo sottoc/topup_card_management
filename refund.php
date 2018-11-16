@@ -25,8 +25,8 @@
 	}
 	
 	$user_type_id = '0';
-	if(isset($_POST['search_sel_usertype'])) //for drop down option selected
-		$user_type_id=$_POST['search_sel_usertype'];
+	if(isset($_POST['search_filter_by'])) //for drop down option selected
+		$user_type_id=$_POST['search_filter_by'];
 		
 	require_once('header.php');
 	
@@ -53,23 +53,23 @@
 		jQuery('#usr_dtList').attr('width',sWidth);
 		
 		loadpagestate();
-		if(jQuery.cookie('userlist[iDisplayStart]')==null)
-			jQuery.cookie('userlist[iDisplayStart]', 0);
+		if(jQuery.cookie('refundlist[iDisplayStart]')==null)
+			jQuery.cookie('refundlist[iDisplayStart]', 0);
 
-		if(jQuery.cookie('userlist[iDisplayLength]')==null)
-			jQuery.cookie('userlist[iDisplayLength]', 10);
+		if(jQuery.cookie('refundlist[iDisplayLength]')==null)
+			jQuery.cookie('refundlist[iDisplayLength]', 10);
 		
-		if(jQuery.cookie('userlist[aaSorting]')==null)
+		if(jQuery.cookie('refundlist[aaSorting]')==null)
 		{
-			jQuery.cookie('userlist[aaSorting]', "[[0,'asc']]");
+			jQuery.cookie('refundlist[aaSorting]', "[[0,'asc']]");
 			aasorting = [[0,'asc']];
 		}
 		else
 		{
-			aasorting = eval('(' + jQuery.cookie('userlist[aaSorting]') + ')'); //convert json string to json object
+			aasorting = eval('(' + jQuery.cookie('refundlist[aaSorting]') + ')'); //convert json string to json object
 		}		
-		ilength = parseInt(jQuery.cookie('userlist[iDisplayLength]'));
-		istart = parseInt(jQuery.cookie('userlist[iDisplayStart]'));		
+		ilength = parseInt(jQuery.cookie('refundlist[iDisplayLength]'));
+		istart = parseInt(jQuery.cookie('refundlist[iDisplayStart]'));		
 		sFilter=getFilter();	
 		
 		oTable=jQuery('#usr_dtList').dataTable({
@@ -89,18 +89,33 @@
 			"fnDrawCallback": function() {	
 				var oSettings = oTable.fnSettings();
 				var aaSorting = JSON.stringify(oSettings.aaSorting); //convert json object to json string because cookie only allow to save string
-				jQuery.cookie('userlist[iDisplayLength]', oSettings._iDisplayLength);
-				jQuery.cookie('userlist[iDisplayStart]', oSettings._iDisplayStart);
-				jQuery.cookie('userlist[aaSorting]', aaSorting);
+				jQuery.cookie('refundlist[iDisplayLength]', oSettings._iDisplayLength);
+				jQuery.cookie('refundlist[iDisplayStart]', oSettings._iDisplayStart);
+				jQuery.cookie('refundlist[aaSorting]', aaSorting);
 
                 var tds = $(".dataTables_wrapper td");
                 for(var i=0;i<tds.length;i++){
-                    if(i%7==6){
+                    if(i%8==7){
                         if($(tds[i]).html().indexOf("div") == -1){
-                            $(tds[i]).html("<a class='edit-button' href='#refund_modal' rel='modal:open' style='margin-left:30%'> Refund </a>");
+							var id_card = $(tds[i]).html();
+							t = id_card.split('-');
+							var id = t[0];
+							var card_id = t[1];
+                            $(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button refund-edit' id='" + id + "' style='float:left;'> Refund </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' id='" + card_id + "' style='float:right;'> View Log </a> </div>");
                         }
-                    }
+					}
+					if(i%8==5){
+						var v=$(tds[i]).html();
+						if(v!=""){
+							$(tds[i]).html('$'+v);
+						}
+					}
                 }
+				
+				$(".edit-button.refund-edit").click(function(){
+					var id = $(this).attr('id');
+					window.location.replace("<?php echo $rootpath;?>/refund_edit.php?id="+id);
+				});
 
 				
 			},	
@@ -113,6 +128,7 @@
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
+							{"bSortable": false,"sWidth":"auto"},
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
@@ -128,9 +144,9 @@
 	});
 	function loadpagestate()
 	{
-		updatecontrol('#search_txt_username', jQuery.cookie('userlist[search_txt_username]'));
-		updatecontrol('#search_txt_useremail', jQuery.cookie('userlist[search_txt_useremail]'));
-		updatecontrol('#search_sel_usertype', jQuery.cookie('userlist[search_sel_usertype]'));
+		updatecontrol('#search_txt_username', jQuery.cookie('refundlist[search_txt_username]'));
+		updatecontrol('#search_txt', jQuery.cookie('refundlist[search_txt]'));
+		updatecontrol('#search_filter_by', jQuery.cookie('refundlist[search_filter_by]'));
 	}
 	function updatecontrol(parctl, parvalue)
 	{
@@ -140,26 +156,25 @@
 	function getFilter()
 	{
 		var jsonfilter = {};
-		jsonfilter.search_txt_username = jQuery.cookie('userlist[search_txt_username]');
-		jsonfilter.search_txt_useremail = jQuery.cookie('userlist[search_txt_useremail]');
-		jsonfilter.search_sel_usertype = jQuery.cookie('userlist[search_sel_usertype]');
+		jsonfilter.search_txt_username = jQuery.cookie('refundlist[search_txt_username]');
+		jsonfilter.search_txt = jQuery.cookie('refundlist[search_txt]');
+		jsonfilter.search_filter_by = jQuery.cookie('refundlist[search_filter_by]');
 		var cri_str = JSON.stringify(jsonfilter);
 		return cri_str;
-		
 	}
 	function savepagestate()
 	{
-		jQuery.cookie('userlist[search_txt_username]', jQuery('#search_txt_username').val());
-		jQuery.cookie('userlist[search_txt_useremail]', jQuery('#search_txt_useremail').val());
-		jQuery.cookie('userlist[search_sel_usertype]', jQuery('#search_sel_usertype').val());
+		jQuery.cookie('refundlist[search_txt_username]', jQuery('#search_txt_username').val());
+		jQuery.cookie('refundlist[search_txt]', jQuery('#search_txt').val());
+		jQuery.cookie('refundlist[search_filter_by]', jQuery('#search_filter_by').val());
 		return true;
 	}
 	function clearpagestate()
 	{
-		jQuery.cookie('userlist[search_txt_username]', null);		
-		jQuery.cookie('userlist[search_txt_useremail]', null);		
-		jQuery.cookie('userlist[search_sel_usertype]', null);		
-		jQuery.cookie('userlist[iDisplayStart]', null);
+		jQuery.cookie('refundlist[search_txt_username]', null);		
+		jQuery.cookie('refundlist[search_txt]', null);		
+		jQuery.cookie('refundlist[search_filter_by]', null);		
+		jQuery.cookie('refundlist[iDisplayStart]', null);
 		return true;
 	}
 	
@@ -204,13 +219,49 @@
 		?>
 	}
 	function changeSearchKey(e){
-		if($(e).val() == '-1'){
-			console.log("email");
-			$('#search_txt_useremail').removeAttr('disabled');
-			$('#search_txt_useremail').focus();
-		} else{
-			$('#search_txt_useremail').val('');
-			$('#search_txt_useremail').attr('disabled','disabled');
+		console.log($(e).val());
+		switch($(e).val()){
+			case '-1':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "");
+				return;
+			case '0':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter email");
+				$('#search_txt').focus();
+				return;
+			case '1':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter account type");
+				$('#search_txt').focus();
+				return;
+			case '2':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Last Name");
+				$('#search_txt').focus();
+				return;
+			case '3':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter First Name");
+				$('#search_txt').focus();
+				return;
+			case '4':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Family Code");
+				$('#search_txt').focus();
+				return;
+			case '5':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Card Value");
+				$('#search_txt').focus();
+                return;
+            case '6':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Active or DeActive");
+				$('#search_txt').focus();
+				return;
+			default:
+				return;
 		}
 	}
 
@@ -224,32 +275,27 @@
 
 <div class="content_data">
 	<form id='frm_usr' name='frm_usr' method='POST'>
-        <h2>Users</h2>
+        <h2>Refund</h2>
         <table class="control-section">
             <tr> <span style="color:black; font-size:15px; font-weight:500;"> Search By </span> </tr>
             <tr>
                 <td style="width:70%">
                     <div class="left-section">
-                        <select id="search_sel_usertype" name="search_sel_usertype" class="select-custom" onChange="changeSearchKey(this)">
+                        <select id="search_filter_by" name="search_filter_by" class="select-custom" onChange="changeSearchKey(this)">
                             <option value="-1">Please choose</option>
-                            <?php
-                                $userbol = new userbol();
-                                $sel_usertype_result = $userbol->get_all_usertype();
-                                while($sel_row=$sel_usertype_result->getNext())
-                                {
-                                    echo '<option value="'.$sel_row['user_type_id'].'"';
-                                    if($user_type_id==$sel_row['user_type_id'])
-                                    echo 'selected';
-                                    echo ">".$sel_row['user_type_name']."</option>";
-                                }
-                            ?>
-							<option value='-1'> Email </option>
+							<option value='0'> Email </option>
+                            <option value='1'> Account Type </option>
+                            <option value='2'> Last Name </option>
+							<option value='3'> First Name </option>
+							<option value='4'> Family Code </option>
+							<option value='5'> Card Value </option>
+                            <option value='6'> Status </option>
                         </select>
                         &nbsp;&nbsp;&nbsp;
-						<input type="text" class="input-text-custom" id="search_txt_useremail" name="search_txt_useremail" style="width:25%;" placeholder="Email Address" disabled> </input>
+						<input type="text" class="input-text-custom" id="search_txt" name="search_txt" style="width:25%;" placeholder=""> </input>
                         <!-- <input type="submit" id="btnsearch" name="btnsearch" value="Search" onclick=" return savepagestate() " class="btn" /> -->
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <a class="control-button" id="btnsearch_a"> <?php echo $localized_home_data['search_btn']; ?> </a>
+                        <a class="control-button" id="btnsearch_a"> Go </a>
                         <input type="submit" id="btnsearch" name="btnsearch" value="<?php echo $localized_home_data['search_btn']; ?>" onclick=" return savepagestate() " class="btn" style="display:none"/> &nbsp;
                     <div>
                 </td>
@@ -262,10 +308,11 @@
 			<thead>
 				<tr>							
 					<th><?php echo $localized_data['email']; ?></th>
-                    <th><?php echo $localized_data['user_type']; ?></th>				
-                    <th> Family Code </th>				
-					<th> Card </th>					
-					<th> Amount </th>					
+                    <th> Account Type </th>
+					<th> First Name </th>
+					<th> Last Name </th>				
+                    <th> Family Code </th>					
+					<th> Card Value </th>					
 					<th><?php echo $localized_data['user_status']; ?></th>					
 					<th><?php echo $localized_home_data['action']; ?></th>					
 				</tr>
@@ -282,23 +329,72 @@
 	</form>
 </div>
 
-<div id="refund_modal" class="modal" style="padding:50px 50px;padding-top:10px;">
-    <h2 align="center" style="font-size:28px;"> Refund </h2>
-    <div style="margin:10px 5px;"> 
-        <div style="margin-bottom:10px"> 
-            <span class="label-span"> Enter Refund Amount </span>
-        </div>
-        <div>
-            <input type="text" class="input-text-custom" style="width:95%">
-        </div>
-    </div>
-
+<div id="view_log_modal" class="modal" style="padding:50px 50px;padding-top:30px;max-width:800px !important;">
+	<span style='font-size:18px;'> Transaction Detail - <span id='log_first_name'> Michalle </span> <span id='log_last_name'> KONG </span> (UserCode:<span id='log_user_code'>A001923</span>) </span>
     <br>
-    <div>
-        <a class="control-button" href="#" rel="modal:close" style="float:left"> Cancel </a>
-        <a class="control-button" style="float:right"> Confirm </a>
-    </div>
+	<div style="max-height:400px;overflow-y:scroll;">
+		<table style='margin-top:20px;'>
+			<tr> 
+				<td> 
+					<span class='date-time'> 2018-08-23 11:06:01 - </span> Spend <strong class='spend-amount'>$4.2</strong> at POS ID(LDS01) by Card Number(F001234).
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br>
+	<br>
+	<div style="width:30%; padding-left:35%;">
+		<a href='<?php echo $rootpath;?>/add_new_card.php' class="control-button"> Create New Card </a>
+	</div>
 </div>
+
+
+<script>
+	$(document).ready(function(){
+
+		setTimeout(() => {
+			$('.edit-button.view-log').click(function(e) {
+				// $("#log_first_name").html($(e.target).attr('data-first-name'));
+				// $("#log_last_name").html($(e.target).attr('data-last-name'));
+				// $("#log_user_code").html($(e.target).attr('data-user-code'));
+				var card_id = $(e.target).attr('id');
+				console.log(card_id);
+				$.post("api/get_purchase_log.php", {card_id: card_id}, function(result){
+					var info = JSON.parse(result);
+					var data = info.response.data;
+					var table = $("#view_log_modal table");
+					var str = '';
+					for(var i=0;i<data.length;i++){
+						str+="<tr><td><span class='date-time'> " + data[i][3] + " - </span> Spend <strong class='spend-amount'>$" + data[i][2] + "</strong> at POS ID(" + data[i][0] + ") by Card Number(" + card_id + ").</td></tr>";
+					}
+					table.html(str);
+				});
+			});
+		}, 500);
+		
+	});
+</script>
+
+<style>
+    .control-section{
+        width:100%;
+	}
+	#view_log_modal span{
+		font-weight: 500 !important;
+	}
+	#view_log_modal table td {
+		border: 1px solid black;
+		padding:10px;
+		font-size:17px;
+	}
+	#view_log_modal table {
+		border-collapse: collapse;
+		width: 100%;
+	}
+	.spend-amount{
+		color:red;
+	}
+</style>
 
 <?php
 	include("footer.php");

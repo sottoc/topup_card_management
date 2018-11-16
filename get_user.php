@@ -26,17 +26,35 @@
 	if ( isset($_GET['sSearch']))
 	{	
 		$criobj = json_decode($_GET['sSearch']);
-		if(isset($criobj->search_txt_username) &&  $criobj->search_txt_username!='' ){
-			$cri_str .= " AND user_name LIKE CONCAT('%',:search_txt_username,'%') ";
-			$param[':search_txt_username'] = clean($criobj->search_txt_username);
-		}
-		if(isset($criobj->search_txt_useremail) &&  $criobj->search_txt_useremail!='' ){
-			$cri_str .= " AND user_email LIKE CONCAT('%',:search_txt_useremail,'%') ";
-			$param[':search_txt_useremail'] = clean($criobj->search_txt_useremail);
-		}
-		if(isset($criobj->search_sel_usertype) &&  $criobj->search_sel_usertype!='-1' ){
-			$cri_str .= " AND u.user_type_id =:search_sel_usertype";
-			$param[':search_sel_usertype'] = clean($criobj->search_sel_usertype);
+		if(isset($criobj->search_txt) &&  $criobj->search_txt!='' ){
+			if($criobj->search_filter_by == '0'){
+				$cri_str .= " AND user_email LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '1'){
+				$cri_str .= " AND user_type_name LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '2'){
+				$cri_str .= " AND Last_name LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '3'){
+				$cri_str .= " AND First_name LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '4'){
+                $cri_str .= " AND Family_code LIKE CONCAT('%',:search_txt,'%') ";
+                $param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '5'){
+				$cri_str .= " AND Card_value LIKE CONCAT('',:search_txt,'') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '6'){
+				$cri_str .= " AND Card_status LIKE CONCAT('',:search_txt,'') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
 		}
 	}
 	$cri_arr = array($cri_str,$param);
