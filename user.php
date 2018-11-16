@@ -279,7 +279,7 @@
         <table class="control-section">
             <tr> <span style="color:black; font-size:15px; font-weight:500;"> Search By </span> </tr>
             <tr>
-                <td style="width:70%">
+                <td style="width:60%">
                     <div class="left-section">
                         <select id="search_filter_by" name="search_filter_by" class="select-custom" onChange="changeSearchKey(this)">
                             <option value="-1">Please choose</option>
@@ -298,6 +298,11 @@
                         <a class="control-button" id="btnsearch_a"> Go </a>
                         <input type="submit" id="btnsearch" name="btnsearch" value="<?php echo $localized_home_data['search_btn']; ?>" onclick=" return savepagestate() " class="btn" style="display:none"/> &nbsp;
                     <div>
+                </td>
+				<td style="width:40%;">
+                    <a href="<?php echo $rootpath; ?>/user_multiple_add.php" class="control-button"> Add Mulitple Users <a/>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="<?php echo $rootpath; ?>/user_single_add.php" class="control-button"> Add Single Users <a/>
                 </td>
             </tr>
         </table>
