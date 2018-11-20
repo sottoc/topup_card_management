@@ -169,7 +169,7 @@
 <div class="content_data">
 	<form id='frm_card' name='frm_card' method='POST'>
 	
-		<h2>Transaction Report</h2>
+		<h2>Spending Report</h2>
 		<table style="width:100%">
             <tr>
                 <td style="width:70%">
@@ -193,7 +193,7 @@
 						</table>
                     <div>
                 </td>
-                <td style="width:30%;text-align:right;padding-top:20px;">
+                <td style="width:30%;padding-top:20px;">
                     <a href="#file_type_modal" rel="modal:open" class="control-button"> Export <a/>
                 </td>
             </tr>
@@ -237,7 +237,7 @@
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Amount Spend</th>
-					<th>POS</th>
+					<th>POS ID</th>
 				</tr>
 			</thead>
 			<tbody>

@@ -35,18 +35,20 @@
 </script>
 
 
-<div class="prepaid_card_edit_div" style="width:80%; margin:0 auto;">
+<div class="multiple_user_div" style="width:80%; margin:0 auto;">
     <h1> <strong style="color:#2d2d2d"> User Detail . Add Multiple Users </strong> </h1>
-
-    <form action="" method="post" enctype="multipart/form-data">
-        <table width="85%">
-            
+    <form action="" method="post" enctype="multipart/form-data" style='padding-left:52px;'>
+        <div style='font-size:20px;transform: translateX(-7px);'> Please upload the excel file. </div>
+        <table>
+            <tr>
+                <td> <input type="text" name='family_code' value='' class="input-text-custom" placeholder="No selected file"/> </td>
+                <td> <a class="control-button" id="btn_browse"> Browse </a> </td>
+            </tr>
         </table>
-        <div style="margin-top:30px; text-align:center;">
-            
+        
+        <div style="margin-top:30px;">
             <a class="control-button" id="save_btn"> Upload </a>
         </div>
-        
     </form>
 </div>
 
@@ -55,7 +57,10 @@
 ?>
 
 <style type="text/css">
-	
+	.multiple_user_div table input{
+        transform: translate(-10px,2px);
+        height: 21px;
+    }
 </style>
 
 <script>

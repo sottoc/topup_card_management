@@ -96,8 +96,6 @@
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
-							{"bSortable": false,"sWidth":"auto"},
-							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"}
 						]
 		});	
@@ -196,7 +194,7 @@
 						</table>
                     <div>
                 </td>
-                <td style="width:30%;text-align:right;padding-top:20px;">
+                <td style="width:30%;padding-top:20px;">
                     <a href="#file_type_modal" rel="modal:open" class="control-button"> Export </a>
                 </td>
             </tr>
@@ -234,12 +232,10 @@
 			<thead>
 				<tr>
 					<th>Date</th>
-					<th>Time</th>
-					<th>User ID</th>					
-					<th>Card ID</th>					
+					<th>Time</th>	
+					<th>Family Code</th>			
 					<th>Amount Spend</th>
-					<th>POS</th>
-					<th>Operator Name</th>
+					<th>Payment Type</th>
 				</tr>
 			</thead>
 			<tbody>

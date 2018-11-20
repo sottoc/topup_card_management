@@ -36,23 +36,23 @@
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '2'){
-				$cri_str .= " AND Last_name LIKE CONCAT('%',:search_txt,'%') ";
+				$cri_str .= " AND user_last_name LIKE CONCAT('%',:search_txt,'%') ";
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '3'){
-				$cri_str .= " AND First_name LIKE CONCAT('%',:search_txt,'%') ";
+				$cri_str .= " AND user_first_name LIKE CONCAT('%',:search_txt,'%') ";
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '4'){
-                $cri_str .= " AND Family_code LIKE CONCAT('%',:search_txt,'%') ";
+                $cri_str .= " AND family_code LIKE CONCAT('%',:search_txt,'%') ";
                 $param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '5'){
-				$cri_str .= " AND Card_value LIKE CONCAT('',:search_txt,'') ";
+				$cri_str .= " AND amount LIKE CONCAT('',:search_txt,'') ";
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '6'){
-				$cri_str .= " AND Card_status LIKE CONCAT('',:search_txt,'') ";
+				$cri_str .= " AND is_active LIKE CONCAT('',:search_txt,'') ";
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 		}
@@ -80,19 +80,17 @@
 		$user_id = $aRow['user_id'];
 		$user_gender_id=$aRow['user_gender_id'];
 		$user_gender_prefix=$aRow['gender_prefix'];
-		$user_name = $user_gender_prefix." ".$aRow['user_name'];
+		$user_name = $user_gender_prefix." ".$aRow['user_email'];
 		$user_email=$aRow['user_email'];
 		$user_type_name=$aRow['user_type_name'];
 		$user_address=$aRow['user_address'];
 		$user_phone=$aRow['user_phone'];
         $is_active=$aRow['is_active'];
-		$family_code = $aRow['Family_code'];
-		$amount = $aRow['Card_value'];
-		$user_id = $aRow['user_id'];
-		$card_id = $aRow['Card_ID'];
-		$first_name = $aRow['First_name'];
-		$last_name = $aRow['Last_name'];
-		$user_id_card_id = $user_id.'-'.$card_id;
+		$family_code = $aRow['family_code'];
+		$amount = $aRow['amount'];
+		$first_name = $aRow['user_first_name'];
+		$last_name = $aRow['user_last_name'];
+		$user_id_family_code = $user_id.'-'.$family_code;
 		if($is_active==1)
 		{
 			$user_status = 'Active';
@@ -116,7 +114,7 @@
         $tmpentry[] = htmlspecialchars($family_code);
         $tmpentry[] = htmlspecialchars($amount);
 		$tmpentry[] = $user_status;
-		$tmpentry[] = $user_id_card_id;
+		$tmpentry[] = $user_id_family_code;
 		$response['aaData'][] = $tmpentry;
 	}
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
@@ -130,7 +128,7 @@
 	function fnColumnToField( $i )
 	{
 		if ( $i == 0 )
-			return "user_name";
+			return "user_id";
 		else if ( $i == 1 )
 			return "user_email";
 		else if ( $i == 2 )

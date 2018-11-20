@@ -21,7 +21,7 @@
 	{
 		$DisplayLength = $_GET['iDisplayLength'];
 	}
-	$cri_str = ' WHERE created_time';
+	$cri_str = ' WHERE user_created_datetime';
 	$param = array();
 	if ( isset($_GET['sSearch']))
 	{	
@@ -34,7 +34,7 @@
 		if(isset($criobj->sel_date_from) && isset($criobj->sel_date_to)){
 			$from = $criobj->sel_date_from;
 			$to = $criobj->sel_date_to;
-			$cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
+			$cri_str .= " >= '".$from."' AND user_created_datetime < '".$to."' + interval 1 day";
 		}
 	}
 	$cri_arr = array($cri_str,$param);
@@ -59,16 +59,18 @@
 	{
 		$trans_amt='';
 		$tmpentry = array();
-		$tmpentry[] = htmlspecialchars($aRow['created_time']);
+		$datetime = $aRow['user_created_datetime'];
+		$datetime = explode(' ', $datetime);
+		$date = $datetime[0];
+		$time = $datetime[1];
+		$tmpentry[] = htmlspecialchars($date);
+		$tmpentry[] = htmlspecialchars($time);
 		// if($aRow['trans_type']=='redemption')
 		// 	$trans_amt = "<font color='red'>".$aRow['redemption_amt']."</font>";
 		// else
 		// 	$trans_amt = "<font color='blue'>".$aRow['topup_amt']."</font>";
-		$tmpentry[] = htmlspecialchars($aRow['Family_code']);
-		$tmpentry[] = htmlspecialchars($aRow['user_email']);
-        $tmpentry[] = htmlspecialchars($aRow['First_name']);
-        $tmpentry[] = htmlspecialchars("1");
-		$tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
+		$tmpentry[] = htmlspecialchars($aRow['family_code']);
+		$tmpentry[] = htmlspecialchars("$".$aRow['amount']);
 		//$tmpentry[] = htmlspecialchars($cri_str);
 		$response['aaData'][] = $tmpentry;
 	}
@@ -83,13 +85,13 @@
 	function fnColumnToField( $i )
 	{
 		if ( $i == 0 )
-			return "created_time";
+			return "user_created_datetime";
 		else if ( $i == 1 )
-			return "created_time";
+			return "user_created_datetime";
 		else if ( $i == 3 )
-			return "created_time";
+			return "user_created_datetime";
 		else if ( $i == 4 )
-			return "created_time";
+			return "user_created_datetime";
 		else 
 			return true;			
 	}

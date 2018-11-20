@@ -62,16 +62,14 @@
 		$date_time = explode(" ", $aRow['created_time']);
 		$tmpentry[] = htmlspecialchars($date_time[0]);
 		$tmpentry[] = htmlspecialchars($date_time[1]);
+		$tmpentry[] = htmlspecialchars($aRow['Family_code']);
 		// if($aRow['trans_type']=='redemption')
 		// 	$trans_amt = "<font color='red'>".$aRow['redemption_amt']."</font>";
 		// else
 		// 	$trans_amt = "<font color='blue'>".$aRow['topup_amt']."</font>";
-		$tmpentry[] = htmlspecialchars($aRow['User_code']);
-		$tmpentry[] = htmlspecialchars($aRow['card_id']);
 		$tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
 		//$tmpentry[] = htmlspecialchars($cri_str);
-		$tmpentry[] = htmlspecialchars($aRow['pos_id']);
-		$tmpentry[] = htmlspecialchars("Keith");
+		$tmpentry[] = htmlspecialchars("Cash");
 		$response['aaData'][] = $tmpentry;
 	}
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );

@@ -146,7 +146,7 @@ class userdal{
 			$param = $cri_arr[1];
 			$query = "SELECT SQL_CALC_FOUND_ROWS * FROM tbl_user u
 					lEFT JOIN tbl_user_type u_t on u.user_type_id=u_t.user_type_id
-					LEFT JOIN tbl_gender g on u.user_gender_id=g.gender_id LEFT JOIN tbl_card1 c on u.User_code=c.User_code";
+					LEFT JOIN tbl_gender g on u.user_gender_id=g.gender_id LEFT JOIN tbl_family_code_amount fa on u.family_code=fa.family_code";
 			$query .= $cri_str;
 			$query .=$sorting;
 			if($rpage!=-1)

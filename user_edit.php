@@ -17,30 +17,26 @@
     require_once('api/api_common.php');
     if(isset($_GET['id'])){
         $user_id = $_GET['id'];
-        $query = "SELECT `user_email`, `User_code`, `user_type_id`, `is_active` FROM `tbl_user` WHERE `user_id` = ".$user_id;
+        $query = "SELECT `user_email`, `family_code`, `user_first_name`, `user_last_name`, `user_type_id`, `is_active` FROM `tbl_user` WHERE `user_id` = ".$user_id;
         $result = $conn->query($query);
-        $user_code = '';
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $email = $row['user_email'];
-                $first_name = "";
-                $last_name = "";
-                $user_code = $row['User_code'];
+                $first_name = $row['user_first_name'];
+                $last_name = $row['user_last_name'];
+                $family_code = $row['family_code'];
+                //$amount = $row['user_amount'];
                 $user_type_id = $row['user_type_id'];
                 $is_active = $row['is_active'];
             }
         }
-        $query = "SELECT `Family_code`, `Card_value`, `First_name`, `Last_name` FROM `tbl_card1` WHERE `User_code` = '".$user_code."'";
+        $query = "SELECT `amount` FROM `tbl_family_code_amount` WHERE `family_code` = '".$family_code."'";
         $result = $conn->query($query);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $family_code = $row['Family_code'];
-                $amount = $row['Card_value'];
-                $first_name = $row['First_name'];
-                $last_name = $row['Last_name'];
+                $amount = $row['amount'];
             }
         } else{
-            $family_code = '';
             $amount = '';
         }
     }

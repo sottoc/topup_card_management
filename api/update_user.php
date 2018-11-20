@@ -14,8 +14,9 @@
     $user_type = $request['user_type'];
     $family_code = $request['family_code'];
     $amount = $request['amount'];
+    $datetime = date("Y-m-d h:i:sa");
 
-    $query = "UPDATE `tbl_user` SET `user_email`='".$user_email."', `user_first_name`='".$first_name."', `user_last_name`='".$last_name."', `user_type_id`='".$user_type."', `is_active`='".$user_status."' WHERE `user_id`='".$user_id."'";
+    $query = "UPDATE `tbl_user` SET `user_email`='".$user_email."', `user_first_name`='".$first_name."', `user_last_name`='".$last_name."', `user_type_id`='".$user_type."', `is_active`='".$user_status."', `user_modified_datetime`='".$datetime."' WHERE `user_id`='".$user_id."'";
     $result = $conn->query($query);
 
     display_results("Successfully Saved!");

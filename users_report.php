@@ -94,8 +94,6 @@
 			"aoColumns": [						
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
-							{"bSortable": false,"sWidth":"auto"},											
-							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},
 							{"bSortable": false,"sWidth":"auto"}
 						]
@@ -191,7 +189,7 @@
 						</table>
                     <div>
                 </td>
-                <td style="width:30%;text-align:right;padding-top:20px;">
+                <td style="width:30%;padding-top:20px;">
                     <a href="#file_type_modal" rel="modal:open" class="control-button"> Export <a/>
                 </td>
             </tr>
@@ -228,12 +226,10 @@
 		<table cellpadding="0"  border="0" class="display" id="transaction_report_dtList" name="transaction_report_dtList">
 			<thead>
 				<tr>
-					<th>Register Date & Time</th>
-					<th>Family ID</th>					
-					<th>Login Email</th>					
-					<th>Sur Name</th>
-					<th>Card</th>
-					<th>Card Debit</th>
+					<th>Register Date</th>
+					<th>Register Time</th>					
+					<th>Family Code</th>
+					<th>Amount Value</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -278,6 +274,12 @@
 		}
 	}
 </script>
+
+<style>
+	#transaction_report_dtList_wrapper{
+		width: 80%;
+	}
+</style>
 
 <?php
 	include("footer.php");

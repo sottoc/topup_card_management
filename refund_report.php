@@ -95,8 +95,6 @@
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
-							{"bSortable": false,"sWidth":"auto"},											
-							{"bSortable": false,"sWidth":"auto"},
 							{"bSortable": false,"sWidth":"auto"},
 							{"bSortable": false,"sWidth":"auto"}
 						]
@@ -192,7 +190,7 @@
 						</table>
                     <div>
                 </td>
-                <td style="width:30%;text-align:right;padding-top:20px;">
+                <td style="width:30%;padding-top:20px;">
                     <a href="#file_type_modal" rel="modal:open" class="control-button"> Export <a/>
                 </td>
             </tr>
@@ -229,13 +227,11 @@
 		<table cellpadding="0"  border="0" class="display" id="transaction_report_dtList" name="transaction_report_dtList">
 			<thead>
 				<tr>
-					<th>Register Date & Time</th>
-					<th>Family ID</th>					
-					<th>Login Email</th>					
-					<th>Sur Name</th>
-					<th>Card</th>
+					<th>Date</th>
+					<th>Time</th>
+					<th>Family Code</th>					
+					<th>Issued By</th>					
 					<th>Refund Amount</th>
-					<th>Operator</th>
 				</tr>
 			</thead>
 			<tbody>
