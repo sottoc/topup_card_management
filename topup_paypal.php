@@ -92,7 +92,7 @@
 		<input type="hidden" name="rm" value="2">
 		<input type="hidden" name="handling" value="0">
 		<!--input type="hidden" name="cpp_header_image" value="http://localhost/topup_card_management_dec5/images/topup_logotext.gif"-->
-		<input type="hidden" name="currency_code" value="USD">
+		<input type="hidden" name="currency_code" value="SGD">
 		<!--input type="hidden" name="handling" value="0"-->
 		<input type="hidden" name="cancel_return" value="http://localhost/topup_card_management/cancel.php">
 		<input type="hidden" name="return" value="http://localhost/topup_card_management/success.php">
