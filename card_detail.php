@@ -85,7 +85,8 @@
 							var card_id = $(tds[j*8+1]).html();
 							var first_name = $(tds[j*8+3]).html();
 							var last_name = $(tds[j*8+2]).html();
-                            $(tds[i]).html("<div style='padding:0 10%'> <div class='edit-button edit-card' id='edit_btn_" + id + "' style='float:left;'> Edit </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-user-code='"+ user_code +"' data-card-id='" + card_id + "' data-first-name='"+ first_name +"' data-last-name='"+ last_name +"' style='float:right;'> View Log </a> </div>");
+							var family_code = $(tds[j*8+4]).html();
+                            $(tds[i]).html("<div style='padding:0 10%'> <div class='edit-button edit-card' id='edit_btn_" + id + "' style='float:left;'> Edit </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-user-code='"+ user_code +"' data-card-id='" + family_code + "' data-first-name='"+ first_name +"' data-last-name='"+ last_name +"' style='float:right;'> View Log </a> </div>");
 						}
 						j++;
                     }
@@ -321,7 +322,7 @@
 	<br>
 	<br>
 	<div style="width:30%; padding-left:35%;">
-		<a href='<?php echo $rootpath;?>/add_new_card.php' class="control-button"> Create New Card </a>
+		<a href="#" rel="modal:close" class="control-button"> Close </a>
 	</div>
 </div>
 
@@ -333,9 +334,9 @@
 				$("#log_first_name").html($(e.target).attr('data-first-name'));
 				$("#log_last_name").html($(e.target).attr('data-last-name'));
 				$("#log_user_code").html($(e.target).attr('data-user-code'));
-				var card_id = $(e.target).attr('data-card-id');
-				console.log(card_id);
-				$.post("api/get_purchase_log.php", {card_id: card_id}, function(result){
+				var family_code = $(e.target).attr('data-card-id');
+				console.log(family_code);
+				$.post("api/get_purchase_log.php", {family_code: family_code}, function(result){
 					var info = JSON.parse(result);
 					var data = info.response.data;
 					var table = $("#view_log_modal table");

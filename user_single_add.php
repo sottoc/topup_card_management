@@ -10,8 +10,33 @@
 	
 	$reportbol = new reportbol();
 
-	require_once('header.php');	
+    require_once('header.php');	
 ?>
+
+<style type="text/css">
+	.user_single_add_div table td{
+        padding:25px;
+    }
+    .card-value-caution{
+        padding-left:30px; 
+        color:red; 
+        font-size:17px;
+        font-weight:600;
+    }
+</style>
+
+<?php 
+    require_once('api/api_common.php');
+    $query = "SELECT family_code FROM tbl_family_code_amount";
+    $result = $conn->query($query);
+    $family_code = array();
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            array_push($family_code, $row['family_code']);
+        }
+    }
+?>
+
 <script language="javascript">
 	$(document).ready(function(){
         //---- set background for active menu -----
@@ -29,42 +54,7 @@
 		$($("#nav ul li")[4]).css("background", '#2c2c2c');
         //---- End -----
 
-       $("input[name='user_email']").blur(function(e){
-           var email = e.target.value;
-           console.log(email);
-           if(email == ''){
-               return;
-           }
-           if(validateEmail(email) == false){
-               alert('Please enter valid email');
-               return;
-           }
-           var obj = {
-                email : email
-            }
-            var url = '<?php echo $rootpath;?>/api/check_if_useremail_exist.php';
-            var request = JSON.stringify(obj);
-            $.ajax({
-                url : url,
-                type : 'POST',
-                data :  request,   
-                tryCount : 0,
-                retryLimit : 3,
-                success : function(info) {
-                    var info = JSON.parse(info);
-                    if(info.response.data == 'Exist!'){
-                        alert("The email user already exist!");
-                        $("input[name='user_email']").val('');
-                        $("input[name='user_email']").focus();
-                    }
-                },
-                error : function(xhr, textStatus, errorThrown ) {
-                    console.log(xhr);
-                }
-            });
-       });
-
-       $("input[name='family_code']").blur(function(e){
+       $("#family_code_select").change(function(e){
             var obj = {
                 family_code : e.target.value
             }
@@ -93,7 +83,7 @@
            var first_name = $("input[name='first_name']").val();
            var last_name = $("input[name='last_name']").val();
            var account_type = $("#account_type").val();
-           var family_code = $("input[name='family_code']").val();
+           var family_code = $("#family_code_select").val();
            if(email == ''){
                 $("input[name='user_email']").focus();
                 return;
@@ -107,8 +97,13 @@
                 return;
            }
            if(family_code == ''){
-                $("input[name='family_code']").focus();
+                $("#family_code_select").focus();
                 return;
+           }
+           if(validateEmail(email) == false){
+                alert('Please enter valid email');
+                $("input[name='user_email']").focus();
+               return;
            }
            var obj = {
                 status : status,
@@ -136,6 +131,7 @@
                 }
             });
        });
+
     });
 
     function default_setting(){
@@ -144,7 +140,7 @@
         $("input[name='first_name']").val('');
         $("input[name='last_name']").val('');
         $("#account_type").val('2');
-        $("input[name='family_code']").val('');
+        $("#family_code_select").val('');
         $("input[name='card_value']").val('');
     }
 
@@ -156,8 +152,48 @@
             return false;
         }
     }
-</script>
 
+     function checkUserExist(){
+           var email = $("input[name='user_email']").val();
+           if(email == ''){
+               return;
+           }
+           var obj = {
+                email : email
+            }
+            var url = '<?php echo $rootpath;?>/api/check_if_useremail_exist.php';
+            var request = JSON.stringify(obj);
+            $.ajax({
+                url : url,
+                type : 'POST',
+                data :  request,   
+                tryCount : 0,
+                retryLimit : 3,
+                success : function(info) {
+                    var info = JSON.parse(info);
+                    if(info.response.data == 'Exist!'){
+                        alert("The email user already exist!");
+                        $("input[name='user_email']").val('');
+                        $("input[name='user_email']").focus();
+                    }
+                },
+                error : function(xhr, textStatus, errorThrown ) {
+                    console.log(xhr);
+                }
+            });
+       }
+
+       function emailChange(){
+            var email = $("input[name='user_email']").val();
+            if(validateEmail(email) == false){
+                $("#email_valid_tip").show();
+            }
+            if(validateEmail(email) == true){
+                $("#email_valid_tip").hide();
+                checkUserExist();
+            }
+       }
+</script>
 
 <div class="user_single_add_div" style="width:80%; margin:0 auto;">
     <h1> <strong style="color:#2d2d2d"> User Detail . Add Single Users </strong> </h1>
@@ -175,8 +211,9 @@
                 <td colspan='2'> 
                     <div> <span class="label-span"> Login Email </span> </div>
                     <div> 
-                        <input type="email" name='user_email' value='' class="input-text-custom" placeholder='Enter Email'/>
+                        <input type="email" name='user_email' value='' onkeyup="emailChange()" class="input-text-custom" placeholder='Enter Email'/>
                     </div>
+                    <div style='color:red;font-size:15px;display:none' id='email_valid_tip'> Enter valid email </div> 
                 </td>
             </tr>
             <tr> 
@@ -197,15 +234,16 @@
                     <div> 
                         <select class="select-custom" name="account_type" id="account_type" style="width:100% !important;">
                         <?php
-                            $userbol = new userbol();
-                            $sel_usertype_result = $userbol->get_all_usertype();
                             $user_type_id = 2;
-                            while($sel_row=$sel_usertype_result->getNext())
-                            {
-                                echo '<option value="'.$sel_row['user_type_id'].'"';
-                                if($user_type_id==$sel_row['user_type_id'])
-                                echo 'selected';
-                                echo ">".$sel_row['user_type_name']."</option>";
+                            $query = "select user_type_id, user_type_name from tbl_user_type";
+                            $result = $conn->query($query);
+                            if ($result->num_rows > 0) {
+                                while($sel_row = $result->fetch_assoc()) {
+                                    echo '<option value="'.$sel_row['user_type_id'].'"';
+                                    if($user_type_id==$sel_row['user_type_id'])
+                                    echo 'selected';
+                                    echo ">".$sel_row['user_type_name']."</option>";
+                                }
                             }
                         ?>
                         </select>
@@ -216,7 +254,14 @@
                 <td> 
                     <div> <span class="label-span"> Family Code </span> </div>
                     <div> 
-                        <input type="text" name='family_code' value='' class="input-text-custom" placeholder="Family Code"/>
+                        <select class="select-custom" id="family_code_select" name="family_code" style="width:100% !important;">
+                            <?php 
+                                echo "<option value=''> Choose Family Code </option>";
+                                for($i=0;$i<count($family_code);$i++){
+                                    echo "<option value='".$family_code[$i]."'>".$family_code[$i]."</option>";
+                                }
+                            ?>
+                        </select>
                     </div>
                 </td>
                 <td> 
@@ -243,20 +288,3 @@
 	include("footer.php");
 ?>
 
-<style type="text/css">
-	.user_single_add_div table td{
-        padding:25px;
-    }
-    .card-value-caution{
-        padding-left:30px; 
-        color:red; 
-        font-size:17px;
-        font-weight:600;
-    }
-</style>
-
-<script>
-    $(document).ready(function(){
-        
-    });
-</script>

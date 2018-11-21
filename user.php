@@ -100,8 +100,8 @@
 							var id_card = $(tds[i]).html();
 							t = id_card.split('-');
 							var id = t[0];
-							var card_id = t[1];
-                            $(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button user-edit' id='" + id + "' style='float:left;'> Edit </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' id='" + card_id + "' style='float:right;'> View Log </a> </div>");
+							var family_code = t[1];
+                            $(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button user-edit' id='" + id + "' style='float:left;'> Edit </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' id='" + family_code + "' style='float:right;'> View Log </a> </div>");
                         }
 					}
 					if(i%8==5){
@@ -349,7 +349,7 @@
 	<br>
 	<br>
 	<div style="width:30%; padding-left:35%;">
-		<a href='<?php echo $rootpath;?>/add_new_card.php' class="control-button"> Create New Card </a>
+		<a href="#" rel="modal:close" class="control-button"> Close </a>
 	</div>
 </div>
 
@@ -362,9 +362,9 @@
 				// $("#log_first_name").html($(e.target).attr('data-first-name'));
 				// $("#log_last_name").html($(e.target).attr('data-last-name'));
 				// $("#log_user_code").html($(e.target).attr('data-user-code'));
-				var card_id = $(e.target).attr('id');
-				console.log(card_id);
-				$.post("api/get_purchase_log.php", {card_id: card_id}, function(result){
+				var family_code = $(e.target).attr('id');
+				console.log(family_code);
+				$.post("api/get_purchase_log.php", {family_code: family_code}, function(result){
 					var info = JSON.parse(result);
 					var data = info.response.data;
 					var table = $("#view_log_modal table");

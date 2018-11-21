@@ -6,7 +6,7 @@
     $json_obj = json_decode($json_str);
     $request = json_decode(json_encode($json_obj), True);
     
-    $card_id = $_POST['card_id'];
+    $card_id = $_POST['family_code'];
 
     $query = "SELECT `pos_id`, `item_name`, `item_price`, `created_time` FROM `tbl_food_purchase_records` WHERE `card_id`='".$card_id."'";
     $result = $conn->query($query);

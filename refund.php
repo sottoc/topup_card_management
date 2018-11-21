@@ -335,8 +335,8 @@
     <br>
 	<div style="max-height:400px;overflow-y:scroll;">
 		<table style='margin-top:20px;'>
-			<tr> 
-				<td> 
+			<tr>
+				<td>
 					<span class='date-time'> 2018-08-23 11:06:01 - </span> Spend <strong class='spend-amount'>$4.2</strong> at POS ID(LDS01) by Card Number(F001234).
 				</td>
 			</tr>
@@ -345,7 +345,7 @@
 	<br>
 	<br>
 	<div style="width:30%; padding-left:35%;">
-		<a href='<?php echo $rootpath;?>/add_new_card.php' class="control-button"> Create New Card </a>
+		<a href="#" rel="modal:close" class="control-button"> Close </a>
 	</div>
 </div>
 

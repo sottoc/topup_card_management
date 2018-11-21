@@ -1,5 +1,6 @@
 <?php
     require_once('api_common.php');
+    $uploadPath = $rootpath.'/upload/profile';
     $fileName = '';
     if(isset($_FILES["file"]["type"]))
     {
