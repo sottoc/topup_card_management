@@ -65,10 +65,10 @@
                         <select class="select-custom" name="status">
                             <?php if($status == 'Active') { ?>
                                 <option value="1" selected> Active </option>
-                                <option value="0"> DeActive </option>
+                                <option value="0"> InActive </option>
                             <?php } else { ?>
                                 <option value="1"> Active </option>
-                                <option value="0" selected> DeActive </option>
+                                <option value="0" selected> InActive </option>
                             <?php } ?>
                         </select>
                     </div>

@@ -54,11 +54,12 @@
 		$($("#nav ul li")[4]).css("background", '#2c2c2c');
         //---- End -----
 
-       $("#family_code_select").change(function(e){
+       $("#family_code_select").keyup(function(e){
+            $("#family_code_check_tip").hide();
             var obj = {
                 family_code : e.target.value
             }
-            var url = '<?php echo $rootpath;?>/api/get_amount_by_family_code.php';
+            var url = '<?php echo $rootpath;?>/api/check_if_family_code_exist.php';
             var request = JSON.stringify(obj);
             $.ajax({
                 url : url,
@@ -68,7 +69,10 @@
                 retryLimit : 3,
                 success : function(info) {
                     var info = JSON.parse(info);
-                    $("input[name='card_value']").val(info.response.data);
+                    if(info.response.data == "Exist!"){
+                        $("#family_code_check_tip").show();
+                    }
+                    $("input[name='card_value']").val('0');
                 },
                 error : function(xhr, textStatus, errorThrown ) {
                     console.log(xhr);
@@ -172,8 +176,7 @@
                 success : function(info) {
                     var info = JSON.parse(info);
                     if(info.response.data == 'Exist!'){
-                        alert("The email user already exist!");
-                        $("input[name='user_email']").val('');
+                        $("#email_check_tip").show();
                         $("input[name='user_email']").focus();
                     }
                 },
@@ -185,6 +188,11 @@
 
        function emailChange(){
             var email = $("input[name='user_email']").val();
+            console.log(email);
+            $("#email_check_tip").hide();
+            if(email == ''){
+                $("#email_valid_tip").hide();
+            }
             if(validateEmail(email) == false){
                 $("#email_valid_tip").show();
             }
@@ -205,7 +213,7 @@
                     <div> <span class="label-span"> User Status </span> </div> 
                     <select class="select-custom" name="status" id="user_status" style="width:100% !important;">
                         <option value="1"> Active </option>
-                        <option value="0" selected> DeActive </option>
+                        <option value="0" selected> InActive </option>
                     </select>
                 </td>
                 <td colspan='2'> 
@@ -213,7 +221,8 @@
                     <div> 
                         <input type="email" name='user_email' value='' onkeyup="emailChange()" class="input-text-custom" placeholder='Enter Email'/>
                     </div>
-                    <div style='color:red;font-size:15px;display:none' id='email_valid_tip'> Enter valid email </div> 
+                    <div style='color:red;font-size:16px;font-weight:600;display:none' id='email_valid_tip'> Enter valid email. </div> 
+                    <div style='color:red;font-size:16px;font-weight:600;display:none' id='email_check_tip'> This email address has already been used. </div> 
                 </td>
             </tr>
             <tr> 
@@ -254,15 +263,9 @@
                 <td> 
                     <div> <span class="label-span"> Family Code </span> </div>
                     <div> 
-                        <select class="select-custom" id="family_code_select" name="family_code" style="width:100% !important;">
-                            <?php 
-                                echo "<option value=''> Choose Family Code </option>";
-                                for($i=0;$i<count($family_code);$i++){
-                                    echo "<option value='".$family_code[$i]."'>".$family_code[$i]."</option>";
-                                }
-                            ?>
-                        </select>
+                        <input type='text' class="input-text-custom" id="family_code_select" name="family_code" style="width:100% !important;"/>
                     </div>
+                    <div style='color:red;font-size:16px;font-weight:600;display:none' id='family_code_check_tip'> Family Code is already been used. </div> 
                 </td>
                 <td> 
                     <div> <span class="label-span"> Card Value </span> </div>
@@ -274,7 +277,6 @@
                 </td>
             </tr>
         </table>
-        <div class='card-value-caution'> Caution! Card value will be change when Family Code is changed </div> 
         <div style="margin-top:30px; text-align:center;">
             <a class="control-button" href="<?php echo $rootpath;?>/user.php"> Cancel </a> 
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

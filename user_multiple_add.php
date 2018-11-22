@@ -93,6 +93,10 @@
     $(document).ready(function(){
         $("#upload_file").on('submit',(function(e) {
                 e.preventDefault();
+                if($("#file_name").val() == ""){
+                   alert("Please select excel file!");
+                   return;
+                }
                 $.ajax({
                     url: "<?php echo $rootpath; ?>/api/upload_excel.php", // Url to which the request is send
                     type: "POST",             // Type of request to be send, called as method
@@ -103,6 +107,7 @@
                     success: function(msg)   // A function to be called if request succeeds
                     {
                         console.log(msg);
+                        alert(msg);
                     }
                 });
             })

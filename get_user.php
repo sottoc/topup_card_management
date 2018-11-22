@@ -100,7 +100,7 @@
 		}
 		else
 		{
-			$user_status = 'Deactive';
+			$user_status = 'InActive';
 			//to show Active btn
 			$active_params = $user_id."@@#$#@@active@@#$#@@".$user_name;
 			$action ="<img title='To do active' src='images/active_user.png' id='user_id$user_id' name='user_id$user_id' onClick=\"active_inactive_user('$active_params');\" border='0' style='cursor:pointer;'>&nbsp;&nbsp;";

@@ -207,7 +207,7 @@
                 return;
             case '5':
 				$('#search_txt').val('');
-				$('#search_txt').attr("placeholder", "Active or DeActive");
+				$('#search_txt').attr("placeholder", "Active or InActive");
 				$('#search_txt').focus();
 				return;
 			default:

@@ -16,6 +16,24 @@
     $time = date("Y-m-d H:i:s");
     $query="INSERT INTO `tbl_refund_record` (`family_code`, `refund_amount`, `refund_reason`, `issues_person`, `date_created`, `date_updated`) VALUES ('".$family_code."','".$refund_amount."','".$refund_reason."','".$issues_person."','".$time."','".$time."')";
     $result = $conn->query($query);
-    display_results("Successfully saved!");
+
+    //------- update user status -------
+    $status = $request['status'];
+    $query = "UPDATE `tbl_user` SET `is_active`='".$status."' WHERE `user_id`='".$issues_person."'";
+    $result = $conn->query($query);
+
+    //------- update amount of family code ------
+    $query = "SELECT amount FROM tbl_family_code_amount WHERE family_code='".$family_code."'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $amount = $row['amount'];
+        }
+    }
+    $amount = floatval($amount) - floatval($refund_amount);
+    $query = "UPDATE `tbl_family_code_amount` SET `amount`='".$amount."' WHERE `family_code`='".$family_code."'";
+    $result = $conn->query($query);
+    
+    display_results($amount);
 
 ?>

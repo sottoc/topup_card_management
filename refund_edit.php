@@ -18,14 +18,14 @@
     if(isset($_GET['id'])){
         $id = $_GET['id'];
         $family_code = $_GET['family_code'];
-        // $query = "SELECT `Last_name`, `First_name` FROM `tbl_card1` WHERE `Card_ID` = '".$card_id."'";
-        // $result = $conn->query($query);
-        // if ($result->num_rows > 0) {
-        //     while($row = $result->fetch_assoc()) {
-        //         $first_name = $row['First_name'];
-        //         $last_name = $row['Last_name'];
-        //     }
-        // }
+        $query = "SELECT `amount` FROM `tbl_family_code_amount` WHERE `family_code` = '".$family_code."'";
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $current_amount = $row['amount'];
+            }
+        }
+
         $query = "SELECT `user_email`, `user_first_name`, `user_last_name`, `is_active` FROM `tbl_user` WHERE `user_id` = ".$id;
         $result = $conn->query($query);
         if ($result->num_rows > 0) {
@@ -57,9 +57,24 @@
         //---- End -----
         
         $('#refund_reason').val('');
+        $("#refund_amount").keyup(function(e){
+            $("#amount_tip").hide();
+            var current_amount = $("#current_amount").html();
+            var refund_amount = e.target.value;
+            console.log(parseFloat(refund_amount));
+            console.log(parseFloat(current_amount));
+            if(parseFloat(refund_amount) > parseFloat(current_amount)){
+                $("#amount_tip").show();
+            }
+        });
+
     });
 
     function refund(){
+        if($("#amount_tip").css('display') != 'none'){
+            $('#refund_amount').focus();
+            return;
+        }
         var family_code = '<?php echo $family_code; ?>';
         var issues_person = "<?php echo $id; ?>";
         var refund_amount = $('#refund_amount').val();
@@ -76,7 +91,8 @@
             family_code : family_code,
             refund_amount : refund_amount,
             refund_reason : refund_reason,
-            issues_person : issues_person
+            issues_person : issues_person,
+            status : $("#status").val()
         };
         var url = '<?php echo $rootpath;?>/api/record_refund.php';
         var request = JSON.stringify(obj);
@@ -88,7 +104,8 @@
             retryLimit : 3,
             success : function(info) {
                 var info = JSON.parse(info);
-                alert(info.response.data);
+                alert("Successfully saved!");
+                $('#current_amount').html(info.response.data);
                 $('#refund_amount').val('');
                 $('#refund_reason').val('');
                 console.log(info);
@@ -98,12 +115,12 @@
             }
         });
     }
-       
 </script>
 
 
 <div class="user_edit" style="width:80%; margin:0 auto;">
     <h2 style="padding-left:20px"> <strong style="color:#2d2d2d"> Refund <span style='color:red;'> <span id='user_full_name'> <?php echo $first_name.' '.$last_name; ?> </span> (<span><?php echo $user_email; ?></span>) </span>  </strong> </h2>
+    <h2 style="padding-left:20px"> <strong style="color:#2d2d2d"> Current Amount Value: $<span id="current_amount"><?php echo $current_amount; ?></span> </strong> </h2>
     <table width="60%">
         <tr>
             <td>
@@ -111,17 +128,18 @@
                 <div> 
                     <input type="email" id='refund_amount' class="input-text-custom" placeholder='Enter amount'/>
                 </div>
+                <div style='color:red;font-size:16px;font-weight:600;display:none' id='amount_tip'> Refund amount have to be less than current amount. </div> 
             </td>
             <td>
                 <div> <span class="label-span"> Status </span> </div> 
                 <select class="select-custom" id="status" style="width:100% !important;">
                     <?php if($status == '1'){ ?>
                         <option value="1" selected> Active </option>
-                        <option value="0"> DeActive </option>
+                        <option value="0"> InActive </option>
                     <?php } ?>
                     <?php if($status == '0'){ ?>
                         <option value="1"> Active </option>
-                        <option value="0" selected> DeActive </option>
+                        <option value="0" selected> InActive </option>
                     <?php } ?>
                 </select>
             </td>

@@ -175,10 +175,10 @@
                     <select class="select-custom" style="border-color:#797070" id='user_status'>
                         <?php if($is_active=="1"){ ?>
                             <option selected> Active </option>
-                            <option> Deactive </option>
+                            <option> InActive </option>
                         <?php } else {?>
                             <option> Active </option>
-                            <option selected> Deactive </option>
+                            <option selected> InActive </option>
                         <?php } ?>
                     </select>
                 </div>
