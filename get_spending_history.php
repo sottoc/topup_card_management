@@ -36,6 +36,26 @@
 			$to = $criobj->sel_date_to;
 			$cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
 		}
+
+		$cri_str .= " AND 1=1 ";
+		if(isset($criobj->search_txt) &&  $criobj->search_txt!='' ){
+			if($criobj->search_filter_by == '0'){
+				$cri_str .= " AND top.Card_ID LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '1'){
+				$cri_str .= " AND First_name LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '2'){
+				$cri_str .= " AND Last_name LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '3'){
+				$cri_str .= " AND item_price LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+		}
 	}
 	$cri_arr = array($cri_str,$param);
 	if ( isset( $_GET['iSortCol_0'] ) )
@@ -62,10 +82,10 @@
 		$date_time = explode(" ", $aRow['created_time']);
 		$tmpentry[] = htmlspecialchars($date_time[0]);
 		$tmpentry[] = htmlspecialchars($date_time[1]);
-        
+		
+		$tmpentry[] = htmlspecialchars($aRow['card_id']);
         $tmpentry[] = htmlspecialchars($aRow['First_name']);
-        $tmpentry[] = htmlspecialchars($aRow['card_id']);
-        $tmpentry[] = htmlspecialchars($aRow['pos_id']);
+        $tmpentry[] = htmlspecialchars($aRow['Last_name']);
 		$tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
 		//$tmpentry[] = htmlspecialchars($cri_str);
 		$tmpentry[] = htmlspecialchars($aRow['item_name'].','.$aRow['Last_name']);

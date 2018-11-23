@@ -36,6 +36,21 @@
 			$to = $criobj->sel_date_to;
 			$cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
 		}
+
+		$cri_str .= " AND 1=1 ";
+		if(isset($criobj->search_txt) &&  $criobj->search_txt!='' ){
+			if($criobj->search_filter_by == '0'){
+				$cri_str .= " AND Family_code LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '1'){
+				$cri_str .= " AND item_price LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '2'){
+				
+			}
+		}
 	}
 	$cri_arr = array($cri_str,$param);
 	if ( isset( $_GET['iSortCol_0'] ) )

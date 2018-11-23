@@ -34,7 +34,7 @@
         if(localStorage.getItem("current_page") != undefined){
             for(var i=0; i < $("#nav ul li").length; i++){
 				if(i == 4){
-					$($("#nav ul li")[i]).css("background", '#05815f');
+					$($("#nav ul li")[i]).css("background", '#b12226');
 				}
             }
         }
@@ -127,8 +127,8 @@
 		updatecontrol('#sel_date_from', jQuery.cookie('topupReport[sel_date_from]'));
 		updatecontrol('#sel_date_to', jQuery.cookie('topupReport[sel_date_to]'));
 		$( "#sel_student_id" ).val( jQuery.cookie('topupReport[sel_student_id]') );
-		//$( "#sel_date_from" ).val( jQuery.cookie('topupReport[sel_date_from]') );
-		//$( "#sel_date_to" ).val( jQuery.cookie('topupReport[sel_date_to]') );
+		updatecontrol('#search_txt', jQuery.cookie('topupReport[search_txt]'));
+		updatecontrol('#search_filter_by', jQuery.cookie('topupReport[search_filter_by]'));
 	}
 	function updatecontrol(parctl, parvalue)
 	{
@@ -141,6 +141,8 @@
 		jsonfilter.sel_student_id = jQuery.cookie('topupReport[sel_student_id]');
 		jsonfilter.sel_date_from = jQuery.cookie('topupReport[sel_date_from]');
 		jsonfilter.sel_date_to = jQuery.cookie('topupReport[sel_date_to]');
+		jsonfilter.search_txt = jQuery.cookie('topupReport[search_txt]');
+		jsonfilter.search_filter_by = jQuery.cookie('topupReport[search_filter_by]');
 		var cri_str = JSON.stringify(jsonfilter);
 		return cri_str;
 	}
@@ -149,6 +151,8 @@
 		jQuery.cookie('topupReport[sel_student_id]', jQuery('#sel_student_id').val());
 		jQuery.cookie('topupReport[sel_date_from]', jQuery('#sel_date_from').val());
 		jQuery.cookie('topupReport[sel_date_to]', jQuery('#sel_date_to').val());
+		jQuery.cookie('topupReport[search_txt]', jQuery('#search_txt').val());
+		jQuery.cookie('topupReport[search_filter_by]', jQuery('#search_filter_by').val());
 		return true;
 	}
 	function clearpagestate()
@@ -157,7 +161,40 @@
 		jQuery.cookie('topupReport[sel_date_from]', 'Choose date');
 		jQuery.cookie('topupReport[sel_date_to]', 'Choose date');		
 		jQuery.cookie('topupReport[iDisplayStart]', null);
+		jQuery.cookie('topupReport[search_txt]', null);		
+		jQuery.cookie('topupReport[search_filter_by]', null);
 		return true;
+	}
+
+	function changeSearchKey(e){
+		console.log($(e).val());
+		switch($(e).val()){
+			case '-1':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "");
+				$("#search_txt").attr('disabled','disabled');
+				return;
+			case '0':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Family Code");
+				$("#search_txt").removeAttr('disabled');
+				$('#search_txt').focus();
+				return;
+			case '1':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Topup Amount");
+				$("#search_txt").removeAttr('disabled');
+				$('#search_txt').focus();
+				return;
+			case '2':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Payment Type");
+				$("#search_txt").removeAttr('disabled');
+				$('#search_txt').focus();
+				return;
+			default:
+				return;
+		}
 	}
 	
 </script>
@@ -173,8 +210,8 @@
 		<h2>Topup Report</h2>
 		<table style="width:100%">
             <tr>
-                <td style="width:70%">
-                    <div class="left-section">
+                <td style="width:85%">
+                    <div class="left-section filter-div">
 						<table>
 							<tr>
 								<td style="padding-right:35px;">
@@ -187,6 +224,21 @@
 									<input type='text' value="Choose date" name='sel_date_to' id='sel_date_to' class='input-text-custom'/>
 								</td>
 
+								<td style="padding-right:20px;">
+									<div style="font-size:16px;"> Filter by </div>
+									<select id="search_filter_by" name="search_filter_by" class="select-custom" onChange="changeSearchKey(this)">
+										<option value="-1">Please choose</option>
+										<option value='0'> Family Code </option>
+										<option value='1'> Amount Spend </option>
+										<option value='2'> Payment Type </option>
+									</select>
+								</td>
+
+								<td style="padding-right:35px;">
+									<div style="font-size:16px;visibility:hidden"> Content </div>
+									<input type="text" class="input-text-custom" id="search_txt" name="search_txt" placeholder="" disabled/>
+								</td>
+
 								<td style="padding-top:20px;">
 									<input type="submit" id="btnsearch" name="btnsearch" class="control-button" onclick=" return savepagestate() " value='Generate Report'/>
 								</td>
@@ -194,9 +246,11 @@
 						</table>
                     <div>
                 </td>
-                <td style="width:30%;padding-top:20px;">
-                    <a href="#file_type_modal" rel="modal:open" class="control-button"> Export </a>
-                </td>
+			</tr>
+			<tr>
+                <td style="width:30%;padding:10px 0px;text-align:right;"> 
+					<a href="#file_type_modal" rel="modal:open" class="control-button"> Export <a/>
+				</td>	
             </tr>
 		</table>
 		

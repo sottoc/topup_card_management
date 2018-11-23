@@ -18,13 +18,13 @@
         if(localStorage.getItem("current_page") != undefined){
             for(var i=0; i < $("#nav ul li").length; i++){
                 if($($("#nav ul li")[i]).html() == localStorage.getItem("current_page")){
-                    $($("#nav ul li")[i]).css("background", '#05815f');
+                    $($("#nav ul li")[i]).css("background", '#b12226');
                 }
             }
 		}
 		$($("#nav ul li")[0]).css("background", '#2c2c2c');
 		$($("#nav ul li")[1]).css("background", '#2c2c2c');
-		$($("#nav ul li")[2]).css("background", '#05815f');
+		$($("#nav ul li")[2]).css("background", '#b12226');
 		$($("#nav ul li")[3]).css("background", '#2c2c2c');
 		$($("#nav ul li")[4]).css("background", '#2c2c2c');
         //---- End -----

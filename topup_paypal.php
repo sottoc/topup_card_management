@@ -9,6 +9,7 @@
 	require_once('userauth.php');	
 	require_once('header.php');
 	
+	//$paypal_url='https://www.sandbox.paypal.com/cgi-bin/webscr'; // Test Paypal API URL
 	$paypal_url='https://www.paypal.com/cgi-bin/webscr'; // Test Paypal API URL
 	//$paypal_id='ydn.smile-facilitator-1@gmail.com'; // Business email ID
 	$paypal_id='ydn.smile@gmail.com'; // Business email ID
@@ -94,8 +95,8 @@
 		<!--input type="hidden" name="cpp_header_image" value="http://localhost/topup_card_management_dec5/images/topup_logotext.gif"-->
 		<input type="hidden" name="currency_code" value="SGD">
 		<!--input type="hidden" name="handling" value="0"-->
-		<input type="hidden" name="cancel_return" value="http://localhost/topup_card_management/cancel.php">
-		<input type="hidden" name="return" value="http://localhost/topup_card_management/success.php">
+		<input type="hidden" name="cancel_return" value="<?php echo $rootpath; ?>/cancel.php">
+		<input type="hidden" name="return" value="<?php echo $rootpath; ?>/success.php">
 		<div>
 			<input type="submit" name="btnsubmit" value="Top-up Now" class="btn control-button" style="height:100% !important;">
 		</div>

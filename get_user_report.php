@@ -36,6 +36,22 @@
 			$to = $criobj->sel_date_to;
 			$cri_str .= " >= '".$from."' AND user_created_datetime < '".$to."' + interval 1 day";
 		}
+
+		$cri_str .= " AND 1=1 ";
+		if(isset($criobj->search_txt) &&  $criobj->search_txt!='' ){
+			if($criobj->search_filter_by == '0'){
+				$cri_str .= " AND family_code LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '1'){
+				$cri_str .= " AND user_email LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '2'){
+				$cri_str .= " AND amount LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+		}
 	}
 	$cri_arr = array($cri_str,$param);
 	if ( isset( $_GET['iSortCol_0'] ) )
@@ -70,6 +86,7 @@
 		// else
 		// 	$trans_amt = "<font color='blue'>".$aRow['topup_amt']."</font>";
 		$tmpentry[] = htmlspecialchars($aRow['family_code']);
+		$tmpentry[] = htmlspecialchars($aRow['user_email']);
 		$tmpentry[] = htmlspecialchars("$".$aRow['amount']);
 		//$tmpentry[] = htmlspecialchars($cri_str);
 		$response['aaData'][] = $tmpentry;

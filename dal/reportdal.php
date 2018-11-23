@@ -345,7 +345,7 @@ class reportdal{
 	{
 		$cri_str = $cri_arr[0];
 		$param = $cri_arr[1];
-		$query = "SELECT `id`, `User_code`, `Family_code`, `Card_ID`, `Last_name`, `First_name`, `Level`, `Card_value`, `Card_status`, `Username`, `Password` FROM `tbl_card1`";		
+		$query = "SELECT * FROM `tbl_card1` c LEFT JOIN tbl_family_code_amount fa on c.Family_code=fa.family_code";		
 		$query .= $cri_str;
 		$query .=$sorting;
 		if($rpage!=-1)

@@ -90,6 +90,7 @@
                 }
             }
         }
+		$($("#nav ul li")[1]).css("background", '#b12226');
         //---- End -----
 
 		loadpagestate();
@@ -187,7 +188,7 @@ function show_item_msg()
 <label id="successmes" name="successmes" style="color:red;" >&nbsp;</label>
 <form id='saleheaderform' name='saleheaderform' method='POST'>
 	<div class="content_data">
-		<h2>Child List (2)</h2>
+		<h2>Card List</h2>
 		
 		<!-- <input type="hidden" id="hid_del_id" name="hid_del_id" value=""/>
 		

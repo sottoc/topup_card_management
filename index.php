@@ -28,7 +28,7 @@ $(document).ready(function(){
 		for(var i=0; i < $("#nav ul li").length; i++){
 			if($($("#nav ul li")[i]).html() == localStorage.getItem("current_page")){
 				if(user_id == "1"){
-					$($("#nav ul li")[i]).css("background", '#05815f');
+					$($("#nav ul li")[i]).css("background", '#b12226');
 				}
 				if(user_id == "2"){
 					$($("#nav ul li")[i]).css("background", '#b12226');

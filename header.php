@@ -136,7 +136,7 @@
 				<?php } ?>
 				
 				<?php if($_SESSION ['login_user_type_id']==2){ ?><!--admin user type or parent user type-->
-					<li><a href="participant_list.php" >Children</a></li>
+					<li><a href="participant_list.php" >Card</a></li>
 				<?php } ?>
 				
 				<?php if($_SESSION ['login_user_type_id']==1){ ?><!--admin user type or organizer user type-->
@@ -203,12 +203,12 @@
 		#nav a:hover {
 			color: white;
 			/* background: url('../images/nav_hover.gif') bottom center no-repeat; */
-			background: #05815f;
+			background: #b12226;
 		}
 		#nav a:visited {
 			color: white;
 			/* background: url('../images/nav_hover.gif') bottom center no-repeat; */
-			background: #05815f;
+			background: #b12226;
 		}
 	</style>
 <?php } ?>

@@ -149,8 +149,8 @@
 		updatecontrol('#sel_date_from', jQuery.cookie('spendingHistory[sel_date_from]'));
 		updatecontrol('#sel_date_to', jQuery.cookie('spendingHistory[sel_date_to]'));
 		$( "#sel_student_id" ).val( jQuery.cookie('spendingHistory[sel_student_id]') );
-		//$( "#sel_date_from" ).val( jQuery.cookie('spendingHistory[sel_date_from]') );
-		//$( "#sel_date_to" ).val( jQuery.cookie('spendingHistory[sel_date_to]') );
+		updatecontrol('#search_txt', jQuery.cookie('spendingHistory[search_txt]'));
+		updatecontrol('#search_filter_by', jQuery.cookie('spendingHistory[search_filter_by]'));
 	}
 	function updatecontrol(parctl, parvalue)
 	{
@@ -163,14 +163,18 @@
 		jsonfilter.sel_student_id = jQuery.cookie('spendingHistory[sel_student_id]');
 		jsonfilter.sel_date_from = jQuery.cookie('spendingHistory[sel_date_from]');
 		jsonfilter.sel_date_to = jQuery.cookie('spendingHistory[sel_date_to]');
+		jsonfilter.search_txt = jQuery.cookie('spendingHistory[search_txt]');
+		jsonfilter.search_filter_by = jQuery.cookie('spendingHistory[search_filter_by]');
 		var cri_str = JSON.stringify(jsonfilter);
 		return cri_str;
 	}
-	function spending_btnsearch()
+	function spending_savepagestate()
 	{
 		jQuery.cookie('spendingHistory[sel_student_id]', jQuery('#sel_student_id').val());
 		jQuery.cookie('spendingHistory[sel_date_from]', jQuery('#sel_date_from').val());
 		jQuery.cookie('spendingHistory[sel_date_to]', jQuery('#sel_date_to').val());
+		jQuery.cookie('spendingHistory[search_txt]', jQuery('#search_txt').val());
+		jQuery.cookie('spendingHistory[search_filter_by]', jQuery('#search_filter_by').val());
 		return true;
 	}
 	function clearpagestate()
@@ -179,7 +183,46 @@
 		jQuery.cookie('spendingHistory[sel_date_from]', 'Choose date');
 		jQuery.cookie('spendingHistory[sel_date_to]', 'Choose date');		
 		jQuery.cookie('spendingHistory[iDisplayStart]', null);
+		jQuery.cookie('spendingHistory[search_txt]', null);		
+		jQuery.cookie('spendingHistory[search_filter_by]', null);
 		return true;
+	}
+
+	function changeSearchKey(e){
+		console.log($(e).val());
+		switch($(e).val()){
+			case '-1':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "");
+				$("#search_txt").attr('disabled','disabled');
+				return;
+			case '0':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Card ID");
+				$("#search_txt").removeAttr('disabled');
+				$('#search_txt').focus();
+				return;
+			case '1':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter First Name");
+				$("#search_txt").removeAttr('disabled');
+				$('#search_txt').focus();
+				return;
+			case '2':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Last Name");
+				$("#search_txt").removeAttr('disabled');
+				$('#search_txt').focus();
+				return;
+			case '3':
+				$('#search_txt').val('');
+				$('#search_txt').attr("placeholder", "Enter Amount");
+				$("#search_txt").removeAttr('disabled');
+				$('#search_txt').focus();
+				return;
+			default:
+				return;
+		}
 	}
 	
 </script>
@@ -195,8 +238,8 @@
 		<h2>Spending History</h2>
 		<table style="width:100%">
             <tr>
-                <td style="width:70%">
-                    <div class="left-section">
+                <td style="width:85%">
+                    <div class="left-section filter-div">
 						<table>
 							<tr>
 								<td style="padding-right:35px;">
@@ -209,8 +252,24 @@
 									<input type='text' value="Choose date" name='sel_date_to' id='sel_date_to' class='input-text-custom'/>
 								</td>
 
+								<td style="padding-right:20px;">
+									<div style="font-size:16px;"> Filter by </div>
+									<select id="search_filter_by" name="search_filter_by" class="select-custom" onChange="changeSearchKey(this)">
+										<option value="-1">Please choose</option>
+										<option value='0'> Card ID </option>
+										<option value='1'> First Name </option>
+										<option value='2'> Last Name </option>
+										<option value='3'> Amount Spend </option>
+									</select>
+								</td>
+
+								<td style="padding-right:35px;">
+									<div style="font-size:16px;visibility:hidden"> Content </div>
+									<input type="text" class="input-text-custom" id="search_txt" name="search_txt" placeholder="" disabled/>
+								</td>
+
 								<td style="padding-top:20px;">
-									<input type="submit" id="spending_btnsearch" name="spending_btnsearch" class="control-button" onclick=" return spending_btnsearch() " value='Go'/>
+									<input type="submit" id="spending_btnsearch" name="spending_btnsearch" class="control-button" onclick=" return spending_savepagestate() " value='Generate Report'/>
 								</td>
 							</tr>
 						</table>
@@ -255,9 +314,9 @@
 				<tr>
 					<th>Date</th>
 					<th>Time</th>
+					<th>Card ID</th>
 					<th>First Name</th>					
-					<th>Card ID</th>					
-					<th>POS ID</th>
+					<th>Last Name</th>
 					<th>Amount Spend</th>
 					<th>Action</th>
 				</tr>
@@ -272,48 +331,50 @@
 	</form>
 </div>
 
-<div id="spending_history_detail_modal" class="modal" style="padding:50px 50px;padding-top:10px;">
+<div id="spending_history_detail_modal" class="modal" style="padding:50px 50px;padding-top:30px;">
     <table>
 		<tr> 
 			<td> 
-				<div class="title"> Date & Time  </div>
-				<div class="detail" id='modal_date_time'> 2018 08 20 15:18:51 </div>
-			</td>
-			<td>
-				<div class="title"> Spending By  </div>
-				<div class="detail" id='modal_full_name'> Maecenas Tempu </div>
+				<span class="title"> Date & Time: </span>
+				<span class="detail" id='modal_date_time'> 2018 08 20 15:18:51 </span>
 			</td>
 		</tr>
-
+		<tr>
+			<td>
+				<span class="title"> Spending By : </span>
+				<span class="detail" id='modal_full_name'> Maecenas Tempu </span>
+			</td>
+		</tr>
 		<tr> 
 			<td> 
-				<div class="title"> Card ID  </div>
-				<div class="detail" id='modal_card_id'> CC69923 </div>
-			</td>
-			<td>
-				<div class="title"> POS ID  </div>
-				<div class="detail" id='modal_pos_id'> HSC0 </div>
+				<span class="title"> Card ID : </span>
+				<span class="detail" id='modal_card_id'> CC69923 </span>
 			</td>
 		</tr>
-
+		<tr>
+			<td>
+				<span class="title"> POS ID : </span>
+				<span class="detail" id='modal_pos_id'> HSC0 </span>
+			</td>
+		</tr>
 		<tr> 
 			<td> 
-				<div class="title"> Amount Spend  </div>
-				<div class="detail" id='modal_item_price'> S$7.80 </div>
-			</td>
-			<td>
-				<div class="title"> Receipt Number  </div>
-				<div class="detail"> HSC010010 </div>
+				<span class="title"> Amount Spend : </span>
+				<span class="detail" id='modal_item_price'> S$7.80 </span>
 			</td>
 		</tr>
-
+		<tr>
+			<td>
+				<span class="title"> Receipt Number:  </span>
+				<span class="detail"> HSC010010 </span>
+			</td>
+		</tr>
 		<tr>
 			<td colspan='2'>
-				<div class="title"> Order Item  </div>
+				<div class="title"> Order Item:  </div>
 				<div class="detail"> <span id='modal_item_name'> </span> <span id='modal_item_price_1'> </span> </div>
 			</td>
 		</tr>
-
 	</table>
 </div>
 
@@ -322,7 +383,7 @@
 		padding:10px 20px;
 	}
 	#spending_history_detail_modal .title{
-		font-weight:600;
+		font-weight:600 !important;
 		font-size:17px;
 	}
 	#spending_history_detail_modal .detail{

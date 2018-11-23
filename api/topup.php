@@ -10,20 +10,35 @@
     $amount = $request['amount'];
     $pos_id = $request['pos_id'];
 
-    $card_value = 0;
-    $query = "SELECT `Card_value` FROM `tbl_card1` WHERE `Card_ID`='".$Card_ID."'";
+    //--- get family code from card number ------
+    $family_code = '';
+    $query = "SELECT `Family_code` FROM `tbl_card1` WHERE `Card_ID`='".$Card_ID."'";
     $result = $conn->query($query);
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            $card_value = $row['Card_value'];
+            $family_code = $row['Family_code'];
         }
     } else{
-        display_results("Invalid Card ID", "ERROR");
+        display_results("Invalid card number", "Info!");
         return;
     }
-    $card_value = $amount + $card_value;
 
-    $query = "UPDATE `tbl_card1` SET `Card_value`=".$card_value." WHERE `Card_ID`='".$Card_ID."'";
+    //---- get amount from family code ------
+    $origin_amount = 0;
+    $query = "SELECT `amount` FROM `tbl_family_code_amount` WHERE `family_code`='".$family_code."'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $origin_amount = $row['amount'];
+        }
+    } else{
+        display_results("Can't find family code", "Info!");
+        return;
+    }
+
+    $new_amount = floatval($amount) + floatval($origin_amount);
+
+    $query = "UPDATE `tbl_family_code_amount` SET `amount`=".$new_amount." WHERE `family_code`='".$family_code."'";
     $result = $conn->query($query);
     display_results("Card value sucessfully chanaged!");
 ?>

@@ -88,7 +88,10 @@
 		$last_name = $aRow['Last_name'];
 		$first_name = $aRow['First_name'];
 		$family_code = $aRow['Family_code'];
-		$card_value = $aRow['Card_value'];
+		$card_value = $aRow['amount'];
+		if($card_value == null){
+			$card_value = "0";
+		}
 		$card_status = $aRow['Card_status'];
         $action = $aRow['id'];
 				
@@ -98,7 +101,7 @@
 		$tmpentry[] = htmlspecialchars($last_name);
 		$tmpentry[] = htmlspecialchars($first_name);
 		$tmpentry[] = htmlspecialchars($family_code);
-		$tmpentry[] = htmlspecialchars($card_value);
+		$tmpentry[] = htmlspecialchars('$'.$card_value);
 		$tmpentry[] = htmlspecialchars($card_status);
         $tmpentry[] = htmlspecialchars($action);
 
