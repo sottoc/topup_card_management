@@ -64,7 +64,7 @@
 			<input type="hidden" name="business" value="<?php echo $paypal_id; ?>">
 			<input type="hidden" name="cmd" value="_xclick">
 			
-			<!-- <input type="text" name="item_name" value="item name"> -->
+			<!-- <input type="hidden" name="item_name" value="Test Name"> -->
 			<!-- <div class="frm">
 				<div class="frm_label">Student Name :</div>
 				<input type="text" name="item_name">
@@ -78,7 +78,7 @@
 				<input type="text" name="amount">
 			</div>
 			
-			<input type="hidden" name="no_shipping" value="2">
+			<input type="hidden" name="no_shipping" value="5">
 	
 			<input type="hidden" name="no_note" value="0" /> 
 			<input type="hidden" name="rm" value="2">

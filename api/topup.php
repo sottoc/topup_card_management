@@ -24,6 +24,7 @@
     }
 
     //---- get amount from family code ------
+    $time = date("Y-m-d H:i:s");
     $origin_amount = 0;
     $query = "SELECT `amount` FROM `tbl_family_code_amount` WHERE `family_code`='".$family_code."'";
     $result = $conn->query($query);
@@ -32,13 +33,13 @@
             $origin_amount = $row['amount'];
         }
     } else{
-        display_results("Can't find family code", "Info!");
-        return;
+        $query="INSERT INTO `tbl_family_code_amount` (`family_code`, `amount`, `date_created`, `date_updated`) VALUES ('".$family_code."','".$origin_amount."','".$time."','".$time."')";
+        $result = $conn->query($query);
     }
 
     $new_amount = floatval($amount) + floatval($origin_amount);
 
-    $query = "UPDATE `tbl_family_code_amount` SET `amount`=".$new_amount." WHERE `family_code`='".$family_code."'";
+    $query = "UPDATE `tbl_family_code_amount` SET `amount`=".$new_amount.", `date_updated`='".$time."'  WHERE `family_code`='".$family_code."'";
     $result = $conn->query($query);
     display_results("Card value sucessfully chanaged!");
 ?>
