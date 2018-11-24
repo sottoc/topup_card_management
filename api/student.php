@@ -17,7 +17,7 @@
                         $amount = $row1['amount'];
                     }
                 }
-                $row['Card_Value'] = $amount;
+                $row['Card_value'] = $amount;
                 display_results($row, 'OK');
             }
 
@@ -43,7 +43,7 @@
                         $amount = $row1['amount'];
                     }
                 }
-                $row['Card_Value'] = $amount;
+                $row['Card_value'] = $amount;
                 display_results($row, 'OK');
             }
 
