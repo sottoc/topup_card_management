@@ -68,7 +68,7 @@ function find_current_card_amount()
 							if($_SESSION ['login_user_type_id']==1) {
 							?>
 								<div style='font-size:19px;'>
-									<h2> &nbsp;&nbsp;&nbsp;&nbsp; Dashborad </h2>
+									<h2> &nbsp;&nbsp;&nbsp;&nbsp; Dashboard </h2>
 									<table width="100%" style="text-align:center;">
 										<tr> 
 											<td style="padding:20px;">

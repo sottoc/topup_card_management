@@ -9,8 +9,8 @@
 	require_once('userauth.php');	
 	require_once('header.php');
 	
-	$paypal_url='https://www.sandbox.paypal.com/cgi-bin/webscr'; // Test Paypal API URL
-	//$paypal_url='https://www.paypal.com/cgi-bin/webscr'; // Test Paypal API URL
+	//$paypal_url='https://www.sandbox.paypal.com/cgi-bin/webscr'; // Test Paypal API URL
+	$paypal_url='https://www.paypal.com/cgi-bin/webscr'; // Test Paypal API URL
 
 	//$paypal_id='ydn.smile-facilitator-1@gmail.com'; // Business email ID
 	$paypal_id='ydn.smile@gmail.com'; // Business email ID
@@ -65,7 +65,7 @@
 			<input type="hidden" name="business" value="<?php echo $paypal_id; ?>">
 			<input type="hidden" name="cmd" value="_xclick">
 			
-			<!-- <input type="hidden" name="item_name" value="Test item name"> -->
+			<input type="hidden" name="item_name" value="Chartwells Food Card Topup">
 
 			<input type="hidden" name="add" add="1">
 			<input type="hidden" name="display" display="1">

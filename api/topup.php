@@ -41,5 +41,12 @@
 
     $query = "UPDATE `tbl_family_code_amount` SET `amount`=".$new_amount.", `date_updated`='".$time."'  WHERE `family_code`='".$family_code."'";
     $result = $conn->query($query);
+
+    //-------- save topup record -----------
+    $payment_type = "1";
+    $payment_detail = $Card_ID;
+    $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `payment_detail`, `topup_amount`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$Card_ID."','".$amount."','".$time."')";
+    $result = $conn->query($query);
+
     display_results("Card value sucessfully chanaged!");
 ?>
