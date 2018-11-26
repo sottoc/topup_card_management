@@ -51,7 +51,7 @@
 		$_SESSION['SESS_SORTINGCOLS']=$SortingCols;
 	}
 	
-	$rResult= $reportbol->get_children_list($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+	$rResult= $reportbol->get_spending_history($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
 	$iTotal = $rResult->getFoundRows();
 	$response = array('sEcho'=>$sEcho,'iTotalRecords'=>$iTotal,'iTotalDisplayRecords'=>$iTotal,'aaData'=>array());
 	
@@ -81,7 +81,7 @@
 	function fnColumnToField( $i )
 	{
 		if ( $i == 0 )
-			return "Date_Created";
+			return "created_time";
 		else if ( $i == 1 )
 			return "created_time";
 		else if ( $i == 3 )
