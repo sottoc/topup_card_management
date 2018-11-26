@@ -572,5 +572,18 @@ class reportdal{
 		}
 		return new readonlyresultset($result);	
 	}
+
+	function get_amount_of_user($user_id){
+		$query = "SELECT `amount` FROM `tbl_user` u LEFT JOIN tbl_family_code_amount fa on u.family_code=fa.family_code";
+		$param = " WHERE u.user_id='".$user_id."'";
+		require_once("api/api_common.php");
+		$result = $conn->query($query.$param);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$amount = $row['amount'];
+			}
+		}
+		return $amount;
+	}
 }
 ?>

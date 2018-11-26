@@ -110,7 +110,7 @@
 			else if($_SESSION ['login_user_type_id']==2)//parent
 				$nav_class="style='background: #011880;'";
 			else if($_SESSION ['login_user_type_id']==3)
-				$nav_class="style='background: #005586;'";
+				$nav_class="style='background: #011880;'";
 		?>
 		<div id="nav" <?php echo $nav_class; ?> >
 			<ul  class="sf-menu" id="example">			
@@ -135,7 +135,7 @@
 					<!-- <li><a href="staff_list.php" ><?php echo $localized_home_data['staff']; ?></a></li> -->
 				<?php } ?>
 				
-				<?php if($_SESSION ['login_user_type_id']==2){ ?><!--admin user type or parent user type-->
+				<?php if($_SESSION ['login_user_type_id']==2 || $_SESSION ['login_user_type_id']==3){ ?><!--admin user type or parent user type-->
 					<li><a href="participant_list.php" >Card</a></li>
 				<?php } ?>
 				
@@ -143,7 +143,7 @@
 					<!-- <li><a href="predefine_participant_list.php">Student(Predefine)</a></li> -->
 				<?php } ?>
 				
-				<?php if($_SESSION ['login_user_type_id']==2){ ?><!--for parentuser type-->
+				<?php if($_SESSION ['login_user_type_id']==2 || $_SESSION ['login_user_type_id']==3){ ?><!--for parentuser type-->
 					<!-- <li><a href="pre_order.php" ><?php echo $localized_home_data['pre_order']; ?></a></li> -->
 					<li><a href="topup_paypal.php" >Topup</a></li>
 				<?php } ?>
@@ -158,10 +158,10 @@
 					</li> -->
 				<?php } ?>
 				
-				<?php if($_SESSION ['login_user_type_id']==3){ ?><!--for staff user type-->
-					<li><a href="topup_manual.php" >Topup(Cash)</a></li>
-					<li><a href="selforder_redemption.php" ><?php echo $localized_home_data['redumption']; ?></a></li>
-				<?php } ?>
+				<?php //if($_SESSION ['login_user_type_id']==3){ ?><!--for staff user type-->
+					<!-- <li><a href="topup_manual.php" >Topup(Cash)</a></li>
+					<li><a href="selforder_redemption.php" ><?php echo $localized_home_data['redumption']; ?></a></li> -->
+				<?php // } ?>
 				
 				<li><a href="#" ><?php echo $localized_home_data['reports']; ?></a>
 					<ul style='display: none;' class='dropdown'>
@@ -180,7 +180,7 @@
 							<!-- <li><a href="redemption_report.php" ><?php echo $localized_home_data['redemption_report_title']; ?></a></li> -->
 						<?php } ?>
 
-						<?php if($_SESSION ['login_user_type_id']==2){ ?><!--admin user type or parent/organizer user type-->
+						<?php if($_SESSION ['login_user_type_id']==2 || $_SESSION ['login_user_type_id']==3){ ?><!--admin user type or parent/organizer user type-->
 							<li><a href="spending_history.php" ><?php echo "Spending History"; ?></a></li>
 							<li><a href="topup_history.php" ><?php echo "Topup History"; ?></a></li>
 							<!-- <li><a href="redemption_report.php" ><?php echo $localized_home_data['redemption_report_title']; ?></a></li> -->
@@ -213,7 +213,7 @@
 	</style>
 <?php } ?>
 
-<?php if($_SESSION ['login_user_type_id']==2){ ?>
+<?php if($_SESSION ['login_user_type_id']==2 || $_SESSION ['login_user_type_id']==3){ ?>
 	<style>
 		#nav a:hover {
 			color: white;

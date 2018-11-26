@@ -90,7 +90,10 @@
                 }
             }
         }
+		$($("#nav ul li")[0]).css("background", '#011880');
 		$($("#nav ul li")[1]).css("background", '#b12226');
+		$($("#nav ul li")[2]).css("background", '#011880');
+		$($("#nav ul li")[3]).css("background", '#011880');
         //---- End -----
 
 		loadpagestate();

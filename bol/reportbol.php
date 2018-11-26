@@ -120,5 +120,11 @@ class reportbol{
 		$result=$reportdal->get_purchase_history_report($participant_id,$all_data);
 		return $result;
 	}
+	function get_amount_of_user($user_id)
+	{
+		$reportdal=new reportdal();
+		$result = $reportdal->get_amount_of_user($user_id);
+		return $result;
+	}
 }
 ?>

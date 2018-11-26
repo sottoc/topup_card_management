@@ -21,16 +21,16 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	find_current_card_amount();
-	var user_id = "<?php echo $_SESSION ['login_user_type_id']; ?>";
+	var user_type_id = "<?php echo $_SESSION ['login_user_type_id']; ?>";
 	localStorage.setItem("current_page", '<a href="index.php">Home</a>');
 	//---- set background for active menu -----
 	if(localStorage.getItem("current_page") != undefined){
 		for(var i=0; i < $("#nav ul li").length; i++){
 			if($($("#nav ul li")[i]).html() == localStorage.getItem("current_page")){
-				if(user_id == "1"){
+				if(user_type_id == "1"){
 					$($("#nav ul li")[i]).css("background", '#b12226');
 				}
-				if(user_id == "2"){
+				if(user_type_id == "2" || user_type_id == "3"){
 					$($("#nav ul li")[i]).css("background", '#b12226');
 				}
 			}
@@ -104,16 +104,17 @@ function find_current_card_amount()
 									</table>
 								</div>
 							<?php
-							}else if($_SESSION ['login_user_type_id']==2)
+							}else if($_SESSION ['login_user_type_id']==2 || $_SESSION ['login_user_type_id']==3)
 							{
 								$login_user_type_id = $_SESSION ['login_user_type_id'];
 								$login_user_id = $_SESSION ['login_user_id'];
 								$reportbol = new reportbol();
 								$rResult= $reportbol->get_student_by_loginusertype($login_user_type_id,$login_user_id);
 								$rCount = $rResult->rowCount();
-								if($rCount > 0)
+								$current_amount = $reportbol->get_amount_of_user($login_user_id);
+								if($rCount >= 0)
 								{
-									echo "<h2> Current Account Value: $ <spam> 128.20 </span> </h2>";
+									echo "<h2> Current Account Value: $<span>".$current_amount."</span> </h2>";
 									echo "<table><tr> <td> <a href='topup_paypal.php' name='topup_now' class='control-button'> Top-up Now </a> </td></tr></table>";
 									include("spending_history_sub.php");
 									echo "<br> <table><tr> <td> <a href='spending_history.php' name='topup_now' class='control-button'> View Spending Report </a> </td></tr></table>";
@@ -162,8 +163,8 @@ function find_current_card_amount()
 								// <br/><br/><h5>Compass Point Canteen</h5><label style='font-size: 13px;'>+6554546789</label>";
 								// echo "</div>";
 							}
-							else if($_SESSION ['login_user_type_id']==3)
-								echo "<div style='font-size:19px;'>Welcome to Food Card Portal Staff Control Page </br></br><img src='images/staff_Home_img_1.jpg' alt='Admin_Home_img_1'></div>";
+							//else if($_SESSION ['login_user_type_id']==3)
+								//echo "<div style='font-size:19px;'>Welcome to Food Card Portal Staff Control Page </br></br><img src='images/staff_Home_img_1.jpg' alt='Admin_Home_img_1'></div>";
 						?>
 					</td>
 				</tr>
