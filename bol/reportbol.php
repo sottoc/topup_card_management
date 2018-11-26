@@ -72,6 +72,13 @@ class reportbol{
 		$result=$reportdal->get_topup_report($offset, $rpage ,$sorting,$cri_arr);
 		return $result;
 	}
+
+	function get_card_list($DisplayStart,$DisplayLength,$SortingCols,$cri_arr)
+	{
+		$reportdal=new reportdal();
+		$result=$reportdal->get_card_list($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+		return $result;
+	}
 	
 	function get_order_schedule_report($offset, $rpage ,$sorting,$cri_arr)
 	{

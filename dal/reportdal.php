@@ -183,6 +183,30 @@ class reportdal{
 		$result = execute_query($query,$param) or die ("get_redemption_report query fail.");	
 		return new readonlyresultset($result);
 	}
+	function get_card_list($offset, $rpage ,$sorting,$cri_arr)
+	{
+		$id_str='';
+		
+		$cri_str = $cri_arr[0];
+		$param = $cri_arr[1];
+		
+		// $query = "SELECT SQL_CALC_FOUND_ROWS *
+		// 		FROM `tbl_transaction` t
+		// 		left join tbl_topup top on t.topup_id=top.topup_id
+		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
+		// 		left join tbl_participant p on p.participant_id=t.participant_id";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_card1`";
+		$query .= $cri_str;
+		
+		if(empty($param) && $id_str!='')
+			$query .= " AND t.participant_id in ($id_str)";
+		$query .=$sorting;
+		if($rpage!=-1)
+			$query.= " LIMIT $offset,$rpage";
+		
+		$result = execute_query($query,$param) or die ("get_redemption_report query fail.");	
+		return new readonlyresultset($result);
+	}
 	function get_topup_history($offset, $rpage ,$sorting,$cri_arr)
 	{
 		$id_str='';
