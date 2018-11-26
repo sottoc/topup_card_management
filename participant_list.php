@@ -150,7 +150,7 @@
 			},
 			"bAutoWidth": false,
 			"bEscapeRegex": false,
-			"sAjaxSource": "get_card_detail.php",
+			"sAjaxSource": "get_children_list.php",
 			"aoColumns": [
 						{ "bSortable": true,"sWidth":"auto"},
 						{ "bSortable": true,"sWidth":"auto"},

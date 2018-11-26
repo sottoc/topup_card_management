@@ -21,21 +21,48 @@
 	{
 		$DisplayLength = $_GET['iDisplayLength'];
 	}
-	$cri_str = ' WHERE created_time';
+	$cri_str = ' WHERE 1=1 ';
 	$param = array();
 	if ( isset($_GET['sSearch']))
 	{	
 		$criobj = json_decode($_GET['sSearch']);
+		if(isset($criobj->search_txt_studentid) &&  $criobj->search_txt_studentid!='' ){
+			$cri_str .= " AND p.participant_enroll_no LIKE CONCAT('%',:search_txt_studentid,'%') ";
+			$param[':search_txt_studentid'] = clean($criobj->search_txt_studentid);
+		}
+		if(isset($criobj->search_filter_by) &&  $criobj->search_filter_by!='-1' ){
+			// switch($criobj->search_filter_by){
+			// 	case '0':
+			// 		$cri_str .= " AND User_code LIKE CONCAT('%',:search_txt_useremail,'%') ";
+			// }
+		}
+		if(isset($criobj->search_txt) &&  $criobj->search_txt!='' ){
+			if($criobj->search_filter_by == '0'){
+				$cri_str .= " AND User_code LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '1'){
+				$cri_str .= " AND Card_ID LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '2'){
+				$cri_str .= " AND Last_name LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '3'){
+				$cri_str .= " AND First_name LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '4'){
+                $cri_str .= " AND Family_code LIKE CONCAT('%',:search_txt,'%') ";
+                $param[':search_txt'] = clean($criobj->search_txt);
+			}
+			if($criobj->search_filter_by == '5'){
+				$cri_str .= " AND Card_status LIKE CONCAT('',:search_txt,'') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
+			}
+		}
 		
-		if(isset($criobj->sel_student_id) &&  $criobj->sel_student_id!='-1' ){
-			//$cri_str .= " AND t.participant_id=:sel_student_id";
-			$param[':sel_student_id'] = clean($criobj->sel_student_id);
-		}
-		if(isset($criobj->sel_date_from) && isset($criobj->sel_date_to)){
-			$from = $criobj->sel_date_from;
-			$to = $criobj->sel_date_to;
-			$cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
-		}
 	}
 	$cri_arr = array($cri_str,$param);
 	if ( isset( $_GET['iSortCol_0'] ) )
@@ -51,23 +78,29 @@
 		$_SESSION['SESS_SORTINGCOLS']=$SortingCols;
 	}
 	
-	$rResult= $reportbol->get_spending_history($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+	$rResult= $reportbol->get_prepaid_card($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
 	$iTotal = $rResult->getFoundRows();
 	$response = array('sEcho'=>$sEcho,'iTotalRecords'=>$iTotal,'iTotalDisplayRecords'=>$iTotal,'aaData'=>array());
-	
 	while( $aRow = $rResult->getNext() )
 	{
-		$trans_amt='';
+		$user_code = $aRow['User_code'];
+		$card_id = $aRow['Card_ID'];
+		$family_code = $aRow['Family_code'];
+		$last_name = $aRow['Last_name'];
+		$first_name = $aRow['First_name'];
+		$card_value = $aRow['amount'];
+		if($card_value == null){
+			$card_value = "0";
+		}
+		$card_status = $aRow['Card_status'];
+        $action = $aRow['id'];
+				
 		$tmpentry = array();
-		$date_time = explode(" ", $aRow['created_time']);
-		
-        $tmpentry[] = htmlspecialchars($aRow['card_id']);
-        $tmpentry[] = htmlspecialchars($aRow['card_id']);
-        $tmpentry[] = htmlspecialchars($aRow['Family_code']);
-        $tmpentry[] = htmlspecialchars($aRow['First_name']);
-        
-		$tmpentry[] = htmlspecialchars($aRow['Last_name']);
-
+		$tmpentry[] = htmlspecialchars($user_code);
+		$tmpentry[] = htmlspecialchars($card_id);
+		$tmpentry[] = htmlspecialchars($family_code);
+		$tmpentry[] = htmlspecialchars($last_name);
+		$tmpentry[] = htmlspecialchars($first_name);
 		$response['aaData'][] = $tmpentry;
 	}
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
@@ -81,13 +114,19 @@
 	function fnColumnToField( $i )
 	{
 		if ( $i == 0 )
-			return "created_time";
+			return "User_code";
 		else if ( $i == 1 )
-			return "created_time";
+			return "Card_ID";
+		else if ( $i == 2 )
+			return "Last_name";
 		else if ( $i == 3 )
-			return "created_time";
-		else if ( $i == 4 )
-			return "created_time";
+			return "First_name";
+        else if ( $i == 4 )
+			return "Family_code";
+		else if ( $i == 5 )
+			return "Card_value";
+		else if ( $i == 6 )
+			return "Card_status";
 		else 
 			return true;			
 	}
