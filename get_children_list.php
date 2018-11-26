@@ -21,7 +21,7 @@
 	{
 		$DisplayLength = $_GET['iDisplayLength'];
 	}
-	$cri_str = ' WHERE 1=1 ';
+	$cri_str = ' AND 1=1 ';
 	$param = array();
 	if ( isset($_GET['sSearch']))
 	{	
@@ -78,7 +78,7 @@
 		$_SESSION['SESS_SORTINGCOLS']=$SortingCols;
 	}
 	
-	$rResult= $reportbol->get_prepaid_card($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
+	$rResult= $reportbol->get_children_list($DisplayStart,$DisplayLength,$SortingCols,$cri_arr);
 	$iTotal = $rResult->getFoundRows();
 	$response = array('sEcho'=>$sEcho,'iTotalRecords'=>$iTotal,'iTotalDisplayRecords'=>$iTotal,'aaData'=>array());
 	while( $aRow = $rResult->getNext() )

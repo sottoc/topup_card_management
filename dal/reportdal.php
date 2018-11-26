@@ -144,24 +144,19 @@ class reportdal{
 	function get_spending_history($offset, $rpage ,$sorting,$cri_arr)
 	{
 		$id_str='';
-		// if($_SESSION ['login_user_type_id']==2)
-		// {
-		// 	$login_user_id = $_SESSION ['login_user_id'];
-		// 	$login_user_type_id = $_SESSION ['login_user_type_id'];
-		// 	$qry = "SELECT * FROM tbl_participant p
-		// 	left join tbl_organizer o on p.organizer_id=o.organizer_id
-		// 	left join tbl_user u on p.organizer_id=u.user_id 
-		// 	where o.user_id=:login_user_id";
-		// 	$res = execute_query($qry,array(':login_user_id'=>$login_user_id)) or die ("query fail.");
-		// 	$res2 = new readonlyresultset($res);
-		// 	while($row = $res2->getNext())
-		// 	{
-		// 		if($id_str=='')
-		// 			$id_str="'".$row['participant_id']."'";
-		// 		else
-		// 			$id_str=$id_str.",'".$row['participant_id']."'";
-		// 	}
-		// }
+		
+		//--- get family code of user ----
+		$login_user_id = $_SESSION ['login_user_id'];
+		$query = "SELECT `family_code` FROM `tbl_user`";
+		$param = " WHERE user_id='".$login_user_id."'";
+		require_once("api/api_common.php");
+		$result = $conn->query($query.$param);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$family_code = $row['family_code'];
+			}
+		}
+		//---------------- end --------------
 		
 		$cri_str = $cri_arr[0];
 		$param = $cri_arr[1];
@@ -171,7 +166,7 @@ class reportdal{
 		// 		left join tbl_topup top on t.topup_id=top.topup_id
 		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
 		// 		left join tbl_participant p on p.participant_id=t.participant_id";
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_purchase_records` t left join tbl_card1 top on t.card_id=top.Card_ID";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_purchase_records` t left join tbl_card1 top on t.card_id=top.Card_ID WHERE top.Family_code='".$family_code."'";
 		$query .= $cri_str;
 		
 		if(empty($param) && $id_str!='')
@@ -346,6 +341,32 @@ class reportdal{
 		$cri_str = $cri_arr[0];
 		$param = $cri_arr[1];
 		$query = "SELECT * FROM `tbl_card1` c LEFT JOIN tbl_family_code_amount fa on c.Family_code=fa.family_code";		
+		$query .= $cri_str;
+		$query .=$sorting;
+		if($rpage!=-1)
+			$query.= " LIMIT $offset,$rpage";
+		$result = execute_query($query,$param) or die ("get_card_report query fail.");
+			
+		return new readonlyresultset($result);	
+	}
+	function get_children_list($offset, $rpage ,$sorting,$cri_arr)
+	{
+		//--- get family code of user ----
+		$login_user_id = $_SESSION ['login_user_id'];
+		$query = "SELECT `family_code` FROM `tbl_user`";
+		$param = " WHERE user_id='".$login_user_id."'";
+		require_once("api/api_common.php");
+		$result = $conn->query($query.$param);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$family_code = $row['family_code'];
+			}
+		}
+		//---------------- end --------------
+
+		$cri_str = $cri_arr[0];
+		$param = $cri_arr[1];
+		$query = "SELECT * FROM `tbl_card1` c LEFT JOIN tbl_family_code_amount fa on c.Family_code=fa.family_code WHERE c.Family_code='".$family_code."'";		
 		$query .= $cri_str;
 		$query .=$sorting;
 		if($rpage!=-1)

@@ -66,6 +66,12 @@ class reportbol{
 			$result=$reportdal->get_prepaid_card($offset, $rpage ,$sorting,$cri_arr);
 			return $result;
 	}
+	function get_children_list($offset, $rpage ,$sorting,$cri_arr)
+	{
+			$reportdal=new reportdal();
+			$result=$reportdal->get_children_list($offset, $rpage ,$sorting,$cri_arr);
+			return $result;
+	}
 	function get_topup_report($offset, $rpage ,$sorting,$cri_arr)
 	{
 		$reportdal=new reportdal();

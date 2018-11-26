@@ -21,7 +21,7 @@
 	{
 		$DisplayLength = $_GET['iDisplayLength'];
 	}
-	$cri_str = ' WHERE created_time';
+	$cri_str = ' AND created_time';
 	$param = array();
 	if ( isset($_GET['sSearch']))
 	{	
