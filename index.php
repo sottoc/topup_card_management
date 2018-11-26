@@ -15,7 +15,47 @@
 	{
 		$localized_home_data[$row['localization_name']]=$row['detail'];
 	}
+
+	require_once('api/api_common.php');
+	$time = date("Y-m-d H:i:s");
+	//---- get Total Sales Today --------
+	$query = "SELECT SUM(item_price) FROM tbl_food_purchase_records WHERE created_time";
+	$query .= " >= '".$time."' AND created_time < '".$time."' + interval 1 day";
+	$result = $conn->query($query);
+	$total_spend_amount_today = 0;
+	if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+			$total_spend_amount_today = $row['SUM(item_price)'];
+        }
+	}
+	$total_spend_amount_today = intval($total_spend_amount_today*100)/100;
+	//------ end ------
 	
+	//----- get total topup amount today ----
+	$total_topup_amount_today = 0;
+	$query = "SELECT SUM(topup_amount) FROM tbl_food_topup_records WHERE date_created";
+	$query .= " >= '".$time."' AND date_created < '".$time."' + interval 1 day";
+	$result = $conn->query($query);
+	if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+			$total_topup_amount_today = $row['SUM(topup_amount)'];
+        }
+	}
+	$total_topup_amount_today = intval($total_topup_amount_today*100)/100;
+
+	//------ end -----------
+
+	//---- get online numbers -------
+	$query = "SELECT COUNT(*) FROM tbl_user WHERE user_type_id > 1";
+	$result = $conn->query($query);
+	$total_users = 0;
+	if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+			$total_users = $row['COUNT(*)'];
+        }
+	}
+	//---- end -------
+
 ?>
 
 <script type="text/javascript">
@@ -74,7 +114,7 @@ function find_current_card_amount()
 											<td style="padding:20px;">
 												<div class="home-block">
 													<div> Total Sales today(Prepaid Card Only) </div>
-													<div class="price"> $ 1028.20 </div>
+													<div class="price"> $ <?php echo $total_spend_amount_today; ?> </div>
 													<div> 
 														<a class="edit-button" href="transaction_report.php"> View Record </a>
 													</div>
@@ -84,7 +124,7 @@ function find_current_card_amount()
 											<td style="padding:20px;">
 												<div class="home-block">
 													<div> Total Top-up amount today </div>
-													<div class="price"> $ 628.20 </div>
+													<div class="price"> $ <?php echo $total_topup_amount_today; ?> </div>
 													<div> 
 														<a class="edit-button" href="topup_report.php"> View Record </a>
 													</div>
@@ -94,7 +134,7 @@ function find_current_card_amount()
 											<td style="padding:20px;">
 												<div class="home-block">
 													<div> Total Online Users </div>
-													<div class="price"> 45 </div>
+													<div class="price"> <?php echo $total_users;?> </div>
 													<div> 
 														<a class="edit-button" href="user.php"> View Record </a>
 													</div>
