@@ -183,9 +183,28 @@ class reportdal{
 		$result = execute_query($query,$param) or die ("get_redemption_report query fail.");	
 		return new readonlyresultset($result);
 	}
-	function get_card_list($offset, $rpage ,$sorting,$cri_arr)
+
+	function get_children_list($offset, $rpage ,$sorting,$cri_arr)
 	{
 		$id_str='';
+		// if($_SESSION ['login_user_type_id']==2)
+		// {
+		// 	$login_user_id = $_SESSION ['login_user_id'];
+		// 	$login_user_type_id = $_SESSION ['login_user_type_id'];
+		// 	$qry = "SELECT * FROM tbl_participant p
+		// 	left join tbl_organizer o on p.organizer_id=o.organizer_id
+		// 	left join tbl_user u on p.organizer_id=u.user_id 
+		// 	where o.user_id=:login_user_id";
+		// 	$res = execute_query($qry,array(':login_user_id'=>$login_user_id)) or die ("query fail.");
+		// 	$res2 = new readonlyresultset($res);
+		// 	while($row = $res2->getNext())
+		// 	{
+		// 		if($id_str=='')
+		// 			$id_str="'".$row['participant_id']."'";
+		// 		else
+		// 			$id_str=$id_str.",'".$row['participant_id']."'";
+		// 	}
+		// }
 		
 		$cri_str = $cri_arr[0];
 		$param = $cri_arr[1];
@@ -195,7 +214,7 @@ class reportdal{
 		// 		left join tbl_topup top on t.topup_id=top.topup_id
 		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
 		// 		left join tbl_participant p on p.participant_id=t.participant_id";
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_card1`";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM tbl_card1";
 		$query .= $cri_str;
 		
 		if(empty($param) && $id_str!='')
@@ -207,6 +226,7 @@ class reportdal{
 		$result = execute_query($query,$param) or die ("get_redemption_report query fail.");	
 		return new readonlyresultset($result);
 	}
+
 	function get_topup_history($offset, $rpage ,$sorting,$cri_arr)
 	{
 		$id_str='';
