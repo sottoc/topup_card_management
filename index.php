@@ -43,7 +43,6 @@
 			}
 		}
 		$total_topup_amount_today = intval($total_topup_amount_today*100)/100;
-
 		//------ end -----------
 
 		//---- get online numbers -------

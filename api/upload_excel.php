@@ -17,7 +17,7 @@
         $excel->read($targetPath);
         $nr_sheets = count($excel->sheets);       // gets the number of sheets
         $sheet = $excel->sheets[0];
-        display_results($sheet);
+        display_results($sheet['numRows'] - 1);
 
         //echo "Successfully uploaded!";
     }
