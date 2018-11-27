@@ -200,6 +200,19 @@ class reportdal{
 		// 	}
 		// }
 		
+		//--- get family code of user ----
+		$login_user_id = $_SESSION ['login_user_id'];
+		$query = "SELECT `family_code` FROM `tbl_user`";
+		$param = " WHERE user_id='".$login_user_id."'";
+		require_once("api/api_common.php");
+		$result = $conn->query($query.$param);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$family_code = $row['family_code'];
+			}
+		}
+		//---------------- end --------------
+		
 		$cri_str = $cri_arr[0];
 		$param = $cri_arr[1];
 		
@@ -208,7 +221,7 @@ class reportdal{
 		// 		left join tbl_topup top on t.topup_id=top.topup_id
 		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
 		// 		left join tbl_participant p on p.participant_id=t.participant_id";
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_purchase_records` t left join tbl_card1 top on t.card_id=top.Card_ID";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_topup_records` WHERE family_code='".$family_code."'";
 		$query .= $cri_str;
 		
 		if(empty($param) && $id_str!='')
@@ -405,7 +418,7 @@ class reportdal{
 		// 		left join tbl_topup top on t.topup_id=top.topup_id
 		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
 		// 		left join tbl_participant p on p.participant_id=t.participant_id";
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_purchase_records` t left join tbl_card1 top on t.card_id=top.Card_ID";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM tbl_food_topup_records";
 		$query .= $cri_str;
 		
 		if(empty($param) && $id_str!='')

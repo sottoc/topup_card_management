@@ -171,7 +171,7 @@
 				return;
 			case '0':
 				$('#search_txt').val('');
-				$('#search_txt').attr("placeholder", "Enter payment type");
+				$('#search_txt').attr("placeholder", "1(Cash) or 0(paypal)");
 				$("#search_txt").removeAttr('disabled');
 				$('#search_txt').focus();
 				return;

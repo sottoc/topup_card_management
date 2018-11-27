@@ -21,7 +21,7 @@
 	{
 		$DisplayLength = $_GET['iDisplayLength'];
 	}
-	$cri_str = ' WHERE created_time';
+	$cri_str = ' AND date_created';
 	$param = array();
 	if ( isset($_GET['sSearch']))
 	{	
@@ -34,17 +34,17 @@
 		if(isset($criobj->sel_date_from) && isset($criobj->sel_date_to)){
 			$from = $criobj->sel_date_from;
 			$to = $criobj->sel_date_to;
-			$cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
+			$cri_str .= " >= '".$from."' AND date_created < '".$to."' + interval 1 day";
 		}
 
 		$cri_str .= " AND 1=1 ";
 		if(isset($criobj->search_txt) &&  $criobj->search_txt!='' ){
 			if($criobj->search_filter_by == '0'){
-				// $cri_str .= " AND top.Card_ID LIKE CONCAT('%',:search_txt,'%') ";
-				// $param[':search_txt'] = clean($criobj->search_txt);
+				$cri_str .= " AND payment_type LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '1'){
-				$cri_str .= " AND item_price LIKE CONCAT('%',:search_txt,'%') ";
+				$cri_str .= " AND topup_amount LIKE CONCAT('%',:search_txt,'%') ";
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 		}
@@ -71,12 +71,16 @@
 	{
 		$trans_amt='';
 		$tmpentry = array();
-		$date_time = explode(" ", $aRow['created_time']);
+		$date_time = explode(" ", $aRow['date_created']);
 		$tmpentry[] = htmlspecialchars($date_time[0]);
 		$tmpentry[] = htmlspecialchars($date_time[1]);
         
-        $tmpentry[] = htmlspecialchars("Cash");
-        $tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
+        $payment_type = "Cash";
+		if($aRow['payment_type'] != 1){
+			$payment_type = "Paypal";
+		}
+		$tmpentry[] = htmlspecialchars($payment_type);
+        $tmpentry[] = htmlspecialchars("$".$aRow['topup_amount']);
 
 		$response['aaData'][] = $tmpentry;
 	}
@@ -91,13 +95,13 @@
 	function fnColumnToField( $i )
 	{
 		if ( $i == 0 )
-			return "created_time";
+			return "date_created";
 		else if ( $i == 1 )
-			return "created_time";
+			return "date_created";
 		else if ( $i == 3 )
-			return "created_time";
+			return "date_created";
 		else if ( $i == 4 )
-			return "created_time";
+			return "date_created";
 		else 
 			return true;			
 	}

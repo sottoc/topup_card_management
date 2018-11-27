@@ -225,7 +225,7 @@
 									<select id="search_filter_by" name="search_filter_by" class="select-custom" onChange="changeSearchKey(this)">
 										<option value="-1">Please choose</option>
 										<option value='0'> Family Code </option>
-										<option value='1'> Amount Spend </option>
+										<option value='1'> Amount Topup </option>
 										<option value='2'> Payment Type </option>
 									</select>
 								</td>
@@ -284,7 +284,7 @@
 					<th>Date</th>
 					<th>Time</th>	
 					<th>Family Code</th>			
-					<th>Amount Spend</th>
+					<th>Amount Topup</th>
 					<th>Payment Type</th>
 				</tr>
 			</thead>
