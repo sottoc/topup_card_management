@@ -163,9 +163,7 @@
 
 		$("#sel_date_from").datepicker({
 			onSelect: function(date){
-				console.log(date);
-				var d = new Date(date);
-				$("#sel_date_from").val(d.toISOString().substring(0, 10));
+				$("#sel_date_from").val(get_date(date));
 			}
 		});
 

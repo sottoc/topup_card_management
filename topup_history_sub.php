@@ -92,17 +92,13 @@
 
 		$("#topup_sub_sel_date_from").datepicker({
 			onSelect: function(date){
-				console.log(date);
-				var d = new Date(date);
-				$("#topup_sub_sel_date_from").val(d.toISOString().substring(0, 10));
+				$("#topup_sub_sel_date_from").val(get_date(date));
 			}
 		});
 
 		$("#topup_sub_sel_date_to").datepicker({
 			onSelect: function(date){
-				console.log(date);
-				var d = new Date(date);
-				$("#topup_sub_sel_date_to").val(d.toISOString().substring(0, 10));
+				$("#topup_sub_sel_date_to").val(get_date(date));
 			}
 		});
 

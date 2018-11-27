@@ -227,3 +227,11 @@
 		}
 	</style>
 <?php } ?>
+
+<script>
+	function get_date(date){
+		d = date;
+		d = d.split("/");
+		return d[2]+'-'+d[0]+'-'+d[1];
+	}
+</script>

@@ -115,17 +115,13 @@
 
 		$("#spending_sub_date_from").datepicker({
 			onSelect: function(date){
-				console.log(date);
-				var d = new Date(date);
-				$("#spending_sub_date_from").val(d.toISOString().substring(0, 10));
+				$("#spending_sub_date_from").val(get_date(date));
 			}
 		});
 
 		$("#spending_sub_date_to").datepicker({
 			onSelect: function(date){
-				console.log(date);
-				var d = new Date(date);
-				$("#spending_sub_date_to").val(d.toISOString().substring(0, 10));
+				$("#spending_sub_date_to").val(get_date(date));
 			}
 		});
 
