@@ -35,7 +35,7 @@
     $uploadPath = $rootpath.'/upload/profile';
     if(isset($_GET['id'])){
         $id = $_GET['id'];
-        $query = "SELECT `User_code`, `Family_code`, `Card_ID`, `Last_name`, `First_name`, `Level`, `Card_value`, `Card_status`, `Image`,  `Username`, `Password` FROM `tbl_card1` WHERE `id` = ".$id;
+        $query = "SELECT * FROM `tbl_card1` c LEFT JOIN tbl_family_code_amount fa on c.Family_code=fa.family_code WHERE c.id = ".$id;
         $result = $conn->query($query);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
@@ -45,7 +45,7 @@
                 $level = $row['Level'];
                 $first_name = $row['First_name'];
                 $last_name = $row['Last_name'];
-                $card_value = $row['Card_value'];
+                $card_value = $row['amount'];
                 $image_name = $row['Image'];
                 $status = $row['Card_status'];
             }
