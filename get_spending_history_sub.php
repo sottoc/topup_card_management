@@ -40,7 +40,7 @@
     $date = new DateTime('7 days ago');
 	$from = $date->format('Y-m-d');
     $to = date("Y-m-d");
-    $cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
+    $cri_str .= " >= '".$from."' AND created_time <= '".$to."' + interval 1 day";
 	$cri_arr = array($cri_str,$param);
 	if ( isset( $_GET['iSortCol_0'] ) )
 	{
@@ -70,9 +70,9 @@
         $tmpentry[] = htmlspecialchars($aRow['First_name']);
         $tmpentry[] = htmlspecialchars($aRow['card_id']);
         $tmpentry[] = htmlspecialchars($aRow['pos_id']);
-		$tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
+		$tmpentry[] = htmlspecialchars("$".$aRow['total_amount']);
 		//$tmpentry[] = htmlspecialchars($cri_str);
-		$tmpentry[] = htmlspecialchars($aRow['item_name'].','.$aRow['Last_name']);
+		$tmpentry[] = htmlspecialchars($aRow['bill_id'].','.$aRow['Last_name']);
 
 		$response['aaData'][] = $tmpentry;
 	}

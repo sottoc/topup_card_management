@@ -10,6 +10,7 @@
     $Card_ID = $request['card_id'];
     $amount = $request['amount'];
     $pos_id = $request['pos_id'];
+    $bill_id = $request['bill_id'];
     
     //--- get family code from card number ------
     $family_code = '';
@@ -44,8 +45,10 @@
     //------ save items of food --------
     $items = $request['items'];
     $time = date("Y-m-d H:i:s");
+    $query="INSERT INTO `tbl_food_bill_records` (`bill_id`, `card_id`, `pos_id`, `total_amount`, `created_time`) VALUES ('".$bill_id."','".$Card_ID."','".$pos_id."','".$amount."','".$time."')";
+    $result = $conn->query($query);
     foreach($items as $index=>$item){
-        $query="INSERT INTO `tbl_food_purchase_records` (`card_id`, `pos_id`, `item_name`, `item_price`, `created_time`) VALUES ('".$Card_ID."','".$pos_id."','".$item['name']."','".$item['price']."','".$time."')";
+        $query="INSERT INTO `tbl_food_purchase_records` (`bill_id`, `item_name`, `item_price`, `item_qty`, `created_time`) VALUES ('".$bill_id."','".$item['name']."','".$item['price']."','".$item['qty']."','".$time."')";
         $result = $conn->query($query);
     }
     display_results("Successfully saved!");

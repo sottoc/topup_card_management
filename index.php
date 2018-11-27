@@ -19,14 +19,20 @@
 	if($_SESSION ['login_user_type_id']==1){
 		require_once('api/api_common.php');
 		$time = date("Y-m-d H:i:s");
+		$date = date("Y-m-d");
+		$date = new DateTime($date);
+		$date->setTime(0, 0, 0);
+		$from = $date->format('Y-m-d H:i:s');
+		$date->setTime(23, 59, 59);
+		$to = $date->format('Y-m-d H:i:s');
 		//---- get Total Sales Today --------
-		$query = "SELECT SUM(item_price) FROM tbl_food_purchase_records WHERE created_time";
-		$query .= " >= '".$time."' AND created_time < '".$time."' + interval 1 day";
+		$query = "SELECT SUM(total_amount) FROM tbl_food_bill_records WHERE created_time";
+		$query .= " >= '".$from."' AND created_time <= '".$to."' + interval 1 day";
 		$result = $conn->query($query);
 		$total_spend_amount_today = 0;
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
-				$total_spend_amount_today = $row['SUM(item_price)'];
+				$total_spend_amount_today = $row['SUM(total_amount)'];
 			}
 		}
 		$total_spend_amount_today = intval($total_spend_amount_today*100)/100;
@@ -35,7 +41,7 @@
 		//----- get total topup amount today ----
 		$total_topup_amount_today = 0;
 		$query = "SELECT SUM(topup_amount) FROM tbl_food_topup_records WHERE date_created";
-		$query .= " >= '".$time."' AND date_created < '".$time."' + interval 1 day";
+		$query .= " >= '".$from."' AND date_created <= '".$to."' + interval 1 day";
 		$result = $conn->query($query);
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {

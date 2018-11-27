@@ -60,7 +60,7 @@
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '5'){
-				$cri_str .= " AND item_price LIKE CONCAT('%',:search_txt,'%') ";
+				$cri_str .= " AND total_amount LIKE CONCAT('%',:search_txt,'%') ";
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '6'){
@@ -102,7 +102,7 @@
 		$tmpentry[] = htmlspecialchars($aRow['card_id']);
 		$tmpentry[] = htmlspecialchars($aRow['First_name']);
 		$tmpentry[] = htmlspecialchars($aRow['Last_name']);
-		$tmpentry[] = htmlspecialchars("$".$aRow['item_price']);
+		$tmpentry[] = htmlspecialchars("$".$aRow['total_amount']);
 		//$tmpentry[] = htmlspecialchars($cri_str);
 		$tmpentry[] = htmlspecialchars($aRow['pos_id']);
 		$response['aaData'][] = $tmpentry;

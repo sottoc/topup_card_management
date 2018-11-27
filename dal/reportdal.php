@@ -129,7 +129,7 @@ class reportdal{
 		// 		left join tbl_topup top on t.topup_id=top.topup_id
 		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
 		// 		left join tbl_participant p on p.participant_id=t.participant_id";
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_purchase_records` t left join tbl_card1 top on t.card_id=top.Card_ID";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_bill_records` t left join tbl_card1 top on t.card_id=top.Card_ID";
 		$query .= $cri_str;
 		
 		if(empty($param) && $id_str!='')
@@ -166,7 +166,7 @@ class reportdal{
 		// 		left join tbl_topup top on t.topup_id=top.topup_id
 		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
 		// 		left join tbl_participant p on p.participant_id=t.participant_id";
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_purchase_records` t left join tbl_card1 top on t.card_id=top.Card_ID WHERE top.Family_code='".$family_code."'";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM `tbl_food_bill_records` t left join tbl_card1 top on t.card_id=top.Card_ID WHERE top.Family_code='".$family_code."'";
 		$query .= $cri_str;
 		
 		if(empty($param) && $id_str!='')
