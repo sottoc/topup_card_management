@@ -87,10 +87,10 @@
 							var pos_id = $(tds[j*7+4]).html();
 							var item_price = $(tds[j*7+5]).html();
 							var str = $(tds[j*7+6]).html();
-							var item_name = str.split(",")[0];
+							var bill_id = str.split(",")[0];
 							var last_name = str.split(",")[1];
 							var full_name = first_name + ' ' + last_name;
-                            $(tds[i]).html("<a class='edit-button view-modal' href='#spending_history_detail_modal' rel='modal:open' data-date-time='" + date+' '+time + "' data-card-id='" + card_id + "' data-pos-id='" + pos_id + "' data-item-price='" + item_price + "' data-item-name='" + item_name +"' data-full-name='" + full_name + "'> View Detail </a>");
+                            $(tds[i]).html("<a class='edit-button view-modal' href='#spending_history_detail_modal' rel='modal:open' data-date-time='" + date+' '+time + "' data-card-id='" + card_id + "' data-pos-id='" + pos_id + "' data-item-price='" + item_price + "' data-bill-id='" + bill_id +"' data-full-name='" + full_name + "'> View Detail </a>");
 						}
 						j++;
                     }
@@ -262,44 +262,48 @@
     <table>
 		<tr> 
 			<td> 
-				<div class="title"> Date & Time  </div>
-				<div class="detail" id='modal_date_time'> 2018 08 20 15:18:51 </div>
-			</td>
-			<td>
-				<div class="title"> Spending By  </div>
-				<div class="detail" id='modal_full_name'> Maecenas Tempu </div>
+				<span class="title"> Date & Time:  </span>
+				<span class="detail" id='modal_date_time'> 2018 08 20 15:18:51 </span>
 			</td>
 		</tr>
-
+		<tr>
+			<td>
+				<span class="title"> Spending By:  </span>
+				<span class="detail" id='modal_full_name'> Maecenas Tempu </span>
+			</td>
+		</tr>
 		<tr> 
 			<td> 
-				<div class="title"> Card ID  </div>
-				<div class="detail" id='modal_card_id'> CC69923 </div>
-			</td>
-			<td>
-				<div class="title"> POS ID  </div>
-				<div class="detail" id='modal_pos_id'> HSC0 </div>
+				<span class="title"> Card ID:  </span>
+				<span class="detail" id='modal_card_id'> CC69923 </span>
 			</td>
 		</tr>
-
+		<tr>
+			<td>
+				<span class="title"> POS ID:  </span>
+				<span class="detail" id='modal_pos_id'> HSC0 </span>
+			</td>
+		</tr>
 		<tr> 
 			<td> 
-				<div class="title"> Amount Spend  </div>
-				<div class="detail" id='modal_item_price'> S$7.80 </div>
-			</td>
-			<td>
-				<div class="title"> Receipt Number  </div>
-				<div class="detail"> HSC010010 </div>
+				<span class="title"> Amount Spend:  </span>
+				<span class="detail" id='modal_item_price'> S$7.80 </span>
 			</td>
 		</tr>
-
+		<tr>
+			<td>
+				<span class="title"> Receipt Number:  </span>
+				<span class="detail"> HSC010010 </span>
+			</td>
+		</tr>
 		<tr>
 			<td colspan='2'>
-				<div class="title"> Order Item  </div>
-				<div class="detail"> <span id='modal_item_name'> </span> <span id='modal_item_price_1'> </span> </div>
+				<span class="title"> Order Item: </span>
+				<div id="order_items_detail"> 
+					
+				</div>
 			</td>
 		</tr>
-
 	</table>
 </div>
 
@@ -315,7 +319,11 @@
 		font-size:15px;
 	}
 	#spending_history_detail_modal span{
-		font-weight:500 !important;
+		font-weight:500;
+	}
+	#order_items_detail{
+		padding:10px;
+		font-size: 15px;
 	}
 </style>
 
@@ -328,10 +336,32 @@
 				$("#modal_card_id").html($(e.target).attr('data-card-id'));
 				$("#modal_pos_id").html($(e.target).attr('data-pos-id'));
 				$("#modal_item_price").html($(e.target).attr('data-item-price'));
-				$("#modal_item_name").html($(e.target).attr('data-item-name'));
-				$("#modal_item_price_1").html($(e.target).attr('data-item-price'));
+				var bill_id = $(e.target).attr('data-bill-id');
+				var obj = {
+					bill_id : bill_id
+				}
+				var url = '<?php echo $rootpath;?>/api/get_items_from_bill_id.php';
+				var request = JSON.stringify(obj);
+				$.ajax({
+					url : url,
+					type : 'POST',
+					data :  request,  
+					tryCount : 0,
+					retryLimit : 3,
+					success : function(info) {
+						var info = JSON.parse(info);
+						info = info.response.data;
+						var str = "";
+						for(var i=0;i<info.length;i++){
+							str += "<span>" + info[i][0] + ":  $" + info[i][1] + " &times " + info[i][2] + "</span></br>";
+						}
+						$("#order_items_detail").html(str);
+					},
+					error : function(xhr, textStatus, errorThrown ) {
+						console.log(xhr);
+					}
+				});
 			});
 		}, 1000);
-		
 	});
 </script>

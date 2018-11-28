@@ -97,10 +97,10 @@
 							var pos_id = $(tds[j*7+4]).html();
 							var item_price = $(tds[j*7+5]).html();
 							var str = $(tds[j*7+6]).html();
-							var item_name = str.split(",")[0];
+							var bill_id = str.split(",")[0];
 							var last_name = str.split(",")[1];
 							var full_name = first_name + ' ' + last_name;
-                            $(tds[i]).html("<a class='edit-button view-modal' href='#spending_history_detail_modal' rel='modal:open' data-date-time='" + date+' '+time + "' data-card-id='" + card_id + "' data-pos-id='" + pos_id + "' data-item-price='" + item_price + "' data-item-name='" + item_name +"' data-full-name='" + full_name + "'> View Detail </a>");
+                            $(tds[i]).html("<a class='edit-button view-modal' href='#spending_history_detail_modal' rel='modal:open' data-date-time='" + date+' '+time + "' data-card-id='" + card_id + "' data-pos-id='" + pos_id + "' data-item-price='" + item_price + "' data-bill-id='" + bill_id +"' data-full-name='" + full_name + "'> View Detail </a>");
 						}
 						j++;
                     }
@@ -367,8 +367,10 @@
 		</tr>
 		<tr>
 			<td colspan='2'>
-				<div class="title"> Order Item:  </div>
-				<div class="detail"> <span id='modal_item_name'> </span> <span id='modal_item_price_1'> </span> </div>
+				<span class="title"> Order Item:  </span>
+				<div id="order_items_detail"> 
+					
+				</div>
 			</td>
 		</tr>
 	</table>
@@ -388,6 +390,10 @@
 	#spending_history_detail_modal span{
 		font-weight:500 !important;
 	}
+	#order_items_detail{
+		padding:10px;
+		font-size: 15px;
+	}
 </style>
 
 <script>
@@ -399,8 +405,31 @@
 				$("#modal_card_id").html($(e.target).attr('data-card-id'));
 				$("#modal_pos_id").html($(e.target).attr('data-pos-id'));
 				$("#modal_item_price").html($(e.target).attr('data-item-price'));
-				$("#modal_item_name").html($(e.target).attr('data-item-name'));
-				$("#modal_item_price_1").html($(e.target).attr('data-item-price'));
+				var bill_id = $(e.target).attr('data-bill-id');
+				var obj = {
+					bill_id : bill_id
+				}
+				var url = '<?php echo $rootpath;?>/api/get_items_from_bill_id.php';
+				var request = JSON.stringify(obj);
+				$.ajax({
+					url : url,
+					type : 'POST',
+					data :  request,  
+					tryCount : 0,
+					retryLimit : 3,
+					success : function(info) {
+						var info = JSON.parse(info);
+						info = info.response.data;
+						var str = "";
+						for(var i=0;i<info.length;i++){
+							str += "<span>" + info[i][0] + ":  $" + info[i][1] + " &times " + info[i][2] + "</span></br>";
+						}
+						$("#order_items_detail").html(str);
+					},
+					error : function(xhr, textStatus, errorThrown ) {
+						console.log(xhr);
+					}
+				});
 			});
 		}, 1000);
 		
