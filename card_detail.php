@@ -28,7 +28,7 @@
 		$($("#nav ul li")[2]).css("background", '#2c2c2c');
 		$($("#nav ul li")[3]).css("background", '#2c2c2c');
 		$($("#nav ul li")[4]).css("background", '#2c2c2c');
-        //---- End -----
+        //------------------ End -----------------
 
 		var sWidth= jQuery('body').width();
 		sWidth = sWidth - 240;		
@@ -248,7 +248,11 @@
 						<input type="submit" id="btnsearch" name="btnsearch" value="Search" onclick=" return savepagestate() " class="btn" style="display:none"/>
                     <div>
                 </td>
-                
+				<td style="width:40%;">
+                    <a href="<?php echo $rootpath; ?>/card_create_multiple.php" class="control-button"> Create Mulitple Card <a/>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="<?php echo $rootpath; ?>/card_create_new.php" class="control-button"> Create New Card <a/>
+                </td>
             </tr>
         </table>
 		<!--showing msgs-->

@@ -27,6 +27,19 @@
 	require_once('header.php');
 ?>
 
+<?php 
+    require_once('api/api_common.php');
+    $query = "SELECT SUM(total_amount) FROM tbl_food_bill_records";
+    $result = $conn->query($query);
+    $total_amount = 0;
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $total_amount = $row['SUM(total_amount)'];
+        }
+	}
+	$total_amount = intval($total_amount*100)/100;
+?>
+
 <script language="javascript">
 	jQuery(document).ready(function()
 	{
@@ -227,10 +240,10 @@
 <div class="content_data">
 	<form id='frm_card' name='frm_card' method='POST'>
 	
-		<h2>Spending Report</h2>
+		<h2>Transaction Report</h2>
 		<table style="width:100%">
             <tr>
-                <td style="width:85%">
+                <td colspan='2' style="width:85%">
                     <div class="left-section filter-div">
 						<table>
 							<tr>
@@ -272,6 +285,9 @@
                 </td>
 			</tr>
 			<tr>
+				<td style='font-size:20px;'>
+					Total Amount Spending : $ <?php echo $total_amount; ?>
+				</td>
                 <td style="width:30%;padding:10px 0px;text-align:right;"> 
 					<a href="#file_type_modal" rel="modal:open" class="control-button"> Export <a/>
 				</td>	
@@ -284,16 +300,7 @@
 				<div class="frm_label">Student ID : </div>			
 				<select id="sel_student_id" name="sel_student_id">
 				<option value='-1'>--Select Student ID--</option>
-				<?php
-					$login_user_type_id = $_SESSION ['login_user_type_id'];
-					$login_user_id = $_SESSION ['login_user_id'];
-					$rResult= $reportbol->get_student_by_loginusertype($login_user_type_id,$login_user_id);
-					while($row=$rResult->getNext())
-					{
-						echo "<option value='".$row['participant_id']."'>".$row['participant_enroll_no']."</option>";
-					}
-					
-				?>
+				
 				</select>
 			</div>
 			<div class="frm">
@@ -332,8 +339,8 @@
 <div id="file_type_modal" class="modal">
 	<div align="center">
 		<select class='select-custom' id='sel_file_type' style='height:38px !important; transform: translateY(2px);'>
-			<option value='excel'> Excel </option>
-			<option value='csv' selected> CSV </option>
+			<option value='excel' selected> Excel </option>
+			<option value='csv'> CSV </option>
 		</select>
 		<input type='button' class='control-button' value='Export' onclick='export_table()'/>
 	</div>

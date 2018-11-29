@@ -263,9 +263,9 @@
                 <td> 
                     <div> <span class="label-span"> Family Code </span> </div>
                     <div> 
-                        <input type='text' class="input-text-custom" id="family_code_select" name="family_code" style="width:100% !important;"/>
+                        <input type='text' class="input-text-custom" id="family_code_select" name="family_code" placeholder="Family Code" style="width:100% !important;"/>
                     </div>
-                    <div style='color:red;font-size:16px;font-weight:600;display:none' id='family_code_check_tip'> Family Code is already been used. </div> 
+                    <div style='color:red;font-size:16px;font-weight:600;display:none' id='family_code_check_tip'> Family Code already used. </div> 
                 </td>
                 <td> 
                     <div> <span class="label-span"> Card Value </span> </div>

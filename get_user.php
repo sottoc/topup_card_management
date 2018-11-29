@@ -44,7 +44,7 @@
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '4'){
-                $cri_str .= " AND family_code LIKE CONCAT('%',:search_txt,'%') ";
+                $cri_str .= " AND u.family_code LIKE CONCAT('%',:search_txt,'%') ";
                 $param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '5'){

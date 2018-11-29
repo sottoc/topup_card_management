@@ -169,10 +169,10 @@
                     </tr>
                 </table>
             </td>
-            <td width="20%">
+            <td width="40%">
                 <div> <span class="label-span"> Status </span> </div>
                 <div> 
-                    <select class="select-custom" style="border-color:#797070" id='user_status'>
+                    <select class="select-custom" style="border-color:#797070;width:100% !important;" id='user_status'>
                         <?php if($is_active=="1"){ ?>
                             <option value="1" selected> Active </option>
                             <option value="0"> InActive </option>
@@ -183,7 +183,7 @@
                     </select>
                 </div>
             </td>
-            <td width="40%" rowspan="3">
+            <td width="10%" rowspan="3">
                 <div class="card-assign-div">
                     <div> Card Assign on Users </div>
                     <div id='card_div_content'>
@@ -213,13 +213,13 @@
             <td>
                 <div> <span class="label-span"> Email Address </span> </div>
                 <div> 
-                    <input type="text" value='<?php echo $email;?>' id='user_email' class="input-text-custom"> </input>
+                    <input type="text" value='<?php echo $email;?>' id='user_email' class="input-text-custom" disabled/>
                 </div>
             </td>
             <td>
                 <div> <span class="label-span"> Account Type </span> </div>
                 <div> 
-                    <select class="select-custom" style="border-color:#797070" id='user_type'>
+                    <select class="select-custom" style="border-color:#797070; width:100% !important;" id='user_type'>
                         <option value="1" <?php if($user_type_id=='1'){ echo 'selected'; } ?>> Admin </option>
                         <option value="2" <?php if($user_type_id=='2'){ echo 'selected'; } ?>> Parent </option>
                         <option value="3" <?php if($user_type_id=='3'){ echo 'selected'; } ?>> Staff </option>
@@ -289,6 +289,7 @@
         font-size: 17px;
         margin-left: 10%;
         padding-left: 10%;
+        display: none;
     }
     .card-assign-div td{
         padding:0px !important;
