@@ -28,9 +28,8 @@
     if($result->num_rows > 0){
         $row = $result->fetch_assoc();
     } else{
-        $query2 = "INSERT INTO `tbl_family_code_amount` (family_code, amount, date_created, date_updated) VALUES ('".$family_code"', '0', '".$time."', '"$time"')";
-        $result2 = $conn->query($query);
+        $query2 = "INSERT INTO `tbl_family_code_amount` (family_code, amount, date_created, date_updated) VALUES ('".$family_code."', '0', '".$time."', '".$time."')";
+        $result2 = $conn->query($query2);
     }
     display_results("Successfully added!");
-
 ?>

@@ -173,7 +173,7 @@
 						<!-- <li><a href="pre_order_report.php" ><?php echo $localized_home_data['pre_order_report_title']; ?></a></li> -->
 						
 						<?php if($_SESSION ['login_user_type_id']==1){ ?><!--admin user type or parent/organizer user type-->
-							<li><a href="transaction_report.php" ><?php echo "Transaction Report"; ?></a></li>
+							<li><a href="transaction_report.php" ><?php echo "Spending Report"; ?></a></li>
 							<li><a href="topup_report.php" ><?php echo "Topup Report"; ?></a></li>
 							<li><a href="users_report.php" ><?php echo "Users Report"; ?></a></li>
 							<li><a href="refund_report.php" ><?php echo "Refund Report"; ?></a></li>

@@ -86,7 +86,7 @@
 							var first_name = $(tds[j*8+3]).html();
 							var last_name = $(tds[j*8+2]).html();
 							var family_code = $(tds[j*8+4]).html();
-                            $(tds[i]).html("<div style='padding:0 10%'> <div class='edit-button edit-card' id='edit_btn_" + id + "' style='float:left;'> Edit </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-user-code='"+ user_code +"' data-card-id='" + family_code + "' data-first-name='"+ first_name +"' data-last-name='"+ last_name +"' style='float:right;'> View Log </a> </div>");
+                            $(tds[i]).html("<div style='padding:0 10%'> <div class='edit-button edit-card' id='edit_btn_" + id + "' style='float:left;'> Edit </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-user-code='"+ user_code +"' data-card-id='" + card_id + "' data-first-name='"+ first_name +"' data-last-name='"+ last_name +"' style='float:right;'> View Log </a> </div>");
 						}
 						j++;
                     }
@@ -230,7 +230,7 @@
         <table class="control-section">
             <tr> <span style="color:black; font-size:15px; font-weight:500;"> Search By </span> </tr>
             <tr>
-                <td style="width:70%">
+                <td style="width:50%">
                     <div class="left-section">
                         <select class="select-custom" id="search_filter_by" name="search_filter_by" onChange="changeSearchKey(this)"> 
                             <option value='-1'> Please choose </option>
@@ -311,7 +311,7 @@
 	</form>
 </div>
 
-<div id="view_log_modal" class="modal" style="padding:50px 50px;padding-top:30px;max-width:800px !important;">
+<div id="view_log_modal" class="modal" style="padding:50px 35px;padding-top:30px;max-width:850px !important;">
 	<span style='font-size:18px;'> Transaction Detail - <span id='log_first_name'> Michalle </span> <span id='log_last_name'> KONG </span> (UserCode:<span id='log_user_code'>A001923</span>) </span>
     <br>
 	<div style="max-height:400px;overflow-y:scroll;">
@@ -338,15 +338,20 @@
 				$("#log_first_name").html($(e.target).attr('data-first-name'));
 				$("#log_last_name").html($(e.target).attr('data-last-name'));
 				$("#log_user_code").html($(e.target).attr('data-user-code'));
-				var family_code = $(e.target).attr('data-card-id');
-				console.log(family_code);
-				$.post("api/get_purchase_log.php", {family_code: family_code}, function(result){
+				var card_id = $(e.target).attr('data-card-id');
+				$.post("api/get_purchase_log.php", {card_id: card_id}, function(result){
 					var info = JSON.parse(result);
-					var data = info.response.data;
+					console.log(info);
+					var all_data = info.response.data;
 					var table = $("#view_log_modal table");
 					var str = '';
+					data = all_data[0];
 					for(var i=0;i<data.length;i++){
-						str+="<tr><td><span class='date-time'> " + data[i][3] + " - </span> Spend <strong class='spend-amount'>$" + data[i][2] + "</strong> at POS ID(" + data[i][0] + ") by Card Number(" + card_id + ").</td></tr>";
+						str+="<tr><td><span class='date-time'> " + data[i][2] + " - </span> Spend <strong class='spend-amount'>$" + data[i][1] + "</strong> at POS ID(" + data[i][0] + ") by Card Number(" + card_id + ").</td></tr>";
+					}
+					data = all_data[1];
+					for(var i=0;i<data.length;i++){
+						str+="<tr><td><span class='date-time'> " + data[i][2] + " - </span> Topup <strong class='topup-amount'>$" + data[i][1] + "</strong> at POS ID(" + data[i][0] + ") by Card Number(" + card_id + ").</td></tr>";
 					}
 					table.html(str);
 				});
@@ -366,7 +371,7 @@
 	#view_log_modal table td {
 		border: 1px solid black;
 		padding:10px;
-		font-size:17px;
+		font-size:16px;
 	}
 	#view_log_modal table {
 		border-collapse: collapse;
@@ -374,6 +379,9 @@
 	}
 	.spend-amount{
 		color:red;
+	}
+	.topup-amount{
+		color:blue;
 	}
 </style>
 

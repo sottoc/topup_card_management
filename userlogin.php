@@ -36,14 +36,11 @@
 			$errmsg_arr [] = $localized_data['check_valid_email_adddress'];
 		}
 		$_SESSION ['USER_ERRMSG_ARR'] = $errmsg_arr;
-		
+
 		if(count($errmsg_arr) == 0)
 		{
 			$loginemail = $_POST['txtemail'];
 			$loginpassword = $_POST['txtpassword'];
-			//echo print_r($loginemail);
-			//echo print_r($loginpassword);
-			//exit;
 			$userbol = new userbol();
 			$result = $userbol->check_user_login($loginemail,$loginpassword);
 
@@ -53,7 +50,6 @@
 			$description = '';
 			$old_values='';
 			/* ------- */
-
 			if($result->rowCount() == 0)
 			{
 				$description = 'Unsuccessfully logined.';
@@ -80,7 +76,6 @@
 				$description = 'Successfully logined.';
 				$eventlogbol->save_eventlog($action_type,$action_table,$new_values_arr,$old_values);
 				session_write_close ();
-				
 				if (isset ( $_COOKIE ['url'] ))
 				{
 					header ( "location:" . $_COOKIE ['url'] );

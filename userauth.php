@@ -3,12 +3,12 @@
 		session_start();
 	$errmsg_arr = array();
 	$autherrflag =false;
-	$currentpage=basename($_SERVER['PHP_SELF']);	
+	$currentpage=basename($_SERVER['PHP_SELF']);
 	if((isset($_SESSION['login_user_id'])) && $_SESSION['login_user_id']!='')
 	{	
 		$autherrflag = true;
 	}
-				
+	
 	if ($autherrflag==false)
 	{		
 		if($currentpage=="userlogin.php")

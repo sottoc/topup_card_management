@@ -68,6 +68,13 @@
             }
         });
 
+        $("#refund_reason").keyup(function(e){
+            if(e.target.value != ''){
+                $("#refund_reason_tip").hide();
+            } else{
+                $("#refund_reason_tip").show();
+            }
+        });
     });
 
     function refund(){
@@ -84,6 +91,7 @@
             return;
         }
         if(refund_reason == ''){
+            $("#refund_reason_tip").show();
             $('#refund_reason').focus();
             return;
         }
@@ -150,6 +158,7 @@
                 <div> 
                     <textarea id='refund_reason' class="input-text-custom" placeholder='Enter refund reason'> </textarea>
                 </div>
+                <div id="refund_reason_tip"> You are require to enter a refund reasons. </div>
             </td>
         </tr>
     </table>
@@ -173,5 +182,10 @@
     }
     table textarea{
         height:70px !important;
+    }
+    #refund_reason_tip{
+        color: red;
+        font-size: 17px;
+        display: none;
     }
 </style>

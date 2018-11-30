@@ -69,10 +69,12 @@
                 retryLimit : 3,
                 success : function(info) {
                     var info = JSON.parse(info);
-                    if(info.response.data == "Exist!"){
+                    var amount = 0;
+                    if(info.response.data != "No"){
                         $("#family_code_check_tip").show();
+                        amount = info.response.data;
                     }
-                    $("input[name='card_value']").val('0');
+                    $("input[name='card_value']").val(amount);
                 },
                 error : function(xhr, textStatus, errorThrown ) {
                     console.log(xhr);
@@ -107,7 +109,11 @@
            if(validateEmail(email) == false){
                 alert('Please enter valid email');
                 $("input[name='user_email']").focus();
-               return;
+                return;
+           }
+           if($("#email_check_tip").css('display') == 'block'){
+                $("input[name='user_email']").focus();
+                return;
            }
            var obj = {
                 status : status,
@@ -119,6 +125,7 @@
             }
             var url = '<?php echo $rootpath;?>/api/user_add_single_api.php';
             var request = JSON.stringify(obj);
+            console.log(request);
             $.ajax({
                 url : url,
                 type : 'POST',
@@ -126,6 +133,7 @@
                 tryCount : 0,
                 retryLimit : 3,
                 success : function(info) {
+                    console.log(info);
                     var info = JSON.parse(info);
                     alert(info.response.data);
                     default_setting();

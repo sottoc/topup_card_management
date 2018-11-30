@@ -94,6 +94,7 @@
 				jQuery.cookie('refundlist[aaSorting]', aaSorting);
 
                 var tds = $(".dataTables_wrapper td");
+				var j = 0;
                 for(var i=0;i<tds.length;i++){
                     if(i%8==7){
                         if($(tds[i]).html().indexOf("div") == -1){
@@ -101,8 +102,11 @@
 							t = id_card.split('-');
 							var id = t[0];
 							var family_code = t[1];
-                            $(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button refund-edit' family_code='" + family_code + "' id='" + id + "' style='float:left;'> Refund </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' id='" + family_code + "' style='float:right;'> View Log </a> </div>");
+							var last_name = $(tds[j*8+3]).html();
+							var first_name = $(tds[j*8+2]).html();
+                            $(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button refund-edit' family_code='" + family_code + "' id='" + id + "' style='float:left;'> Refund </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-last-name='"+ last_name +"' data-first-name='"+ first_name + "' data-family-code='" + family_code + "' style='float:right;'> View Log </a> </div>");
                         }
+						j++;
 					}
 					if(i%8==5){
 						var v=$(tds[i]).html();
@@ -330,16 +334,13 @@
 	</form>
 </div>
 
-<div id="view_log_modal" class="modal" style="padding:50px 50px;padding-top:30px;max-width:800px !important;">
-	<span style='font-size:18px;'> Transaction Detail - <span id='log_first_name'> Michalle </span> <span id='log_last_name'> KONG </span> (UserCode:<span id='log_user_code'>A001923</span>) </span>
+
+<div id="view_log_modal" class="modal" style="padding:50px 35px;padding-top:30px;max-width:850px !important;">
+	<span style='font-size:18px;'> Transaction Detail - <span id='log_first_name'> Michalle </span> <span id='log_last_name'> KONG </span> (UserCode:<span id='log_user_code'></span>) </span>
     <br>
 	<div style="max-height:400px;overflow-y:scroll;">
 		<table style='margin-top:20px;'>
-			<tr>
-				<td>
-					<span class='date-time'> 2018-08-23 11:06:01 - </span> Spend <strong class='spend-amount'>$4.2</strong> at POS ID(LDS01) by Card Number(F001234).
-				</td>
-			</tr>
+			
 		</table>
 	</div>
 	<br>
@@ -349,24 +350,31 @@
 	</div>
 </div>
 
-
 <script>
 	$(document).ready(function(){
 
 		setTimeout(() => {
 			$('.edit-button.view-log').click(function(e) {
-				// $("#log_first_name").html($(e.target).attr('data-first-name'));
-				// $("#log_last_name").html($(e.target).attr('data-last-name'));
-				// $("#log_user_code").html($(e.target).attr('data-user-code'));
-				var family_code = $(e.target).attr('id');
+				$("#log_first_name").html($(e.target).attr('data-first-name'));
+				$("#log_last_name").html($(e.target).attr('data-last-name'));
+				$("#log_user_code").html('');
+				var family_code = $(e.target).attr('data-family-code');
 				console.log(family_code);
 				$.post("api/get_purchase_log.php", {family_code: family_code}, function(result){
 					var info = JSON.parse(result);
-					var data = info.response.data;
+					var all_data = info.response.data;
 					var table = $("#view_log_modal table");
 					var str = '';
+					if(all_data.length == 0){
+						all_data = [[],[]];
+					}
+					data = all_data[0];
 					for(var i=0;i<data.length;i++){
-						str+="<tr><td><span class='date-time'> " + data[i][3] + " - </span> Spend <strong class='spend-amount'>$" + data[i][2] + "</strong> at POS ID(" + data[i][0] + ") by Card Number(" + family_code + ").</td></tr>";
+						str+="<tr><td><span class='date-time'> " + data[i][2] + " - </span> Spend <strong class='spend-amount'>$" + data[i][1] + "</strong> at POS ID(" + data[i][0] + ") by Card Number(" + data[i][3] + ").</td></tr>";
+					}
+					data = all_data[1];
+					for(var i=0;i<data.length;i++){
+						str+="<tr><td><span class='date-time'> " + data[i][2] + " - </span> Topup <strong class='topup-amount'>$" + data[i][1] + "</strong> at POS ID(" + data[i][0] + ") by Card Number(" + data[i][3] + ").</td></tr>";
 					}
 					table.html(str);
 				});
@@ -386,7 +394,7 @@
 	#view_log_modal table td {
 		border: 1px solid black;
 		padding:10px;
-		font-size:17px;
+		font-size:16px;
 	}
 	#view_log_modal table {
 		border-collapse: collapse;
@@ -394,6 +402,9 @@
 	}
 	.spend-amount{
 		color:red;
+	}
+	.topup-amount{
+		color:blue;
 	}
 </style>
 
