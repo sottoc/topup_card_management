@@ -27,19 +27,6 @@
 	require_once('header.php');
 ?>
 
-<?php 
-    require_once('api/api_common.php');
-    $query = "SELECT SUM(total_amount) FROM tbl_food_bill_records";
-    $result = $conn->query($query);
-    $total_amount = 0;
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $total_amount = $row['SUM(total_amount)'];
-        }
-	}
-	$total_amount = intval($total_amount*100)/100;
-?>
-
 <script language="javascript">
 	jQuery(document).ready(function()
 	{
@@ -229,6 +216,47 @@
 				return;
 		}
 	}
+
+	function get_total_amount(){
+        var sel_date_from = $('#sel_date_from').val();
+        var sel_date_to = $('#sel_date_to').val();
+        var filter_index = '-1';
+        var filter_value = $('#search_txt').val();
+		if(filter_value != ''){
+			filter_index = $('#search_filter_by').attr('value');
+		}
+        var obj = {
+			report_type : "spend",
+            sel_date_from : sel_date_from,
+            sel_date_to : sel_date_to,
+            filter_index : filter_index,
+            filter_value : filter_value
+        }
+        var url = '<?php echo $rootpath;?>/api/get_total_amount_api.php';
+        var request = JSON.stringify(obj);
+		console.log(request);
+        $.ajax({
+            url : url,
+            type : 'POST',
+            data :  request,   
+            tryCount : 0,
+            retryLimit : 3,
+            success : function(info) {
+                var info = JSON.parse(info);
+                console.log(info);
+				$("#total_amount").html(info.response.data);
+            },
+            error : function(xhr, textStatus, errorThrown ) {
+                console.log(xhr);
+            }
+        });
+	}
+
+	$(document).ready(function(){
+		setTimeout(() => {
+			get_total_amount();
+		}, 1000);
+	});
 </script>
 
 <label id="successmes" name="successmes" style="color:red;" >&nbsp;</label>
@@ -286,7 +314,7 @@
 			</tr>
 			<tr>
 				<td style='font-size:20px;'>
-					Total Amount Spending : $ <?php echo $total_amount; ?>
+					Total Amount Spending : $ <span id="total_amount">  </span>
 				</td>
                 <td style="width:30%;padding:10px 0px;text-align:right;"> 
 					<a href="#file_type_modal" rel="modal:open" class="control-button"> Export <a/>

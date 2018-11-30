@@ -48,7 +48,8 @@
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '2'){
-				
+				$cri_str .= " AND payment_type LIKE CONCAT('%',:search_txt,'%') ";
+				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 		}
 	}
