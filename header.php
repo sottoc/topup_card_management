@@ -177,6 +177,7 @@
 							<li><a href="topup_report.php" ><?php echo "Topup Report"; ?></a></li>
 							<li><a href="users_report.php" ><?php echo "Users Report"; ?></a></li>
 							<li><a href="refund_report.php" ><?php echo "Refund Report"; ?></a></li>
+							<!-- <li><a href="summary_report.php" ><?php echo "Summary Report"; ?></a></li> -->
 							<!-- <li><a href="redemption_report.php" ><?php echo $localized_home_data['redemption_report_title']; ?></a></li> -->
 						<?php } ?>
 

@@ -42,29 +42,29 @@
 
 		var sWidth= jQuery('body').width();
 		sWidth = sWidth - 240;		
-		jQuery('#transaction_report_dtList').attr('width',sWidth);
+		jQuery('#summary_report_dtList').attr('width',sWidth);
 		
 		loadpagestate();
-		if(jQuery.cookie('transactionReport[iDisplayStart]')==null)
-			jQuery.cookie('transactionReport[iDisplayStart]', 0);
+		if(jQuery.cookie('summaryReport[iDisplayStart]')==null)
+			jQuery.cookie('summaryReport[iDisplayStart]', 0);
 
-		if(jQuery.cookie('transactionReport[iDisplayLength]')==null)
-			jQuery.cookie('transactionReport[iDisplayLength]', 10);
+		if(jQuery.cookie('summaryReport[iDisplayLength]')==null)
+			jQuery.cookie('summaryReport[iDisplayLength]', 10);
 		
-		if(jQuery.cookie('transactionReport[aaSorting]')==null)
+		if(jQuery.cookie('summaryReport[aaSorting]')==null)
 		{
-			jQuery.cookie('transactionReport[aaSorting]', "[[0,'asc']]");
+			jQuery.cookie('summaryReport[aaSorting]', "[[0,'asc']]");
 			aasorting = [[0,'asc']];
 		}
 		else
 		{
-			aasorting = eval('(' + jQuery.cookie('transactionReport[aaSorting]') + ')'); //convert json string to json object
+			aasorting = eval('(' + jQuery.cookie('summaryReport[aaSorting]') + ')'); //convert json string to json object
 		}		
-		ilength = parseInt(jQuery.cookie('transactionReport[iDisplayLength]'));
-		istart = parseInt(jQuery.cookie('transactionReport[iDisplayStart]'));		
+		ilength = parseInt(jQuery.cookie('summaryReport[iDisplayLength]'));
+		istart = parseInt(jQuery.cookie('summaryReport[iDisplayStart]'));		
 		sFilter=getFilter();	
 		
-		oTable=jQuery('#transaction_report_dtList').dataTable({
+		oTable=jQuery('#summary_report_dtList').dataTable({
 			"iDisplayLength": ilength,
 			"iDisplayStart": istart,
 			"aaSorting": aasorting,
@@ -81,15 +81,15 @@
 			"fnDrawCallback": function() {	
 				var oSettings = oTable.fnSettings();
 				var aaSorting = JSON.stringify(oSettings.aaSorting); //convert json object to json string because cookie only allow to save string
-				jQuery.cookie('transactionReport[iDisplayLength]', oSettings._iDisplayLength);
-				jQuery.cookie('transactionReport[iDisplayStart]', oSettings._iDisplayStart);
-				jQuery.cookie('transactionReport[aaSorting]', aaSorting);
+				jQuery.cookie('summaryReport[iDisplayLength]', oSettings._iDisplayLength);
+				jQuery.cookie('summaryReport[iDisplayStart]', oSettings._iDisplayStart);
+				jQuery.cookie('summaryReport[aaSorting]', aaSorting);
 				
 			},	
 			
 			"bAutoWidth": false,
 			"bEscapeRegex": false,
-			"sAjaxSource": "get_transaction_report.php",
+			"sAjaxSource": "get_summary_report.php",
 			
 			"aoColumns": [						
 							{"bSortable": false,"sWidth":"auto"},											
@@ -119,12 +119,12 @@
 	});
 	function loadpagestate()
 	{
-		updatecontrol('#sel_student_id', jQuery.cookie('transactionReport[sel_student_id]'));
-		updatecontrol('#sel_date_from', jQuery.cookie('transactionReport[sel_date_from]'));
-		updatecontrol('#sel_date_to', jQuery.cookie('transactionReport[sel_date_to]'));
-		$( "#sel_student_id" ).val( jQuery.cookie('transactionReport[sel_student_id]') );
-		updatecontrol('#search_txt', jQuery.cookie('transactionReport[search_txt]'));
-		updatecontrol('#search_filter_by', jQuery.cookie('transactionReport[search_filter_by]'));
+		updatecontrol('#sel_student_id', jQuery.cookie('summaryReport[sel_student_id]'));
+		updatecontrol('#sel_date_from', jQuery.cookie('summaryReport[sel_date_from]'));
+		updatecontrol('#sel_date_to', jQuery.cookie('summaryReport[sel_date_to]'));
+		$( "#sel_student_id" ).val( jQuery.cookie('summaryReport[sel_student_id]') );
+		updatecontrol('#search_txt', jQuery.cookie('summaryReport[search_txt]'));
+		updatecontrol('#search_filter_by', jQuery.cookie('summaryReport[search_filter_by]'));
 	}
 	function updatecontrol(parctl, parvalue)
 	{
@@ -134,31 +134,31 @@
 	function getFilter()
 	{
 		var jsonfilter = {};
-		jsonfilter.sel_student_id = jQuery.cookie('transactionReport[sel_student_id]');
-		jsonfilter.sel_date_from = jQuery.cookie('transactionReport[sel_date_from]');
-		jsonfilter.sel_date_to = jQuery.cookie('transactionReport[sel_date_to]');
-		jsonfilter.search_txt = jQuery.cookie('transactionReport[search_txt]');
-		jsonfilter.search_filter_by = jQuery.cookie('transactionReport[search_filter_by]');
+		jsonfilter.sel_student_id = jQuery.cookie('summaryReport[sel_student_id]');
+		jsonfilter.sel_date_from = jQuery.cookie('summaryReport[sel_date_from]');
+		jsonfilter.sel_date_to = jQuery.cookie('summaryReport[sel_date_to]');
+		jsonfilter.search_txt = jQuery.cookie('summaryReport[search_txt]');
+		jsonfilter.search_filter_by = jQuery.cookie('summaryReport[search_filter_by]');
 		var cri_str = JSON.stringify(jsonfilter);
 		return cri_str;
 	}
 	function savepagestate()
 	{
-		jQuery.cookie('transactionReport[sel_student_id]', jQuery('#sel_student_id').val());
-		jQuery.cookie('transactionReport[sel_date_from]', jQuery('#sel_date_from').val());
-		jQuery.cookie('transactionReport[sel_date_to]', jQuery('#sel_date_to').val());
-		jQuery.cookie('transactionReport[search_txt]', jQuery('#search_txt').val());
-		jQuery.cookie('transactionReport[search_filter_by]', jQuery('#search_filter_by').val());
+		jQuery.cookie('summaryReport[sel_student_id]', jQuery('#sel_student_id').val());
+		jQuery.cookie('summaryReport[sel_date_from]', jQuery('#sel_date_from').val());
+		jQuery.cookie('summaryReport[sel_date_to]', jQuery('#sel_date_to').val());
+		jQuery.cookie('summaryReport[search_txt]', jQuery('#search_txt').val());
+		jQuery.cookie('summaryReport[search_filter_by]', jQuery('#search_filter_by').val());
 		return true;
 	}
 	function clearpagestate()
 	{
-		jQuery.cookie('transactionReport[sel_student_id]', '-1');
-		jQuery.cookie('transactionReport[sel_date_from]', 'Choose date');
-		jQuery.cookie('transactionReport[sel_date_to]', 'Choose date');		
-		jQuery.cookie('transactionReport[iDisplayStart]', null);
-		jQuery.cookie('transactionReport[search_txt]', null);		
-		jQuery.cookie('transactionReport[search_filter_by]', null);
+		jQuery.cookie('summaryReport[sel_student_id]', '-1');
+		jQuery.cookie('summaryReport[sel_date_from]', 'Choose date');
+		jQuery.cookie('summaryReport[sel_date_to]', 'Choose date');		
+		jQuery.cookie('summaryReport[iDisplayStart]', null);
+		jQuery.cookie('summaryReport[search_txt]', null);		
+		jQuery.cookie('summaryReport[search_filter_by]', null);
 		return true;
 	}
 
@@ -268,7 +268,7 @@
 <div class="content_data">
 	<form id='frm_card' name='frm_card' method='POST'>
 	
-		<h2>Spending Report</h2>
+		<h2>Summary Report</h2>
 		<table style="width:100%">
             <tr>
                 <td colspan='2' style="width:85%">
@@ -341,17 +341,17 @@
 		
 		<!--datatable-->
 		<div class="cleaner"></div>
-		<table cellpadding="0"  border="0" class="display" id="transaction_report_dtList" name="transaction_report_dtList">
+		<table cellpadding="0"  border="0" class="display" id="summary_report_dtList" name="summary_report_dtList">
 			<thead>
 				<tr>
-					<th>Date</th>
-					<th>Time</th>
-					<th>User ID</th>					
-					<th>Card ID</th>					
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Amount Spend</th>
-					<th>POS ID</th>
+					<th>User Email</th>
+					<th>Family Code</th>
+					<th>Opening Balance</th>					
+					<th>Total Spending</th>					
+					<th>Total Topup(Cash)</th>
+					<th>Total Topup(payment)</th>
+					<th>Total Refund</th>
+					<th>Balance</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -377,8 +377,8 @@
 <script type="text/javascript" src="javascript/table2csv.js"></script>
 <script>
 	function export_table2excel(){
-		$("#transaction_report_dtList").table2excel({
-			filename: "transaction_report.xls"
+		$("#summary_report_dtList").table2excel({
+			filename: "summary_report.xls"
 		});
 	}
 	
