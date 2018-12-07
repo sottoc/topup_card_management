@@ -40,31 +40,11 @@
 		$cri_str .= " AND 1=1 ";
 		if(isset($criobj->search_txt) &&  $criobj->search_txt!='' ){
 			if($criobj->search_filter_by == '0'){
-				$cri_str .= " AND User_code LIKE CONCAT('%',:search_txt,'%') ";
+				$cri_str .= " AND user_email LIKE CONCAT('%',:search_txt,'%') ";
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 			if($criobj->search_filter_by == '1'){
-				$cri_str .= " AND top.Card_ID LIKE CONCAT('%',:search_txt,'%') ";
-				$param[':search_txt'] = clean($criobj->search_txt);
-			}
-			if($criobj->search_filter_by == '2'){
-				$cri_str .= " AND Family_code LIKE CONCAT('%',:search_txt,'%') ";
-				$param[':search_txt'] = clean($criobj->search_txt);
-			}
-			if($criobj->search_filter_by == '3'){
-				$cri_str .= " AND First_name LIKE CONCAT('%',:search_txt,'%') ";
-				$param[':search_txt'] = clean($criobj->search_txt);
-			}
-			if($criobj->search_filter_by == '4'){
-				$cri_str .= " AND Last_name LIKE CONCAT('%',:search_txt,'%') ";
-				$param[':search_txt'] = clean($criobj->search_txt);
-			}
-			if($criobj->search_filter_by == '5'){
-				$cri_str .= " AND total_amount LIKE CONCAT('%',:search_txt,'%') ";
-				$param[':search_txt'] = clean($criobj->search_txt);
-			}
-			if($criobj->search_filter_by == '6'){
-				$cri_str .= " AND pos_id LIKE CONCAT('%',:search_txt,'%') ";
+				$cri_str .= " AND family_code LIKE CONCAT('%',:search_txt,'%') ";
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
 		}
@@ -92,19 +72,15 @@
 		$trans_amt='';
 		$tmpentry = array();
 		$date_time = explode(" ", $aRow['created_time']);
-		$tmpentry[] = htmlspecialchars($date_time[0]);
-		$tmpentry[] = htmlspecialchars($date_time[1]);
-		// if($aRow['trans_type']=='redemption')
-		// 	$trans_amt = "<font color='red'>".$aRow['redemption_amt']."</font>";
-		// else
-		// 	$trans_amt = "<font color='blue'>".$aRow['topup_amt']."</font>";
-		$tmpentry[] = htmlspecialchars($aRow['User_code']);
-		$tmpentry[] = htmlspecialchars($aRow['card_id']);
-		$tmpentry[] = htmlspecialchars($aRow['First_name']);
-		$tmpentry[] = htmlspecialchars($aRow['Last_name']);
-		$tmpentry[] = htmlspecialchars("$".$aRow['total_amount']);
-		//$tmpentry[] = htmlspecialchars($cri_str);
-		$tmpentry[] = htmlspecialchars($aRow['pos_id']);
+
+		$tmpentry[] = htmlspecialchars($aRow['user_email']);
+		$tmpentry[] = htmlspecialchars($aRow['family_code']);
+		$tmpentry[] = htmlspecialchars($aRow['opening_balance']);
+		$tmpentry[] = htmlspecialchars($aRow['total_spending']);
+		$tmpentry[] = htmlspecialchars($aRow['total_topup_cash']);
+		$tmpentry[] = htmlspecialchars($aRow['total_topup_online']);
+		$tmpentry[] = htmlspecialchars($aRow['total_refund']);
+		$tmpentry[] = htmlspecialchars($aRow['balance']);
 		$response['aaData'][] = $tmpentry;
 	}
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );

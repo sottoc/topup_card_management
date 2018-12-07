@@ -172,43 +172,13 @@
 				return;
 			case '0':
 				$('#search_txt').val('');
-				$('#search_txt').attr("placeholder", "Enter User ID");
+				$('#search_txt').attr("placeholder", "Enter User Email");
 				$("#search_txt").removeAttr('disabled');
 				$('#search_txt').focus();
 				return;
 			case '1':
 				$('#search_txt').val('');
-				$('#search_txt').attr("placeholder", "Enter Card ID");
-				$("#search_txt").removeAttr('disabled');
-				$('#search_txt').focus();
-				return;
-			case '2':
-				$('#search_txt').val('');
-				$('#search_txt').attr("placeholder", "Enter Family ID");
-				$("#search_txt").removeAttr('disabled');
-				$('#search_txt').focus();
-				return;
-			case '3':
-				$('#search_txt').val('');
-				$('#search_txt').attr("placeholder", "Enter First Name");
-				$("#search_txt").removeAttr('disabled');
-				$('#search_txt').focus();
-				return;
-			case '4':
-				$('#search_txt').val('');
-				$('#search_txt').attr("placeholder", "Enter Last Name");
-				$("#search_txt").removeAttr('disabled');
-				$('#search_txt').focus();
-				return;
-			case '5':
-				$('#search_txt').val('');
-				$('#search_txt').attr("placeholder", "Enter Amount");
-				$("#search_txt").removeAttr('disabled');
-				$('#search_txt').focus();
-				return;
-			case '6':
-				$('#search_txt').val('');
-				$('#search_txt').attr("placeholder", "Enter POS ID");
+				$('#search_txt').attr("placeholder", "Enter Family Code");
 				$("#search_txt").removeAttr('disabled');
 				$('#search_txt').focus();
 				return;
@@ -232,7 +202,7 @@
             filter_index : filter_index,
             filter_value : filter_value
         }
-        var url = '<?php echo $rootpath;?>/api/get_total_amount_api.php';
+        var url = '<?php echo $rootpath;?>/api/get_summary_total_amount_api.php';
         var request = JSON.stringify(obj);
 		console.log(request);
         $.ajax({
@@ -243,8 +213,42 @@
             retryLimit : 3,
             success : function(info) {
                 var info = JSON.parse(info);
+				var summary_data = info.response.data;
+				console.log(summary_data);
+				$("#summary_total_opening_balance").html(summary_data[0]);
+				$("#summary_total_spending").html(summary_data[1]);
+				$("#summary_total_topup_cash").html(summary_data[2]);
+				$("#summary_total_topup_online").html(summary_data[3]);
+				$("#summary_total_refund").html(summary_data[4]);
+            },
+            error : function(xhr, textStatus, errorThrown ) {
+                console.log(xhr);
+            }
+        });
+	}
+
+	function update_summary_date(){
+		$("div#divLoading").addClass('show');
+        var sel_date_from = $('#sel_date_from').val();
+        var sel_date_to = $('#sel_date_to').val();
+        var obj = {
+            sel_date_from : sel_date_from,
+            sel_date_to : sel_date_to
+        }
+        var url = '<?php echo $rootpath;?>/api/update_summary_data.php';
+        var request = JSON.stringify(obj);
+        $.ajax({
+            url : url,
+            type : 'POST',
+            data :  request,   
+            tryCount : 0,
+            retryLimit : 3,
+            success : function(info) {
+                var info = JSON.parse(info);
                 console.log(info);
-				$("#total_amount").html(info.response.data);
+				$("div#divLoading").remove('show');
+				$("#btnsearch").trigger('click');
+				get_total_amount();
             },
             error : function(xhr, textStatus, errorThrown ) {
                 console.log(xhr);
@@ -256,6 +260,9 @@
 		setTimeout(() => {
 			get_total_amount();
 		}, 1000);
+		$("#btnsearch_button").click(function(){
+			update_summary_date();
+		});
 	});
 </script>
 
@@ -289,13 +296,8 @@
 									<div style="font-size:16px;"> Filter by </div>
 									<select id="search_filter_by" name="search_filter_by" class="select-custom" onChange="changeSearchKey(this)">
 										<option value="-1">Please choose</option>
-										<option value='0'> User ID </option>
-										<option value='1'> Card ID </option>
-										<option value='2'> Family ID </option>
-										<option value='3'> First Name </option>
-										<option value='4'> Last Name </option>
-										<option value='5'> Amount Spend </option>
-										<option value='6'> POS ID </option>
+										<option value='0'> Email </option>
+										<option value='1'> Family Code </option>
 									</select>
 								</td>
 
@@ -305,39 +307,31 @@
 								</td>
 
 								<td style="padding-top:20px;">
+									<input type="button" id="btnsearch_button" name="btnsearch_button" class="control-button" value='Generate Report'/>
+								</td>
+
+								<td style="display:none">
 									<input type="submit" id="btnsearch" name="btnsearch" class="control-button" onclick=" return savepagestate() " value='Generate Report'/>
 								</td>
+								
 							</tr>
 						</table>
                     <div>
                 </td>
 			</tr>
 			<tr>
-				<td style='font-size:20px;'>
-					Total Amount Spending : $ <span id="total_amount">  </span>
+				<td style='font-size:17px;'>
+					<div> Total Opening Balance : $ <span id="summary_total_opening_balance"> </span> </div>
+					<div> Total Spending : $ <span id="summary_total_spending">  </span> </div>
+					<div> Total Topup (Cash) : $ <span id="summary_total_topup_cash"> </span> </div>
+					<div> Total Topup (Online) : $ <span id="summary_total_topup_online"> </span> </div>
+					<div> Total Refund : $ <span id="summary_total_refund"> </span> </div>
 				</td>
                 <td style="width:30%;padding:10px 0px;text-align:right;"> 
-					<a href="#file_type_modal" rel="modal:open" class="control-button"> Export <a/>
+					<a href="#file_type_modal" rel="modal:open" class="control-button"> Export </a>
 				</td>	
             </tr>
 		</table>
-		
-		<!--Searching criteria-->
-		<!-- <div style="float: left; width: 50%;">
-			<div class="frm">
-				<div class="frm_label">Student ID : </div>			
-				<select id="sel_student_id" name="sel_student_id">
-				<option value='-1'>--Select Student ID--</option>
-				
-				</select>
-			</div>
-			<div class="frm">
-				<div class="frm_label">&nbsp;</div>
-				<input type="submit" id="btnsearch" name="btnsearch" value="<?php echo $localized_home_data['search_btn']; ?>" onclick=" return savepagestate() " class="btn" /> &nbsp;
-				<input type="submit" id="btnshowall" name="btnshowall" value="<?php echo $localized_home_data['show_all_btn']; ?>" onclick="clearpagestate()" class="btn" />		
-			</div>
-		</div> -->
-		<!--Searching criteria-->
 		
 		<!--datatable-->
 		<div class="cleaner"></div>
@@ -363,7 +357,7 @@
 		<!--datatable-->
 	</form>
 </div>
-
+<div id="divLoading"> </div>
 <div id="file_type_modal" class="modal">
 	<div align="center">
 		<select class='select-custom' id='sel_file_type' style='height:38px !important; transform: translateY(2px);'>
@@ -383,7 +377,7 @@
 	}
 	
 	function export_table2csv(){
-		exportTableToCSV('transaction_report.csv')
+		exportTableToCSV('summary_report.csv')
 	}
 
 	function export_table(){
@@ -400,3 +394,25 @@
 <?php
 	include("footer.php");
 ?>
+
+<style>
+#divLoading
+{
+	display : none;
+}
+#divLoading.show
+{
+	display : block;
+	position : fixed;
+	z-index: 100;
+	background-image : url('http://loadinggif.com/images/image-selection/3.gif');
+	background-color:#666;
+	opacity : 0.6;
+	background-repeat : no-repeat;
+	background-position : center;
+	left : 0;
+	bottom : 0;
+	right : 0;
+	top : 0;
+}
+</style>
