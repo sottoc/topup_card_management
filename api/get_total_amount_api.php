@@ -12,6 +12,12 @@
         $query = "SELECT SUM(total_amount) FROM `tbl_food_bill_records` t left join tbl_card1 top on t.card_id=top.Card_ID";
         $from = $request['sel_date_from'];
         $to = $request['sel_date_to'];
+        if (strpos($from, '-') != true) {
+            $from = '2010-01-01';
+        }
+        if (strpos($to, '-') != true) {
+            $to = '2030-01-01';
+        }
         $search_filter_by = $request['filter_index'];
         $filter_value = $request['filter_value'];
         $param = " WHERE created_time"." >= '".$from."' AND created_time < '".$to."' + interval 1 day";
@@ -51,6 +57,12 @@
         $query = "SELECT SUM(topup_amount) FROM tbl_food_topup_records";
         $from = $request['sel_date_from'];
         $to = $request['sel_date_to'];
+        if (strpos($from, '-') != true) {
+            $from = '2010-01-01';
+        }
+        if (strpos($to, '-') != true) {
+            $to = '2030-01-01';
+        }
         $search_filter_by = $request['filter_index'];
         $filter_value = $request['filter_value'];
         $param = " WHERE date_created"." >= '".$from."' AND date_created < '".$to."' + interval 1 day";
@@ -78,6 +90,12 @@
         $query = "SELECT SUM(amount) FROM tbl_user u LEFT JOIN tbl_family_code_amount fa ON u.family_code=fa.family_code";
         $from = $request['sel_date_from'];
         $to = $request['sel_date_to'];
+        if (strpos($from, '-') != true) {
+            $from = '2010-01-01';
+        }
+        if (strpos($to, '-') != true) {
+            $to = '2030-01-01';
+        }
         $search_filter_by = $request['filter_index'];
         $filter_value = $request['filter_value'];
         $param = " WHERE user_created_datetime"." >= '".$from."' AND user_created_datetime < '".$to."' + interval 1 day";
@@ -105,6 +123,12 @@
         $query = "SELECT SUM(refund_amount) FROM tbl_refund_record r LEFT JOIN tbl_user u on r.issues_person=u.user_id";
         $from = $request['sel_date_from'];
         $to = $request['sel_date_to'];
+        if (strpos($from, '-') != true) {
+            $from = '2010-01-01';
+        }
+        if (strpos($to, '-') != true) {
+            $to = '2030-01-01';
+        }
         $search_filter_by = $request['filter_index'];
         $filter_value = $request['filter_value'];
         $param = " WHERE date_created"." >= '".$from."' AND date_created < '".$to."' + interval 1 day";

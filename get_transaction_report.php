@@ -34,6 +34,12 @@
 		if(isset($criobj->sel_date_from) && isset($criobj->sel_date_to)){
 			$from = $criobj->sel_date_from;
 			$to = $criobj->sel_date_to;
+			if (strpos($from, '-') != true) {
+				$from = '2010-01-01';
+			}
+			if (strpos($to, '-') != true) {
+				$to = '2030-01-01';
+			}
 			$cri_str .= " >= '".$from."' AND created_time < '".$to."' + interval 1 day";
 		}
 
