@@ -8,6 +8,12 @@
     
     $from = $request['sel_date_from'];
     $to = $request['sel_date_to'];
+    if (strpos($from, '-') != true) {
+        $from = '2010-01-01';
+    }
+    if (strpos($to, '-') != true) {
+        $to = '2030-01-01';
+    }
     $search_filter_by = $request['filter_index'];
     $filter_value = $request['filter_value'];
 

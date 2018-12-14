@@ -11,6 +11,8 @@
     $amount = $request['amount'];
     $pos_id = $request['pos_id'];
     $bill_id = $request['bill_id'];
+
+    $amount = 0 - floatval($amount);
     
     //--- get family code from card number ------
     $family_code = '';

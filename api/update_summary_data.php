@@ -8,6 +8,12 @@
 
     $from = $request['sel_date_from'];
     $to = $request['sel_date_to'];
+    if (strpos($from, '-') != true) {
+        $from = '2010-01-01';
+    }
+    if (strpos($to, '-') != true) {
+        $to = '2030-01-01';
+    }
     $query = "SELECT user_email, family_code FROM tbl_summary_record WHERE created_time"." >= '".$from."' AND created_time < '".$to."' + interval 1 day";
     $result = $conn->query($query);
     if($result->num_rows > 0){
@@ -94,5 +100,5 @@
         }
     }
 
-    display_results("Successfully Updated!");
+    display_results("Successfully updated!");
 ?>

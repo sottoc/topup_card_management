@@ -245,7 +245,7 @@
             retryLimit : 3,
             success : function(info) {
                 var info = JSON.parse(info);
-                console.log(info);
+				info = info.response.data;
 				$("div#divLoading").remove('show');
 				$("#btnsearch").trigger('click');
 				get_total_amount();
