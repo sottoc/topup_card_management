@@ -78,6 +78,8 @@
 				<div class="frm_label">Student Id :</div>
 				<input type="text" name="item_number">
 			</div> -->
+			<input type="hidden" name="item_number" value="204">
+
 			<div class="frm" style="display:none;">
 				<div class="frm_label">Amount : </div>
 				<input type="text" name="amount">

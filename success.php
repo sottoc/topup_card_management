@@ -37,6 +37,11 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 			$str=$str.','.$key.'='.$value;
 	}
 	$paypal_return_data = $str;
+
+	//--------- code by Qiang ---------
+	$user_email = $_SESSION ['login_user_email'];
+	print_r($user_email."->".$amount);
+	exit;
 	
 //save in topup table
 	$topupinfo->set_topup_amt($amount);
