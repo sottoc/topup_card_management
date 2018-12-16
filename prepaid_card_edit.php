@@ -51,6 +51,30 @@
             }
         }
     }
+
+    // $query = "SELECT Family_code, Card_value FROM tbl_card2";
+    // $result = $conn->query($query);
+    // if ($result->num_rows > 0) {
+    //     while($row = $result->fetch_assoc()) {
+    //         $family_code = $row['Family_code'];
+    //         $value = $row['Card_value'];
+    //         $query1 = "SELECT family_code, amount FROM tbl_family_code_amount WHERE family_code = '".$family_code."'";
+    //         $result1 = $conn->query($query1);
+    //         if($result1->num_rows > 0){
+    //             while($row1 = $result1->fetch_assoc()) {
+    //                 $amount = $row1['amount'];
+    //                 $amount = floatval($amount) + floatval($value);
+    //                 $query2 = "UPDATE tbl_family_code_amount SET amount = '".$amount."' WHERE family_code = '".$family_code."'";
+    //                 $result2 = $conn->query($query2);
+    //             }
+    //         } else{
+    //             $time = date("Y-m-d H:i:s");
+    //             $query3 = "INSERT INTO tbl_family_code_amount (family_code, amount, date_created, date_updated) VALUES ('".$family_code."',0,'".$time."','".$time."')";
+    //             $result3 = $conn->query($query3);
+    //         }
+
+    //     }
+    // }
 ?>
 
 <div class="prepaid_card_edit_div" style="width:80%; margin:0 auto;">

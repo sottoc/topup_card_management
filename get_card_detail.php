@@ -118,7 +118,7 @@
 	function fnColumnToField( $i )
 	{
 		if ( $i == 0 )
-			return "User_code";
+			return "id";
 		else if ( $i == 1 )
 			return "Card_ID";
 		else if ( $i == 2 )
