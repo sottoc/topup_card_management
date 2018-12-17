@@ -72,24 +72,25 @@
                         array_push($data_spend, $record);
                     }
                 }
-                
-                //------- get topup history --------
-                $query2 = "SELECT `pos_id`, `topup_amount`, `date_created` FROM `tbl_food_topup_records` WHERE `payment_detail`='".$card_id."'";
-                $result2 = $conn->query($query2);
-                if($result2->num_rows > 0){
-                    while($row2 = $result2->fetch_assoc()) {
-                        $record = array();
-                        $pos_id = $row2['pos_id'];
-                        $topup_amount = $row2['topup_amount'];
-                        $date_created = $row2['date_created'];
-                        array_push($record, $pos_id);
-                        array_push($record, $topup_amount);
-                        array_push($record, $date_created);
-                        array_push($record, $card_id);
-                        array_push($data_topup, $record);
-                    }
+            }
+
+            //------- get topup history --------
+            $query2 = "SELECT `pos_id`, `topup_amount`, `date_created` FROM `tbl_food_topup_records` WHERE `family_code`='".$family_code."'";
+            $result2 = $conn->query($query2);
+            if($result2->num_rows > 0){
+                while($row2 = $result2->fetch_assoc()) {
+                    $record = array();
+                    $pos_id = $row2['pos_id'];
+                    $topup_amount = $row2['topup_amount'];
+                    $date_created = $row2['date_created'];
+                    array_push($record, $pos_id);
+                    array_push($record, $topup_amount);
+                    array_push($record, $date_created);
+                    array_push($record, $card_id);
+                    array_push($data_topup, $record);
                 }
             }
+
             array_push($all_data, $data_spend);
             array_push($all_data, $data_topup);
         }

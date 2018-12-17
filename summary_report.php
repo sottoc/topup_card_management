@@ -258,7 +258,7 @@
 
 	$(document).ready(function(){
 		setTimeout(() => {
-			get_total_amount();
+		   get_total_amount();
 		}, 1000);
 		
 		$("#btnsearch_button").click(function(){
