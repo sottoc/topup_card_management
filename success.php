@@ -38,9 +38,46 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 	}
 	$paypal_return_data = $str;
 
-	//--------- code by Qiang ---------
+	//---------------------------------- code by Qiang -----------------------------
 	$user_email = $_SESSION ['login_user_email'];
 	print_r($user_email."->".$amount);
+	
+	//---------------- save in table --------------
+	require_once('api/api_common.php');
+	$uploadPath = $rootpath.'/upload/profile';
+	$query = "SELECT `family_code` FROM `tbl_user` WHERE `user_email`='".$user_email."'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $family_code = $row['family_code'];
+        }
+	}
+	
+	$time = date("Y-m-d H:i:s");
+    $origin_amount = 0;
+    $query = "SELECT `amount` FROM `tbl_family_code_amount` WHERE `family_code`='".$family_code."'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $origin_amount = $row['amount'];
+        }
+    } else{
+        $query="INSERT INTO `tbl_family_code_amount` (`family_code`, `amount`, `date_created`, `date_updated`) VALUES ('".$family_code."','".$origin_amount."','".$time."','".$time."')";
+        $result = $conn->query($query);
+    }
+    $new_amount = floatval($amount) + floatval($origin_amount);
+    $query = "UPDATE `tbl_family_code_amount` SET `amount`=".$new_amount.", `date_updated`='".$time."'  WHERE `family_code`='".$family_code."'";
+	$result = $conn->query($query);
+	
+	$payment_type = "0";
+	$pos_id = $transaction_id;
+	$Card_ID = $transaction_id;
+    $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$Card_ID."','".$amount."','".$time."')";
+	$result = $conn->query($query);
+	//------- end save in table ------
+	
+	echo "<h2>Your payment is successful</h2>";
+	echo "<div><a href='topup_paypal.php'>Click here</a></div>";
 	exit;
 	
 //save in topup table

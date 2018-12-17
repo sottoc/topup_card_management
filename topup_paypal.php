@@ -43,6 +43,11 @@
 		<table>
 			<tr>
 				<td>
+					<div class="topup-amount-div" data="0.01">
+						<strong> $0.01(Test) </strong>
+					</div>
+				</td>
+				<td>
 					<div class="topup-amount-div" data="30">
 						<strong> $30 </strong>
 					</div>
