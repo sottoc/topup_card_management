@@ -52,29 +52,51 @@
         }
     }
 
-    // $query = "SELECT Family_code, Card_value FROM tbl_card2";
+    // $query = "SELECT created_time FROM tbl_food_purchase_records_old WHERE id>1527 AND id<=1755 GROUP BY created_time";
     // $result = $conn->query($query);
+    // $n = 858;
     // if ($result->num_rows > 0) {
     //     while($row = $result->fetch_assoc()) {
-    //         $family_code = $row['Family_code'];
-    //         $value = $row['Card_value'];
-    //         $query1 = "SELECT family_code, amount FROM tbl_family_code_amount WHERE family_code = '".$family_code."'";
+    //         $n = $n + 1;
+    //         $bill_id = 'lycee00000'.$n;
+    //         $created_time = $row['created_time'];
+
+    //         $query2 = "SELECT COUNT(*) FROM tbl_food_purchase_records_old WHERE created_time = '".$created_time."' GROUP BY item_name";
+    //         $result2 = $conn->query($query2);
+    //         $item_qty = [];
+    //         if($result2->num_rows > 0){
+    //             while($row2 = $result2->fetch_assoc()) {
+    //                 array_push($item_qty, $row2['COUNT(*)']);
+    //             }
+    //         }
+            
+    //         $query1 = "SELECT * FROM tbl_food_purchase_records_old WHERE created_time = '".$created_time."' GROUP BY item_name";
     //         $result1 = $conn->query($query1);
     //         if($result1->num_rows > 0){
+    //             $m = 0;
+    //             $total_amount = 0;
     //             while($row1 = $result1->fetch_assoc()) {
-    //                 $amount = $row1['amount'];
-    //                 $amount = floatval($amount) + floatval($value);
-    //                 $query2 = "UPDATE tbl_family_code_amount SET amount = '".$amount."' WHERE family_code = '".$family_code."'";
-    //                 $result2 = $conn->query($query2);
+    //                 $card_id = $row1['card_id'];
+    //                 $pos_id = $row1['pos_id'];
+    //                 $item_name = $row1['item_name'];
+    //                 $item_price = $row1['item_price'];
+    //                 echo $item_name.'-'.$item_price.'-'.$item_qty[$m].'</br>';
+    //                 $qty = $item_qty[$m];
+    //                 $total_amount = $total_amount + floatval($item_price) * $qty;
+    //                 $query3="INSERT INTO `tbl_food_purchase_records` (`bill_id`, `item_name`, `item_price`, `item_qty`, `created_time`) VALUES ('".$bill_id."','".$item_name."','".$item_price."','".$qty."','".$created_time."')";
+    //                 $result3 = $conn->query($query3);
+                    
+    //                 $m++;
     //             }
-    //         } else{
-    //             $time = date("Y-m-d H:i:s");
-    //             $query3 = "INSERT INTO tbl_family_code_amount (family_code, amount, date_created, date_updated) VALUES ('".$family_code."',0,'".$time."','".$time."')";
-    //             $result3 = $conn->query($query3);
     //         }
+    //         $total_amount = round(intval($total_amount*100)/10)/10;
+    //         $query4="INSERT INTO `tbl_food_bill_records` (`bill_id`, `card_id`, `pos_id`, `total_amount`, `created_time`) VALUES ('".$bill_id."','".$card_id."','".$pos_id."','".$total_amount."','".$created_time."')";
+    //         $result4 = $conn->query($query4);
+    //         echo '-----------------------------------</br>';
 
     //     }
     // }
+    // exit;
 ?>
 
 <div class="prepaid_card_edit_div" style="width:80%; margin:0 auto;">

@@ -26,7 +26,7 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 	$currency = $_REQUEST['mc_currency']; // Paypal received currency type
 	$paypal_payment_status = $_REQUEST['payment_status'];
 	$payer_email = $_REQUEST['payer_email'];
-	$receiver_email = $_REQUEST['receiver_email'];
+	//$receiver_email = $_REQUEST['receiver_email'];
 	$paypal_return_arr = $_REQUEST;
 	$str='';
 	foreach ($paypal_return_arr as $key => $value)
@@ -75,7 +75,7 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
     $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$Card_ID."','".$amount."','".$time."')";
 	$result = $conn->query($query);
 	//------- end save in table ------
-	
+
 	echo "<h2>Your payment is successful</h2>";
 	echo "<div><a href='topup_paypal.php'>Click here</a></div>";
 	exit;

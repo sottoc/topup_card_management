@@ -13,7 +13,9 @@
 	$paypal_url='https://www.paypal.com/cgi-bin/webscr'; // Test Paypal API URL
 
 	//$paypal_id='ydn.smile-facilitator-1@gmail.com'; // Business email ID
-	$paypal_id='ydn.smile@gmail.com'; // Business email ID
+	//$paypal_id='ydn.smile@gmail.com'; // Business email ID
+
+	$paypal_id = 'peihan@compass-group.sg';
 ?>
 
 <script language="javascript">
