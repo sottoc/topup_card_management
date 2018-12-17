@@ -260,6 +260,7 @@
 		setTimeout(() => {
 			get_total_amount();
 		}, 1000);
+		
 		$("#btnsearch_button").click(function(){
 			update_summary_date();
 		});

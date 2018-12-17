@@ -74,10 +74,10 @@
             $result9 = $conn->query($query9);
             if ($result9->num_rows > 0) {
                 while($row9 = $result9->fetch_assoc()) {
-                    $total_topup_cash = $row9['SUM(topup_amount)'];
+                    $total_topup_online = $row9['SUM(topup_amount)'];
                 }
             }
-            $query10 = "UPDATE `tbl_summary_record` SET total_topup_cash = '".$total_topup_cash."' WHERE `user_email`='".$user_email."'";
+            $query10 = "UPDATE `tbl_summary_record` SET total_topup_online = '".$total_topup_online."' WHERE `user_email`='".$user_email."'";
             $result10 = $conn->query($query10);
             $total_refund = 0; //------------ total_refund -----------------
             $query11 = "SELECT SUM(refund_amount) FROM tbl_refund_record";

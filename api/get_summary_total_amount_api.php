@@ -34,7 +34,7 @@
             $total_opening_balance = $row['SUM(opening_balance)'];
         }
     }
-    $total_opening_balance = round(intval($total_opening_balance*100)/10)/10;
+    $total_opening_balance = round(intval($total_opening_balance*10000)/100)/100;
 
     $total_spending = 0; //------------- total_spending --------------
     $query = "SELECT SUM(total_spending) FROM tbl_summary_record";
@@ -53,7 +53,7 @@
             $total_spending = $row['SUM(total_spending)'];
         }
     }
-    $total_spending = round(intval($total_spending*100)/10)/10;
+    $total_spending = round(intval($total_spending*10000)/100)/100;
 
     $total_topup_cash = 0; //------------- total_topup_cash --------------
     $query = "SELECT SUM(total_topup_cash) FROM tbl_summary_record";
@@ -72,7 +72,7 @@
             $total_topup_cash = $row['SUM(total_topup_cash)'];
         }
     }
-    $total_topup_cash = round(intval($total_topup_cash*100)/10)/10;
+    $total_topup_cash = round(intval($total_topup_cash*10000)/100)/100;
 
     $total_topup_online = 0; //------------- total_topup_online --------------
     $query = "SELECT SUM(total_topup_online) FROM tbl_summary_record";
@@ -91,7 +91,7 @@
             $total_topup_online = $row['SUM(total_topup_online)'];
         }
     }
-    $total_topup_online = round(intval($total_topup_online*100)/10)/10;
+    $total_topup_online = round(intval($total_topup_online*10000)/100)/100;
 
     $total_refund = 0; //------------- total_refund --------------
     $query = "SELECT SUM(total_refund) FROM tbl_summary_record";
@@ -110,7 +110,7 @@
             $total_refund = $row['SUM(total_refund)'];
         }
     }
-    $total_refund = round(intval($total_refund*100)/10)/10;
+    $total_refund = round(intval($total_refund*10000)/100)/100;
 
     $total_data = array();
     array_push($total_data, $total_opening_balance);

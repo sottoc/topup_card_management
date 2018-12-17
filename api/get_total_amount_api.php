@@ -50,7 +50,7 @@
                 $total_amount = $row['SUM(total_amount)'];
             }
         }
-        $total_amount = round(intval($total_amount*100)/10)/10;
+        $total_amount = round(intval($total_amount*10000)/100)/100;
     }
 
     if($report_type == "topup"){
@@ -83,7 +83,7 @@
                 $total_amount = $row['SUM(topup_amount)'];
             }
         }
-        $total_amount = round(intval($total_amount*100)/10)/10;
+        $total_amount = round(intval($total_amount*10000)/100)/100;
     }
 
     if($report_type == "user"){
@@ -116,7 +116,7 @@
                 $total_amount = $row['SUM(amount)'];
             }
         }
-        $total_amount = round(intval($total_amount*100)/10)/10;
+        $total_amount = round(intval($total_amount*10000)/100)/100;
     }
 
     if($report_type == "refund"){
@@ -149,7 +149,7 @@
                 $total_amount = $row['SUM(refund_amount)'];
             }
         }
-        $total_amount = round(intval($total_amount*100)/10)/10;
+        $total_amount = round(intval($total_amount*10000)/100)/100;
     }
 
     display_results($total_amount);
