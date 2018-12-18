@@ -53,7 +53,7 @@
 		ilength = parseInt(jQuery.cookie('spendingSubHistory[iDisplayLength]'));
 		istart = parseInt(jQuery.cookie('spendingSubHistory[iDisplayStart]'));		
 		sFilter=getFilter();	
-		
+		ilength = -1;
 		oTable=jQuery('#spending_history_dtList').dataTable({
 			"iDisplayLength": ilength,
 			"iDisplayStart": istart,
@@ -61,7 +61,7 @@
 			"bProcessing": true,
 			"bSortable": true,
 			"asSorting": [ 'asc', 'desc' ],
-			"lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ]	,		
+			"lengthMenu": [ [-1], ["All"] ]	,		
 			"sDom": 'Rfrtlip',
 			"bServerSide": true,
 			"bJQueryUI": true,
@@ -124,10 +124,7 @@
 				$("#spending_sub_date_to").val(get_date(date));
 			}
 		});
-
-		$('#generate_report_btn').click(function(){
-			
-		});
+		
 	});
 	function loadpagestate()
 	{
@@ -338,6 +335,7 @@
 				$("#bill_id").html($(e.target).attr('data-bill-id'));
 				$("#modal_item_price").html($(e.target).attr('data-item-price'));
 				var bill_id = $(e.target).attr('data-bill-id');
+				console.log(bill_id);
 				var obj = {
 					bill_id : bill_id
 				}

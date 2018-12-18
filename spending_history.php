@@ -63,7 +63,7 @@
 		ilength = parseInt(jQuery.cookie('spendingHistory[iDisplayLength]'));
 		istart = parseInt(jQuery.cookie('spendingHistory[iDisplayStart]'));		
 		sFilter=getFilter();	
-		
+		ilength = -1;
 		oTable=jQuery('#spending_history_dtList').dataTable({
 			"iDisplayLength": ilength,
 			"iDisplayStart": istart,
@@ -71,7 +71,7 @@
 			"bProcessing": true,
 			"bSortable": true,
 			"asSorting": [ 'asc', 'desc' ],
-			"lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ]	,		
+			"lengthMenu": [ [-1], ["All"] ]	,		
 			"sDom": 'Rfrtlip',
 			"bServerSide": true,
 			"bJQueryUI": true,
