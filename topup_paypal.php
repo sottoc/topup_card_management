@@ -70,6 +70,7 @@
 
 		<form action="<?php echo $paypal_url; ?>" method="post" name="frmPayPal1">
 			<input type="hidden" name="business" value="<?php echo $paypal_id; ?>">
+			<input type="hidden" name="bn" value="butterflysg_SP_Compass">
 			<input type="hidden" name="cmd" value="_xclick">
 			
 			<input type="hidden" name="item_name" value="Chartwells Food Card Topup">
