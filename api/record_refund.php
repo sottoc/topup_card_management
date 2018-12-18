@@ -13,6 +13,7 @@
     $issues_person = $request['issues_person'];
     
     //------ save refund record --------
+    date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
     $time = date("Y-m-d H:i:s");
     $query="INSERT INTO `tbl_refund_record` (`family_code`, `refund_amount`, `refund_reason`, `issues_person`, `date_created`, `date_updated`) VALUES ('".$family_code."','".$refund_amount."','".$refund_reason."','".$issues_person."','".$time."','".$time."')";
     $result = $conn->query($query);

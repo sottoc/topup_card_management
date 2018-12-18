@@ -53,6 +53,7 @@
     if($image_name == ''){
         $image_name = $_POST['image_name'];
     }
+    date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
     $time = date("Y-m-d H:i:s");
     $class = '';
     $classification = 'Staff';

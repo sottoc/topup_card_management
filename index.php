@@ -18,6 +18,7 @@
 
 	if($_SESSION ['login_user_type_id']==1){
 		require_once('api/api_common.php');
+		date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
 		$time = date("Y-m-d H:i:s");
 		$date = date("Y-m-d");
 		$date = new DateTime($date);

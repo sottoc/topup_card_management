@@ -52,7 +52,7 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
             $family_code = $row['family_code'];
         }
 	}
-	
+	date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
 	$time = date("Y-m-d H:i:s");
     $origin_amount = 0;
     $query = "SELECT `amount` FROM `tbl_family_code_amount` WHERE `family_code`='".$family_code."'";

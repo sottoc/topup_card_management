@@ -94,7 +94,7 @@
         $tmpentry[] = htmlspecialchars($aRow['Last_name']);
 		$tmpentry[] = htmlspecialchars("$".$aRow['total_amount']);
 		//$tmpentry[] = htmlspecialchars($cri_str);
-		$tmpentry[] = htmlspecialchars($aRow['bill_id'].','.$aRow['Last_name']);
+		$tmpentry[] = htmlspecialchars($aRow['bill_id'].','.$aRow['pos_id']);
 
 		$response['aaData'][] = $tmpentry;
 	}

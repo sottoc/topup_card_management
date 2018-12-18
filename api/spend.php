@@ -46,6 +46,7 @@
 
     //------ save items of food --------
     $items = $request['items'];
+    date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
     $time = date("Y-m-d H:i:s");
     $query="INSERT INTO `tbl_food_bill_records` (`bill_id`, `card_id`, `pos_id`, `total_amount`, `created_time`) VALUES ('".$bill_id."','".$Card_ID."','".$pos_id."','".$amount."','".$time."')";
     $result = $conn->query($query);

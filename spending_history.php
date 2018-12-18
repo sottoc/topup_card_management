@@ -92,13 +92,13 @@
                         if($(tds[i]).html().indexOf("div") == -1){
 							var date = $(tds[j*7+0]).html();
 							var time = $(tds[j*7+1]).html();
-							var first_name = $(tds[j*7+2]).html();
-							var card_id = $(tds[j*7+3]).html();
-							var pos_id = $(tds[j*7+4]).html();
+							var first_name = $(tds[j*7+3]).html();
+							var last_name = $(tds[j*7+4]).html();
+							var card_id = $(tds[j*7+2]).html();
 							var item_price = $(tds[j*7+5]).html();
 							var str = $(tds[j*7+6]).html();
 							var bill_id = str.split(",")[0];
-							var last_name = str.split(",")[1];
+							var pos_id = str.split(",")[1];
 							var full_name = first_name + ' ' + last_name;
                             $(tds[i]).html("<a class='edit-button view-modal' href='#spending_history_detail_modal' rel='modal:open' data-date-time='" + date+' '+time + "' data-card-id='" + card_id + "' data-pos-id='" + pos_id + "' data-item-price='" + item_price + "' data-bill-id='" + bill_id +"' data-full-name='" + full_name + "'> View Detail </a>");
 						}
@@ -332,37 +332,37 @@
 		<tr> 
 			<td> 
 				<span class="title"> Date & Time: </span>
-				<span class="detail" id='modal_date_time'> 2018 08 20 15:18:51 </span>
+				<span class="detail" id='modal_date_time'> </span>
 			</td>
 		</tr>
 		<tr>
 			<td>
 				<span class="title"> Spending By : </span>
-				<span class="detail" id='modal_full_name'> Maecenas Tempu </span>
+				<span class="detail" id='modal_full_name'> </span>
 			</td>
 		</tr>
 		<tr> 
 			<td> 
 				<span class="title"> Card ID : </span>
-				<span class="detail" id='modal_card_id'> CC69923 </span>
+				<span class="detail" id='modal_card_id'> </span>
 			</td>
 		</tr>
 		<tr>
 			<td>
 				<span class="title"> POS ID : </span>
-				<span class="detail" id='modal_pos_id'> HSC0 </span>
+				<span class="detail" id='modal_pos_id'> </span>
 			</td>
 		</tr>
 		<tr> 
 			<td> 
 				<span class="title"> Amount Spend : </span>
-				<span class="detail" id='modal_item_price'> S$7.80 </span>
+				<span class="detail" id='modal_item_price'> </span>
 			</td>
 		</tr>
 		<tr>
 			<td>
 				<span class="title"> Receipt Number:  </span>
-				<span class="detail"> HSC010010 </span>
+				<span class="detail" id="bill_id"> </span>
 			</td>
 		</tr>
 		<tr>
@@ -404,6 +404,7 @@
 				$("#modal_full_name").html($(e.target).attr('data-full-name'));
 				$("#modal_card_id").html($(e.target).attr('data-card-id'));
 				$("#modal_pos_id").html($(e.target).attr('data-pos-id'));
+				$("#bill_id").html($(e.target).attr('data-bill-id'));
 				$("#modal_item_price").html($(e.target).attr('data-item-price'));
 				var bill_id = $(e.target).attr('data-bill-id');
 				var obj = {

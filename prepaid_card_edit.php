@@ -52,9 +52,9 @@
         }
     }
 
-    // $query = "SELECT created_time FROM tbl_food_purchase_records_old WHERE id>1527 AND id<=1755 GROUP BY created_time";
+    // $query = "SELECT created_time FROM tbl_food_purchase_records_old WHERE id>5 GROUP BY created_time";
     // $result = $conn->query($query);
-    // $n = 858;
+    // $n = 4;
     // if ($result->num_rows > 0) {
     //     while($row = $result->fetch_assoc()) {
     //         $n = $n + 1;

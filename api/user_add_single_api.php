@@ -18,6 +18,7 @@
     $phone = '123456789';
     $gender = '1';
     $status = $request['status'];
+    date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
     $time = date("Y-m-d H:i:s");
 
     $query="INSERT INTO `tbl_user` (`user_email`, `user_password`, `family_code`, `user_type_id`, `user_first_name`, `user_last_name`, `user_address`, `user_phone`, `user_gender_id`, `is_active`, `user_created_datetime`, `user_modified_datetime`) VALUES ('".$email."','".$password."','".$family_code."','".$type."','".$first_name."','".$last_name."','".$address."','".$phone."','".$gender."','".$status."','".$time."','".$time."')";
