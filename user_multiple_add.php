@@ -43,11 +43,11 @@
             reader.onloadend = (e) => {
                 var filename = file.name;
                 var len = filename.length;
-                var type = filename.substring(len-4, len);
-                if(type != '.xls'){
-                    alert("File is invalid. Please choose excel file(.xls)!");
-                } else{
+                var type = filename.substring(len-5, len);
+                if(filename.substring(len-4, len) == '.xls' || filename.substring(len-5, len) == '.xlsx'){
                     $("#file_name").val(filename);
+                } else{
+                    alert("File is invalid. Please choose excel file(.xls)!");
                 }
             }
             reader.readAsDataURL(file);

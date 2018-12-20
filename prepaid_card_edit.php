@@ -52,9 +52,9 @@
         }
     }
 
-    // $query = "SELECT created_time FROM tbl_food_purchase_records_old WHERE id>5 GROUP BY created_time";
+    // $query = "SELECT created_time FROM tbl_food_purchase_records_old WHERE id>19199 GROUP BY created_time";
     // $result = $conn->query($query);
-    // $n = 4;
+    // $n = 10837;
     // if ($result->num_rows > 0) {
     //     while($row = $result->fetch_assoc()) {
     //         $n = $n + 1;
@@ -80,7 +80,6 @@
     //                 $pos_id = $row1['pos_id'];
     //                 $item_name = $row1['item_name'];
     //                 $item_price = $row1['item_price'];
-    //                 echo $item_name.'-'.$item_price.'-'.$item_qty[$m].'</br>';
     //                 $qty = $item_qty[$m];
     //                 $total_amount = $total_amount + floatval($item_price) * $qty;
     //                 $query3="INSERT INTO `tbl_food_purchase_records` (`bill_id`, `item_name`, `item_price`, `item_qty`, `created_time`) VALUES ('".$bill_id."','".$item_name."','".$item_price."','".$qty."','".$created_time."')";
@@ -92,7 +91,8 @@
     //         $total_amount = round(intval($total_amount*100)/10)/10;
     //         $query4="INSERT INTO `tbl_food_bill_records` (`bill_id`, `card_id`, `pos_id`, `total_amount`, `created_time`) VALUES ('".$bill_id."','".$card_id."','".$pos_id."','".$total_amount."','".$created_time."')";
     //         $result4 = $conn->query($query4);
-    //         echo '-----------------------------------</br>';
+    //         echo $n;
+    //         echo '-----------------------------------';
 
     //     }
     // }
