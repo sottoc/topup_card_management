@@ -14,7 +14,8 @@
     $user_type = $request['user_type'];
     $family_code = $request['family_code'];
     $amount = $request['amount'];
-    $datetime = date("Y-m-d h:i:sa");
+    date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
+    $datetime = date("Y-m-d h:i:s");
 
     $query = "UPDATE `tbl_user` SET `user_email`='".$user_email."', `user_first_name`='".$first_name."', `user_last_name`='".$last_name."', `user_type_id`='".$user_type."', `is_active`='".$user_status."', `user_modified_datetime`='".$datetime."' WHERE `user_id`='".$user_id."'";
     $result = $conn->query($query);
