@@ -69,7 +69,7 @@
         
         $payment_type = "Cash";
 		if($aRow['payment_type'] != 1){
-			$payment_type = "Paypal";
+			$payment_type = "Online";
 		}
 		$tmpentry[] = htmlspecialchars($payment_type);
         $tmpentry[] = htmlspecialchars("$".$aRow['topup_amount']);

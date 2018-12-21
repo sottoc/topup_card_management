@@ -64,6 +64,11 @@
 						<strong> $100 </strong>
 					</div>
 				</td>
+				<td>
+					<div class="topup-amount-div" data="150">
+						<strong> $150 </strong>
+					</div>
+				</td>
 			</tr>
 		</table>
 		<br/>
