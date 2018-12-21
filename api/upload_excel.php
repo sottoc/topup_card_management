@@ -38,32 +38,38 @@
                 $query = "SELECT * FROM tbl_user WHERE user_email = '".$user_email."'";
                 $result = $conn->query($query);
                 if ($result->num_rows > 0) {
-                    $k = "ok";
+                    $warning = "email exist!";
                 } else{
-                    $email = $user_email;
-                    $password = md5($password);
-                    $type = "2";
-                    $address = 'address';
-                    $phone = '123456789';
-                    $gender = '1';
-                    $status = "1";
-                    date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
-                    $time = date("Y-m-d H:i:s");
-                    $query="INSERT INTO `tbl_user` (`user_email`, `user_password`, `family_code`, `user_type_id`, `user_first_name`, `user_last_name`, `user_address`, `user_phone`, `user_gender_id`, `is_active`, `user_created_datetime`, `user_modified_datetime`) VALUES ('".$email."','".$password."','".$family_code."','".$type."','".$first_name."','".$last_name."','".$address."','".$phone."','".$gender."','".$status."','".$time."','".$time."')";
-                    $result = $conn->query($query);
-
-                    $query="INSERT INTO `tbl_summary_record` (`user_email`, `family_code`, `opening_balance`, `total_spending`, `total_topup_cash`, `total_topup_online`, `total_refund`, `balance`, `created_time`) VALUES ('".$email."','".$family_code."','0','0','0','0','0','0','".$time."')";
-                    $result = $conn->query($query);
-
-                    $query = "SELECT * FROM tbl_family_code_amount WHERE family_code='".$family_code."'";
-                    $result = $conn->query($query);
-                    if($result->num_rows > 0){
-                        $row = $result->fetch_assoc();
+                    $query3 = "SELECT amount FROM tbl_user u LEFT JOIN tbl_family_code_amount fa ON u.family_code=fa.family_code WHERE u.family_code='".$family_code."'";
+                    $result3 = $conn->query($query3);
+                    if($result3->num_rows > 0){
+                        $warning = "family code used!";
                     } else{
-                        $query2 = "INSERT INTO `tbl_family_code_amount` (family_code, amount, date_created, date_updated) VALUES ('".$family_code."', '0', '".$time."', '".$time."')";
-                        $result2 = $conn->query($query2);
+                        $email = $user_email;
+                        $password = md5($password);
+                        $type = "2";
+                        $address = 'address';
+                        $phone = '123456789';
+                        $gender = '1';
+                        $status = "1";
+                        date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
+                        $time = date("Y-m-d H:i:s");
+                        $query="INSERT INTO `tbl_user` (`user_email`, `user_password`, `family_code`, `user_type_id`, `user_first_name`, `user_last_name`, `user_address`, `user_phone`, `user_gender_id`, `is_active`, `user_created_datetime`, `user_modified_datetime`) VALUES ('".$email."','".$password."','".$family_code."','".$type."','".$first_name."','".$last_name."','".$address."','".$phone."','".$gender."','".$status."','".$time."','".$time."')";
+                        $result = $conn->query($query);
+
+                        $query="INSERT INTO `tbl_summary_record` (`user_email`, `family_code`, `opening_balance`, `total_spending`, `total_topup_cash`, `total_topup_online`, `total_refund`, `balance`, `created_time`) VALUES ('".$email."','".$family_code."','0','0','0','0','0','0','".$time."')";
+                        $result = $conn->query($query);
+
+                        $query = "SELECT * FROM tbl_family_code_amount WHERE family_code='".$family_code."'";
+                        $result = $conn->query($query);
+                        if($result->num_rows > 0){
+                            $row = $result->fetch_assoc();
+                        } else{
+                            $query2 = "INSERT INTO `tbl_family_code_amount` (family_code, amount, date_created, date_updated) VALUES ('".$family_code."', '0', '".$time."', '".$time."')";
+                            $result2 = $conn->query($query2);
+                        }
+                        $total_number++;
                     }
-                    $total_number++;
                 }
             }
             echo "Saved ".$total_number." users";

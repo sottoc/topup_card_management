@@ -69,11 +69,12 @@
                 retryLimit : 3,
                 success : function(info) {
                     var info = JSON.parse(info);
-                    var amount = 0;
-                    if(info.response.data != "No"){
+                    var data = info.response.data;
+                    console.log(data);
+                    if(data[0] == "Already used!"){
                         $("#family_code_check_tip").show();
-                        amount = info.response.data;
                     }
+                    var amount = data[1];
                     $("input[name='card_value']").val(amount);
                 },
                 error : function(xhr, textStatus, errorThrown ) {
