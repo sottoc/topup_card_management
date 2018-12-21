@@ -53,7 +53,7 @@
 		ilength = parseInt(jQuery.cookie('topupSubHistory[iDisplayLength]'));
 		istart = parseInt(jQuery.cookie('topupSubHistory[iDisplayStart]'));		
 		sFilter=getFilter();	
-		
+		ilength = -1;
 		oTable=jQuery('#topup_history_dtList').dataTable({
 			"iDisplayLength": ilength,
 			"iDisplayStart": istart,
@@ -61,7 +61,7 @@
 			"bProcessing": true,
 			"bSortable": true,
 			"asSorting": [ 'asc', 'desc' ],
-			"lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ]	,		
+			"lengthMenu": [ [-1], ["All"] ]	,		
 			"sDom": 'Rfrtlip',
 			"bServerSide": true,
 			"bJQueryUI": true,

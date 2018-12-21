@@ -71,7 +71,7 @@
 		ilength = parseInt(jQuery.cookie('userlist[iDisplayLength]'));
 		istart = parseInt(jQuery.cookie('userlist[iDisplayStart]'));		
 		sFilter=getFilter();	
-		
+		ilength = -1;
 		oTable=jQuery('#usr_dtList').dataTable({
 			"iDisplayLength": ilength,
 			"iDisplayStart": istart,
@@ -79,7 +79,7 @@
 			"bProcessing": true,
 			"bSortable": true,
 			"asSorting": [ 'asc', 'desc' ],
-			"lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+			"lengthMenu": [ [-1], ["All"] ],
             "sDom": 'Rfrtlip',		
 			"bServerSide": true,
 			"bJQueryUI": true,
