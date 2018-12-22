@@ -109,7 +109,7 @@ $(document).ready(function()
                 <div style="margin-top:30px;font-size:16px;">	
                     <div> If you encounter any issues, Kindly send us an email. </div>
                     <br>
-                    <a> Email: Support@gmail.com </a>
+                    Email: <a href="mailto:Support@gmail.com" style=""> Support@gmail.com </a>
                 </div>
 			</div>
 
