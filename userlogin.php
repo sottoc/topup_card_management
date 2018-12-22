@@ -200,3 +200,4 @@ jQuery(document).ready(function()
 	require ("library/closedb.php");
 	require ("footer.php");
 ?>
+<span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=By2iIIj040vuizYbNUtfSc0L4o1upGr5OKHfLaxAvP3y2ewD9QeRgailkYpa"></script></span>
