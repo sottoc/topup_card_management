@@ -138,7 +138,7 @@ jQuery(document).ready(function()
 		<form method="post" id="frmuserlogin" name="frmuserlogin">
 
 			<div align="center">
-				<h2 style="font-size:30px;"> Welcome to Compass Food Card Website </h2>
+				<h2 style="font-size:30px;"> Welcome to Compass Food Card Portal </h2>
 				<div style="font-size:16px"> Delivering great food and support services in around 50 countries at more than 55,000 client locations </div>
 				<div style="margin-top:30px;">
 					<span class="label-span"> Login Email: </span> 
@@ -196,8 +196,8 @@ jQuery(document).ready(function()
 			?>
 		</form>
 	</div>
+	<span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=By2iIIj040vuizYbNUtfSc0L4o1upGr5OKHfLaxAvP3y2ewD9QeRgailkYpa"></script></span>
 <?php
 	require ("library/closedb.php");
 	require ("footer.php");
 ?>
-<span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=By2iIIj040vuizYbNUtfSc0L4o1upGr5OKHfLaxAvP3y2ewD9QeRgailkYpa"></script></span>
