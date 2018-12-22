@@ -162,6 +162,10 @@ jQuery(document).ready(function()
 					<br>
 					Email: <a href="mailto:Support@gmail.com" style=""> Support@gmail.com </a>
 				</div>
+				<br/>
+				<br/>
+				<br/>
+				<span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=By2iIIj040vuizYbNUtfSc0L4o1upGr5OKHfLaxAvP3y2ewD9QeRgailkYpa"></script></span>
 			</div>
 
 			
@@ -196,7 +200,6 @@ jQuery(document).ready(function()
 			?>
 		</form>
 	</div>
-	<span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSeal?sealID=By2iIIj040vuizYbNUtfSc0L4o1upGr5OKHfLaxAvP3y2ewD9QeRgailkYpa"></script></span>
 <?php
 	require ("library/closedb.php");
 	require ("footer.php");

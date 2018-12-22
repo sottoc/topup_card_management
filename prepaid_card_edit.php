@@ -10,7 +10,7 @@
 	
 	$reportbol = new reportbol();
 
-	require_once('header.php');	
+	require_once('header.php');
 ?>
 <script language="javascript">
 	$(document).ready(function(){
@@ -52,9 +52,9 @@
         }
     }
 
-    // $query = "SELECT created_time FROM tbl_food_purchase_records_old WHERE id>19199 GROUP BY created_time";
+    // $query = "SELECT created_time FROM tbl_food_purchase_records_old WHERE id>20249 GROUP BY created_time";
     // $result = $conn->query($query);
-    // $n = 10837;
+    // $n = 11430;
     // if ($result->num_rows > 0) {
     //     while($row = $result->fetch_assoc()) {
     //         $n = $n + 1;
