@@ -138,8 +138,8 @@ jQuery(document).ready(function()
 		<form method="post" id="frmuserlogin" name="frmuserlogin">
 
 			<div align="center">
-				<h2 style="font-size:30px;"> Welcome to Compass Point Card Website </h2>
-				<div style="font-size:16px"> Our mission is to bring more concern to you and your children. </div>
+				<h2 style="font-size:30px;"> Welcome to Compass Food Card Website </h2>
+				<div style="font-size:16px"> Delivering great food and support services in around 50 countries at more than 55,000 client locations </div>
 				<div style="margin-top:30px;">
 					<span class="label-span"> Login Email: </span> 
 					<input type="text" class="input-text-custom" name="txtemail" id="txtemail"  value="<?php echo $refill_login_email;?>" style="width:50%"> 
