@@ -99,34 +99,24 @@
     // exit;
 
     //-------------------------------- update family code amount ------------------------
-    // $query = "SELECT card_id, total_amount, created_time FROM tbl_food_bill_records";
+    // $query = "SELECT Family_code, Card_value FROM tbl_card1_old";
     // $result = $conn->query($query);
     // if ($result->num_rows > 0) {
     //     while($row = $result->fetch_assoc()) {
-    //         $created_time = $row['created_time'];
-    //         $card_id = $row['card_id'];
-    //         $total_amount = $row['total_amount'];
-    //         $query1 = "SELECT Family_code FROM tbl_card1 WHERE Card_ID = '".$card_id."'";
+    //         $family_code = $row['Family_code'];
+    //         $card_value = $row['Card_value'];
+    //         $query1 = "SELECT amount FROM tbl_family_code_amount WHERE Family_code = '".$family_code."'";
     //         $result1 = $conn->query($query1);
     //         if ($result1->num_rows > 0) {
     //             while($row1 = $result1->fetch_assoc()) {
-    //                 $family_code = $row1['Family_code'];
-    //                 $query2 = "SELECT date_updated, amount FROM tbl_family_code_amount WHERE family_code = '".$family_code."'";
-    //                 $result2 = $conn->query($query2);
-    //                 if ($result2->num_rows > 0) {
-    //                     while($row2 = $result2->fetch_assoc()) {
-    //                         $update_time = $row2['date_updated'];
-    //                         $amount = $row2['amount'];
-    //                         $time1 = DateTime::createFromFormat('Y-m-d H:i:s', $created_time);
-    //                         $time2 = DateTime::createFromFormat('Y-m-d H:i:s', $update_time);
-    //                         if($time1 < $time2){
-    //                             $new_amount = floatval($total_amount) - floatval($amount);
-
-    //                         }
-    //                     }
-    //                 }
+    //                 $amount = $row1['amount'];
+    //                 $amount = floatval($card_value) + floatval($amount);
+    //                 $query3 = "UPDATE tbl_family_code_amount SET amount = '".$amount."' WHERE family_code = '".$family_code."'";
+    //                 $result4 = $conn->query($query3);
+    //                 echo "-------->".$amount;
     //             }
     //         }
+
     //     }
     // }
     // exit;

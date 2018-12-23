@@ -340,7 +340,7 @@
 
 
 <div id="view_log_modal" class="modal" style="padding:50px 35px;padding-top:30px;max-width:850px !important;">
-	<span style='font-size:18px;'> Transaction Detail - <span id='log_first_name'> Michalle </span> <span id='log_last_name'> KONG </span> (UserCode:<span id='log_user_code'></span>) </span>
+	<span style='font-size:18px;'> Transaction Detail - <span id='log_first_name'> </span> <span id='log_last_name'> </span> (UserCode:<span id='log_user_code'></span>) </span>
     <br>
 	<div style="max-height:400px;overflow-y:scroll;">
 		<table style='margin-top:20px;'>
