@@ -97,6 +97,40 @@
     //     }
     // }
     // exit;
+
+    //-------------------------------- update family code amount ------------------------
+    // $query = "SELECT card_id, total_amount, created_time FROM tbl_food_bill_records";
+    // $result = $conn->query($query);
+    // if ($result->num_rows > 0) {
+    //     while($row = $result->fetch_assoc()) {
+    //         $created_time = $row['created_time'];
+    //         $card_id = $row['card_id'];
+    //         $total_amount = $row['total_amount'];
+    //         $query1 = "SELECT Family_code FROM tbl_card1 WHERE Card_ID = '".$card_id."'";
+    //         $result1 = $conn->query($query1);
+    //         if ($result1->num_rows > 0) {
+    //             while($row1 = $result1->fetch_assoc()) {
+    //                 $family_code = $row1['Family_code'];
+    //                 $query2 = "SELECT date_updated, amount FROM tbl_family_code_amount WHERE family_code = '".$family_code."'";
+    //                 $result2 = $conn->query($query2);
+    //                 if ($result2->num_rows > 0) {
+    //                     while($row2 = $result2->fetch_assoc()) {
+    //                         $update_time = $row2['date_updated'];
+    //                         $amount = $row2['amount'];
+    //                         $time1 = DateTime::createFromFormat('Y-m-d H:i:s', $created_time);
+    //                         $time2 = DateTime::createFromFormat('Y-m-d H:i:s', $update_time);
+    //                         if($time1 < $time2){
+    //                             $new_amount = floatval($total_amount) - floatval($amount);
+
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
+    // exit;
+
 ?>
 
 <div class="prepaid_card_edit_div" style="width:80%; margin:0 auto;">
