@@ -188,6 +188,13 @@
 						<?php } ?>
 					</ul>
 				</li>
+				<?php if($_SESSION ['login_user_type_id']==1){ ?><!--admin user type -->
+				<li><a href="#" ><?php echo "SETTINGS"; ?></a>
+					<ul style='display: none;' class='dropdown'>
+						<li><a href="topup_online_setting.php" ><?php echo "Online Topup Settings"; ?></a></li>
+					</ul>
+				</li>
+				<?php } ?>
 			</ul>
 		</div>
 		
