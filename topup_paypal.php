@@ -71,7 +71,7 @@
 				</td>
 				<?php foreach ($all_box as $box) {  ?>
 					<td>
-						<div class="topup-amount-div" data="30">
+						<div class="topup-amount-div" data="<?php echo $box[1];?>">
 							<strong> $<?php echo $box[1];?> </strong>
 							<div style="font-size:16px;font-weight:600;"> Extra $<?php echo $box[3];?> for first <?php echo $box[4];?> times topup </div>
 						</div>
