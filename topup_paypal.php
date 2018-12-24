@@ -35,6 +35,26 @@
 	);
 </script>
 
+<?php
+    require_once('api/api_common.php');
+    $query = "SELECT * FROM `tbl_topup_box` ORDER BY amount";
+    $result = $conn->query($query);
+    $all_box = array();
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $box = array();
+            $box[] = $row['box_id'];
+            $box[] = $row['amount'];
+            $box[] = $row['description'];
+            $box[] = $row['bonus_value'];
+            $box[] = $row['limit_times'];
+            $box[] = $row['datetime_from'];
+            $box[] = $row['datetime_to'];
+            array_push($all_box, $box);
+        }
+    }
+?>
+
 <div class="content_data">
 	<div class="product">            
 	  
@@ -49,26 +69,14 @@
 						<strong> $0.01(Test) </strong>
 					</div>
 				</td>
-				<td>
-					<div class="topup-amount-div" data="30">
-						<strong> $30 </strong>
-					</div>
-				</td>
-				<td>
-					<div class="topup-amount-div" data="50">
-						<strong> $50 </strong>
-					</div>
-				</td>
-				<td>
-					<div class="topup-amount-div" data="100">
-						<strong> $100 </strong>
-					</div>
-				</td>
-				<td>
-					<div class="topup-amount-div" data="150">
-						<strong> $150 </strong>
-					</div>
-				</td>
+				<?php foreach ($all_box as $box) {  ?>
+					<td>
+						<div class="topup-amount-div" data="30">
+							<strong> $<?php echo $box[1];?> </strong>
+							<div style="font-size:16px;font-weight:600;"> Extra $<?php echo $box[3];?> for first <?php echo $box[4];?> times topup </div>
+						</div>
+					</td>
+				<?php } ?>
 			</tr>
 		</table>
 		<br/>
