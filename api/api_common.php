@@ -2,7 +2,7 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "topup_card_management";
+    $dbname = "topup_card_management_1";
     $uploadPath = $_SERVER['DOCUMENT_ROOT'].'/2018-8-13-Singapore/work/topup_card_management/upload/profile';
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);

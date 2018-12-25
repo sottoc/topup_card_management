@@ -2,7 +2,7 @@
 	$dbhost = 'localhost';
 	$dbuser = 'root';
 	$dbpass = '';//'lycee';
-	$dbname = 'topup_card_management'; 
+	$dbname = 'topup_card_management_1'; 
 	//$rootpath = 'http://localhost/topup_card_management';
 	function url(){
 		return sprintf(
