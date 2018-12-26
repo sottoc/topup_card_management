@@ -412,12 +412,9 @@
 		});
 
         $("#edit_box_btn").click(function(e){
-            if($("#bonus_type_edit").val() == "2"){
-                return;
-            }
             var id = $(e.target).attr('data-id');
             var amount = $("#box_amount_edit").val();
-            if(amount == "-1"){ $("#box_amount_edit").focus(); return; }  // return;
+            if(amount == ""){ $("#box_amount_edit").focus(); return; }  // return;
             var description = $("#box_description_edit").val();
             if(description == ""){ $("#box_description_edit").focus(); return; } // return;
             if($("#bonus_type_edit").val() == "-1"){ $("#bonus_type_edit").focus(); return; } // return;
@@ -427,11 +424,11 @@
             }
             var limit_times = $("#limit_times_edit").val();
             var sel_date_from = $("#sel_date_from_edit").val();
-            if(sel_date_from == "Choose date"){ $("#sel_date_from_edit").focus(); return; } // return;
+            if($("#bonus_type_edit").val() != "2" && sel_date_from == "Choose Date"){ $("#sel_date_from_edit").focus(); return; } // return;
             var sel_time_from = $("#sel_time_from_edit").val();
             sel_time_from = sel_time_from + ":00:00";
             var sel_date_to = $("#sel_date_to_edit").val();
-            if(sel_date_to == "Choose date"){ $("#sel_date_to_edit").focus(); return; } // return;
+            if($("#bonus_type_edit").val() != "2" && sel_date_to == "Choose Date"){ $("#sel_date_to_edit").focus(); return; } // return;
             var sel_time_to = $("#sel_time_to_edit").val();
             sel_time_to = sel_time_to + ":00:00";
             //----- call API -------
@@ -523,7 +520,7 @@
         <tr>
             <td style="float:right;"> Description: </td>
             <td class="td-2"> 
-                <textarea id='box_description_edit' class="input-text-custom" disabled> </textarea>
+                <textarea id='box_description_edit' class="input-text-custom"> </textarea>
             </td>
         </tr>
         <tr>
