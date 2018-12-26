@@ -8,7 +8,7 @@
 
     $id = $request['id'];
 
-    $query = "DELETE FROM tbl_topup_box WHERE box_id = '".$id."'";
+    $query = "UPDATE `tbl_topup_box` SET `box_status`='0' WHERE box_id = '".$id."'";
     $result = $conn->query($query);
 
     display_results("Successfully removed!");

@@ -22,7 +22,7 @@
     $datetime_from = $sel_date_from.' '.$sel_time_from;
     $datetime_to = $sel_date_to.' '.$sel_time_to;
 
-    $query = "INSERT INTO `tbl_topup_box`(`amount`, `description`, `bonus_value`, `limit_times`, `datetime_from`, `datetime_to`) VALUES ('".$amount."','".$description."','".$bonus_value."','".$limit_times."','".$datetime_from."','".$datetime_to."')";
+    $query = "INSERT INTO `tbl_topup_box`(`amount`, `description`, `bonus_value`, `limit_times`, `datetime_from`, `datetime_to`, `box_status`) VALUES ('".$amount."','".$description."','".$bonus_value."','".$limit_times."','".$datetime_from."','".$datetime_to."','1')";
     $result = $conn->query($query);
 
     display_results("Successfully Saved!");

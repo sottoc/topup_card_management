@@ -49,7 +49,8 @@
             $box[] = $row['bonus_value'];
             $box[] = $row['limit_times'];
             $box[] = $row['datetime_from'];
-            $box[] = $row['datetime_to'];
+			$box[] = $row['datetime_to'];
+			$box[] = $row['box_status'];
             array_push($all_box, $box);
         }
     }
@@ -69,14 +70,18 @@
 						<strong> $0.01(Test) </strong>
 					</div>
 				</td>
-				<?php foreach ($all_box as $box) {  ?>
+				<?php foreach ($all_box as $box) { if($box[7] == '1'){  ?>
 					<td>
 						<div class="topup-amount-div" data="<?php echo $box[1];?>">
 							<strong> $<?php echo $box[1];?> </strong>
+							<?php if($box[3] != "0"){ ?>
 							<div style="font-size:16px;font-weight:600;"> Extra $<?php echo $box[3];?> for first <?php echo $box[4];?> times topup </div>
+							<?php } else {?>
+							<div style="font-size:16px;font-weight:600;visibility:hidden;"> Extra $<?php echo $box[3];?> for first <?php echo $box[4];?> times topup </div>
+							<?php }?>
 						</div>
 					</td>
-				<?php } ?>
+				<?php } } ?>
 			</tr>
 		</table>
 		<br/>

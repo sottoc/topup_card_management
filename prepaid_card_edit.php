@@ -52,9 +52,9 @@
         }
     }
 
-    // $query = "SELECT created_time FROM tbl_food_purchase_records_old WHERE id>20249 GROUP BY created_time";
+    // $query = "SELECT created_time FROM tbl_food_purchase_records_old WHERE id>0 GROUP BY created_time";
     // $result = $conn->query($query);
-    // $n = 11430;
+    // $n = 1;
     // if ($result->num_rows > 0) {
     //     while($row = $result->fetch_assoc()) {
     //         $n = $n + 1;
@@ -105,7 +105,7 @@
     //     while($row = $result->fetch_assoc()) {
     //         $family_code = $row['Family_code'];
     //         $card_value = $row['Card_value'];
-    //         $query1 = "SELECT amount FROM tbl_family_code_amount WHERE Family_code = '".$family_code."'";
+    //         $query1 = "SELECT amount FROM tbl_family_code_amount WHERE family_code = '".$family_code."'";
     //         $result1 = $conn->query($query1);
     //         if ($result1->num_rows > 0) {
     //             while($row1 = $result1->fetch_assoc()) {
@@ -116,10 +116,30 @@
     //                 echo "-------->".$amount;
     //             }
     //         }
-
     //     }
     // }
     // exit;
+
+    // $query = "SELECT Family_code, Card_value FROM tbl_card1_old";
+    // $result = $conn->query($query);
+    // date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
+    // $time = date("Y-m-d H:i:s");
+    // $n = 0;
+    // if ($result->num_rows > 0) {
+    //     while($row = $result->fetch_assoc()) {
+    //         $family_code = $row['Family_code'];
+    //         $query1 = "SELECT * FROM tbl_family_code_amount WHERE family_code = '".$family_code."'";
+    //         $result1 = $conn->query($query1);
+    //         if($result1->num_rows > 0){
+    //             $Ok = "Ok";
+    //         } else{
+    //             $query2 = "INSERT INTO `tbl_family_code_amount` (family_code, amount, date_created, date_updated) VALUES ('".$family_code."', '0', '".$time."', '".$time."')";
+    //             $result2 = $conn->query($query2);
+    //             $n++;
+    //             echo "------>".$n;
+    //         }
+    //     }
+    // }
 
 ?>
 

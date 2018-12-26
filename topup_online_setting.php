@@ -90,6 +90,7 @@
             $box[] = $row['limit_times'];
             $box[] = $row['datetime_from'];
             $box[] = $row['datetime_to'];
+            $box[] = $row['box_status'];
             array_push($all_box, $box);
         }
     }
@@ -133,40 +134,31 @@
     <a href="#online_topup_settings" rel="modal:open" class="control-button"> Add </a>
     <br/>
     <div class="topup-content"> 
-        <?php foreach ($all_box as $box) {  ?>
+        <?php foreach ($all_box as $box) { if($box[7] == '1') { ?>
             <div class="topup-model-box">
                 <table>
                     <tr> 
-                        <td> <div class="topup-detail"> $<?php echo $box[1]; ?>: Extra $<?php echo $box[3];?> for first <span class="limit-times"> <?php echo $box[4];?> </span> times topup </div>  </td>
+                        <td align="center"> 
+                            <div class="topup-detail"> 
+                                $<?php echo $box[1]; ?> 
+                                <?php if($box[3] != "0") { ?>
+                                : Extra $<?php echo $box[3];?> for first <span class="limit-times"> <?php echo $box[4];?> </span> times topup
+                                <?php } ?>
+                            </div>  
+                        </td>
                         <td> <div class="buttons"> 
                         <a href="#online_topup_box_edit" rel="modal:open" class="edit-button edit-box" data-id="<?php echo $box[0];?>" data-amount="<?php echo $box[1];?>" data-description="<?php echo $box[2];?>" data-bonus-value="<?php echo $box[3];?>" data-limit-times="<?php echo $box[4];?>" data-datetime-from="<?php echo $box[5];?>" data-datetime-to="<?php echo $box[6];?>"> Edit </a>  
                         &nbsp;&nbsp;&nbsp; <a data-id="<?php echo $box[0];?>" class="edit-button delete-box"> Delete </a> 
                         </div> </td>
                     </tr>
                     <tr>
-                        <td>
-                            <span style="color:#72ab72;"> Top Up Amount(SGD): </span> 
-                            <span style="color:#ea5f5f;"> <?php echo $box[2];?> </span> 
+                        <td align="center">
+                            <span style="color:#ea5f5f;font-size:17px;margin-left:30px;"> (<?php echo $box[2];?>) </span> 
                         </td>
                     </tr>
                 </table>
             </div>
-        <?php } ?>
-        
-        <!-- <div class="topup-model-box">
-            <table>
-                <tr> 
-                    <td> 
-                        <div class="topup-detail">
-                            <span style="color:#1b8e1b;"> Top Up Amount(SGD): </span> 
-                            <span style="color:#fd3333;"> Description </span> 
-                        </div> 
-                    </td>
-                    <td> <div class="buttons"> <a class="edit-button"> Edit </a>  &nbsp;&nbsp;&nbsp; <a class="edit-button"> Delete </a> </div> </td>
-                </tr>
-            </table>
-        </div> -->
-        
+        <?php }} ?>
     </div>
 </div>
 
@@ -174,9 +166,25 @@
     function changeBonusType(e){
         if($(e).val() == "0"){
             $("#bonus_type_symbol").html("($)");
-        } else{
+        } else if($(e).val() == "1"){
             $("#bonus_type_symbol").html("(%)");
+        } else{
+            $("#bonus_value").val("0");
+            $("#limit_times").val("0");
+            $("#bonus_value").attr('disabled', true);
+            $("#limit_times").attr('disabled', true);
+            $("#sel_date_from").attr('disabled', true);
+            $("#sel_time_from").attr('disabled', true);
+            $("#sel_date_to").attr('disabled', true);
+            $("#sel_time_to").attr('disabled', true);
+            return;
         }
+        $("#bonus_value").attr('disabled', false);
+        $("#limit_times").attr('disabled', false);
+        $("#sel_date_from").attr('disabled', false);
+        $("#sel_time_from").attr('disabled', false);
+        $("#sel_date_to").attr('disabled', false);
+        $("#sel_time_to").attr('disabled', false);
         $("#bonus_value").focus();
         $("#bonus_value").val("1");
         $("#limit_times").val("1");
@@ -187,7 +195,7 @@
 
         $("#add_new_box").click(function(){
             var amount = $("#box_amount").val();
-            if(amount == "-1"){ $("#box_amount").focus(); return; }  // return;
+            if(amount == ""){ $("#box_amount").focus(); return; }  // return;
             var description = $("#box_description").val();
             if(description == ""){ $("#box_description").focus(); return; } // return;
             if($("#bonus_type").val() == "-1"){ $("#bonus_type").focus(); return; } // return;
@@ -197,12 +205,18 @@
             }
             var limit_times = $("#limit_times").val();
             var sel_date_from = $("#sel_date_from").val();
-            if(sel_date_from == "Choose date"){ $("#sel_date_from").focus(); return; } // return;
+            if($("#bonus_type").val() != "2" && sel_date_from == "Choose Date"){ $("#sel_date_from").focus(); return; } // return;
             var sel_time_from = $("#sel_time_from").val();
+            if($("#bonus_type").val() == "2"){
+                sel_time_from = "00";
+            }
             sel_time_from = sel_time_from + ":00:00";
             var sel_date_to = $("#sel_date_to").val();
-            if(sel_date_to == "Choose date"){ $("#sel_date_to").focus(); return; } // return;
+            if($("#bonus_type").val() != "2" && sel_date_to == "Choose Date"){ $("#sel_date_to").focus(); return; } // return;
             var sel_time_to = $("#sel_time_to").val();
+            if($("#bonus_type").val() == "2"){
+                sel_time_to = "00";
+            }
             sel_time_to = sel_time_to + ":00:00";
             //----- call API -------
             var obj = {
@@ -245,32 +259,23 @@
         <tr>
             <td style="float:right;"> Topup Amount(SGD): </td>
             <td class="td-2"> 
-                <!-- <input type="text" id="topup_amount" class="input-text-custom" />  -->
-                <select id="box_amount" class="select-custom" onChange="">
-                    <option value='-1'> Choose Amount </option>
-                    <option value='10'> 10 </option>
-                    <option value='30'> 30 </option>
-                    <option value='50'> 50 </option>
-                    <option value='100'> 100 </option>
-                    <option value='150'> 150 </option>
-                    <option value='200'> 200 </option>
-                    <option value='500'> 500 </option>
-                </select>
+                <input type="number" id="box_amount" class="input-text-custom" min="1"/> 
             </td>
         </tr>
         <tr>
             <td style="float:right;"> Description: </td>
             <td class="td-2"> 
-                <textarea id='box_description' class="input-text-custom" placeholder='Enter refund reason'> </textarea>
+                <textarea id='box_description' class="input-text-custom"> </textarea>
             </td>
         </tr>
         <tr>
             <td style="float:right;"> Bonus Type: </td>
             <td class="td-2">
                 <select id="bonus_type" class="select-custom" onChange="changeBonusType(this)">
-                    <option value='-1'> Amount/Percentage </option>
+                    <option value='-1'> Choose Bonus Type </option>
                     <option value='0'> Amount </option>
                     <option value='1'> Percentage </option>
+                    <option value='2'> No Bonus </option>
                 </select>
             </td>
         </tr>
@@ -294,7 +299,7 @@
                 <table>
                     <tr> 
                         <td> 
-                            <input type="text" value="Choose date" name="sel_date_from" id="sel_date_from" class='input-text-custom' style="width:150px"/>
+                            <input type="text" value="Choose Date" name="sel_date_from" id="sel_date_from" class='input-text-custom' style="width:150px"/>
                         </td>
                         <td> 
                             <select id="sel_time_from" class="select-custom">
@@ -336,7 +341,7 @@
                 <table>
                     <tr> 
                         <td> 
-                            <input type="text" value="Choose date" name="sel_date_to" id="sel_date_to" class='input-text-custom' style="width:150px"/>
+                            <input type="text" value="Choose Date" name="sel_date_to" id="sel_date_to" class='input-text-custom' style="width:150px"/>
                         </td>
                         <td> 
                             <select id="sel_time_to" class="select-custom">
@@ -406,7 +411,10 @@
 			}
 		});
 
-        $("#add_new_box_edit").click(function(e){
+        $("#edit_box_btn").click(function(e){
+            if($("#bonus_type_edit").val() == "2"){
+                return;
+            }
             var id = $(e.target).attr('data-id');
             var amount = $("#box_amount_edit").val();
             if(amount == "-1"){ $("#box_amount_edit").focus(); return; }  // return;
@@ -462,7 +470,7 @@
         setTimeout(() => {
             $(".edit-button.edit-box").click(function(e){
                 var id = $(e.target).attr('data-id');
-                $("#add_new_box_edit").attr('data-id', id);
+                $("#edit_box_btn").attr('data-id', id);
                 $("#box_amount_edit").val($(e.target).attr('data-amount'));
                 $("#box_description_edit").html($(e.target).attr('data-description'));
                 $("#bonus_value_edit").val($(e.target).attr('data-bonus-value'));
@@ -478,6 +486,26 @@
                 $("#sel_date_to_edit").val(datetime_to[0]);
                 time_to = datetime_to[1];
                 $("#sel_time_to_edit").val(time_to.substring(0,2));
+
+                if($("#bonus_value_edit").val() == "0"){
+                    $("#bonus_type_edit").val("2");
+                    $("#limit_times_edit").attr('disabled', true);
+                    $("#sel_date_from_edit").attr('disabled', true);
+                    $("#sel_time_from_edit").attr('disabled', true);
+                    $("#sel_date_to_edit").attr('disabled', true);
+                    $("#sel_time_to_edit").attr('disabled', true);
+                    $("#sel_date_from_edit").val("Choose Date");
+                    $("#sel_time_from_edit").val("-1");
+                    $("#sel_date_to_edit").val("Choose Date");
+                    $("#sel_time_to_edit").val("-1");
+                } else{
+                    $("#bonus_type_edit").val("0");
+                    $("#limit_times_edit").attr('disabled', false);
+                    $("#sel_date_from_edit").attr('disabled', false);
+                    $("#sel_time_from_edit").attr('disabled', false);
+                    $("#sel_date_to_edit").attr('disabled', false);
+                    $("#sel_time_to_edit").attr('disabled', false);
+                }
             });
         }, 500);
     });
@@ -489,39 +517,30 @@
         <tr>
             <td style="float:right;"> Topup Amount(SGD): </td>
             <td class="td-2"> 
-                <!-- <input type="text" id="topup_amount" class="input-text-custom" />  -->
-                <select id="box_amount_edit" class="select-custom" onChange="">
-                    <option value='-1'> Choose Amount </option>
-                    <option value='10'> 10 </option>
-                    <option value='30'> 30 </option>
-                    <option value='50'> 50 </option>
-                    <option value='100'> 100 </option>
-                    <option value='150'> 150 </option>
-                    <option value='200'> 200 </option>
-                    <option value='500'> 500 </option>
-                </select>
+                <input type="number" id="box_amount_edit" class="input-text-custom" min="1" disabled/> 
             </td>
         </tr>
         <tr>
             <td style="float:right;"> Description: </td>
             <td class="td-2"> 
-                <textarea id='box_description_edit' class="input-text-custom" placeholder='Enter refund reason'> </textarea>
+                <textarea id='box_description_edit' class="input-text-custom" disabled> </textarea>
             </td>
         </tr>
         <tr>
             <td style="float:right;"> Bonus Type: </td>
             <td class="td-2">
-                <select id="bonus_type_edit" class="select-custom" onChange="changeBonusTypeEdit(this)">
-                    <option value='-1'> Amount/Percentage </option>
-                    <option value='0' selected> Amount </option>
+                <select id="bonus_type_edit" class="select-custom" onChange="changeBonusTypeEdit(this)" disabled>
+                    <option value='-1'> Choose Bonus Type </option>
+                    <option value='0'> Amount </option>
                     <option value='1'> Percentage </option>
+                    <option value='2'> No Bonus </option>
                 </select>
             </td>
         </tr>
         <tr>
             <td style="float:right;"> Value: </td>
             <td class="td-2">
-                <input type="number" id="bonus_value_edit" class="input-text-custom" min="1" max="100" style="width:100px;"/> 
+                <input type="number" id="bonus_value_edit" class="input-text-custom" min="1" max="100" style="width:100px;" disabled/> 
                 <span id="bonus_type_symbol_edit"> ($) </span>
             </td>
         </tr>
@@ -538,7 +557,7 @@
                 <table>
                     <tr> 
                         <td> 
-                            <input type="text" value="Choose date" name="sel_date_from" id="sel_date_from_edit" class='input-text-custom' style="width:150px"/>
+                            <input type="text" value="Choose Date" name="sel_date_from" id="sel_date_from_edit" class='input-text-custom' style="width:150px"/>
                         </td>
                         <td> 
                             <select id="sel_time_from_edit" class="select-custom">
@@ -580,7 +599,7 @@
                 <table>
                     <tr> 
                         <td> 
-                            <input type="text" value="Choose date" name="sel_date_to" id="sel_date_to_edit" class='input-text-custom' style="width:150px"/>
+                            <input type="text" value="Choose Date" name="sel_date_to" id="sel_date_to_edit" class='input-text-custom' style="width:150px"/>
                         </td>
                         <td> 
                             <select id="sel_time_to_edit" class="select-custom">
@@ -619,7 +638,7 @@
     <div align="center" style="margin-top:50px;">
         <a class="control-button" href="#" rel="modal:close" id='close_modal_btn'> Cancel </a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a class="control-button" id="add_new_box_edit"> Update </a>
+        <a class="control-button" id="edit_box_btn"> Update </a>
     </div>
 </div>
 
