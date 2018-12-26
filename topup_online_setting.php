@@ -192,9 +192,41 @@
         $("#limit_times").val("1");
     }
 
+    
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+    function isZero(e){
+        var value = $(e).val();
+        var x = value.substring(0,1);
+        if(x == "0"){
+            $(e).val("");
+            return false;
+        }
+        if($(e).attr('id') == 'bonus_value'){
+            console.log($(e).attr('id'));
+            if($("#bonus_type").val() == "1"){
+                if(parseInt(value) >= 100){
+                    var v = value.substring(0,2);
+                    $("#bonus_value").val(v);
+                }
+            } else if($("#bonus_type").val() == "0"){
+                if(parseInt(value) >= parseInt($("#box_amount").val())){
+                    var v = value.substring(0, value.length - 1);
+                    console.log(v);
+                    $("#bonus_value").val(v);
+                }
+            }
+        }
+    }
+
     $(document).ready(function(){
         $("#box_description").val("");
-
         $("#add_new_box").click(function(){
             var amount = $("#box_amount").val();
             if(amount == ""){ $("#box_amount").focus(); return; }  // return;
@@ -251,7 +283,6 @@
                 }
             });
         });
-
     });
 </script>
 
@@ -261,7 +292,7 @@
         <tr>
             <td style="float:right;"> Topup Amount(SGD): </td>
             <td class="td-2"> 
-                <input type="number" id="box_amount" class="input-text-custom" min="1"/> 
+                <input type="number" id="box_amount" onkeyup="return isZero(this)" onkeypress="return isNumberKey(event)" class="input-text-custom" min="1"/> 
             </td>
         </tr>
         <tr>
@@ -284,14 +315,14 @@
         <tr>
             <td style="float:right;"> Value: </td>
             <td class="td-2">
-                <input type="number" id="bonus_value" class="input-text-custom" min="1" max="100" style="width:100px;"/> 
+                <input type="number" id="bonus_value" onkeyup="return isZero(this)" onkeypress="return isNumberKey(event)" class="input-text-custom" min="1" max="100" style="width:100px;"/> 
                 <span id="bonus_type_symbol">  </span>
             </td>
         </tr>
         <tr>
             <td style="float:right;"> Limit: </td>
             <td class="td-2">
-                <input type="number" id="limit_times" class="input-text-custom" min="1" max="10" style="width:100px;"/> 
+                <input type="number" id="limit_times" onkeyup="return isZero(this)" onkeypress="return isNumberKey(event)" class="input-text-custom" min="1" max="10" style="width:100px;"/> 
                 <span> times </span>
             </td>
         </tr>

@@ -19,12 +19,14 @@
             //------------- get data from excel file ------------------
             include '../library/excel_reader/excel_reader.php';     // include the class
             $excel = new PhpExcelReader;
+            $excel->setUTFEncoder('iconv');
+            $excel->setOutputEncoding('UTF-8');
             $excel->read($targetPath);
             $nr_sheets = count($excel->sheets);       // gets the number of sheets
             $sheet = $excel->sheets[0];
             $rows = $sheet['numRows'];
             $cols = $sheet['numCols'];
-            if($cols < 5 || $sheet['cells'][1][1] !="User Code" || $sheet['cells'][1][2] != "Family Code"){
+            if($cols < 5){
                 echo "Invalid content!";
                 exit;
             }

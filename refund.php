@@ -374,10 +374,10 @@
 					}
 					data = all_data[1];
 					for(var i=0;i<data.length;i++){
-						if(data[i][4] == "1"){
+						if(data[i][4] == "Cash"){
 							str+="<tr><td><span class='date-time'> " + data[i][2] + " - </span> Topup <strong class='topup-amount'>$" + data[i][1] + "</strong> at POS ID(" + data[i][0] + ") by Card Number(" + data[i][3] + ").</td></tr>";
 						}
-						if(data[i][4] == "0"){
+						if(data[i][4] == "Paypal"){
 							str+="<tr><td><span class='date-time'> " + data[i][2] + " - </span> Topup <strong class='topup-amount'>$" + data[i][1] + "</strong> at Transaction ID(" + data[i][0] + ") by Paypal.</td></tr>";
 						}
 					}

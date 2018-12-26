@@ -13,6 +13,10 @@
     $pos_id = $request['pos_id'];
     $created_date = $request['created_date'];
 
+    if($payment_type == "CASH"){
+        $payment_type = "Cash";
+    }
+
     date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
     $time = date("Y-m-d h:i:s", $created_date);
 

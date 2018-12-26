@@ -22,6 +22,7 @@
 		
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
+		<?php header('Content-type: text/html; charset=utf-8'); ?>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<link rel="stylesheet" href="style/dataTables.jqueryui.css" type="text/css">
 		<link href="style/ufd-base.css" rel="stylesheet" type="text/css" />
