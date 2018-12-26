@@ -44,7 +44,7 @@
     $result = $conn->query($query);
 
     //-------- save topup record -----------
-    $payment_type = "1";
+    $payment_type = "Cash";
     $payment_detail = $Card_ID;
     $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$Card_ID."','".$amount."','".$time."')";
     $result = $conn->query($query);

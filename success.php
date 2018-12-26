@@ -69,7 +69,7 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
     $query = "UPDATE `tbl_family_code_amount` SET `amount`=".$new_amount.", `date_updated`='".$time."'  WHERE `family_code`='".$family_code."'";
 	$result = $conn->query($query);
 	
-	$payment_type = "0";
+	$payment_type = "Paypal";
 	$pos_id = $transaction_id;
 	$Card_ID = $transaction_id;
     $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$Card_ID."','".$amount."','".$time."')";

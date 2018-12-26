@@ -54,7 +54,7 @@
             $total_topup_cash = 0; //--------- total_topup_cash -----------------
             $query7 = "SELECT SUM(topup_amount) FROM tbl_food_topup_records";
             $param = " WHERE 1=1 ";
-            $param .= " AND payment_type = '1' AND family_code='".$family_code."'";
+            $param .= " AND payment_type = 'Cash' AND family_code='".$family_code."'";
             $param .= " AND date_created"." >= '".$from."' AND date_created < '".$to."' + interval 1 day";
             $query7 .= $param;
             $result7 = $conn->query($query7);
@@ -68,7 +68,7 @@
             $total_topup_online = 0; //--------- total_topup_online -----------------
             $query9 = "SELECT SUM(topup_amount) FROM tbl_food_topup_records";
             $param = " WHERE 1=1 ";
-            $param .= " AND payment_type = '0' AND family_code='".$family_code."'";
+            $param .= " AND payment_type = 'Paypal' AND family_code='".$family_code."'";
             $param .= " AND date_created"." >= '".$from."' AND date_created < '".$to."' + interval 1 day";
             $query9 .= $param;
             $result9 = $conn->query($query9);

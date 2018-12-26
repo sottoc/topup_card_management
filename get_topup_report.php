@@ -91,10 +91,7 @@
 		// 	$trans_amt = "<font color='blue'>".$aRow['topup_amt']."</font>";
 		$tmpentry[] = htmlspecialchars("$".$aRow['topup_amount']);
 		//$tmpentry[] = htmlspecialchars($cri_str);
-		$payment_type = "Cash";
-		if($aRow['payment_type'] != 1){
-			$payment_type = "Online";
-		}
+		$payment_type = $aRow['payment_type'];
 		$tmpentry[] = htmlspecialchars($payment_type);
 		$response['aaData'][] = $tmpentry;
 	}

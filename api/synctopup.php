@@ -9,11 +9,6 @@
     $card_id = $request['card_id'];
     $amount = $request['amount'];
     $payment_type = $request['payment_type'];
-    if($payment_type == "CASH"){
-        $payment_type = '1';
-    } else{
-        $payment_type = '0';
-    }
     $username = $request['username'];
     $pos_id = $request['pos_id'];
     $created_date = $request['created_date'];

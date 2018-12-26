@@ -67,10 +67,7 @@
 		$tmpentry[] = htmlspecialchars($date_time[0]);
 		$tmpentry[] = htmlspecialchars($date_time[1]);
         
-        $payment_type = "Cash";
-		if($aRow['payment_type'] != 1){
-			$payment_type = "Online";
-		}
+        $payment_type = $aRow['payment_type'];
 		$tmpentry[] = htmlspecialchars($payment_type);
         $tmpentry[] = htmlspecialchars("$".$aRow['topup_amount']);
 
