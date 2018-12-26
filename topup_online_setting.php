@@ -138,7 +138,7 @@
             <div class="topup-model-box">
                 <table>
                     <tr> 
-                        <td align="center"> 
+                        <td align="left" style="padding-left:20px;"> 
                             <div class="topup-detail"> 
                                 $<?php echo $box[1]; ?> 
                                 <?php if($box[3] != "0") { ?>
@@ -146,14 +146,16 @@
                                 <?php } ?>
                             </div>  
                         </td>
-                        <td> <div class="buttons"> 
+                        <td align="right" style="padding-right:20px;"> 
+                        <div class="buttons"> 
                         <a href="#online_topup_box_edit" rel="modal:open" class="edit-button edit-box" data-id="<?php echo $box[0];?>" data-amount="<?php echo $box[1];?>" data-description="<?php echo $box[2];?>" data-bonus-value="<?php echo $box[3];?>" data-limit-times="<?php echo $box[4];?>" data-datetime-from="<?php echo $box[5];?>" data-datetime-to="<?php echo $box[6];?>"> Edit </a>  
                         &nbsp;&nbsp;&nbsp; <a data-id="<?php echo $box[0];?>" class="edit-button delete-box"> Delete </a> 
-                        </div> </td>
+                        </div> 
+                        </td>
                     </tr>
                     <tr>
-                        <td align="center">
-                            <span style="color:#ea5f5f;font-size:17px;margin-left:30px;"> (<?php echo $box[2];?>) </span> 
+                        <td align="left" style="padding-left:20px;">
+                            <span style="color:#ea5f5f;font-size:17px;"> (<?php echo $box[2];?>) </span> 
                         </td>
                     </tr>
                 </table>
