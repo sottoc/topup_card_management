@@ -456,6 +456,7 @@
                 bonus_value = parseInt(amount)*bonus_value/100;
             }
             var limit_times = $("#limit_times_edit").val();
+            if(limit_times == ""){ $("#limit_times_edit").focus(); return; }  // return;
             var sel_date_from = $("#sel_date_from_edit").val();
             if($("#bonus_type_edit").val() != "2" && sel_date_from == "Choose Date"){ $("#sel_date_from_edit").focus(); return; } // return;
             var sel_time_from = $("#sel_time_from_edit").val();
@@ -577,7 +578,7 @@
         <tr>
             <td style="float:right;"> Limit: </td>
             <td class="td-2">
-                <input type="number" id="limit_times_edit" class="input-text-custom" min="1" max="10" style="width:100px;"/> 
+                <input type="number" id="limit_times_edit" onkeyup="return isZero(this)" onkeypress="return isNumberKey(event)" class="input-text-custom" min="1" max="10" style="width:100px;"/> 
                 <span> times </span>
             </td>
         </tr>
