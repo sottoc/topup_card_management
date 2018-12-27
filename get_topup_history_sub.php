@@ -69,7 +69,8 @@
         
         $payment_type = $aRow['payment_type'];
 		$tmpentry[] = htmlspecialchars($payment_type);
-        $tmpentry[] = htmlspecialchars("$".$aRow['topup_amount']);
+		$tmpentry[] = htmlspecialchars("$".$aRow['topup_amount']);
+		$tmpentry[] = htmlspecialchars("$".$aRow['bonus_amount']);
 
 		$response['aaData'][] = $tmpentry;
 	}

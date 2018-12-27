@@ -44,22 +44,6 @@
 			$family_code = $row1['family_code'];
 		}
 	}
-	// $query2 = "SELECT * FROM tbl_topup_box WHERE box_status = '1' AND bonus_value != '0'";
-	// $result2 = $conn->query($query2);
-	// if ($result2->num_rows > 0) {
-    //     while($row2 = $result2->fetch_assoc()) {
-	// 		$box_id = $row2['box_id'];
-	// 		$limit_times = $row2['limit_times'];
-	// 		$query3 = "SELECT * FROM tbl_topup_limit_record WHERE family_code = '".$family_code."' AND box_id = '".$box_id."'";
-	// 		$result3 = $conn->query($query3);
-	// 		if ($result3->num_rows > 0) {
-	// 			$str = "This box already recorded";
-	// 		} else{
-	// 			$query4 = "INSERT INTO `tbl_topup_limit_record` (`family_code`, `box_id`, `limit_times`) VALUES ('".$family_code."','".$box_id."','".$limit_times."')";
-	// 			$result4 = $conn->query($query4);
-	// 		}
-	// 	}
-	// }
 
 	$query = "SELECT * FROM `tbl_topup_box` ORDER BY amount";
     $result = $conn->query($query);
@@ -109,11 +93,16 @@
 						<strong> $0.01(Test) </strong>
 					</div>
 				</td>
-				<?php foreach ($all_box as $box) { if($box[7] == '1'){  ?>
+				<?php foreach ($all_box as $box) { if($box[7] == '1'){ 
+					date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
+					if($box[3] == '0') { $time_to = "2030-01-01 00:00:00"; } else { $time_to = date($box[6]); }
+					$time_now = date("Y-m-d h:i:s");
+					if($time_now < $time_to) {
+				?>
 					<td>
 						<div class="topup-amount-div" data="<?php echo $box[1];?>" box-id="<?php echo $box[0];?>">
 							<strong> $<?php echo $box[1];?> </strong>
-							<?php if($box[3] != "0"){ ?>
+							<?php if($box[3] != "0") { ?>
 							<div style="font-size:16px;font-weight:600;"> Extra $<?php echo $box[3];?> for first <?php if($box[4] == '1') { echo $box[4].' time';} else {echo $box[4].' times';}?> topup </div>
 							<div style="font-size:16px;font-weight:600;color:#a20c0c;"> <?php if($box[8] == '0') { echo '(No left)'; } else if($box[8] == '1'){ echo '(Left 1 time)'; } else { echo '(Left '.$box[8].' times)'; } ?>  </div>
 							<?php } else {?>
@@ -122,7 +111,7 @@
 							<?php }?>
 						</div>
 					</td>
-				<?php } } ?>
+				<?php } } } ?>
 			</tr>
 		</table>
 		<br/>

@@ -85,6 +85,7 @@
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
+							{"bSortable": false,"sWidth":"auto"},
 							{"bSortable": false,"sWidth":"auto"}
 						]
 		});	
@@ -219,7 +220,8 @@
 					<th>Date</th>
 					<th>Time</th>
 					<th>Payment Type</th>
-					<th>Amount</th>
+					<th>Topup Amount</th>
+					<th>Bonus Amount</th>
 				</tr>
 			</thead>
 			<tbody>
