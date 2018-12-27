@@ -93,6 +93,7 @@
 		//$tmpentry[] = htmlspecialchars($cri_str);
 		$payment_type = $aRow['payment_type'];
 		$tmpentry[] = htmlspecialchars($payment_type);
+		$tmpentry[] = htmlspecialchars($aRow['bonus_amount']);
 		$response['aaData'][] = $tmpentry;
 	}
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );

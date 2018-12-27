@@ -96,6 +96,7 @@
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
+							{"bSortable": false,"sWidth":"auto"},
 							{"bSortable": false,"sWidth":"auto"}
 						]
 		});	
@@ -321,6 +322,7 @@
 					<th>Family Code</th>			
 					<th>Amount Topup</th>
 					<th>Payment Type</th>
+					<th>Topup Bonus</th>
 				</tr>
 			</thead>
 			<tbody>

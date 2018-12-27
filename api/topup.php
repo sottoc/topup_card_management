@@ -9,6 +9,9 @@
     $Card_ID = $request['card_id'];
     $amount = $request['amount'];
     $pos_id = $request['pos_id'];
+    $payment_type = $request['payment_type'];
+    $username = $request['username'];
+    $created_date = $request['created_date'];
 
     //--- get family code from card number ------
     $family_code = '';
@@ -25,7 +28,7 @@
 
     //---- get amount from family code ------
     date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
-    $time = date("Y-m-d H:i:s");
+    $time = date("Y-m-d h:i:s", $created_date);
     $origin_amount = 0;
     $query = "SELECT `amount` FROM `tbl_family_code_amount` WHERE `family_code`='".$family_code."'";
     $result = $conn->query($query);
@@ -44,9 +47,11 @@
     $result = $conn->query($query);
 
     //-------- save topup record -----------
-    $payment_type = "Cash";
+    if($payment_type == "CASH"){
+        $payment_type = "Cash";
+    }
     $payment_detail = $Card_ID;
-    $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$Card_ID."','".$amount."','".$time."')";
+    $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `bonus_amount`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$Card_ID."','".$amount."','0','".$time."')";
     $result = $conn->query($query);
 
     display_results("Card value sucessfully chanaged!");
