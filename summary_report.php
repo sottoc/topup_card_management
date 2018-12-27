@@ -344,7 +344,7 @@
 					<th>Opening Balance</th>					
 					<th>Total Spending</th>					
 					<th>Total Topup(Cash)</th>
-					<th>Total Topup(payment)</th>
+					<th>Total Topup(Online)</th>
 					<th>Total Refund</th>
 					<th>Balance</th>
 				</tr>

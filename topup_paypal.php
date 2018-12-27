@@ -37,7 +37,31 @@
 
 <?php
     require_once('api/api_common.php');
-    $query = "SELECT * FROM `tbl_topup_box` ORDER BY amount";
+	$query1 = "SELECT * FROM `tbl_user` WHERE user_email = '".$_SESSION ['login_user_email']."'";
+	$result1 = $conn->query($query1);
+	if ($result1->num_rows > 0) {
+        while($row1 = $result1->fetch_assoc()) {
+			$family_code = $row1['family_code'];
+		}
+	}
+	$query2 = "SELECT * FROM tbl_topup_box WHERE box_status = '1' AND bonus_value != '0'";
+	$result2 = $conn->query($query2);
+	if ($result2->num_rows > 0) {
+        while($row2 = $result2->fetch_assoc()) {
+			$box_id = $row2['box_id'];
+			$limit_times = $row2['limit_times'];
+			$query3 = "SELECT * FROM tbl_topup_limit_record WHERE family_code = '".$family_code."' AND box_id = '".$box_id."'";
+			$result3 = $conn->query($query3);
+			if ($result3->num_rows > 0) {
+				$str = "This box already recorded";
+			} else{
+				$query4 = "INSERT INTO `tbl_topup_limit_record` (`family_code`, `box_id`, `limit_times`) VALUES ('".$family_code."','".$box_id."','".$limit_times."')";
+				$result4 = $conn->query($query4);
+			}
+		}
+	}
+
+	$query = "SELECT * FROM `tbl_topup_box` ORDER BY amount";
     $result = $conn->query($query);
     $all_box = array();
     if ($result->num_rows > 0) {
@@ -51,9 +75,21 @@
             $box[] = $row['datetime_from'];
 			$box[] = $row['datetime_to'];
 			$box[] = $row['box_status'];
+			if($row['bonus_value'] != "0" && $row['box_status'] =="1"){
+				$query1 = "SELECT * FROM tbl_topup_limit_record WHERE family_code = '".$family_code."' AND box_id = '".$row['box_id']."'";
+				$result1 = $conn->query($query1);
+				if ($result1->num_rows > 0) {
+					while($row1 = $result1->fetch_assoc()) {
+						$box[] = $row1['limit_times'];
+					}
+				} else{
+					$box[] = '0';
+				}
+			}
             array_push($all_box, $box);
         }
-    }
+	}
+
 ?>
 
 <div class="content_data">
@@ -72,10 +108,11 @@
 				</td>
 				<?php foreach ($all_box as $box) { if($box[7] == '1'){  ?>
 					<td>
-						<div class="topup-amount-div" data="<?php echo $box[1];?>">
+						<div class="topup-amount-div" data="<?php echo $box[1];?>" box-id="<?php echo $box[0];?>">
 							<strong> $<?php echo $box[1];?> </strong>
 							<?php if($box[3] != "0"){ ?>
-							<div style="font-size:16px;font-weight:600;"> Extra $<?php echo $box[3];?> for first <?php echo $box[4];?> times topup </div>
+							<div style="font-size:16px;font-weight:600;"> Extra $<?php echo $box[3];?> for first <?php if($box[4] == '1') { echo $box[4].' time';} else {echo $box[4].' times';}?> topup </div>
+							<div style="font-size:16px;font-weight:600;color:#a20c0c;"> <?php if($box[8] == '0') { echo '(No left)'; } else if($box[8] == '1'){ echo '(Left 1 time)'; } else { echo '(Left '.$box[8].' times)'; } ?>  </div>
 							<?php } else {?>
 							<div style="font-size:16px;font-weight:600;visibility:hidden;"> Extra $<?php echo $box[3];?> for first <?php echo $box[4];?> times topup </div>
 							<?php }?>
@@ -104,7 +141,7 @@
 				<div class="frm_label">Student Id :</div>
 				<input type="text" name="item_number">
 			</div> -->
-			<input type="hidden" name="item_number" value="204">
+			<input type="hidden" name="item_number" value="0">
 
 			<div class="frm" style="display:none;">
 				<div class="frm_label">Amount : </div>
@@ -158,7 +195,10 @@
 			$(".topup-amount-div").css("background", "rgb(191, 189, 189)");
 			$(this).css("background", "#f0c370");
 			var amount = $(this).attr('data');
+			var box_id = $(this).attr('box-id');
+			console.log(box_id);
 			$("input[name='amount']").val(amount);
+			$("input[name='item_number']").val(box_id);
 		});
 
 		$($(".topup-amount-div")[0]).trigger('click');

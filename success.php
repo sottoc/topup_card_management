@@ -41,7 +41,7 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 	//---------------------------------- code by Qiang -----------------------------
 	$user_email = $_SESSION ['login_user_email'];
 	print_r($user_email."->".$amount);
-	
+
 	//---------------- save in table --------------
 	require_once('api/api_common.php');
 	$uploadPath = $rootpath.'/upload/profile';
@@ -51,6 +51,30 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
         while($row = $result->fetch_assoc()) {
             $family_code = $row['family_code'];
         }
+	}
+	//check bonus for box
+	$box_id = $student_id;
+	$query = "SELECT * FROM tbl_topup_box WHERE box_id = '".$box_id."'";
+	$result = $conn->query($query);
+	if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+			$bonus_value = $row['bonus_value'];
+		}
+	}
+	if($bonus_value != '0'){
+		$query = "SELECT * FROM tbl_topup_limit_record WHERE family_code = '".$family_code."' AND box_id = '".$box_id."'";
+		$result = $conn->query($query);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				$limit_times = $row['limit_times'];
+				if((int)$limit_times >= 1){
+					$limit_times = (int)$limit_times - 1;
+					$query1 = "UPDATE `tbl_topup_limit_record` SET `limit_times`=".$limit_times." WHERE family_code = '".$family_code."' AND box_id = '".$box_id."'";
+					$result1 = $conn->query($query1);
+					$amount = floatval($amount) + floatval($bonus_value);
+				}
+			}
+		}
 	}
 	date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
 	$time = date("Y-m-d H:i:s");
@@ -77,7 +101,7 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 	//------- end save in table ------
 
 	echo "<h2>Your payment is successful</h2>";
-	echo "<div><a href='topup_paypal.php'>Click here</a></div>";
+	echo "<div><a href='topup_history.php'>Click here</a></div>";
 	exit;
 	
 //save in topup table
