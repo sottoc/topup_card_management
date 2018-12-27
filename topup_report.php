@@ -221,7 +221,8 @@
             success : function(info) {
                 var info = JSON.parse(info);
                 console.log(info);
-				$("#total_amount").html(info.response.data);
+				$("#total_amount").html(info.response.data[0]);
+				$("#bonus_amount").html(info.response.data[1]);
             },
             error : function(xhr, textStatus, errorThrown ) {
                 console.log(xhr);
@@ -287,10 +288,11 @@
 			</tr>
 			<tr>
 				<td style='font-size:20px;'>
-					Total Topup amount : $ <span id="total_amount">  </span>
+					<div> Total Topup amount : $ <span id="total_amount">  </span> </div>
+					<div> Total Bonus amount : $ <span id="bonus_amount">  </span> </div>
 				</td>
                 <td style="width:30%;padding:10px 0px;text-align:right;"> 
-					<a href="#file_type_modal" rel="modal:open" class="control-button"> Export <a/>
+					<a href="#file_type_modal" rel="modal:open" class="control-button"> Export </a>
 				</td>	
             </tr>
 		</table>
