@@ -59,6 +59,7 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 	if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
 			$bonus_value = $row['bonus_value'];
+			$limit_times = $row['limit_times'];
 		}
 	}
 	if($bonus_value != '0'){
@@ -66,14 +67,19 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 		$result = $conn->query($query);
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
-				$limit_times = $row['limit_times'];
-				if((int)$limit_times >= 1){
-					$limit_times = (int)$limit_times - 1;
-					$query1 = "UPDATE `tbl_topup_limit_record` SET `limit_times`=".$limit_times." WHERE family_code = '".$family_code."' AND box_id = '".$box_id."'";
+				$limit_used = $row['limit_used'];
+				if((int)$limit_used < (int)$limit_times){
+					$limit_used = (int)$limit_used + 1;
+					$query1 = "UPDATE `tbl_topup_limit_record` SET `limit_used`=".$limit_used." WHERE family_code = '".$family_code."' AND box_id = '".$box_id."'";
 					$result1 = $conn->query($query1);
 					$amount = floatval($amount) + floatval($bonus_value);
 				}
 			}
+		} else{
+			$limit_used = 1;
+			$query2 = "INSERT INTO `tbl_topup_limit_record` (`family_code`, `box_id`, `limit_used`) VALUES ('".$family_code."','".$box_id."','".$limit_used."')";
+			 $result2 = $conn->query($query2);
+			 $amount = floatval($amount) + floatval($bonus_value);
 		}
 	}
 	date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
