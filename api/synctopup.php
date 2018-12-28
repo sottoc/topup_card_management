@@ -31,7 +31,7 @@
         $family_code = '';
     }
 
-    $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `bonus_amount`,`date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$card_id."','".$amount."','0','".$time."')";
+    $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `bonus_amount`, `username`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$card_id."','".$amount."','0','".$username."','".$time."')";
     $result = $conn->query($query);
 
     $query = "SELECT id FROM tbl_food_topup_records ORDER BY id DESC LIMIT 1";

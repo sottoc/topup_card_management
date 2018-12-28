@@ -88,11 +88,6 @@
 		<br/>
 		<table>
 			<tr>
-				<td>
-					<div class="topup-amount-div" data="0.01">
-						<strong> $0.01(Test) </strong>
-					</div>
-				</td>
 				<?php foreach ($all_box as $box) { if($box[7] == '1'){ 
 					date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
 					if($box[3] == '0') { $time_to = "2030-01-01 00:00:00"; } else { $time_to = date($box[6]); }
@@ -104,10 +99,10 @@
 							<strong> $<?php echo $box[1];?> </strong>
 							<?php if($box[3] != "0") { ?>
 							<div style="font-size:16px;font-weight:600;"> Extra $<?php echo $box[3];?> for first <?php if($box[4] == '1') { echo $box[4].' time';} else {echo $box[4].' times';}?> topup </div>
-							<div style="font-size:16px;font-weight:600;color:#a20c0c;"> <?php if($box[8] == '0') { echo '(No left)'; } else if($box[8] == '1'){ echo '(Left 1 time)'; } else { echo '(Left '.$box[8].' times)'; } ?>  </div>
+							<div style="font-size:16px;font-weight:600;color:#a20c0c;"> <?php if($box[8] == '0') { echo '(Bonus Used Up)'; } else if($box[8] == '1'){ echo '(Left 1 time)'; } else { echo '(Left '.$box[8].' times)'; } ?>  </div>
 							<?php } else {?>
 							<div style="font-size:16px;font-weight:600;visibility:hidden;"> Extra $<?php echo $box[3];?> for first <?php echo $box[4];?> times topup </div>
-							<div style="font-size:16px;font-weight:600;color:#a20c0c;"> <?php if($box[8] == '0') { echo '(No bonus)'; } else if($box[8] == '1'){ echo '(Left 1 time)'; } else { echo '(Left '.$box[8].' times)'; } ?>  </div>
+							<div style="font-size:16px;font-weight:600;color:#a20c0c;visibility:hidden;"> <?php if($box[8] == '0') { echo '(No bonus)'; } else if($box[8] == '1'){ echo '(Left 1 time)'; } else { echo '(Left '.$box[8].' times)'; } ?>  </div>
 							<?php }?>
 						</div>
 					</td>

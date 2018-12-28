@@ -72,14 +72,16 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 					$limit_used = (int)$limit_used + 1;
 					$query1 = "UPDATE `tbl_topup_limit_record` SET `limit_used`=".$limit_used." WHERE family_code = '".$family_code."' AND box_id = '".$box_id."'";
 					$result1 = $conn->query($query1);
-					$amount = floatval($amount) + floatval($bonus_value);
+					//$amount = floatval($amount) + floatval($bonus_value);
+				} else if((int)$limit_used == (int)$limit_times){
+					$bonus_value = '0';
 				}
 			}
 		} else{
 			$limit_used = 1;
 			$query2 = "INSERT INTO `tbl_topup_limit_record` (`family_code`, `box_id`, `limit_used`) VALUES ('".$family_code."','".$box_id."','".$limit_used."')";
 			 $result2 = $conn->query($query2);
-			 $amount = floatval($amount) + floatval($bonus_value);
+			 //$amount = floatval($amount) + floatval($bonus_value);
 		}
 	}
 	date_default_timezone_set('Asia/Singapore');//('Kuala Lumpur, Singapore');
@@ -95,14 +97,14 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
         $query="INSERT INTO `tbl_family_code_amount` (`family_code`, `amount`, `date_created`, `date_updated`) VALUES ('".$family_code."','".$origin_amount."','".$time."','".$time."')";
         $result = $conn->query($query);
     }
-    $new_amount = floatval($amount) + floatval($origin_amount);
+    $new_amount = floatval($amount) + floatval($origin_amount) + floatval($bonus_value);
     $query = "UPDATE `tbl_family_code_amount` SET `amount`=".$new_amount.", `date_updated`='".$time."'  WHERE `family_code`='".$family_code."'";
 	$result = $conn->query($query);
 	
 	$payment_type = "Paypal";
 	$pos_id = $transaction_id;
 	$Card_ID = $transaction_id;
-    $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `bonus_amount`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$Card_ID."','".$amount."','".$bonus_value."','".$time."')";
+    $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `bonus_amount`, `username`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$Card_ID."','".$amount."','".$bonus_value."','".$user_email."','".$time."')";
 	$result = $conn->query($query);
 	//------- end save in table ------
 

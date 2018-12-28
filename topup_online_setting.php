@@ -208,21 +208,21 @@
             $(e).val("");
             return false;
         }
-        if($(e).attr('id') == 'bonus_value'){
-            console.log($(e).attr('id'));
-            if($("#bonus_type").val() == "1"){
-                if(parseInt(value) >= 100){
-                    var v = value.substring(0,2);
-                    $("#bonus_value").val(v);
-                }
-            } else if($("#bonus_type").val() == "0"){
-                if(parseInt(value) >= parseInt($("#box_amount").val())){
-                    var v = value.substring(0, value.length - 1);
-                    console.log(v);
-                    $("#bonus_value").val(v);
-                }
-            }
-        }
+        // if($(e).attr('id') == 'bonus_value'){
+        //     console.log($(e).attr('id'));
+        //     if($("#bonus_type").val() == "1"){
+        //         if(parseInt(value) >= 100){
+        //             var v = value.substring(0,2);
+        //             $("#bonus_value").val(v);
+        //         }
+        //     } else if($("#bonus_type").val() == "0"){
+        //         if(parseInt(value) >= parseInt($("#box_amount").val())){
+        //             var v = value.substring(0, value.length - 1);
+        //             console.log(v);
+        //             $("#bonus_value").val(v);
+        //         }
+        //     }
+        // }
     }
 
     $(document).ready(function(){
@@ -408,6 +408,9 @@
                     </tr>
                 </table>
             </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="font-size:16px;padding-left:20px;"> Note : When the effective date is on, Top-Up choices will be hidden when not in effective date </td>
         </tr>
     </table>
     <div align="center" style="margin-top:50px;">
@@ -664,6 +667,9 @@
                     </tr>
                 </table>
             </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="font-size:16px;padding-left:20px;"> Note : When the effective date is on, Top-Up choices will be hidden when not in effective date </td>
         </tr>
     </table>
     <div align="center" style="margin-top:50px;">

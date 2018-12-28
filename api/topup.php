@@ -51,8 +51,18 @@
         $payment_type = "Cash";
     }
     $payment_detail = $Card_ID;
-    $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `bonus_amount`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$Card_ID."','".$amount."','0','".$time."')";
+    $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `bonus_amount`, `username`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$Card_ID."','".$amount."','0','".$username."','".$time."')";
     $result = $conn->query($query);
 
-    display_results("Card value sucessfully chanaged!");
+    $query = "SELECT id FROM tbl_food_topup_records ORDER BY id DESC LIMIT 1";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $id = $row['id'];
+        }
+    }
+
+    $data = array('id'=>$id);
+
+    display_results($data);
 ?>
