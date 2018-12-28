@@ -72,6 +72,7 @@
 			"bSortable": true,
 			"asSorting": [ 'asc', 'desc' ],
 			"lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ]	,		
+			"bLengthChange" : false,
 			"sDom": 'Rfrtlip',
 			"bServerSide": true,
 			"bJQueryUI": true,
@@ -97,7 +98,6 @@
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},
-							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"}
 						]
@@ -258,7 +258,7 @@
 
 	$(document).ready(function(){
 		setTimeout(() => {
-		   get_total_amount();
+			get_total_amount();
 		}, 1000);
 		
 		$("#btnsearch_button").click(function(){
@@ -293,7 +293,7 @@
 									<input type='text' value="Choose date" name='sel_date_to' id='sel_date_to' class='input-text-custom'/>
 								</td>
 
-								<td style="padding-right:20px;">
+								<td style="padding-right:20px;display:none;">
 									<div style="font-size:16px;"> Filter by </div>
 									<select id="search_filter_by" name="search_filter_by" class="select-custom" onChange="changeSearchKey(this)">
 										<option value="-1">Please choose</option>
@@ -302,7 +302,7 @@
 									</select>
 								</td>
 
-								<td style="padding-right:35px;">
+								<td style="padding-right:35px;display:none;">
 									<div style="font-size:16px;visibility:hidden"> Content </div>
 									<input type="text" class="input-text-custom" id="search_txt" name="search_txt" placeholder="" disabled/>
 								</td>
@@ -339,12 +339,11 @@
 		<table cellpadding="0"  border="0" class="display" id="summary_report_dtList" name="summary_report_dtList">
 			<thead>
 				<tr>
-					<th>User Email</th>
-					<th>Family Code</th>
 					<th>Opening Balance</th>					
 					<th>Total Spending</th>					
 					<th>Total Topup(Cash)</th>
 					<th>Total Topup(Online)</th>
+					<th>Total Bonus</th>
 					<th>Total Refund</th>
 					<th>Balance</th>
 				</tr>

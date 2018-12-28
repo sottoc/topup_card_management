@@ -79,12 +79,11 @@
 		$tmpentry = array();
 		$date_time = explode(" ", $aRow['created_time']);
 
-		$tmpentry[] = htmlspecialchars($aRow['user_email']);
-		$tmpentry[] = htmlspecialchars($aRow['family_code']);
 		$tmpentry[] = htmlspecialchars($aRow['opening_balance']);
 		$tmpentry[] = htmlspecialchars($aRow['total_spending']);
 		$tmpentry[] = htmlspecialchars($aRow['total_topup_cash']);
 		$tmpentry[] = htmlspecialchars($aRow['total_topup_online']);
+		$tmpentry[] = htmlspecialchars($aRow['total_bonus']);
 		$tmpentry[] = htmlspecialchars($aRow['total_refund']);
 		$tmpentry[] = htmlspecialchars($aRow['balance']);
 		$response['aaData'][] = $tmpentry;

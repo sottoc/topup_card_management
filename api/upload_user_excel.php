@@ -60,9 +60,6 @@
                         $query="INSERT INTO `tbl_user` (`user_email`, `user_password`, `family_code`, `user_type_id`, `user_first_name`, `user_last_name`, `user_address`, `user_phone`, `user_gender_id`, `is_active`, `user_created_datetime`, `user_modified_datetime`) VALUES ('".$email."','".$password."','".$family_code."','".$type."','".$first_name."','".$last_name."','".$address."','".$phone."','".$gender."','".$status."','".$time."','".$time."')";
                         $result = $conn->query($query);
 
-                        $query="INSERT INTO `tbl_summary_record` (`user_email`, `family_code`, `opening_balance`, `total_spending`, `total_topup_cash`, `total_topup_online`, `total_refund`, `balance`, `created_time`) VALUES ('".$email."','".$family_code."','0','0','0','0','0','0','".$time."')";
-                        $result = $conn->query($query);
-
                         $query = "SELECT * FROM tbl_family_code_amount WHERE family_code='".$family_code."'";
                         $result = $conn->query($query);
                         if($result->num_rows > 0){
