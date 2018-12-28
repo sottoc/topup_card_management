@@ -142,7 +142,7 @@
                             <div class="topup-detail"> 
                                 $<?php echo $box[1]; ?> 
                                 <?php if($box[3] != "0") { ?>
-                                : Extra $<?php echo $box[3];?> for first <span class="limit-times"> <?php echo $box[4];?> </span> times topup
+                                : Extra $<?php echo $box[3];?> for first <span class="limit-times"> <?php echo $box[4];?> </span> <?php if($box[4] =="1"){ echo "time"; } else { echo "times"; }?> topup
                                 <?php } ?>
                             </div>  
                         </td>
