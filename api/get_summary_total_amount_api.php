@@ -14,27 +14,74 @@
     if (strpos($to, '-') != true) {
         $to = '2030-01-01';
     }
+    $from = $from.' 00:00:00';
+    $to = $to.' 23:59:59';
 
-    $total_spending = 0; //------------- total_spending --------------
+    $total_spending = 0; //------------- total_spending ------------------ (B)
+    $query = "SELECT SUM(total_amount) FROM tbl_food_bill_records WHERE created_time >= '".$from."' AND created_time < '".$to."'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $total_spending = $row['SUM(total_amount)'];
+        }
+    }
     $total_spending = round(intval($total_spending*10000)/100)/100;
 
-    $total_topup_cash = 0; //------------- total_topup_cash --------------
+
+    $total_topup_cash = 0; //------------- total_topup_cash -------------- (C)
+    $query = "SELECT SUM(topup_amount) FROM tbl_food_topup_records WHERE LOWER(payment_type) = 'cash' AND date_created >= '".$from."' AND date_created < '".$to."'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $total_topup_cash = $row['SUM(topup_amount)'];
+        }
+    }
     $total_topup_cash = round(intval($total_topup_cash*10000)/100)/100;
 
-    $total_topup_online = 0; //------------- total_topup_online --------------
+
+    $total_topup_online = 0; //------------- total_topup_online ------------- (D)
+    $query = "SELECT SUM(topup_amount) FROM tbl_food_topup_records WHERE LOWER(payment_type) = 'paypal' AND date_created >= '".$from."' AND date_created < '".$to."'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $total_topup_online = $row['SUM(topup_amount)'];
+        }
+    }
     $total_topup_online = round(intval($total_topup_online*10000)/100)/100;
 
-    $total_refund = 0; //------------- total_refund --------------
+
+    $total_bonus = 0; //------------- total_bonus ------------- (E)
+    $query = "SELECT SUM(bonus_amount) FROM tbl_food_topup_records WHERE date_created >= '".$from."' AND date_created < '".$to."'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $total_bonus = $row['SUM(bonus_amount)'];
+        }
+    }
+    $total_bonus = round(intval($total_bonus*10000)/100)/100;
+
+
+    $total_refund = 0; //------------- total_refund ------------------------ (F)
+    $query = "SELECT SUM(refund_amount) FROM tbl_refund_record WHERE date_created >= '".$from."' AND date_created < '".$to."'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $total_refund = $row['SUM(refund_amount)'];
+        }
+    }
     $total_refund = round(intval($total_refund*10000)/100)/100;
+
 
     $total_opening_balance = 0; //------------- total_opening_balance --------------
     $total_opening_balance = round(intval($total_opening_balance*10000)/100)/100;
+
 
     $total_data = array();
     array_push($total_data, $total_opening_balance);
     array_push($total_data, $total_spending);
     array_push($total_data, $total_topup_cash);
     array_push($total_data, $total_topup_online);
+    array_push($total_data, $total_bonus);
     array_push($total_data, $total_refund);
     display_results($total_data);
 ?>

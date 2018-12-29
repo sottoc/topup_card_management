@@ -219,7 +219,8 @@
 				$("#summary_total_spending").html(summary_data[1]);
 				$("#summary_total_topup_cash").html(summary_data[2]);
 				$("#summary_total_topup_online").html(summary_data[3]);
-				$("#summary_total_refund").html(summary_data[4]);
+				$("#summary_total_topup_bonus").html(summary_data[4]);
+				$("#summary_total_refund").html(summary_data[5]);
             },
             error : function(xhr, textStatus, errorThrown ) {
                 console.log(xhr);
@@ -326,6 +327,7 @@
 					<div> Total Spending : $ <span id="summary_total_spending">  </span> </div>
 					<div> Total Topup (Cash) : $ <span id="summary_total_topup_cash"> </span> </div>
 					<div> Total Topup (Online) : $ <span id="summary_total_topup_online"> </span> </div>
+					<div> Total Bonus : $ <span id="summary_total_topup_bonus"> </span> </div>
 					<div> Total Refund : $ <span id="summary_total_refund"> </span> </div>
 				</td>
                 <td style="width:30%;padding:10px 0px;text-align:right;"> 
