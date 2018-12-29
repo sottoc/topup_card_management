@@ -330,7 +330,7 @@
 					<div> Total Bonus : $ <span id="summary_total_topup_bonus"> </span> </div>
 					<div> Total Refund : $ <span id="summary_total_refund"> </span> </div>
 				</td>
-                <td style="width:30%;padding:10px 0px;text-align:right;"> 
+                <td style="width:30%;padding:10px 0px;text-align:right;display:none"> 
 					<a href="#file_type_modal" rel="modal:open" class="control-button"> Export </a>
 				</td>	
             </tr>
@@ -338,7 +338,7 @@
 		
 		<!--datatable-->
 		<div class="cleaner"></div>
-		<table cellpadding="0"  border="0" class="display" id="summary_report_dtList" name="summary_report_dtList">
+		<table cellpadding="0"  border="0" class="display" id="summary_report_dtList" name="summary_report_dtList" style="display:none">
 			<thead>
 				<tr>
 					<th>Opening Balance</th>					
