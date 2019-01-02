@@ -305,7 +305,9 @@ class reportdal{
 		// 		left join tbl_topup top on t.topup_id=top.topup_id
 		// 		left join tbl_redemption r on t.redempation_id=r.redemption_id
 		// 		left join tbl_participant p on p.participant_id=t.participant_id";
-		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM tbl_user u LEFT JOIN tbl_family_code_amount fa on u.family_code=fa.family_code";
+		
+		//$query = "SELECT SQL_CALC_FOUND_ROWS * FROM tbl_user u LEFT JOIN tbl_family_code_amount fa on u.family_code=fa.family_code";
+		$query = "SELECT SQL_CALC_FOUND_ROWS * FROM tbl_family_code_amount";
 		$query .= $cri_str;
 		
 		if(empty($param) && $id_str!='')

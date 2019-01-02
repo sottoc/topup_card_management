@@ -90,7 +90,7 @@
     }
 
     if($report_type == "user"){
-        $query = "SELECT SUM(amount) FROM tbl_user u LEFT JOIN tbl_family_code_amount fa ON u.family_code=fa.family_code";
+        $query = "SELECT SUM(amount) FROM tbl_family_code_amount";
         $from = $request['sel_date_from'];
         $to = $request['sel_date_to'];
         if (strpos($from, '-') != true) {
@@ -101,14 +101,14 @@
         }
         $search_filter_by = $request['filter_index'];
         $filter_value = $request['filter_value'];
-        $param = " WHERE user_created_datetime"." >= '".$from."' AND user_created_datetime < '".$to."' + interval 1 day";
+        $param = " WHERE date_created"." >= '".$from."' AND date_created < '".$to."' + interval 1 day";
         $param .= " AND 1=1 ";
         if($search_filter_by == '0'){
-            $param .= " AND u.family_code LIKE '%".$filter_value."%' ";
+            $param .= " AND family_code LIKE '%".$filter_value."%' ";
         }
-        if($search_filter_by == '1'){
-            $param .= " AND user_email LIKE '%".$filter_value."%' ";
-        }
+        // if($search_filter_by == '1'){
+        //     $param .= " AND user_email LIKE '%".$filter_value."%' ";
+        // }
         if($search_filter_by == '2'){
             $param .= " AND amount LIKE '%".$filter_value."%' ";
         }

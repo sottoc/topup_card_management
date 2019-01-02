@@ -21,7 +21,7 @@
 	{
 		$DisplayLength = $_GET['iDisplayLength'];
 	}
-	$cri_str = ' WHERE user_created_datetime';
+	$cri_str = ' WHERE date_created';
 	$param = array();
 	if ( isset($_GET['sSearch']))
 	{	
@@ -40,19 +40,19 @@
 			if (strpos($to, '-') != true) {
 				$to = '2030-01-01';
 			}
-			$cri_str .= " >= '".$from."' AND user_created_datetime < '".$to."' + interval 1 day";
+			$cri_str .= " >= '".$from."' AND date_created < '".$to."' + interval 1 day";
 		}
 
 		$cri_str .= " AND 1=1 ";
 		if(isset($criobj->search_txt) &&  $criobj->search_txt!='' ){
 			if($criobj->search_filter_by == '0'){
-				$cri_str .= " AND u.family_code LIKE CONCAT('%',:search_txt,'%') ";
+				$cri_str .= " AND family_code LIKE CONCAT('%',:search_txt,'%') ";
 				$param[':search_txt'] = clean($criobj->search_txt);
 			}
-			if($criobj->search_filter_by == '1'){
-				$cri_str .= " AND user_email LIKE CONCAT('%',:search_txt,'%') ";
-				$param[':search_txt'] = clean($criobj->search_txt);
-			}
+			// if($criobj->search_filter_by == '1'){
+			// 	$cri_str .= " AND user_email LIKE CONCAT('%',:search_txt,'%') ";
+			// 	$param[':search_txt'] = clean($criobj->search_txt);
+			// }
 			if($criobj->search_filter_by == '2'){
 				$cri_str .= " AND amount LIKE CONCAT('%',:search_txt,'%') ";
 				$param[':search_txt'] = clean($criobj->search_txt);
@@ -81,7 +81,7 @@
 	{
 		$trans_amt='';
 		$tmpentry = array();
-		$datetime = $aRow['user_created_datetime'];
+		$datetime = $aRow['date_created'];
 		$datetime = explode(' ', $datetime);
 		$date = $datetime[0];
 		$time = $datetime[1];
@@ -108,13 +108,13 @@
 	function fnColumnToField( $i )
 	{
 		if ( $i == 0 )
-			return "user_created_datetime";
+			return "date_created";
 		else if ( $i == 1 )
-			return "user_created_datetime";
+			return "date_created";
 		else if ( $i == 3 )
-			return "user_created_datetime";
+			return "date_created";
 		else if ( $i == 4 )
-			return "user_created_datetime";
+			return "date_created";
 		else 
 			return true;			
 	}
