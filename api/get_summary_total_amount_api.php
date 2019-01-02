@@ -15,7 +15,7 @@
         $to = '2030-01-01';
     }
     $from = $from.' 00:00:00';
-    $to = $to.' 23:23:59';
+    $to = $to.' 23:59:59';
 
     $total_spending = 0; //------------- total_spending ------------------ (B)
     $query = "SELECT SUM(total_amount) FROM tbl_food_bill_records WHERE created_time >= '".$from."' AND created_time < '".$to."'";
