@@ -90,7 +90,7 @@
     }
 
     if($report_type == "user"){
-        $query = "SELECT SUM(amount) FROM tbl_family_code_amount";
+        $query = "SELECT sum(amount), COUNT(*) FROM tbl_family_code_amount";
         $from = $request['sel_date_from'];
         $to = $request['sel_date_to'];
         if (strpos($from, '-') != true) {
@@ -116,10 +116,13 @@
         $result = $conn->query($query);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $total_amount = $row['SUM(amount)'];
+                $total_amount1 = $row['sum(amount)'];
+                $total_amount2 = $row['COUNT(*)'];
             }
         }
-        $total_amount = round(intval($total_amount*10000)/100)/100;
+        $total_amount = array();
+        $total_amount[] = round(intval($total_amount1*10000)/100)/100;
+        $total_amount[] = $total_amount2;
     }
 
     if($report_type == "refund"){
