@@ -15,7 +15,7 @@
         $to = '2030-01-01';
     }
     $from = $from.' 00:00:00';
-    $to = $to.' 23:59:59';
+    $to = $to.' 23:23:59';
 
     $total_spending = 0; //------------- total_spending ------------------ (B)
     $query = "SELECT SUM(total_amount) FROM tbl_food_bill_records WHERE created_time >= '".$from."' AND created_time < '".$to."'";
@@ -71,10 +71,18 @@
     }
     $total_refund = round(intval($total_refund*10000)/100)/100;
 
-
     
     $total_opening_balance = 0; //------------- total_opening_balance --------------
-    $total_opening_balance = round(intval($total_opening_balance*10000)/100)/100;
+    $query = "SELECT SUM(amount) FROM tbl_family_code_amount";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $family_code_sum = $row['SUM(amount)'];
+        }
+    }
+    $family_code_sum = round(intval($family_code_sum*10000)/100)/100;
+    $total_opening_balance = $family_code_sum - $total_spending + $total_topup_cash + $total_topup_online + $total_bonus - $total_refund;
+
 
 
     $total_data = array();
