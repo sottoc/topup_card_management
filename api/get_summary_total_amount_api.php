@@ -72,6 +72,7 @@
     $total_refund = round(intval($total_refund*10000)/100)/100;
 
 
+    
     $total_opening_balance = 0; //------------- total_opening_balance --------------
     $total_opening_balance = round(intval($total_opening_balance*10000)/100)/100;
 

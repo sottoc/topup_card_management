@@ -95,7 +95,6 @@
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},											
 							{"bSortable": false,"sWidth":"auto"},
-							{"bSortable": false,"sWidth":"auto"},
 							{"bSortable": false,"sWidth":"auto"}
 						]
 		});	
@@ -247,12 +246,12 @@
                     <div class="left-section filter-div">
 						<table>
 							<tr>
-								<td style="padding-right:35px;">
+								<td style="padding-right:35px;display:none">
 									<div style="font-size:16px;"> From </div>
 									<input type="text" value="Choose date" name="sel_date_from" id="sel_date_from" class='input-text-custom'/>
 								</td>
 
-								<td style="padding-right:35px;">
+								<td style="padding-right:35px;display:none">
 									<div style="font-size:16px;"> To </div>
 									<input type='text' value="Choose date" name='sel_date_to' id='sel_date_to' class='input-text-custom'/>
 								</td>
@@ -315,7 +314,7 @@
 					<th>Register Date</th>
 					<th>Register Time</th>					
 					<th>Family Code</th>
-					<th>Email</th>
+					<!-- <th>Email</th> -->
 					<th>Amount Value</th>
 				</tr>
 			</thead>

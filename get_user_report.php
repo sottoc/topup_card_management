@@ -92,7 +92,7 @@
 		// else
 		// 	$trans_amt = "<font color='blue'>".$aRow['topup_amt']."</font>";
 		$tmpentry[] = htmlspecialchars($aRow['family_code']);
-		$tmpentry[] = htmlspecialchars($aRow['user_email']);
+		// $tmpentry[] = htmlspecialchars($aRow['user_email']);
 		$tmpentry[] = htmlspecialchars("$".$aRow['amount']);
 		//$tmpentry[] = htmlspecialchars($cri_str);
 		$response['aaData'][] = $tmpentry;
