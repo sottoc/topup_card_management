@@ -82,7 +82,7 @@
     }
     $family_code_sum = round(intval($family_code_sum*10000)/100)/100;
     $total_opening_balance = $family_code_sum - $total_spending + $total_topup_cash + $total_topup_online + $total_bonus - $total_refund;
-
+    $total_opening_balance = round(intval($total_opening_balance*10000)/100)/100;
 
 
     $total_data = array();
