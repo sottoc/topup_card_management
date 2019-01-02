@@ -77,6 +77,7 @@
 	$response = array('sEcho'=>$sEcho,'iTotalRecords'=>$iTotal,'iTotalDisplayRecords'=>$iTotal,'aaData'=>array());
 	while( $aRow = $rResult->getNext() )
 	{
+		$family_code = $aRow['family_code'];
 		$user_id = $aRow['user_id'];
 		$user_gender_id=$aRow['user_gender_id'];
 		$user_gender_prefix=$aRow['gender_prefix'];
@@ -86,7 +87,7 @@
 		$user_address=$aRow['user_address'];
 		$user_phone=$aRow['user_phone'];
         $is_active=$aRow['is_active'];
-		$family_code = $aRow['family_code'];
+		
 		$amount = $aRow['amount'];
 		$first_name = $aRow['user_first_name'];
 		$last_name = $aRow['user_last_name'];
@@ -128,7 +129,7 @@
 	function fnColumnToField( $i )
 	{
 		if ( $i == 0 )
-			return "user_id";
+			return "family_id";
 		else if ( $i == 1 )
 			return "user_email";
 		else if ( $i == 2 )
