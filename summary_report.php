@@ -221,6 +221,7 @@
 				$("#summary_total_topup_online").html(summary_data[3]);
 				$("#summary_total_topup_bonus").html(summary_data[4]);
 				$("#summary_total_refund").html(summary_data[5]);
+				$("#summary_total_balance").html(summary_data[6]);
             },
             error : function(xhr, textStatus, errorThrown ) {
                 console.log(xhr);
@@ -329,6 +330,7 @@
 					<div> Total Topup (Online) : $ <span id="summary_total_topup_online"> </span> </div>
 					<div> Total Bonus : $ <span id="summary_total_topup_bonus"> </span> </div>
 					<div> Total Refund : $ <span id="summary_total_refund"> </span> </div>
+					<div> Total Balance : $ <span id="summary_total_balance"> </span> </div>
 				</td>
                 <td style="width:30%;padding:10px 0px;text-align:right;display:none"> 
 					<a href="#file_type_modal" rel="modal:open" class="control-button"> Export </a>
