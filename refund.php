@@ -104,7 +104,12 @@
 							var family_code = t[1];
 							var last_name = $(tds[j*8+3]).html();
 							var first_name = $(tds[j*8+2]).html();
-                            $(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button refund-edit' family_code='" + family_code + "' id='" + id + "' style='float:left;'> Refund </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-last-name='"+ last_name +"' data-first-name='"+ first_name + "' data-family-code='" + family_code + "' style='float:right;'> View Log </a> </div>");
+							if(id != ''){
+								$(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button refund-edit' family_code='" + family_code + "' id='" + id + "' style='float:left;'> Refund </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-last-name='"+ last_name +"' data-first-name='"+ first_name + "' data-family-code='" + family_code + "' style='float:right;'> View Log </a> </div>");
+							} else{
+								$(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button refund-edit' family_code='" + family_code + "' id='" + id + "' style='float:left;'> </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-last-name='"+ last_name +"' data-first-name='"+ first_name + "' data-family-code='" + family_code + "' style='float:right;'>  </a> </div>");
+							}
+                            
                         }
 						j++;
 					}
