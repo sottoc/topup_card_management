@@ -147,7 +147,7 @@ class userdal{
 			// $query = "SELECT SQL_CALC_FOUND_ROWS * FROM tbl_user u
 			// 		lEFT JOIN tbl_user_type u_t on u.user_type_id=u_t.user_type_id
 			// 		LEFT JOIN tbl_gender g on u.user_gender_id=g.gender_id LEFT JOIN tbl_family_code_amount fa on u.family_code=fa.family_code";
-			$query = "SELECT SQL_CALC_FOUND_ROWS family_id, fa.family_code, amount, user_id, user_gender_id, gender_prefix, user_email, user_type_name, user_address, user_phone, is_active, user_first_name, user_last_name FROM tbl_family_code_amount fa LEFT JOIN tbl_user u ON u.family_code=fa.family_code LEFT JOIN tbl_user_type u_t ON u.user_type_id=u_t.user_type_id LEFT JOIN tbl_gender g ON u.user_gender_id=g.gender_id";
+			$query = "SELECT SQL_CALC_FOUND_ROWS family_id, fa.family_code, amount, user_id, user_gender_id, gender_prefix, user_email, user_type_name, user_address, user_phone, is_active, user_first_name, user_last_name, First_name, Last_name FROM tbl_family_code_amount fa LEFT JOIN tbl_user u ON u.family_code=fa.family_code LEFT JOIN tbl_user_type u_t ON u.user_type_id=u_t.user_type_id LEFT JOIN tbl_gender g ON u.user_gender_id=g.gender_id LEFT JOIN tbl_card1 c1 ON fa.family_code = c1.Family_code";
 			$query .= $cri_str;
 			$query .=$sorting;
 			if($rpage!=-1)

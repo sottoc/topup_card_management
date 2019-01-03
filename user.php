@@ -107,7 +107,7 @@
 							if(id !='' ){
 								$(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button user-edit' id='" + id + "' style='float:left;'> Edit </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-last-name='"+ last_name +"' data-first-name='"+ first_name +"' data-family-code='" + family_code + "' style='float:right;'> View Log </a> </div>");
 							} else{
-								$(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button user-edit' id='" + id + "' style='float:left;'>  </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-last-name='"+ last_name +"' data-first-name='"+ first_name +"' data-family-code='" + family_code + "' style='float:right;'>  </a> </div>");
+								$(tds[i]).html("<div style='padding:0 10px'> <div class='edit-button user-edit' id='" + id + "' style='float:left;'>  </div> <a class='edit-button view-log' href='#view_log_modal' rel='modal:open' data-last-name='"+ last_name +"' data-first-name='"+ first_name +"' data-family-code='" + family_code + "' style='float:right;'> View Log </a> </div>");
 							}
                             
                         }

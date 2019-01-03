@@ -91,6 +91,8 @@
 		$amount = $aRow['amount'];
 		$first_name = $aRow['user_first_name'];
 		$last_name = $aRow['user_last_name'];
+		if($first_name == '') $first_name = $aRow['First_name'];
+		if($last_name == '') $last_name = $aRow['Last_name'];
 		$user_id_family_code = $user_id.'-'.$family_code;
 		if($is_active==1)
 		{
