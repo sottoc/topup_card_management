@@ -57,7 +57,7 @@
             while($row = $result->fetch_assoc()) {
                 $card_id = $row['Card_ID'];
                 //------ get spend history --------
-                $query1 = "SELECT `pos_id`, `total_amount`, `created_time` FROM `tbl_food_bill_records` WHERE `card_id`='".$card_id."'";
+                $query1 = "SELECT `pos_id`, `total_amount`, `created_time` FROM `tbl_food_bill_records` WHERE `card_id`='".$card_id."' ORDER BY created_time DESC";
                 $result1 = $conn->query($query1);
                 if($result1->num_rows > 0){
                     while($row1 = $result1->fetch_assoc()) {
@@ -75,7 +75,7 @@
             }
 
             //------- get topup history --------
-            $query2 = "SELECT `payment_type`, `pos_id`, `topup_amount`, `date_created` FROM `tbl_food_topup_records` WHERE `family_code`='".$family_code."'";
+            $query2 = "SELECT `payment_type`, `pos_id`, `topup_amount`, `date_created` FROM `tbl_food_topup_records` WHERE `family_code`='".$family_code."' ORDER BY date_created DESC";
             $result2 = $conn->query($query2);
             if($result2->num_rows > 0){
                 while($row2 = $result2->fetch_assoc()) {
