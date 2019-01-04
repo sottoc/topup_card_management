@@ -32,6 +32,7 @@
         }
     }
     $amount = floatval($amount) - floatval($refund_amount);
+    $amount = round(intval($amount*10000)/100)/100;
     $query = "UPDATE `tbl_family_code_amount` SET `amount`='".$amount."' WHERE `family_code`='".$family_code."'";
     $result = $conn->query($query);
     

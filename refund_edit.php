@@ -26,7 +26,7 @@
             }
         }
 
-        $query = "SELECT `user_email`, `user_first_name`, `user_last_name`, `is_active` FROM `tbl_user` WHERE `user_id` = ".$id;
+        $query = "SELECT `user_email`, `user_first_name`, `user_last_name`, `is_active` FROM `tbl_user` WHERE `family_code` = '".$family_code."'";
         $result = $conn->query($query);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
@@ -34,6 +34,22 @@
                 $first_name = $row['user_first_name'];
                 $last_name = $row['user_last_name'];
                 $status = $row['is_active'];
+            }
+        } else{
+            $query1 = "SELECT `First_name`, `Last_name`, `Card_status` FROM `tbl_card1` WHERE `Family_code` = '".$family_code."'";
+            $result1 = $conn->query($query1);
+            if ($result1->num_rows > 0) {
+                while($row1 = $result1->fetch_assoc()) {
+                    $user_email = "";
+                    $first_name = $row1['First_name'];
+                    $last_name = $row1['Last_name'];
+                    $status_str = $row1['Card_status'];
+                    if($status_str == 'Active'){
+                        $status = 1;
+                    } else{
+                        $status = 0;
+                    }
+                }
             }
         }
     }
@@ -63,7 +79,7 @@
             var refund_amount = e.target.value;
             console.log(parseFloat(refund_amount));
             console.log(parseFloat(current_amount));
-            if(parseFloat(refund_amount) > parseFloat(current_amount)){
+            if(current_amount == '0' || parseFloat(refund_amount) > parseFloat(current_amount)){
                 $("#amount_tip").show();
             }
         });

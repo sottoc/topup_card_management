@@ -78,7 +78,7 @@
 	while( $aRow = $rResult->getNext() )
 	{
 		$family_code = $aRow['family_code'];
-		$user_id = $aRow['user_id'];
+		$user_id = $aRow['family_id'];
 		$user_gender_id=$aRow['user_gender_id'];
 		$user_gender_prefix=$aRow['gender_prefix'];
 		$user_name = $user_gender_prefix." ".$aRow['user_email'];
