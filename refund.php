@@ -132,7 +132,7 @@
 			
 			"bAutoWidth": false,
 			"bEscapeRegex": false,
-			"sAjaxSource": "get_user.php",
+			"sAjaxSource": "get_refund.php",
 			
 			"aoColumns": [						
 							{"bSortable": false,"sWidth":"auto"},											
