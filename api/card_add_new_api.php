@@ -59,9 +59,9 @@
     $classification = 'Staff';
     $username = $user_code;
     $password = $user_code;
-    $query = "INSERT INTO `tbl_card1` (`User_code`, `Family_code`, `Card_ID`, `Last_name`, `First_name`, `Level`, `Class`, `Image`, `Card_status`, `Classification`, `Username`, `Password`, `Date_Created`, `Date_Updated`) VALUES ('".$user_code."','".$family_code."','".$card_id."','".$last_name."','".$first_name."','".$level."','".$class."','".$image_name."','".$status."','".$classification."','".$username."','".$password."','".$time."','".$time."')";
-    $result = $conn->query($query);
-    
+    $query = 'INSERT INTO `tbl_card1` (`User_code`, `Family_code`, `Card_ID`, `Last_name`, `First_name`, `Level`, `Class`, `Image`, `Card_status`, `Classification`, `Username`, `Password`, `Date_Created`, `Date_Updated`) VALUES ("'.$user_code.'","'.$family_code.'","'.$card_id.'","'.$last_name.'","'.$first_name.'","'.$level.'","'.$class.'","'.$image_name.'","'.$status.'","'.$classification.'","'.$username.'","'.$password.'","'.$time.'","'.$time.'")';
+    $result_main = $conn->query($query);
+
     $query = "SELECT * FROM tbl_family_code_amount WHERE family_code='".$family_code."'";
     $result = $conn->query($query);
     if($result->num_rows > 0){

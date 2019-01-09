@@ -247,6 +247,11 @@
                     {
                         alert(msg);
                         console.log(msg);
+                        $("#user_code").val("");
+                        $("#card_id").val("");
+                        $("#family_code").val("");
+                        $("#first_name").val("");
+                        $("#last_name").val("");
                         $('#image_info').html("");
                     }
                 });

@@ -168,13 +168,13 @@
                 <td>
                     <div> <span class="label-span"> User Code </span> </div>
                     <div> 
-                        <input type="text" name='user_code' value='<?php echo $user_code;?>' class="input-text-custom"> </input>
+                        <input type="text" name='user_code' value="<?php echo $user_code;?>" class="input-text-custom"> </input>
                     </div>
                 </td>
                 <td width="25%">
                     <div> <span class="label-span"> Card Number </span> </div>
                     <div> 
-                        <input type="text" name='card_id' value='<?php echo $card_id;?>' class="input-text-custom"> </input>
+                        <input type="text" name='card_id' value="<?php echo $card_id;?>" class="input-text-custom"> </input>
                     </div>
                 </td>
                 <td width="25%">
@@ -203,19 +203,19 @@
                 <td>
                     <div> <span class="label-span"> Family Code </span> </div>
                     <div> 
-                        <input type="text" name='family_code' class="input-text-custom" value='<?php echo $family_code;?>'> </input>
+                        <input type="text" name='family_code' class="input-text-custom" value="<?php echo $family_code;?>"> </input>
                     </div>
                 </td>
                 <td>
                     <div> <span class="label-span"> First Name </span> </div>
                     <div> 
-                        <input type="text" name='first_name' class="input-text-custom" value='<?php echo $first_name; ?>'> </input>
+                        <input type="text" name='first_name' class="input-text-custom" value="<?php echo $first_name; ?>"> </input>
                     </div>
                 </td>
                 <td>
                     <div> <span class="label-span"> Last Name </span> </div>
                     <div> 
-                        <input type="text" name='last_name' class="input-text-custom" value='<?php echo $last_name;?>'> </input>
+                        <input type="text" name='last_name' class="input-text-custom" value="<?php echo $last_name;?>">
                     </div>
                 </td>
             </tr>
