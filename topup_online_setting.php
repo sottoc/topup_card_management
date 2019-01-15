@@ -91,6 +91,7 @@
             $box[] = $row['datetime_from'];
             $box[] = $row['datetime_to'];
             $box[] = $row['box_status'];
+            $box[] = $row['group_id'];
             array_push($all_box, $box);
         }
     }
@@ -148,7 +149,7 @@
                         </td>
                         <td align="right" style="padding-right:20px;"> 
                         <div class="buttons"> 
-                        <a href="#online_topup_box_edit" rel="modal:open" class="edit-button edit-box" data-id="<?php echo $box[0];?>" data-amount="<?php echo $box[1];?>" data-description="<?php echo $box[2];?>" data-bonus-value="<?php echo $box[3];?>" data-limit-times="<?php echo $box[4];?>" data-datetime-from="<?php echo $box[5];?>" data-datetime-to="<?php echo $box[6];?>"> Edit </a>  
+                        <a href="#online_topup_box_edit" rel="modal:open" class="edit-button edit-box" data-id="<?php echo $box[0];?>" data-amount="<?php echo $box[1];?>" data-description="<?php echo $box[2];?>" data-bonus-value="<?php echo $box[3];?>" data-limit-times="<?php echo $box[4];?>" data-datetime-from="<?php echo $box[5];?>" data-datetime-to="<?php echo $box[6];?>" data-group-id="<?php echo $box[8];?>"> Edit </a>  
                         &nbsp;&nbsp;&nbsp; <a data-id="<?php echo $box[0];?>" class="edit-button delete-box"> Delete </a> 
                         </div> 
                         </td>
@@ -238,6 +239,8 @@
                 bonus_value = parseInt(amount)*bonus_value/100;
             }
             var limit_times = $("#limit_times").val();
+            var group_id = $("#group_id").val();
+            if(group_id == ""){ $("#group_id").focus(); return; } // return;
             var sel_date_from = $("#sel_date_from").val();
             if($("#bonus_type").val() != "2" && sel_date_from == "Choose Date"){ $("#sel_date_from").focus(); return; } // return;
             var sel_time_from = $("#sel_time_from").val();
@@ -258,6 +261,7 @@
                 description : description,
                 bonus_value : bonus_value,
                 limit_times : limit_times,
+                group_id : group_id,
                 sel_date_from : sel_date_from,
                 sel_time_from : sel_time_from,
                 sel_date_to : sel_date_to,
@@ -324,6 +328,13 @@
             <td class="td-2">
                 <input type="number" id="limit_times" onkeyup="return isZero(this)" onkeypress="return isNumberKey(event)" class="input-text-custom" min="1" max="10" style="width:100px;"/> 
                 <span> times </span>
+            </td>
+        </tr>
+        <tr>
+            <td style="float:right;"> Group Id: </td>
+            <td class="td-2">
+                <input type="number" id="group_id" onkeyup="return isZero(this)" onkeypress="return isNumberKey(event)" class="input-text-custom" min="1" style="width:100px;"/> 
+                <span> </span>
             </td>
         </tr>
         <tr>
@@ -460,6 +471,7 @@
             }
             var limit_times = $("#limit_times_edit").val();
             if(limit_times == ""){ $("#limit_times_edit").focus(); return; }  // return;
+            var group_id_edit = $("#group_id_edit").val();
             var sel_date_from = $("#sel_date_from_edit").val();
             if($("#bonus_type_edit").val() != "2" && sel_date_from == "Choose Date"){ $("#sel_date_from_edit").focus(); return; } // return;
             var sel_time_from = $("#sel_time_from_edit").val();
@@ -475,6 +487,7 @@
                 description : description,
                 bonus_value : bonus_value,
                 limit_times : limit_times,
+                group_id : group_id_edit,
                 sel_date_from : sel_date_from,
                 sel_time_from : sel_time_from,
                 sel_date_to : sel_date_to,
@@ -509,6 +522,7 @@
                 $("#box_description_edit").html($(e.target).attr('data-description'));
                 $("#bonus_value_edit").val($(e.target).attr('data-bonus-value'));
                 $("#limit_times_edit").val($(e.target).attr('data-limit-times'));
+                $("#group_id_edit").val($(e.target).attr('data-group-id'));
 
                 var datetime_from = $(e.target).attr('data-datetime-from');
                 datetime_from = datetime_from.split(" ");
@@ -583,6 +597,13 @@
             <td class="td-2">
                 <input type="number" id="limit_times_edit" onkeyup="return isZero(this)" onkeypress="return isNumberKey(event)" class="input-text-custom" min="1" max="10" style="width:100px;"/> 
                 <span> times </span>
+            </td>
+        </tr>
+        <tr>
+            <td style="float:right;"> Group Id: </td>
+            <td class="td-2">
+                <input type="number" id="group_id_edit" onkeyup="return isZero(this)" onkeypress="return isNumberKey(event)" class="input-text-custom" min="1" style="width:100px;" disabled/> 
+                <span> </span>
             </td>
         </tr>
         <tr>

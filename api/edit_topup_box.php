@@ -11,6 +11,7 @@
     $description = $request['description'];
     $bonus_value = $request['bonus_value'];
     $limit_times = $request['limit_times'];
+    $group_id = $request['group_id'];
     $sel_date_from = $request['sel_date_from'];
     $sel_time_from = $request['sel_time_from'];
     $sel_date_to = $request['sel_date_to'];
@@ -20,7 +21,7 @@
     $datetime_from = $sel_date_from.' '.$sel_time_from;
     $datetime_to = $sel_date_to.' '.$sel_time_to;
 
-    $query = "UPDATE `tbl_topup_box` SET `amount`='".$amount."', `description`='".$description."', `bonus_value`='".$bonus_value."', `limit_times`='".$limit_times."', `datetime_from`='".$datetime_from."', `datetime_to`='".$datetime_to."' WHERE `box_id`='".$box_id."'";
+    $query = "UPDATE `tbl_topup_box` SET `group_id`='".$group_id."', `amount`='".$amount."', `description`='".$description."', `bonus_value`='".$bonus_value."', `limit_times`='".$limit_times."', `datetime_from`='".$datetime_from."', `datetime_to`='".$datetime_to."' WHERE `box_id`='".$box_id."'";
     $result = $conn->query($query);
 
     display_results("Successfully Updated!");
