@@ -95,6 +95,14 @@
             array_push($all_box, $box);
         }
     }
+
+    $query = "SELECT MAX(box_id)+1 FROM tbl_topup_box";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $group_id = $row['MAX(box_id)+1'];
+        }
+    }
 ?>
 
 <script>
@@ -333,7 +341,7 @@
         <tr>
             <td style="float:right;"> Group Id: </td>
             <td class="td-2">
-                <input type="text" id="group_id" class="input-text-custom" min="1" style="width:100px;"/> 
+                <input type="text" id="group_id" value="<?php echo $group_id; ?>" class="input-text-custom" min="1" style="width:100px;"/> 
                 <span> </span>
             </td>
         </tr>
