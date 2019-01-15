@@ -333,7 +333,7 @@
         <tr>
             <td style="float:right;"> Group Id: </td>
             <td class="td-2">
-                <input type="number" id="group_id" onkeyup="return isZero(this)" onkeypress="return isNumberKey(event)" class="input-text-custom" min="1" style="width:100px;"/> 
+                <input type="text" id="group_id" class="input-text-custom" min="1" style="width:100px;"/> 
                 <span> </span>
             </td>
         </tr>
@@ -602,7 +602,7 @@
         <tr>
             <td style="float:right;"> Group Id: </td>
             <td class="td-2">
-                <input type="number" id="group_id_edit" onkeyup="return isZero(this)" onkeypress="return isNumberKey(event)" class="input-text-custom" min="1" style="width:100px;" disabled/> 
+                <input type="text" id="group_id_edit" class="input-text-custom" min="1" style="width:100px;" disabled/> 
                 <span> </span>
             </td>
         </tr>
