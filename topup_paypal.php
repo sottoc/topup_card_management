@@ -60,7 +60,7 @@
 			$box[] = $row['datetime_to'];
 			$box[] = $row['box_status'];
 			if($row['bonus_value'] != "0" && $row['box_status'] =="1"){
-				$query1 = "SELECT * FROM tbl_topup_limit_record WHERE family_code = '".$family_code."' AND box_id = '".$row['box_id']."'";
+				$query1 = "SELECT * FROM tbl_topup_limit_record WHERE family_code = '".$family_code."' AND group_id = '".$row['group_id']."'";
 				$result1 = $conn->query($query1);
 				if ($result1->num_rows > 0) {
 					while($row1 = $result1->fetch_assoc()) {
