@@ -251,7 +251,7 @@
 								<td style="padding-right:20px;">
 									<div style="font-size:16px;"> Filter by </div>
 									<select id="search_filter_by" name="search_filter_by" class="select-custom" onChange="changeSearchKey(this)">
-										<option value="-1">Please choose</option>
+										<option value="-1">No Filter</option>
 										<option value='0'> Card ID </option>
 										<option value='1'> First Name </option>
 										<option value='2'> Last Name </option>

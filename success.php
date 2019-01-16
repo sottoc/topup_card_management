@@ -178,3 +178,9 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 		}
 	}
 ?>
+
+<script>
+	$(document).ready(function(){
+		$("#go_to_home").html("Return Home");
+	});
+</script>

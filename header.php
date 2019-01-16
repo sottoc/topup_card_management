@@ -115,7 +115,7 @@
 		?>
 		<div id="nav" <?php echo $nav_class; ?> >
 			<ul  class="sf-menu" id="example">			
-				<li><a href="index.php" ><?php echo $localized_home_data['home']; ?></a></li>
+				<li><a href="index.php" id="go_to_home"><?php echo $localized_home_data['home']; ?></a></li>
 				<?php if($_SESSION ['login_user_type_id']==1){ ?><!--admin user type-->
 					<li><a href="card_detail.php" >CARD DETAIL</a></li>
 					<!-- <li><a href="#" >Data Entry Form</a>
@@ -243,4 +243,7 @@
 		d = d.split("/");
 		return d[2]+'-'+d[0]+'-'+d[1];
 	}
+	$(document).ready(function(){
+		$("#go_to_home").html("Home");
+	});
 </script>

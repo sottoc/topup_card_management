@@ -86,8 +86,8 @@
 		$user_code = $aRow['User_code'];
 		$card_id = $aRow['Card_ID'];
 		$family_code = $aRow['Family_code'];
-		$last_name = $aRow['Last_name'];
 		$first_name = $aRow['First_name'];
+		$last_name = $aRow['Last_name'];
 		$card_value = $aRow['amount'];
 		if($card_value == null){
 			$card_value = "0";

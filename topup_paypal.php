@@ -101,17 +101,17 @@
 							<?php if($box[3] != "0") { ?>
 								<?php if($effective_date == "Effective") { ?>
 								<div>
-									<div style="font-size:16px;font-weight:600;"> Extra $<?php echo $box[3];?> for first <?php if($box[4] == '1') { echo $box[4].' time';} else {echo $box[4].' times';}?> topup </div>
+									<div style="font-size:16px;font-weight:600;"> For first <?php if($box[4] == '1') { echo $box[4].' time';} else {echo $box[4].' times';}?> topup </div>
 									<div style="font-size:16px;font-weight:600;color:#a20c0c;"> <?php if($box[8] == '0') { echo '(Bonus Used Up)'; } else if($box[8] == '1'){ echo '(Left 1 time)'; } else { echo '(Left '.$box[8].' times)'; } ?>  </div>
 								</div>
 							    <?php } else { ?>
 									<div style="visibility:hidden;">
-										<div style="font-size:16px;font-weight:600;"> Extra $<?php echo $box[3];?> for first <?php if($box[4] == '1') { echo $box[4].' time';} else {echo $box[4].' times';}?> topup </div>
+										<div style="font-size:16px;font-weight:600;"> For first <?php if($box[4] == '1') { echo $box[4].' time';} else {echo $box[4].' times';}?> topup </div>
 										<div style="font-size:16px;font-weight:600;color:#a20c0c;"> <?php if($box[8] == '0') { echo '(Bonus Used Up)'; } else if($box[8] == '1'){ echo '(Left 1 time)'; } else { echo '(Left '.$box[8].' times)'; } ?>  </div>
 									</div>
 								<?php } ?>
 							<?php } else {?>
-							<div style="font-size:16px;font-weight:600;visibility:hidden;"> Extra $<?php echo $box[3];?> for first <?php echo $box[4];?> times topup </div>
+							<div style="font-size:16px;font-weight:600;visibility:hidden;"> For first <?php echo $box[4];?> times topup </div>
 							<div style="font-size:16px;font-weight:600;color:#a20c0c;visibility:hidden;"> <?php if($box[8] == '0') { echo '(No bonus)'; } else if($box[8] == '1'){ echo '(Left 1 time)'; } else { echo '(Left '.$box[8].' times)'; } ?>  </div>
 							<?php }?>
 						</div>
@@ -201,7 +201,5 @@
 
 		$($(".topup-amount-div")[0]).trigger('click');
 	});
-
-	
 
 </script>
