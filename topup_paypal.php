@@ -52,9 +52,9 @@
         while($row = $result->fetch_assoc()) {
             $box = array();
             $box[] = $row['box_id'];
-            $box[] = $row['amount'];
+            $box[] = number_format((float)$row['amount'], 2, '.', '');
             $box[] = $row['description'];
-            $box[] = $row['bonus_value'];
+            $box[] = number_format((float)$row['bonus_value'], 2, '.', '');
             $box[] = $row['limit_times'];
             $box[] = $row['datetime_from'];
 			$box[] = $row['datetime_to'];
@@ -207,6 +207,7 @@
 		});
 
 		$($(".topup-amount-div")[0]).trigger('click');
+		
 	});
 
 </script>

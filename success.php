@@ -110,9 +110,10 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
     $query="INSERT INTO `tbl_food_topup_records` (`family_code`, `payment_type`, `pos_id`, `payment_detail`, `topup_amount`, `bonus_amount`, `username`, `date_created`) VALUES ('".$family_code."','".$payment_type."','".$pos_id."','".$Card_ID."','".$amount."','".$bonus_value."','Paypal','".$time."')";
 	$result = $conn->query($query);
 	//------- end save in table ------
-
+	echo "<div style='margin:40px'>";
 	echo "<h2>Your payment is successful</h2>";
-	echo "<div><a href='index.php'>Return Home</a></div>";
+	echo "<div><a href='index.php'>Back to Home</a></div>";
+	echo "</div>";
 	exit;
 	
 //save in topup table
@@ -177,3 +178,10 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 		}
 	}
 ?>
+
+
+<script>
+	$(document).ready(function(){
+		$("#go_to_home").html("Return Home");
+	});
+</script>
