@@ -40,7 +40,6 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 
 	//---------------------------------- code by Qiang -----------------------------
 	$user_email = $_SESSION ['login_user_email'];
-	print_r($user_email."->".$amount);
 
 	//---------------- save in table --------------
 	require_once('api/api_common.php');
@@ -113,7 +112,7 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 	//------- end save in table ------
 
 	echo "<h2>Your payment is successful</h2>";
-	echo "<div><a href='topup_history.php'>Click here</a></div>";
+	echo "<div><a href='index.php'>Return Home</a></div>";
 	exit;
 	
 //save in topup table
@@ -178,9 +177,3 @@ Array ( [transaction_subject] => [txn_type] => web_accept [payment_date] => 01:0
 		}
 	}
 ?>
-
-<script>
-	$(document).ready(function(){
-		$("#go_to_home").html("Return Home");
-	});
-</script>

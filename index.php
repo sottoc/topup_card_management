@@ -73,16 +73,7 @@ $(document).ready(function(){
 	localStorage.setItem("current_page", '<a href="index.php">Home</a>');
 	//---- set background for active menu -----
 	if(localStorage.getItem("current_page") != undefined){
-		for(var i=0; i < $("#nav ul li").length; i++){
-			if($($("#nav ul li")[i]).html() == localStorage.getItem("current_page")){
-				if(user_type_id == "1"){
-					$($("#nav ul li")[i]).css("background", '#b12226');
-				}
-				if(user_type_id == "2" || user_type_id == "3"){
-					$($("#nav ul li")[i]).css("background", '#b12226');
-				}
-			}
-		}
+		$($("#nav ul li")[0]).css("background", '#b12226');
 	}
 	//---- End -----
 });
