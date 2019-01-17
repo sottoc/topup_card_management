@@ -99,8 +99,8 @@
 		$tmpentry[] = htmlspecialchars($user_code);
 		$tmpentry[] = htmlspecialchars($card_id);
 		$tmpentry[] = htmlspecialchars($family_code);
-		$tmpentry[] = htmlspecialchars($last_name);
 		$tmpentry[] = htmlspecialchars($first_name);
+		$tmpentry[] = htmlspecialchars($last_name);
 		$response['aaData'][] = $tmpentry;
 	}
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );

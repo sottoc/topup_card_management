@@ -286,7 +286,7 @@
 					Total Refund amount : $ <span id="total_amount">  </span>
 				</td>
                 <td style="width:30%;padding:10px 0px;text-align:right;"> 
-					<a href="#file_type_modal" rel="modal:open" class="control-button"> Export <a/>
+					<a href="#file_type_modal" rel="modal:open" class="control-button"> Export </a>
 				</td>	
             </tr>
 		</table>

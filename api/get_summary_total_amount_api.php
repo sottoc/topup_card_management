@@ -142,12 +142,12 @@
 
 
     $total_data = array();
-    array_push($total_data, $total_opening_balance);
-    array_push($total_data, $total_spending);
-    array_push($total_data, $total_topup_cash);
-    array_push($total_data, $total_topup_online);
-    array_push($total_data, $total_bonus);
-    array_push($total_data, $total_refund);
-    array_push($total_data, $total_balance);
+    array_push($total_data, number_format((float)$total_opening_balance, 2, '.', ''));
+    array_push($total_data, number_format((float)$total_spending, 2, '.', ''));
+    array_push($total_data, number_format($total_topup_cash, 2, '.', ''));
+    array_push($total_data, number_format((float)$total_topup_online, 2, '.', ''));
+    array_push($total_data, number_format((float)$total_bonus, 2, '.', ''));
+    array_push($total_data, number_format((float)$total_refund, 2, '.', ''));
+    array_push($total_data, number_format((float)$total_balance, 2, '.', ''));
     display_results($total_data);
 ?>

@@ -92,6 +92,11 @@
 		$tmpentry[] = htmlspecialchars("$".$aRow['topup_amount']);
 		//$tmpentry[] = htmlspecialchars($cri_str);
 		$payment_type = $aRow['payment_type'];
+		if(strtolower($aRow['payment_type']) == "cash"){
+			$payment_type = "CASH";
+		} else{
+			$payment_type = "ONLINE";
+		}
 		$tmpentry[] = htmlspecialchars($payment_type);
 		$tmpentry[] = htmlspecialchars($aRow['bonus_amount']);
 		$response['aaData'][] = $tmpentry;

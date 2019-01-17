@@ -337,30 +337,90 @@
 				</td>	
             </tr>
 		</table>
-		
+		<br/>
+		<a href="#file_type_modal" rel="modal:open" class="control-button"> Export </a>
 		<!--datatable-->
 		<div class="cleaner"></div>
-		<table cellpadding="0"  border="0" class="display" id="summary_report_dtList" name="summary_report_dtList" style="display:none">
-			<thead>
-				<tr>
-					<th>Opening Balance</th>					
-					<th>Total Spending</th>					
-					<th>Total Topup(Cash)</th>
-					<th>Total Topup(Online)</th>
-					<th>Total Bonus</th>
-					<th>Total Refund</th>
-					<th>Balance</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td colspan="5" class="dataTables_empty"><?php echo $localized_home_data['loading_msg_datatable']; ?></td>
-				</tr>
-			</tbody>
+		<table cellpadding="0"  border="0" class="display" id="summary_report_dtList" style="display:none">
+			<tr>
+				<td> From Date </td>
+				<td id="export_from_date"> </td>
+			</tr>
+			<tr> 
+				<td> To Date </td>
+				<td id="export_to_date"> </td>
+			</tr>
+			<tr>
+				<td>Total Opening Balance</td>
+				<td id="export_total_opening_balance"> </td>	
+			</tr>		
+			<tr>		
+				<th>Total Spending</th>	
+				<td id="export_total_spending"> </td>
+			</tr>		
+			<tr>
+				<th>Total Topup(Cash)</th>
+				<td id="export_total_topup_cash"> </td>
+			</tr>		
+			<tr>
+				<th>Total Topup(Online)</th>
+				<td id="export_total_topup_online"> </td>
+			</tr>		
+			<tr>
+				<th>Total Bonus</th>
+				<td id="export_total_bonus"> </td>
+			</tr>		
+			<tr>
+				<th>Total Refund</th>
+				<td id="export_total_refund"> </td>
+			</tr>		
+			<tr>
+				<th>Total Balance</th>
+				<td id="export_total_balance"> </td>
+			</tr>
 		</table>
 		<!--datatable-->
 	</form>
 </div>
+<table cellpadding="0"  border="0" class="display" id="summary_report_dtList_export" style="display:none">
+	<tr>
+		<td> From Date </td>
+		<td id="export_from_date"> </td>
+	</tr>
+	<tr> 
+		<td> To Date </td>
+		<td id="export_to_date"> </td>
+	</tr>
+	<tr>
+		<td>Total Opening Balance</td>
+		<td id="export_total_opening_balance"> </td>	
+	</tr>		
+	<tr>		
+		<td>Total Spending</td>	
+		<td id="export_total_spending"> </td>
+	</tr>		
+	<tr>
+		<td>Total Topup(Cash)</td>
+		<td id="export_total_topup_cash"> </td>
+	</tr>		
+	<tr>
+		<td>Total Topup(Online)</td>
+		<td id="export_total_topup_online"> </td>
+	</tr>		
+	<tr>
+		<td>Total Bonus</td>
+		<td id="export_total_bonus"> </td>
+	</tr>		
+	<tr>
+		<td>Total Refund</td>
+		<td id="export_total_refund"> </td>
+	</tr>		
+	<tr>
+		<td>Balance</td>
+		<td id="export_total_balance"> </td>
+	</tr>
+</table>
+
 <div id="divLoading"> </div>
 <div id="file_type_modal" class="modal">
 	<div align="center">
@@ -375,7 +435,7 @@
 <script type="text/javascript" src="javascript/table2csv.js"></script>
 <script>
 	function export_table2excel(){
-		$("#summary_report_dtList").table2excel({
+		$("#summary_report_dtList_export").table2excel({
 			filename: "summary_report.xls"
 		});
 	}
@@ -386,6 +446,15 @@
 
 	function export_table(){
 		var file_type = $('#sel_file_type').val();
+		$("#export_from_date").html($('#sel_date_from').val());
+		$("#export_to_date").html($('#sel_date_to').val());
+		$("#export_total_opening_balance").html('$' + $("#summary_total_opening_balance").html());
+		$("#export_total_spending").html('$' + $("#summary_total_spending").html());
+		$("#export_total_topup_cash").html('$' + $("#summary_total_topup_cash").html());
+		$("#export_total_topup_online").html('$' + $("#summary_total_topup_online").html());
+		$("#export_total_bonus").html('$' + $("#summary_total_topup_bonus").html());
+		$("#export_total_refund").html('$' + $("#summary_total_refund").html());
+		$("#export_total_balance").html('$' + $("#summary_total_balance").html());
 		if(file_type == 'csv'){
 			export_table2csv();
 		}
