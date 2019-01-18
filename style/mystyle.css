@@ -76,6 +76,7 @@ p {
 	height: 118px;
 	margin: 0 auto;
 	background: url('../images/header_bgimg_2.png') left no-repeat;
+	position: relative;
 }
 
 /*----------- Content Area ------------*/
@@ -183,11 +184,11 @@ p {
 /*------------Logo---------------------*/
 #logo {
 	float: left;
-	margin: 4px 0 0 130px;
+	margin: 0 0 0 150px;
 	font-size: 18px;
 	background: url('../images/logo_2.png') left no-repeat;
-	width: 329px;
-	height: 111px;
+	width: 550px;
+	height: 118px;
 }
 #logo img{
 	margin: 0 0 0 60px;
@@ -196,16 +197,12 @@ p {
 
 /*----------------Top Menu------------------*/
 #topmenu {
-	float: right;
 	width: 229px;
-	/*height: 67px;*/
-	margin: 70px 40px 0 0;
-	/* padding-top: 18px; */
-	/*text-align: center;*/
-	/*background: url('../images/topmenu_bg.gif') bottom no-repeat;*/
 	overflow: hidden;
 	color: #fff;
-	position: relative;
+	position: absolute;
+	left:800px;
+	top: 60px;
 }
 #topmenu a {
 	color: #fff;
@@ -708,5 +705,4 @@ textarea.textarea { margin-bottom:12px; width:500px; padding: .4em; height:120px
 	padding: 20px !important;
     border: solid 1px #6d6767 !important;
 	margin-bottom: 20px !important;
-	width: 60% !important;
 }
