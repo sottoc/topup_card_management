@@ -326,3 +326,14 @@
 <?php
 	include("footer.php");
 ?>
+
+<style>
+	@media screen and (max-width: 1450px) {
+		.select-custom{
+			width:90px !important;
+		}
+		#topup_btnsearch{
+			width:165px !important;
+		}
+	}
+</style>
