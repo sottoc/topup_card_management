@@ -98,7 +98,7 @@
 			$payment_type = "ONLINE";
 		}
 		$tmpentry[] = htmlspecialchars($payment_type);
-		$tmpentry[] = htmlspecialchars($aRow['bonus_amount']);
+		$tmpentry[] = htmlspecialchars(number_format((float)$aRow['bonus_amount'], 2, '.', ''));
 		$response['aaData'][] = $tmpentry;
 	}
 	header("Expires: Mon, 26 Jul 1997 05:00:00 GMT" );
